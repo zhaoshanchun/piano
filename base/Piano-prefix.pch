@@ -1,0 +1,14 @@
+//
+//  Piano.pch
+//  fayusucheng
+//
+//  Created by kun on 2017/5/21.
+//  Copyright © 2017年 kun. All rights reserved.
+//
+
+#ifndef Piano-prefix_pch
+#define Piano-prefix_pch
+
+#import "Common-Header.h"
+
+#endif
