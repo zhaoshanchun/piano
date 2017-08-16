@@ -315,6 +315,8 @@
 		BCF7B2171F0A4B6A00E19B98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2161F0A4B6A00E19B98 /* GoogleService-Info.plist */; };
 		BCF7B2191F0A4C4D00E19B98 /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2181F0A4C4D00E19B98 /* welcome.jpg */; };
 		DB2205B81F448EFE00CEB964 /* UIBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */; };
+		DB2205BB1F44992600CEB964 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205BA1F44992600CEB964 /* UIColor+Helper.m */; };
+		DB2205BE1F449AC900CEB964 /* Common-Function.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205BC1F449AC900CEB964 /* Common-Function.m */; };
 		DB2651C41F4040A100437140 /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651C31F4040A100437140 /* UIView+Helper.m */; };
 		DB2651CA1F43499400437140 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651C91F43499400437140 /* BaseViewController.m */; };
 		DB2651CD1F448A9100437140 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651CC1F448A9100437140 /* ProfileViewController.m */; };
@@ -726,6 +728,10 @@
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2205B61F448EFE00CEB964 /* UIBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBaseTableViewCell.h; sourceTree = "<group>"; };
 		DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBaseTableViewCell.m; sourceTree = "<group>"; };
+		DB2205B91F44992600CEB964 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
+		DB2205BA1F44992600CEB964 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
+		DB2205BC1F449AC900CEB964 /* Common-Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Common-Function.m"; sourceTree = "<group>"; };
+		DB2205BD1F449AC900CEB964 /* Common-Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Common-Function.h"; sourceTree = "<group>"; };
 		DB2651C21F4040A100437140 /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
 		DB2651C31F4040A100437140 /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
 		DB2651C61F4042A700437140 /* Common-Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Common-Define.h"; sourceTree = "<group>"; };
@@ -1327,6 +1333,10 @@
 		DB2651C11F403F0A00437140 /* CommonFunction */ = {
 			isa = PBXGroup;
 			children = (
+				DB2205BD1F449AC900CEB964 /* Common-Function.h */,
+				DB2205BC1F449AC900CEB964 /* Common-Function.m */,
+				DB2205B91F44992600CEB964 /* UIColor+Helper.h */,
+				DB2205BA1F44992600CEB964 /* UIColor+Helper.m */,
 				DB2651C21F4040A100437140 /* UIView+Helper.h */,
 				DB2651C31F4040A100437140 /* UIView+Helper.m */,
 			);
@@ -1767,6 +1777,7 @@
 				BCB0C4991EA8EEE5004AB5FD /* MainTabBarController.m in Sources */,
 				BCDDD7731ED2C67500499D11 /* DatabaseOperation.m in Sources */,
 				BCB0C4AC1EA8F66B004AB5FD /* BaseNavigationController.m in Sources */,
+				DB2205BB1F44992600CEB964 /* UIColor+Helper.m in Sources */,
 				BCB0C4821EA8EA1E004AB5FD /* main.m in Sources */,
 				BCBB706C1EBC7DF5001D25C2 /* CLPlayerView.m in Sources */,
 				BCDDD7581ED2C64300499D11 /* FMResultSet.m in Sources */,
@@ -1788,6 +1799,7 @@
 				BC9A63881EAF8EE200B14AC1 /* TFHpple.m in Sources */,
 				BC9C67CA1EE91C8100AA05E1 /* iToast.m in Sources */,
 				BCDDD75C1ED2C64300499D11 /* MJRefreshFooterView.m in Sources */,
+				DB2205BE1F449AC900CEB964 /* Common-Function.m in Sources */,
 				BCA3E42E1EE4E2CD0042F692 /* LBToAppStore.m in Sources */,
 				BCB0C49C1EA8F0A7004AB5FD /* BaseTableViewController.m in Sources */,
 				BC9C67C11EE91C4900AA05E1 /* NoteBookViewController.m in Sources */,

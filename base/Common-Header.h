@@ -10,5 +10,8 @@
 #define Common_Header_h
 
 #import "Common-Define.h"
+#import "UIView+Helper.h"
+#import "UIColor+Helper.h"
+#import "Common-Function.h"
 
 #endif /* Common_Header_h */

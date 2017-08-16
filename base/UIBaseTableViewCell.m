@@ -23,7 +23,7 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor orTableViewCellHighlightedColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
     }
