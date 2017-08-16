@@ -6,8 +6,11 @@
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "UIBaseTableViewCell.h"
 
-@interface BaseTableViewController : UITableViewController
+@interface BaseTableViewController : BaseViewController
+
+@property (strong, nonatomic) UITableView *tableView;
 
 @end

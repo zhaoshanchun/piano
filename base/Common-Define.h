@@ -25,10 +25,41 @@
 
 #define documentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
+#define topBarheight      ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0?64:44)
+#define DeviceVersion     [[[UIDevice currentDevice] systemVersion] floatValue] //判断系统版本
 #define DEVICE_IS_IPHONE4 ([[UIScreen mainScreen] bounds].size.height < 568)    //判断该设备是否为3.5寸
 #define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height >= 568)   //判断该设备是否为5
-#define DeviceVersion     [[[UIDevice currentDevice] systemVersion] floatValue] //判断系统版本
-#define topBarheight      ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0?64:44)
+#define iPhone4 ([UIScreen mainScreen].bounds.size.height==480?YES:NO)
+#define iPhone5 ([UIScreen mainScreen].bounds.size.height==568?YES:NO)
+#define iPhone6 ([UIScreen mainScreen].bounds.size.height==667?YES:NO)
+#define iPhone6_plus ([UIScreen mainScreen].bounds.size.height==736?YES:NO)
+
+// iOS System Version Checking
+#define IS_IOS_8_OR_ABOVE ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define IS_IOS_8_OR_BELOW ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0)
+#define IS_IOS_9_OR_ABOVE ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
+
+// iOS Device Checking
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_WIDTH CGRectGetWidth([[UIScreen mainScreen] bounds])
+#define SCREEN_HEIGHT CGRectGetHeight([[UIScreen mainScreen] bounds])
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_HEIGHT < 568.0)
+#define IS_IPHONE_5 (SCREEN_HEIGHT == 568.0)
+#define IS_IPHONE_5_OR_LESS (IS_IPHONE && SCREEN_WIDTH == 320.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_HEIGHT == 667.0)
+#define IS_IPHONE_6_PLUS (IS_IPHONE && SCREEN_HEIGHT == 736.0)
+#define IS_IPHONE_6_PLUS_OR_ABOVE (IS_IPHONE && SCREEN_HEIGHT >= 736.0)
+#define IS_IPHONE_6_OR_ABOVE (IS_IPHONE && SCREEN_WIDTH > 320.0)
+
+#define STATUS_BAR_HEIGHT CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)
+// Hardcoded first unless there is better choice
+#define NAVIGATION_BAR_HEIGHT 44.f
+// Custom Tab Bar with 1px line at the top
+#define TAB_BAR_HEIGHT  50.f
+#define SR2_TOOL_BAR_HEIGHT  60.f
+
+
 
 #define AppID                   @"1230303508"
 #define AdmobApplicationID      @"ca-app-pub-8216990062470309~2518401071"
@@ -38,11 +69,7 @@
 #define AdUnitID                @"ca-app-pub-3940256099942544/2934735716"  /////for test
 #define TestDevice              @"a492223edaf92cbf1987951af14e360a" ///admob test device
 
-#define iPhone4 ([UIScreen mainScreen].bounds.size.height==480?YES:NO)
-#define iPhone5 ([UIScreen mainScreen].bounds.size.height==568?YES:NO)
 
-#define iPhone6 ([UIScreen mainScreen].bounds.size.height==667?YES:NO)
-#define iPhone6_plus ([UIScreen mainScreen].bounds.size.height==736?YES:NO)
 
 
 #endif /* CommonDefine_h */

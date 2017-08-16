@@ -314,7 +314,10 @@
 		BCF7B2151F0A470C00E19B98 /* XOTYzOTczODEy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B1341F0A470C00E19B98 /* XOTYzOTczODEy.jpg */; };
 		BCF7B2171F0A4B6A00E19B98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2161F0A4B6A00E19B98 /* GoogleService-Info.plist */; };
 		BCF7B2191F0A4C4D00E19B98 /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2181F0A4C4D00E19B98 /* welcome.jpg */; };
+		DB2205B81F448EFE00CEB964 /* UIBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */; };
 		DB2651C41F4040A100437140 /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651C31F4040A100437140 /* UIView+Helper.m */; };
+		DB2651CA1F43499400437140 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651C91F43499400437140 /* BaseViewController.m */; };
+		DB2651CD1F448A9100437140 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2651CC1F448A9100437140 /* ProfileViewController.m */; };
 		FB9C1CE929025DC7AFA16093 /* libPods-gangqinjiaocheng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A584A6547B34685E967D9C47 /* libPods-gangqinjiaocheng.a */; };
 /* End PBXBuildFile section */
 
@@ -721,10 +724,16 @@
 		BCF7B2181F0A4C4D00E19B98 /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = welcome.jpg; path = img/welcome.jpg; sourceTree = "<group>"; };
 		C706C9C5A0CAAF3C0E88C624 /* Pods-huazhuangjiaocheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huazhuangjiaocheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-huazhuangjiaocheng/Pods-huazhuangjiaocheng.release.xcconfig"; sourceTree = "<group>"; };
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB2205B61F448EFE00CEB964 /* UIBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBaseTableViewCell.h; sourceTree = "<group>"; };
+		DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBaseTableViewCell.m; sourceTree = "<group>"; };
 		DB2651C21F4040A100437140 /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
 		DB2651C31F4040A100437140 /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
 		DB2651C61F4042A700437140 /* Common-Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Common-Define.h"; sourceTree = "<group>"; };
 		DB2651C71F4043FA00437140 /* Common-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Common-Header.h"; sourceTree = "<group>"; };
+		DB2651C81F43499400437140 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		DB2651C91F43499400437140 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		DB2651CB1F448A9100437140 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		DB2651CC1F448A9100437140 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10B0B782C211CE05D61A087 /* Pods-sifakaoshi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sifakaoshi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sifakaoshi/Pods-sifakaoshi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1228,8 +1237,12 @@
 		DB2651BB1F40071000437140 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				DB2205B61F448EFE00CEB964 /* UIBaseTableViewCell.h */,
+				DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */,
 				BCB0C4AD1EA8FA6C004AB5FD /* BaseTableViewCell.h */,
 				BCB0C4AE1EA8FA6C004AB5FD /* BaseTableViewCell.m */,
+				DB2651C81F43499400437140 /* BaseViewController.h */,
+				DB2651C91F43499400437140 /* BaseViewController.m */,
 				BCB0C49A1EA8F0A7004AB5FD /* BaseTableViewController.h */,
 				BCB0C49B1EA8F0A7004AB5FD /* BaseTableViewController.m */,
 				BCB0C4AA1EA8F66B004AB5FD /* BaseNavigationController.h */,
@@ -1266,6 +1279,8 @@
 		DB2651BD1F400DC200437140 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DB2651CB1F448A9100437140 /* ProfileViewController.h */,
+				DB2651CC1F448A9100437140 /* ProfileViewController.m */,
 				BC9C67C51EE91C5F00AA05E1 /* SettingViewController.h */,
 				BC9C67C31EE91C5F00AA05E1 /* SettingViewController.m */,
 				BC9C67C41EE91C5F00AA05E1 /* UserFeedbackViewController.h */,
@@ -1745,6 +1760,8 @@
 				BC87B6341F0141A2000A3962 /* PlayerViewController.m in Sources */,
 				BCDDD7541ED2C64300499D11 /* FMDatabase.m in Sources */,
 				BC9C67CC1EE91E3600AA05E1 /* NoteBookCell.m in Sources */,
+				DB2651CD1F448A9100437140 /* ProfileViewController.m in Sources */,
+				DB2651CA1F43499400437140 /* BaseViewController.m in Sources */,
 				BC9A63691EAD9CF700B14AC1 /* TextViewController.m in Sources */,
 				BC9C67C01EE91C4900AA05E1 /* NoteDetialViewController.m in Sources */,
 				BCB0C4991EA8EEE5004AB5FD /* MainTabBarController.m in Sources */,
@@ -1760,6 +1777,7 @@
 				BC87B6391F0141A2000A3962 /* ShowMoreItemV.m in Sources */,
 				BC49FFDF1EEBB61500AE7B01 /* CollectionViewCell.m in Sources */,
 				BCDDD7551ED2C64300499D11 /* FMDatabaseAdditions.m in Sources */,
+				DB2205B81F448EFE00CEB964 /* UIBaseTableViewCell.m in Sources */,
 				BC0395FB1EC99F1900825834 /* OtherTableViewCell.m in Sources */,
 				BC49FFF11EED40CF00AE7B01 /* GLCell.m in Sources */,
 				BC6E46511EF36E51003F9EE8 /* SearchDetailView.m in Sources */,

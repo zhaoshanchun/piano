@@ -9,6 +9,7 @@
 #import "MainTabBarController.h"
 #import "BaseNavigationController.h"
 #import "MainCollectionViewController.h"
+#import "ProfileViewController.h"
 
 @interface MainTabBarController ()
 
@@ -39,7 +40,7 @@
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},
                                  
-                                 @{kClassKey  : @"SettingViewController",
+                                 @{kClassKey  : @"ProfileViewController",
                                    kTitleKey  : @"我的",
                                    kTextKey   : @"我的",
                                    kImgKey    : @"More",

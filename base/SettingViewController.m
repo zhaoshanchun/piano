@@ -24,8 +24,9 @@
     [super viewDidLoad];
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;
+    
     //用户好评系统
-    LBToAppStore *toAppStore = [[LBToAppStore alloc]init];
+    LBToAppStore *toAppStore = [[LBToAppStore alloc] init];
     [toAppStore showGotoAppStore:self Rep:YES];
     
     // Do any additional setup after loading the view.
@@ -95,11 +96,8 @@
     [opinion addSubview:button2];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button2 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1 constant:35]];
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:25]];
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button2 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:opinion attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:button2 attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:opinion attribute:NSLayoutAttributeTrailing multiplier:1 constant:-5]];
     
     _history = [HistoryView new];
@@ -109,37 +107,12 @@
     [self.view addSubview:_history];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_history attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_history attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_history attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:opinion attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_history attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:(self.view.bounds.size.width/3)]];
     
     [_history updateConstraints];
     [_history updateConstraintsIfNeeded];
-
-}
-
-
--(void)buttonClickUp:(UIButton *)sender{
-    NSLog(@"%s tag %ld",__func__, (long)sender.tag);
-    
-    switch (sender.tag) {
-        case 1:
-        {
-            NSString *str = [NSString stringWithFormat:
-                             @"https://itunes.apple.com/cn/app/id%@?mt=8", AppID];
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-        }
-            break;
-        case 2:
-            [self.navigationController pushViewController:[UserFeedbackViewController new] animated:YES];
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,12 +120,35 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    if(_history)
+- (void)viewWillAppear:(BOOL)animated {
+    if(_history) {
         [_history historyReload];
+    }
 }
 
-- (void)onClickHistoryView:(VideoObject *)object{
+
+- (void)buttonClickUp:(UIButton *)sender {
+    NSLog(@"%s tag %ld",__func__, (long)sender.tag);
+    
+    switch (sender.tag) {
+        case 1: {
+            NSString *str = [NSString stringWithFormat:
+                             @"https://itunes.apple.com/cn/app/id%@?mt=8", AppID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            break;
+        }
+        case 2: {
+            [self.navigationController pushViewController:[UserFeedbackViewController new] animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+
+- (void)onClickHistoryView:(VideoObject *)object {
     [self.navigationController pushViewController:[PlayerViewController playerViewControllerWithVideoPath:object.videoPath Title:object.title Index:object.uid Ccode:object.code] animated:YES];
 }
 

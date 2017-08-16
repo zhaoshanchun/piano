@@ -8,37 +8,85 @@
 
 #import "BaseTableViewController.h"
 
-@interface BaseTableViewController ()
+@interface BaseTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation BaseTableViewController
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    /*
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-        
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])
-    {
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-     */
+    [self.view addSubview:self.tableView];
+    [self setTableView];
+}
+
+- (void)setTableView {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorColor = [UIColor grayColor];
+    [self.tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - UITableViewDelegate, UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];;
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
+    return cell;
+}
+
+
+#pragma mark - Factory Method
+- (UITableView *)tableView {
+    if (_tableView==nil) {
+        _tableView = [[UITableView alloc] initWithFrame:(CGRect) { 0, 0, [self pageWidth], [self pageHeight]} style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.delaysContentTouches = NO;
+        
+        if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [_tableView setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([_tableView respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+            [_tableView setPreservesSuperviewLayoutMargins:NO];;
+        }
+        if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [_tableView setLayoutMargins:UIEdgeInsetsZero];
+        }
+        if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
+            [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
+        }
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
 }
 
 @end
