@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view.
     NSArray *childItemsArray = @[
                                  @{kClassKey  : @"MainCollectionViewController",
-                                   kTextKey  : @"视频",
+                                   kTextKey  : localizeString(@"tab_home"),
                                    kTitleKey   : @"",
                                    kImgKey    : @"Home",
                                    kSelImgKey : @"Home"},
@@ -41,7 +41,7 @@
                                    kSelImgKey : @"Book_open"},
                                  
                                  @{kClassKey  : @"ProfileViewController",
-                                   kTitleKey  : @"我的",
+                                   kTitleKey  : localizeString(@"tab_profile"),
                                    kTextKey   : @"我的",
                                    kImgKey    : @"More",
                                    kSelImgKey : @"More"}

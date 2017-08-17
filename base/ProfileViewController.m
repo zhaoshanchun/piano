@@ -45,13 +45,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"评价应用";
+        cell.textLabel.text = localizeString(@"profile_evaluate");
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
     } else if (indexPath.section == 1) {
-        cell.textLabel.text = @"意见反馈";
+        cell.textLabel.text = localizeString(@"profile_feedBack");
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
     } else {
-        cell.textLabel.text = @"历史观看";
+        cell.textLabel.text = localizeString(@"profile_history");
     }
     return cell;
 }

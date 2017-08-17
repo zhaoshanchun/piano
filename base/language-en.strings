@@ -1,0 +1,29 @@
+/* 
+  language-en.strings
+  gangqinjiaocheng
+
+  Created by zhaosc on 17/8/17.
+  Copyright © 2017年 kun. All rights reserved.
+*/
+
+
+"Hello_World" = "Hello world!";
+
+// Common 
+"search" = "Search";
+"more" = "More";
+"commit" = "Commit";
+
+// Tab
+"tab_home" = "Video";
+"tab_profile" = "Me";
+
+// Page title
+"page_title_profile" = "Me";
+
+// Profile
+"profile_evaluate" = "Evaluate this app";
+"profile_feedBack" = "Feed back";
+"profile_feedBack_placeHolder" = "Please feed back, min 3 character!";
+"profile_history" = "View history";
+"profile_contactUs" = "Contact us";

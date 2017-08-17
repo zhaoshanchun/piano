@@ -59,16 +59,9 @@
 #define TAB_BAR_HEIGHT  50.f
 #define SR2_TOOL_BAR_HEIGHT  60.f
 
-#define LANG_ZH     @"tc"   // Tranditional Chinese
+
 #define LANG_EN     @"en"   // English
 #define LANG_SC     @"sc"   // Simplified Chinese
-#define LANG_Thai   @"th"   // Thai
-#define LANG_ID     @"id"   // Bahasa
-#define LANG_JP     @"ja"   // Japanese
-
-#define LANG_HK     @"hk"   // Tranditional Chinese (Hong Kong)
-#define LANG_TW     @"tw"   // Tranditional Chinese (Taiwan)
-
 
 
 #define AppID                   @"1230303508"

@@ -1,0 +1,29 @@
+/* 
+  language.strings
+  gangqinjiaocheng
+
+  Created by zhaosc on 17/8/17.
+  Copyright © 2017年 kun. All rights reserved.
+*/
+
+
+"Hello_World" = "你好，世界!";
+
+// 公共通用
+"search" = "搜索";
+"more" = "更多";
+"commit" = "提交";
+
+// Tab
+"tab_home" = "视频";
+"tab_profile" = "我的";
+
+// Page title
+"page_title_profile" = "我的";
+
+// Profile
+"profile_evaluate" = "评价应用";
+"profile_feedBack" = "意见反馈";
+"profile_feedBack_placeHolder" = "请输入您的宝贵意见!必须大于3个字符!";
+"profile_history" = "观看历史";
+"profile_contactUs" = "联系我们";

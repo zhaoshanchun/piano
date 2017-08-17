@@ -13,9 +13,6 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 
-#if (CN == 0)
-@import GoogleMobileAds;
-#endif
 
 void saveObjectToUserDefaults(NSString *key, NSObject *obj) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -36,6 +33,31 @@ NSString* getStringFromUserDefaults(NSString *key) {
 BOOL containsString(NSString *fullString, NSString *subString) {
     NSRange range = [fullString rangeOfString:subString];
     return range.length != 0;
+}
+
+NSString *getLocalLanguage() {
+    if (getObjectFromUserDefaults(kLanguagekey)) {
+        NSString *language = (NSString *)getObjectFromUserDefaults(kLanguagekey);
+        return (language.length > 0) ? language : LANG_SC;
+    } else {
+        NSString *localLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+        if ([localLanguage isEqualToString:@"zh-CN"] || [localLanguage hasPrefix:@"zh"]) {
+            saveObjectToUserDefaults(kLanguagekey, LANG_SC);
+            return LANG_SC;
+        } else {
+            saveObjectToUserDefaults(kLanguagekey, LANG_EN);
+            return LANG_EN;
+        }
+    }
+}
+
+NSString *localizeString(NSString *stringKey) {
+    NSString *tableName = @"language-cn";
+    NSString *language = getLocalLanguage();
+    if ([language isEqualToString:LANG_EN]) {
+        tableName = @"language-en";
+    }
+    return NSLocalizedStringFromTable(stringKey, tableName, nil);
 }
 
 
