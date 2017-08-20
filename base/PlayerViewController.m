@@ -5,6 +5,7 @@
 //  Created by kun on 2017/5/5.
 //  Copyright © 2017年 kun. All rights reserved.
 //
+
 @import GoogleMobileAds;
 
 #import "PlayerViewController.h"
@@ -17,8 +18,7 @@
 #import "AsyncImage.h"
 
 #define CellIdentifier @"PlayerViewController"
-@interface PlayerViewController ()<LBToAppStoreDelegate>
-{
+@interface PlayerViewController ()<LBToAppStoreDelegate> {
     NSMutableArray *videoArray;
 }
 @property (nonatomic, copy) NSString *videoPath;
@@ -37,8 +37,7 @@
 
 @implementation PlayerViewController
 
-+ (instancetype)playerViewControllerWithUrlString:(NSString *)title Uid:(NSString *)uid Ccode:(NSString *)ccode URL:(NSString *)htmlUrl
-{
++ (instancetype)playerViewControllerWithUrlString:(NSString *)title Uid:(NSString *)uid Ccode:(NSString *)ccode URL:(NSString *)htmlUrl {
     PlayerViewController *vc = [PlayerViewController new];
     vc.Videotitle = title;
     vc.vid = uid;
@@ -49,8 +48,7 @@
     vc.model = 0;
     return vc;
 }
-+ (instancetype)playerViewControllerWithVideoPath:(NSString *)videoPath Title:(NSString *)video_title Index:(NSString *)uid Ccode:(NSString *)ccode
-{
++ (instancetype)playerViewControllerWithVideoPath:(NSString *)videoPath Title:(NSString *)video_title Index:(NSString *)uid Ccode:(NSString *)ccode {
     PlayerViewController *vc = [PlayerViewController new];
     vc.title = video_title;
     vc.Videotitle = video_title;
@@ -66,7 +64,7 @@
     return vc;
 }
 
--(void)initData{
+- (void)initData {
     videoArray = [NSMutableArray array];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GlobalValue *globalValue = appDelegate.globalValue;
@@ -88,100 +86,85 @@
     [self setupView];
     [self.playerView setAutoFullScreen:NO];
 
-    if(self.model == 0 || self.videoPath == nil)
-    {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *cna = [userDefaults objectForKey:@"cna"];
-        if(cna == nil)
-        {
+    if(self.model == 0 || self.videoPath == nil) {
+        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        // NSString *cna = [userDefaults objectForKey:kEtagCna];
+        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        if(cna == nil) {
             [self analysisCookie];
-        }else{
+        } else {
             [self analysisUrl:cna id:self.vid];
         }
-    }
-    else{
+    } else {
         self.playerView.url = [NSURL URLWithString:self.videoPath];
         [self.playerView playVideo];
     }
+    
     //用户好评系统
     LBToAppStore *toAppStore = [[LBToAppStore alloc]init];
     toAppStore.delegate = self;
     [toAppStore showGotoAppStore:self Rep:NO];
     [self startAdmob];
+    
     [self UpdateTableView];
-
 }
 
--(void)UpdateTableView{
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    GlobalValue *globalValue = appDelegate.globalValue;
-    long row = [globalValue getVideoObjectIndex:self.vid];
-    if(row < 0)
-        return;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
-    
+
+- (void)viewDidAppear:(BOOL)animated {
+    if(self.bannerView == nil || self.bannerView.hidden == YES) {
+        self.tabBarController.tabBar.hidden = NO;
+    } else if (self.bannerView.hidden == NO) {
+        self.tabBarController.tabBar.hidden = YES;
+    }
 }
 
--(void)ShowButtonAction{
-    
-    if(_playerView == nil)
-        return;
-    [_playerView pausePlay];
-}
-
--(void)SureButtonAction{
-    NSLog(@"%s", __func__);
-    if(_playerView == nil)
-        return;
-    [_playerView playVideo];
-}
-
--(void)CancelButtonAction{
-    NSLog(@"%s", __func__);
+- (void)viewDidDisappear:(BOOL)animated {
     [self.navigationController popViewControllerAnimated:YES];
-    if(_playerView == nil)
+    if(_playerView == nil) {
         return;
+    }
     [_playerView pausePlay];
     [_playerView destroyPlayer];
     _playerView = nil;
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [self.navigationController popViewControllerAnimated:YES];
-    if(_playerView == nil)
-        return;
-    [_playerView pausePlay];
-    [_playerView destroyPlayer];
-    _playerView = nil;
-}
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     self.tabBarController.tabBar.hidden=NO;
-    if(_playerView == nil)
+    if(_playerView == nil) {
         return;
+    }
     [_playerView pausePlay];
     [_playerView destroyPlayer];
     _playerView = nil;
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    if(self.bannerView == nil || self.bannerView.hidden == YES)
-    {
-        self.tabBarController.tabBar.hidden=NO;
-    }
-    else if (self.bannerView.hidden == NO){
-        self.tabBarController.tabBar.hidden=YES;
-    }
 }
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion{
+    
+}
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
-- (void)setupView
-{
+- (void)UpdateTableView {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    GlobalValue *globalValue = appDelegate.globalValue;
+    long row = [globalValue getVideoObjectIndex:self.vid];
+    if(row < 0) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+}
+
+
+
+
+
+
+- (void)setupView {
     _nameLabel = [UILabel new];
     _nameLabel.font = [UIFont systemFontOfSize:16];
     _nameLabel.textColor = [UIColor redColor];
@@ -241,16 +224,12 @@
 }
 
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSLog(@"videoArray count: %lu", (unsigned long)[videoArray count]);
-    
     return [videoArray count];
 }
 
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     long row = [indexPath row];
     VideoObject *object = [videoArray objectAtIndex:row];
     BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -258,13 +237,11 @@
     cell.iconImageView.image = [UIImage imageNamed:object.icon];
     cell.nameLabel.text = object.title;
     cell.timeLabel.text = object.time;
-    if(![object.time isEqualToString:@""])
-    {
+    if(![object.time isEqualToString:@""]) {
         NSString *t = @"时长:";
         t = [t stringByAppendingString:object.time];
         cell.playTime.text = t;
-    }
-    else{
+    } else{
         cell.playTime.text = @"";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -276,18 +253,14 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     long row = [indexPath row];
     VideoObject *object = [videoArray objectAtIndex:row];
-    
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
-    
 
     LBToAppStore *toAppStore = [[LBToAppStore alloc]init];
     toAppStore.delegate = self;
     [toAppStore showGotoAppStore:self Rep:NO];
-
         
     CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     CGRect rectNav = self.navigationController.navigationBar.frame;
@@ -306,12 +279,34 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     GlobalValue *globalValue = appDelegate.globalValue;
     [globalValue historySave:object.uid];
-
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - LBToAppStoreDelegate
+- (void)ShowButtonAction {
+    if(_playerView == nil) {
+        return;
+    }
+    [_playerView pausePlay];
+}
+
+- (void)SureButtonAction {
+    NSLog(@"%s", __func__);
+    if(_playerView == nil) {
+        return;
+    }
+    [_playerView playVideo];
+}
+
+-(void)CancelButtonAction{
+    NSLog(@"%s", __func__);
+    [self.navigationController popViewControllerAnimated:YES];
+    if(_playerView == nil) {
+        return;
+    }
+    [_playerView pausePlay];
+    [_playerView destroyPlayer];
+    _playerView = nil;
 }
 
 
@@ -322,22 +317,21 @@
     self.ccode = object.code;
     self.section = 0;
     self.videoPath = object.videoPath;
-    if(self.model == 0 || self.videoPath == nil)
-    {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *cna = [userDefaults objectForKey:@"cna"];
-        if(cna == nil)
-        {
+    if (self.model == 0 || self.videoPath == nil) {
+        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        // NSString *cna = [userDefaults objectForKey:kEtagCna];
+        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        if(cna == nil) {
             [self analysisCookie];
-        }else{
+        } else{
             [self analysisUrl:cna id:self.vid];
         }
-    }
-    else{
+    } else {
         self.playerView.url = [NSURL URLWithString:self.videoPath];
         [self.playerView playVideo];
     }
 }
+
 /*
 #pragma mark - Navigation
 
@@ -348,19 +342,14 @@
 }
 */
 
-- (void)analysisCookie
-{
+- (void)analysisCookie {
     NSURL *url = [NSURL URLWithString:@"https://log.mmstat.com/eg.js"];
-    
     //2.创建请求对象
     //请求对象内部默认已经包含了请求头和请求方法（GET）
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
     //3.获得会话对象
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                  {
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                       NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
                                       NSLog(@"%s--->%@ headers %@", __func__, error, headers);
                                       
@@ -369,46 +358,37 @@
                                       cna = [cna stringByReplacingOccurrencesOfString:@"/" withString:@""];
                                       NSLog(@"%s--->2 %@ cna %@", __func__, error, cna);
                                       
-                                      if (error == nil)
-                                      {
-                                          NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                                          [userDefaults setObject:cna forKey:@"cna"];
+                                      if (error == nil) {
+                                          // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                          // [userDefaults setObject:cna forKey:kEtagCna];
+                                          saveObjectToUserDefaults(kEtagCna, cna);
 
                                           //6.解析服务器返回的数据
                                           //说明：（此处返回的数据是JSON格式的，因此使用NSJSONSerialization进行反序列化处理）
                                           //NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                           //NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                           //NSLog(@"--->%@",str);
-                                          if(self.vid == nil)
-                                          {
+                                          if(self.vid == nil) {
                                               [self parseHtml:self.htmlUrl];
                                           }
                                           [self analysisUrl:[cna stringByReplacingOccurrencesOfString:@"\"" withString:@""] id:_vid];
-                                          
-                                      }
-                                      else
-                                      {
+                                      } else {
                                           [self alertController];
                                       }
                                   }];
-    
     //5.执行任务
     [dataTask resume];
 }
 
-- (void)analysisUrl:(NSString *)cna id:(NSString *)vid
-{
+- (void)analysisUrl:(NSString *)cna id:(NSString *)vid {
     cna = [cna stringByReplacingOccurrencesOfString:@"/" withString:@""];
     cna = [cna stringByReplacingOccurrencesOfString:@"\"" withString:@""];
    
     NSString *urlStr;
-    if(self.clent_id == nil || self.password == nil)
-    {
-        urlStr=[NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld", self.ccode, self.vid, cna, time(nil)];
-    }
-    else
-    {
-        urlStr=[NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld&client_id=%@&password=%@", self.ccode, self.vid, cna, time(nil), self.clent_id, self.password];
+    if (self.clent_id == nil || self.password == nil) {
+        urlStr = [NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld", self.ccode, self.vid, cna, time(nil)];
+    } else {
+        urlStr = [NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld&client_id=%@&password=%@", self.ccode, self.vid, cna, time(nil), self.clent_id, self.password];
     }
     NSURL *url = [NSURL URLWithString:urlStr];
     NSLog(@"urlStr--->%@", urlStr);
@@ -416,27 +396,20 @@
     //2.创建请求对象
     //请求对象内部默认已经包含了请求头和请求方法（GET）
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
     //3.获得会话对象
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                  {
-                                      if (error == nil)
-                                      {
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                      if (error == nil) {
                                           //6.解析服务器返回的数据
                                           //说明：（此处返回的数据是JSON格式的，因此使用NSJSONSerialization进行反序列化处理）
                                           NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                           NSString *dstUrl = dict[@"data"][@"stream"][0][@"m3u8_url"];
                                           NSLog(@"--->dstUrl = %@", dstUrl);
                                           
-                                          if(dstUrl == nil)
-                                          {
+                                          if(dstUrl == nil) {
                                               NSLog(@"--->dict %@", dict);
                                               [self alertController];
-                                          }
-                                          else
-                                          {
+                                          } else {
                                               dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                   _playerView.url = [NSURL URLWithString:dstUrl];
                                                   [_playerView playVideo];
@@ -444,78 +417,68 @@
                                           }
                                          // [_LoadingImage setHidden:YES];
                                          // [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dstUrl]]];
-                                      }
-                                      else
-                                      {
+                                      } else {
                                           [self alertController];
                                       }
                                   }];
-    
     //5.执行任务
     [dataTask resume];
 }
 
--(BOOL)parseHtml:(NSString *)htmlString
-{
+- (BOOL)parseHtml:(NSString *)htmlString {
     //NSString *htmlString = @"http://e.youku.com/cp/ECONDU4NDQ=/ECHNjE4MDQ0?";
-    
     NSLog(@"---parseHtml: > %@", htmlString);
-
-    NSData *htmlData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:htmlString]];
+    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:htmlString]];
    // NSLog(@"---htmlData: > %@", htmlData);
 
-    if(htmlData == nil)
+    if(htmlData == nil) {
         return NO;
-    TFHpple *xpathParser = [[TFHpple alloc]initWithHTMLData:htmlData];
-    if(xpathParser == nil)
+    }
+    
+    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+    if(xpathParser == nil) {
         return NO;
+    }
+    
     NSArray *itemArray = [xpathParser searchWithXPathQuery:@"//script[@type = 'text/javascript']"];
-    if(itemArray == nil)
+    if(itemArray == nil) {
         return NO;
+    }
     //NSLog(@"---itemArray: > %@", itemArray);
 
-    for(TFHppleElement *element in itemArray)
-    {
+    for(TFHppleElement *element in itemArray) {
         NSString *string = [element content];
-        if(![string containsString:@"window.playData"])
+        if(![string containsString:@"window.playData"]) {
             continue;
+        }
         
-        if([string containsString:@"password"])
-        {
+        if([string containsString:@"password"]) {
             NSArray *array = [string componentsSeparatedByString:@"password\":\""];
-            if(array && [array count] >= 2)
-            {
+            if(array && [array count] >= 2) {
                 array = [array[1] componentsSeparatedByString:@"\"}"];
-                if(array && [array count] >= 2)
-                {
+                if(array && [array count] >= 2) {
                     NSString *password = array[0];
                     self.password = password;
                     NSLog(@"---password: > %@", password);
                 }
             }
         }
-        if([string containsString:@"clent_id"])
-        {
+        if([string containsString:@"clent_id"]) {
             NSArray *array = [string componentsSeparatedByString:@"clent_id\":\""];
-            if(array && [array count] >= 2)
-            {
+            if(array && [array count] >= 2) {
                 array = [array[1] componentsSeparatedByString:@"\","];
-                if(array && [array count] >= 2)
-                {
+                if(array && [array count] >= 2) {
                     NSString *clent_id = array[0];
                     self.clent_id = clent_id;
                     NSLog(@"---clent_id> %@", clent_id);
                 }
             }
         }
-        if([string containsString:@"res"])
-        {
+        if([string containsString:@"res"]) {
             NSArray *array = [string componentsSeparatedByString:@"res\":\""];
-            if(array && [array count] >= 2)
-            {
+            if(array && [array count] >= 2) {
                 array = [array[1] componentsSeparatedByString:@"\","];
-                if(array && [array count] >= 2)
-                {
+                if(array && [array count] >= 2) {
                     NSString *vid = array[0];
                     self.vid = vid;
                     NSLog(@"---vid> %@", vid);
@@ -527,8 +490,7 @@
 }
 
 
-- (void)alertController
-{
+- (void)alertController {
     // 危险操作:弹框提醒
     // 1.UIAlertView
     // 2.UIActionSheet
@@ -543,7 +505,9 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(void)startAdmob{
+
+#pragma mark - AD
+- (void)startAdmob {
     // Replace this ad unit ID with your own ad unit ID.
     
     self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];

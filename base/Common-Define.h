@@ -73,6 +73,9 @@
 #define TestDevice              @"a492223edaf92cbf1987951af14e360a" ///admob test device
 
 
+#define kEtagCna @"kEtagCna"
+
+
 
 
 #endif /* CommonDefine_h */

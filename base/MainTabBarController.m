@@ -83,8 +83,7 @@
 }
 
 - (void)checkAppOnline {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:
-                                       @"https://itunes.apple.com//lookup?id=1231276398"]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com//lookup?id=1231276398"]];
     NSLog(@"%s %@", __func__, url);
     
     //2.创建请求对象
@@ -118,3 +117,8 @@
 }
 
 @end
+
+
+
+
+

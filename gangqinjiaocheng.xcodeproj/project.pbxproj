@@ -314,6 +314,8 @@
 		BCF7B2151F0A470C00E19B98 /* XOTYzOTczODEy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B1341F0A470C00E19B98 /* XOTYzOTczODEy.jpg */; };
 		BCF7B2171F0A4B6A00E19B98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2161F0A4B6A00E19B98 /* GoogleService-Info.plist */; };
 		BCF7B2191F0A4C4D00E19B98 /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCF7B2181F0A4C4D00E19B98 /* welcome.jpg */; };
+		DB1645B11F4975DE00DF6696 /* language-cn.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB1645AF1F4975DD00DF6696 /* language-cn.strings */; };
+		DB1645B21F4975DE00DF6696 /* language-en.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB1645B01F4975DD00DF6696 /* language-en.strings */; };
 		DB2205B81F448EFE00CEB964 /* UIBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */; };
 		DB2205BB1F44992600CEB964 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205BA1F44992600CEB964 /* UIColor+Helper.m */; };
 		DB2205BE1F449AC900CEB964 /* Common-Function.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2205BC1F449AC900CEB964 /* Common-Function.m */; };
@@ -726,6 +728,8 @@
 		BCF7B2181F0A4C4D00E19B98 /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = welcome.jpg; path = img/welcome.jpg; sourceTree = "<group>"; };
 		C706C9C5A0CAAF3C0E88C624 /* Pods-huazhuangjiaocheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huazhuangjiaocheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-huazhuangjiaocheng/Pods-huazhuangjiaocheng.release.xcconfig"; sourceTree = "<group>"; };
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB1645AF1F4975DD00DF6696 /* language-cn.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "language-cn.strings"; sourceTree = "<group>"; };
+		DB1645B01F4975DD00DF6696 /* language-en.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "language-en.strings"; sourceTree = "<group>"; };
 		DB2205B61F448EFE00CEB964 /* UIBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBaseTableViewCell.h; sourceTree = "<group>"; };
 		DB2205B71F448EFE00CEB964 /* UIBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBaseTableViewCell.m; sourceTree = "<group>"; };
 		DB2205B91F44992600CEB964 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
@@ -890,6 +894,8 @@
 		BCB0C4801EA8EA1E004AB5FD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB1645AF1F4975DD00DF6696 /* language-cn.strings */,
+				DB1645B01F4975DD00DF6696 /* language-en.strings */,
 				BCB0C4911EA8EA1E004AB5FD /* Info.plist */,
 				BCDDD77A1ED2C6A700499D11 /* Piano-prefix.pch */,
 				BCF7B2161F0A4B6A00E19B98 /* GoogleService-Info.plist */,
@@ -1516,6 +1522,7 @@
 				BCF7B1D81F0A470C00E19B98 /* XMzQxNjY0MDY4.jpg in Resources */,
 				BCF7B1801F0A470C00E19B98 /* XMTM1MzA5ODMxMg==.jpg in Resources */,
 				BCF7B1361F0A470C00E19B98 /* XMjc2MzYzMzkyOA==.jpg in Resources */,
+				DB1645B21F4975DE00DF6696 /* language-en.strings in Resources */,
 				BCF7B1B91F0A470C00E19B98 /* XMTYwNTM2NzI2MA==.jpg in Resources */,
 				BCF7B1911F0A470C00E19B98 /* XMTM4NzQ3MTUyMA==.jpg in Resources */,
 				BCF7B1371F0A470C00E19B98 /* XMjc4MDYyODc1Mg==.jpg in Resources */,
@@ -1539,6 +1546,7 @@
 				BCF7B1A21F0A470C00E19B98 /* XMTY1MTE5NjU3Mg==.jpg in Resources */,
 				BCF7B2011F0A470C00E19B98 /* XODUyNjYzOTAw.jpg in Resources */,
 				BCF7B1A91F0A470C00E19B98 /* XMTY1MTIxMTc0NA==.jpg in Resources */,
+				DB1645B11F4975DE00DF6696 /* language-cn.strings in Resources */,
 				BCF7B2171F0A4B6A00E19B98 /* GoogleService-Info.plist in Resources */,
 				BCF7B1791F0A470C00E19B98 /* XMTg4OTI4ODkwNA==.jpg in Resources */,
 				BCF7B1821F0A470C00E19B98 /* XMTM1MzI4NjA4NA==.jpg in Resources */,

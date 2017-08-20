@@ -20,12 +20,10 @@
 
 @interface AsyncImage : NSObject
 
+@property (nonatomic, weak) id<LoadImageDelegate> delegate;
+
 -(void)LoadImage:(BaseTableViewCell *)cell Object:(VideoObject *)obj;
-
 -(void)LoadImage2:(CollectionViewCell *)cell Object:(VideoObject *)obj;
-/**代理人*/
-@property (nonatomic,weak) id<LoadImageDelegate> delegate;
-
 
 @end
 

@@ -12,7 +12,6 @@
 
 @interface AsyncImage ()
 
-
 @property (nonatomic, copy) NSString *Videotitle;
 @property (nonatomic, copy) NSString *srcVid;
 @property (nonatomic, strong) NSString *password;
@@ -20,6 +19,7 @@
 @property (nonatomic, strong) BaseTableViewCell *cell;
 @property (nonatomic, strong) CollectionViewCell *cell2;
 @property (nonatomic, strong) VideoObject *videoObject;
+
 @end
 
 
@@ -33,14 +33,15 @@
 }
 */
 
--(void)LoadImage:(BaseTableViewCell *)cell Object:(VideoObject *)obj{
-    
-    if(obj == nil)
+- (void)LoadImage:(BaseTableViewCell *)cell Object:(VideoObject *)obj {
+    if(obj == nil) {
         return;
-    if([obj.password isEqual:@"password"] || [obj.password isEqual:@""])
+    }
+    if([obj.password isEqual:@"password"] || [obj.password isEqual:@""]) {
         self.password = nil;
-    else
+    } else {
         self.password = obj.password;
+    }
     self.clent_id = obj.clent_id;
     self.videoObject = obj;
     self.cell2 = nil;
@@ -48,8 +49,9 @@
     
     if(obj == nil || obj.previewPath == nil){
         //[cell.loading startAnimating];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *cna = [userDefaults objectForKey:@"cna"];
+        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        // NSString *cna = [userDefaults objectForKey:kEtagCna];
+        NSString *cna = getStringFromUserDefaults(kEtagCna);
         if(cna == nil)
         {
             [self analysisCookie];
@@ -86,8 +88,9 @@
     
     if(obj == nil || obj.previewPath == nil){
         //[cell.loading startAnimating];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *cna = [userDefaults objectForKey:@"cna"];
+        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        // NSString *cna = [userDefaults objectForKey:kEtagCna];
+        NSString *cna = getStringFromUserDefaults(kEtagCna);
         if(cna == nil)
         {
             [self analysisCookie];
@@ -105,30 +108,25 @@
         //[cell.iconImageView sd_setImageWithURL:url];
     }
 }
-- (void)analysisCookie
-{
+
+- (void)analysisCookie {
     NSURL *url = [NSURL URLWithString:@"https://log.mmstat.com/eg.js"];
-    
     //2.创建请求对象
     //请求对象内部默认已经包含了请求头和请求方法（GET）
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
     //3.获得会话对象
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                  {
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                       NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
-                                      NSString *cna = headers[@"Etag"];
+                                      NSString *cna = headers[@"Etag"];// key
                                       cna = [cna stringByReplacingOccurrencesOfString:@"/" withString:@""];
                                       
-                                      if (error == nil)
-                                      {
-                                          NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                                          [userDefaults setObject:cna forKey:@"cna"];
+                                      if (error == nil) {
+                                          // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                          // [userDefaults setObject:cna forKey:kEtagCna];
+                                          saveObjectToUserDefaults(kEtagCna, cna);
                                           [self analysisUrl:cna id:self.videoObject.uid];
                                       }
-                                    
                                   }];
     //5.执行任务
     [dataTask resume];

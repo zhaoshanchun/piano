@@ -10,14 +10,21 @@
 #import <UIKit/UIKit.h>
 
 
-@interface PlayerViewController : UIViewController<GADBannerViewDelegate,UITableViewDataSource, UITableViewDelegate>
-+ (instancetype)playerViewControllerWithUrlString:(NSString *)title Uid:(NSString *)uid Ccode:(NSString *)ccode URL:(NSString *)htmlUrl;
-+ (instancetype)playerViewControllerWithVideoPath:(NSString *)videoPath Title:(NSString *)video_title Index:(NSString *)uid Ccode:(NSString *)ccode;
-@property(nonatomic, strong) IBOutlet GADBannerView *bannerView;
-@property (nonatomic,strong) NSTimer   *timer;
-@property(nonatomic, copy) NSDictionary *ads;
-@property (nonatomic , strong) UITableView *tableView;
-@property long section;
+@interface PlayerViewController : UIViewController<GADBannerViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) IBOutlet GADBannerView *bannerView;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, copy) NSDictionary *ads;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) long section;
+
++ (instancetype)playerViewControllerWithUrlString:(NSString *)title
+                                              Uid:(NSString *)uid
+                                            Ccode:(NSString *)ccode
+                                              URL:(NSString *)htmlUrl;
++ (instancetype)playerViewControllerWithVideoPath:(NSString *)videoPath
+                                            Title:(NSString *)video_title
+                                            Index:(NSString *)uid
+                                            Ccode:(NSString *)ccode;
 
 @end
