@@ -8,6 +8,8 @@ target 'gangqinjiaocheng' do
   # Pods for huazhengjiaocheng
 
 platform :ios, '7.0'
+
 pod 'SDWebImage', '~>3.8'
+pod 'AFNetworking', '~> 3.0'
 
 end
