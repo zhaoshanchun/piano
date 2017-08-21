@@ -329,8 +329,6 @@
 		DBCFCD861F4B3BB300149112 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD671F4B3BB300149112 /* AFURLRequestSerialization.m */; };
 		DBCFCD871F4B3BB300149112 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD691F4B3BB300149112 /* AFURLResponseSerialization.m */; };
 		DBCFCD881F4B3BB300149112 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD6B1F4B3BB300149112 /* AFURLSessionManager.m */; };
-		DBCFCD891F4B3BB300149112 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCD6C1F4B3BB300149112 /* LICENSE */; };
-		DBCFCD8A1F4B3BB300149112 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD6D1F4B3BB300149112 /* README.md */; };
 		DBCFCD8B1F4B3BB300149112 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD701F4B3BB300149112 /* AFAutoPurgingImageCache.m */; };
 		DBCFCD8C1F4B3BB300149112 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD721F4B3BB300149112 /* AFImageDownloader.m */; };
 		DBCFCD8D1F4B3BB300149112 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCD741F4B3BB300149112 /* AFNetworkActivityIndicatorManager.m */; };
@@ -777,8 +775,6 @@
 		DBCFCD691F4B3BB300149112 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		DBCFCD6A1F4B3BB300149112 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		DBCFCD6B1F4B3BB300149112 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		DBCFCD6C1F4B3BB300149112 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		DBCFCD6D1F4B3BB300149112 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DBCFCD6F1F4B3BB300149112 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
 		DBCFCD701F4B3BB300149112 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
 		DBCFCD711F4B3BB300149112 /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
@@ -1428,8 +1424,6 @@
 			isa = PBXGroup;
 			children = (
 				DBCFCD5E1F4B3BB300149112 /* AFNetworking */,
-				DBCFCD6C1F4B3BB300149112 /* LICENSE */,
-				DBCFCD6D1F4B3BB300149112 /* README.md */,
 				DBCFCD6E1F4B3BB300149112 /* UIKit+AFNetworking */,
 			);
 			name = AFNetworking;
@@ -1680,7 +1674,6 @@
 				BCF7B1C11F0A470C00E19B98 /* XMTYzMzY3MDU4NA==.jpg in Resources */,
 				BCF7B20F1F0A470C00E19B98 /* XOTM0NTAyMTky.jpg in Resources */,
 				BCF7B13A1F0A470C00E19B98 /* XMjcxMTMwNjA4.jpg in Resources */,
-				DBCFCD891F4B3BB300149112 /* LICENSE in Resources */,
 				BCB0C48D1EA8EA1E004AB5FD /* Assets.xcassets in Resources */,
 				BCF7B1D91F0A470C00E19B98 /* XMzQxNjYxMzQ0.jpg in Resources */,
 				BCF7B1D41F0A470C00E19B98 /* XMzM0MTIyOTU2.jpg in Resources */,
@@ -1933,7 +1926,6 @@
 				BCDDD7551ED2C64300499D11 /* FMDatabaseAdditions.m in Sources */,
 				DB2205B81F448EFE00CEB964 /* UIBaseTableViewCell.m in Sources */,
 				DBCFCD931F4B3BB300149112 /* UIWebView+AFNetworking.m in Sources */,
-				DBCFCD8A1F4B3BB300149112 /* README.md in Sources */,
 				BC0395FB1EC99F1900825834 /* OtherTableViewCell.m in Sources */,
 				DBCFCD851F4B3BB300149112 /* AFSecurityPolicy.m in Sources */,
 				BC49FFF11EED40CF00AE7B01 /* GLCell.m in Sources */,
