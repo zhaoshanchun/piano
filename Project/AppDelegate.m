@@ -42,9 +42,6 @@
     globalValue = [[GlobalValue alloc] init];
     [NSThread sleepForTimeInterval:4.0];
     
-    APIManager *manager = [[APIManager alloc] init];
-    // [manager baiduTest];
-    
     return YES;
 }
 

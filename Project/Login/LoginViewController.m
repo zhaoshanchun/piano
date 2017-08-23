@@ -71,9 +71,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLoginTableViewCellIdentifier forIndexPath:indexPath];
-    cell.indexPath = indexPath;
     cell.delegate = self;
     if (self.listArray.count > indexPath.row) {
+        cell.cellModel.indexPath = indexPath;
         cell.cellModel = [self.listArray objectAtIndex:indexPath.row];
     }
     return cell;
@@ -88,7 +88,7 @@
 - (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
     if (isEditting) {
         self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
-        [self.tableView scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [self.tableView scrollToRowAtIndexPath:cell.cellModel.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     } else {
         self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     }

@@ -17,12 +17,35 @@
 #define kMail @"mail"
 #define kCode @"code"
 
+#define kRequestHeaderAuthorization @"Authorization"
+#define kRequestHeaderLanguage @"Accept-Language"
+#define kRequestHeaderUserAgent @"User-Agent"
+#define kRequestHeaderImageProfileId @"X-OR-ImageProfileId"
+#define kRequestHeaderORChecksum @"X-OR-Checksum"
+#define kRequestHeaderDeviceId @"X-DeviceId"
+#define kRequestHeaderSendDate @"X-SendDate"
+#define kRequestHeaderFPApiKey @"X-FP-API-KEY"
 
-typedef void (^ApiResponseHandler)(id *model, NSInteger statusCode, NSError *err);
+typedef NS_ENUM(NSInteger, APIMethod) {
+    APIMethodGet,
+    APIMethodPost,
+    APIMethodPut,
+    APIMethodDelete
+};
+
+typedef void (^ApiResponseHandler)(id model, NSInteger statusCode, NSError *err);
+typedef void (^DownLoadResponseHandler)(NSURLResponse *response, NSURL *filePath, NSError *error);
 
 @interface APIManager : NSObject
 
 //- (NSURLSessionDataTask *)getData:(ApiResponseHandler)handler;
 
++ (void)downloadWithUrl:(NSString *)url completedHandler:(DownLoadResponseHandler)handler;
+
++ (NSURLSessionDataTask *)requestWithApi:(NSString *)url
+                               apiMethod:(APIMethod)apiMethod
+                               andParams:(id)params
+                           progressBlock:(void (^)(NSProgress *progress))progress
+                       completionHandler:(ApiResponseHandler)handler;
 
 @end

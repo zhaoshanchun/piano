@@ -13,6 +13,7 @@
 #define kLoginTableViewCellTBMargin 15.f
 #define kLoginTableViewCellTitleWidth 80.f
 #define kLoginTableViewCellInputHeight 30.f
+#define kVerificationWidth 50.f
 
 typedef enum {
     LoginTableViewCellUserName,   // title + input
@@ -30,7 +31,7 @@ typedef enum {
 @property (assign, nonatomic) BOOL isLastCell;
 @property (assign, nonatomic) LoginTableViewCellType loginCellellType;
 @property (strong, nonatomic) NSAttributedString *titleAttriute;
-@property (strong, nonatomic) NSString *imageUrl;
+@property (strong, nonatomic) NSString *verificationFilePath;
 @property (assign, nonatomic) CGFloat cellHeight;
 
 @property (assign, nonatomic) CGRect titleFrame;
@@ -38,6 +39,8 @@ typedef enum {
 @property (assign, nonatomic) CGRect verificationFrame;
 @property (strong, nonatomic) NSString *placeHolder;
 @property (strong, nonatomic) NSString *inputedContent;
+
+@property (strong, nonatomic) NSIndexPath *indexPath;
 
 - (id)initWithType:(LoginTableViewCellType)loginCellType;
 - (void)updateFrame;

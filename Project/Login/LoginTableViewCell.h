@@ -21,7 +21,6 @@
 @interface LoginTableViewCell : UIBaseTableViewCell
 
 @property (weak, nonatomic) id<LoginTableViewCellDelegate> delegate;
-@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) LoginTableViewCellModel *cellModel;
 
 @end

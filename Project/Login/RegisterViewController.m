@@ -15,6 +15,9 @@
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) UIView *footView;
 
+@property (strong, nonatomic) NSString *verificationImageFilePath;
+@property (strong, nonatomic) NSString *verificationKey;
+
 @end
 
 @implementation RegisterViewController
@@ -27,7 +30,13 @@
     [self presetData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self getVerification];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self.view endEditing:YES];
 }
 
@@ -74,8 +83,38 @@
     LoginTableViewCellModel *verificationCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellVerification];
     verificationCellModel.isLastCell = YES;
     verificationCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_verification"), @"BR15N"], nil);
+    verificationCellModel.verificationFilePath = self.verificationImageFilePath;
     [verificationCellModel updateFrame];
     [self.listArray addObject:verificationCellModel];
+}
+
+- (void)getVerification {
+    [APIManager downloadWithUrl:@"http://www.appshopping.store/app/get_verify_code" completedHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        
+        NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
+        if (headers[@"key"]) {
+            self.verificationKey = headers[@"key"];
+            NSLog(@"verificationKey = %@", self.verificationKey);
+        }
+        
+        NSLog(@"File downloaded to: %@", filePath);
+        self.verificationImageFilePath = [filePath absoluteString];
+        // file:///Users/zhaosc/Library/Developer/CoreSimulator/Devices/4BFA1AB3-C11D-4FFE-9C35-D9E46A8C5E63/data/Containers/Data/Application/719C3E7A-8EC9-495D-93F5-EA53D6DB86D2/Documents/get_verify_code.png
+        if (self.verificationImageFilePath.length > 0 && self.listArray.count > 0) {
+            for (LoginTableViewCellModel *cellModel in self.listArray) {
+                if (LoginTableViewCellVerification == cellModel.loginCellellType) {
+                    cellModel.verificationFilePath = self.verificationImageFilePath;
+                    [cellModel updateFrame];
+                    if (cellModel.indexPath) {
+                        [self.tableView beginUpdates];
+                        [self.tableView reloadRowsAtIndexPaths:@[cellModel.indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        [self.tableView endUpdates];
+                    }
+                    break;
+                }
+            }
+        }
+    }];
 }
 
 
@@ -95,9 +134,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLoginTableViewCellIdentifier forIndexPath:indexPath];
-    cell.indexPath = indexPath;
     cell.delegate = self;
     if (self.listArray.count > indexPath.row) {
+        cell.cellModel.indexPath = indexPath;
         cell.cellModel = [self.listArray objectAtIndex:indexPath.row];
     }
     return cell;
@@ -112,7 +151,7 @@
 - (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
     if (isEditting) {
         self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
-        [self.tableView scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        [self.tableView scrollToRowAtIndexPath:cell.cellModel.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     } else {
         self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     }
