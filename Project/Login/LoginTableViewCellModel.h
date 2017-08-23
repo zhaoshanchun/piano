@@ -15,7 +15,10 @@
 #define kLoginTableViewCellInputHeight 30.f
 
 typedef enum {
-    LoginTableViewCellNormal,   // title + input
+    LoginTableViewCellUserName,   // title + input
+    LoginTableViewCellPassWord,
+    LoginTableViewCellConfirmPassWord,
+    LoginTableViewCellPhone,
     LoginTableViewCellMail,     // 右边有一个选择邮箱类型的开关
     LoginTableViewCellVerification, // 验证码
 } LoginTableViewCellType;
@@ -34,7 +37,7 @@ typedef enum {
 @property (assign, nonatomic) CGRect inputFrame;
 @property (assign, nonatomic) CGRect verificationFrame;
 @property (strong, nonatomic) NSString *placeHolder;
-@property (strong, nonatomic) NSString *inputContent;
+@property (strong, nonatomic) NSString *inputedContent;
 
 - (id)initWithType:(LoginTableViewCellType)loginCellType;
 - (void)updateFrame;

@@ -19,11 +19,17 @@
 }
 
 - (void)updateFrame {
-    CGFloat topMargin = self.isFirstCell ? kLoginTableViewCellTBMargin : kLoginTableViewCellTBMargin/2;
-    CGFloat bottomMargin = self.isLastCell ? kLoginTableViewCellTBMargin : kLoginTableViewCellTBMargin/2;
-    
+    // CGFloat topMargin = self.isFirstCell ? kLoginTableViewCellTBMargin : kLoginTableViewCellTBMargin/2;
+    // CGFloat bottomMargin = self.isLastCell ? kLoginTableViewCellTBMargin : kLoginTableViewCellTBMargin/2;
+    CGFloat topMargin = kLoginTableViewCellTBMargin;
+    CGFloat bottomMargin = kLoginTableViewCellTBMargin;
     switch (self.loginCellellType) {
-            case LoginTableViewCellNormal: {
+            case LoginTableViewCellUserName:
+            case LoginTableViewCellPassWord:
+            case LoginTableViewCellConfirmPassWord:
+            case LoginTableViewCellPhone:
+            case LoginTableViewCellMail:
+            case LoginTableViewCellVerification: {
                 CGSize size = getSizeForAttributedString(self.titleAttriute, kLoginTableViewCellTitleWidth, MAXFLOAT);
                 self.titleFrame = CGRectMake(kLoginTableViewCellLRMargin, topMargin, kLoginTableViewCellTitleWidth, size.height);
                 self.inputFrame = CGRectMake(CGRectGetMaxX(self.titleFrame) + 10, topMargin, kLoginTableViewCellWidth - kLoginTableViewCellLRMargin - (CGRectGetMaxX(self.titleFrame) + 10), kLoginTableViewCellInputHeight);

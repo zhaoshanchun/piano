@@ -11,14 +11,17 @@
 
 #define kLoginTableViewCellIdentifier @"kLoginTableViewCellIdentifier"
 
+@class LoginTableViewCell;
 @protocol LoginTableViewCellDelegate <NSObject>
+
+- (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting;
 
 @end
 
 @interface LoginTableViewCell : UIBaseTableViewCell
 
 @property (weak, nonatomic) id<LoginTableViewCellDelegate> delegate;
-@property (strong, nonatomic) NSIndexPath *idnexPath;
+@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) LoginTableViewCellModel *cellModel;
 
 @end

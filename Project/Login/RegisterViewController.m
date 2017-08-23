@@ -10,7 +10,7 @@
 #import "LoginTableViewCell.h"
 
 
-@interface RegisterViewController ()
+@interface RegisterViewController () <LoginTableViewCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) UIView *footView;
@@ -27,6 +27,10 @@
     [self presetData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.view endEditing:YES];
+}
+
 - (void)setTableView {
     [self.tableView registerClass:[LoginTableViewCell class] forCellReuseIdentifier:kLoginTableViewCellIdentifier];
     self.tableView.tableFooterView = self.footView;
@@ -36,52 +40,44 @@
     self.listArray = [NSMutableArray new];
     
     // 用户名
-    LoginTableViewCellModel *userNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    LoginTableViewCellModel *userNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellUserName];
     userNameCellModel.isFirstCell = YES;
     userNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_user_name"), @"BR15N"], nil);
     [userNameCellModel updateFrame];
     [self.listArray addObject:userNameCellModel];
     
     // 密码
-    LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    passWordCellModel.isLastCell = YES;
+    LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellPassWord];
     passWordCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_password"), @"BR15N"], nil);
     [passWordCellModel updateFrame];
     [self.listArray addObject:passWordCellModel];
     
     // 确认密码
-    LoginTableViewCellModel *confirmCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    confirmCellModel.isLastCell = YES;
+    LoginTableViewCellModel *confirmCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellConfirmPassWord];
     confirmCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_confirme_password"), @"BR15N"], nil);
     [confirmCellModel updateFrame];
     [self.listArray addObject:confirmCellModel];
     
     // 电话
-    LoginTableViewCellModel *phoneCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    phoneCellModel.isLastCell = YES;
+    LoginTableViewCellModel *phoneCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellPhone];
     phoneCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_phone"), @"BR15N"], nil);
     [phoneCellModel updateFrame];
     [self.listArray addObject:phoneCellModel];
     
     // 邮箱
-    LoginTableViewCellModel *emailCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    emailCellModel.isLastCell = YES;
+    LoginTableViewCellModel *emailCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellMail];
     emailCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_email"), @"BR15N"], nil);
     [emailCellModel updateFrame];
     [self.listArray addObject:emailCellModel];
     
     // 验证码
-    LoginTableViewCellModel *verificationCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    LoginTableViewCellModel *verificationCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellVerification];
     verificationCellModel.isLastCell = YES;
     verificationCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_verification"), @"BR15N"], nil);
     [verificationCellModel updateFrame];
     [self.listArray addObject:verificationCellModel];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -99,7 +95,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLoginTableViewCellIdentifier forIndexPath:indexPath];
-    cell.idnexPath = indexPath;
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     if (self.listArray.count > indexPath.row) {
         cell.cellModel = [self.listArray objectAtIndex:indexPath.row];
     }
@@ -111,9 +108,21 @@
 }
 
 
+#pragma mark - LoginTableViewCellDelegate
+- (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
+    if (isEditting) {
+        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
+        [self.tableView scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    } else {
+        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }
+}
+
+
 #pragma mark - Action
 - (void)registerButtonAction {
     // TODO... 注册
+    [self.view endEditing:YES];
 }
 
 
@@ -129,11 +138,18 @@
         registerButton.backgroundColor = [UIColor orThemeColor];
         registerButton.layer.cornerRadius = 5.f;
         registerButton.layer.masksToBounds = YES;
-        [registerButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [registerButton addTarget:self action:@selector(registerButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_footView addSubview:registerButton];
     }
     return _footView;
 }
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end
 

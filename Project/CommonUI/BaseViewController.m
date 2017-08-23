@@ -31,6 +31,7 @@
 }
 
 - (CGFloat)pageHeight {
+    // TODO... translunt,hidenavigationBar等情况
     return SCREEN_HEIGHT - (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
 }
 

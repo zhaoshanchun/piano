@@ -12,7 +12,7 @@
 #import "LoginTableViewCell.h"
 
 
-@interface LoginViewController ()
+@interface LoginViewController () <LoginTableViewCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) UIView *footView;
@@ -26,19 +26,11 @@
     
     [self setNavigationBarTitle:localizeString(@"login")];
 
-    self.listArray = [NSMutableArray new];
-    
-    LoginTableViewCellModel *userNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    userNameCellModel.isFirstCell = YES;
-    userNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_user_name"), @"BR15N"], nil);
-    [userNameCellModel updateFrame];
-    [self.listArray addObject:userNameCellModel];
-    
-    LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
-    passWordCellModel.isLastCell = YES;
-    passWordCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_password"), @"BR15N"], nil);
-    [passWordCellModel updateFrame];
-    [self.listArray addObject:passWordCellModel];
+    [self presetData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.view endEditing:YES];
 }
 
 - (void)setTableView {
@@ -46,10 +38,22 @@
     self.tableView.tableFooterView = self.footView;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)presetData {
+    self.listArray = [NSMutableArray new];
+    
+    LoginTableViewCellModel *userNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellUserName];
+    userNameCellModel.isFirstCell = YES;
+    userNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_user_name"), @"BR15N"], nil);
+    [userNameCellModel updateFrame];
+    [self.listArray addObject:userNameCellModel];
+    
+    LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellPassWord];
+    passWordCellModel.isLastCell = YES;
+    passWordCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_password"), @"BR15N"], nil);
+    [passWordCellModel updateFrame];
+    [self.listArray addObject:passWordCellModel];
 }
+
 
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -67,7 +71,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLoginTableViewCellIdentifier forIndexPath:indexPath];
-    cell.idnexPath = indexPath;
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     if (self.listArray.count > indexPath.row) {
         cell.cellModel = [self.listArray objectAtIndex:indexPath.row];
     }
@@ -79,12 +84,63 @@
 }
 
 
+#pragma mark - LoginTableViewCellDelegate
+- (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
+    if (isEditting) {
+        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
+        [self.tableView scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    } else {
+        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    }
+}
+
+
 #pragma mark - Action
 - (void)loginButtonAction {
-    // TODO... 登录
+    // 登录
+    [self.view endEditing:YES];
+    
+    // TODO... 错误判断
+    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+    for (LoginTableViewCellModel *cellModel in self.listArray) {
+        switch (cellModel.loginCellellType) {
+            case LoginTableViewCellUserName: {
+                [paramDict setObject:cellModel.inputedContent forKey:@"user"];
+                break;
+            }
+            case LoginTableViewCellPassWord:
+            case LoginTableViewCellConfirmPassWord: {
+                if ([paramDict objectForKey:kPassword]) {
+                    NSString *passWord = [paramDict objectForKey:kPassword];
+                    if (![passWord isEqualToString:cellModel.inputedContent]) {
+                        // TODO... 密码不匹配
+                    }
+                } else {
+                    [paramDict setObject:cellModel.inputedContent forKey:kPassword];
+                }
+                break;
+            }
+            case LoginTableViewCellPhone: {
+                [paramDict setObject:cellModel.inputedContent forKey:@""];
+                break;
+            }
+            case LoginTableViewCellMail: {
+                [paramDict setObject:cellModel.inputedContent forKey:@""];
+                break;
+            }
+            case LoginTableViewCellVerification: {
+                [paramDict setObject:cellModel.inputedContent forKey:@""];
+                break;
+            }
+            default:
+                break;
+        }
+    }
 }
 
 - (void)registerButtonAction {
+    [self.view endEditing:YES];
     RegisterViewController *vc = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -115,6 +171,12 @@
     }
     return _footView;
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end
 

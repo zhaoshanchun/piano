@@ -9,7 +9,7 @@
 #import "LoginTableViewCell.h"
 
 
-@interface LoginTableViewCell ()
+@interface LoginTableViewCell () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UITextField *textField;
@@ -72,6 +72,20 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(updateFrameForEdittingCell:isEditting:)]) {
+        [self.delegate updateFrameForEdittingCell:self isEditting:YES];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.cellModel.inputedContent = textField.text;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(updateFrameForEdittingCell:isEditting:)]) {
+        [self.delegate updateFrameForEdittingCell:self isEditting:NO];
+    }
+}
+
 
 #pragma mark - Factory method
 - (UILabel *)titleLabel {
@@ -86,6 +100,7 @@
 - (UITextField *)textField {
     if (_textField == nil) {
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
+        _textField.delegate = self;
         [_textField showBorder:[UIColor orLineColor]];
         _textField.layer.cornerRadius = 4.f;
         _textField.layer.masksToBounds = YES;
