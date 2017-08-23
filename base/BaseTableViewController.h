@@ -11,6 +11,8 @@
 
 @interface BaseTableViewController : BaseViewController
 
+@property (assign, nonatomic) UITableViewStyle tableStyle;
+
 @property (strong, nonatomic) UITableView *tableView;
 
 @end

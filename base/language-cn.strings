@@ -22,6 +22,9 @@
 "page_title_profile" = "我的";
 
 // Profile
+"profile_login" = "登录";
+"profile_logout" = "退出登录";
+
 "profile_evaluate" = "评价应用";
 "profile_feedBack" = "意见反馈";
 "profile_feedBack_placeHolder" = "请输入您的宝贵意见!必须大于3个字符!";

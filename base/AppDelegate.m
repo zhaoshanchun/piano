@@ -43,7 +43,7 @@
     [NSThread sleepForTimeInterval:4.0];
     
     APIManager *manager = [[APIManager alloc] init];
-    [manager baiduTest];
+    // [manager baiduTest];
     
     return YES;
 }

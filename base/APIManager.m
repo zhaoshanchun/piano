@@ -11,33 +11,23 @@
 @implementation APIManager
 
 
-- (NSURLSessionDataTask *)baiduTest {
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-
-    NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/get"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-        }
-    }];
-    [dataTask resume];
-    
-    return dataTask;
- 
-    return nil;
-}
-
-
-- (void)sdImageTest {
-    SDImageCache *cache = [[SDImageCache alloc] init];
-}
-
+//- (NSURLSessionDataTask *)getData:(ApiResponseHandler)handler {
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+//
+//    NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/get"];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+//    
+//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+//        if (error) {
+//            NSLog(@"Error: %@", error);
+//        } else {
+//            NSLog(@"%@ %@", response, responseObject);
+//        }
+//    }];
+//    [dataTask resume];
+//    return dataTask;
+//}
 
 
 @end

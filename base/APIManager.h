@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
-
-#import "SDImageCache.h"
+//#import "AFNetworking.h"
 
 
+typedef void (^ApiResponseHandler)(id *model, NSInteger statusCode, NSError *err);
 
 @interface APIManager : NSObject
 
-- (NSURLSessionDataTask *)baiduTest;
-
-- (void)sdImageTest;
+//- (NSURLSessionDataTask *)getData:(ApiResponseHandler)handler;
 
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+AppBar.h"
 
 @interface BaseViewController : UIViewController
 
