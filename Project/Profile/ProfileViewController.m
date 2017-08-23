@@ -37,8 +37,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setTableRegister {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+- (void)setTableView {
+    [self.tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

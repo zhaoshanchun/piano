@@ -25,6 +25,7 @@
 		BCBB707F1EC05314001D25C2 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633F1EAC665100B14AC1 /* GoogleSymbolUtilities.framework */; };
 		BCBB70801EC05314001D25C2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633E1EAC665100B14AC1 /* GoogleToolboxForMac.framework */; };
 		BCBB70951EC07AF7001D25C2 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */; };
+		DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -348,6 +349,8 @@
 		DBCFD0C01F4D285900149112 /* LBToAppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0BF1F4D285900149112 /* LBToAppStore.m */; };
 		DBCFD0C31F4D289800149112 /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0C21F4D289800149112 /* iToast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0C51F4D29FF00149112 /* OtherTableViewCell.m */; };
+		DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0C81F4D2DFF00149112 /* LoginTableViewCell.m */; };
+		DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */; };
 		FB9C1CE929025DC7AFA16093 /* libPods-gangqinjiaocheng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A584A6547B34685E967D9C47 /* libPods-gangqinjiaocheng.a */; };
 /* End PBXBuildFile section */
 
@@ -413,6 +416,8 @@
 		BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "admob sdk/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		C706C9C5A0CAAF3C0E88C624 /* Pods-huazhuangjiaocheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huazhuangjiaocheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-huazhuangjiaocheng/Pods-huazhuangjiaocheng.release.xcconfig"; sourceTree = "<group>"; };
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		DB0EFC661F4D6BE300DE7B59 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -818,6 +823,10 @@
 		DBCFD0C21F4D289800149112 /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		DBCFD0C41F4D29FF00149112 /* OtherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTableViewCell.h; sourceTree = "<group>"; };
 		DBCFD0C51F4D29FF00149112 /* OtherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTableViewCell.m; sourceTree = "<group>"; };
+		DBCFD0C71F4D2DFF00149112 /* LoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCell.h; sourceTree = "<group>"; };
+		DBCFD0C81F4D2DFF00149112 /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
+		DBCFD0CA1F4D2E1300149112 /* LoginTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCellModel.h; sourceTree = "<group>"; };
+		DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCellModel.m; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10B0B782C211CE05D61A087 /* Pods-sifakaoshi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sifakaoshi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sifakaoshi/Pods-sifakaoshi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1089,8 +1098,14 @@
 		DBCFCE571F4D1D0400149112 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				DB0EFC661F4D6BE300DE7B59 /* RegisterViewController.h */,
+				DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */,
 				DBCFCE581F4D1D0400149112 /* LoginViewController.h */,
 				DBCFCE591F4D1D0400149112 /* LoginViewController.m */,
+				DBCFD0C71F4D2DFF00149112 /* LoginTableViewCell.h */,
+				DBCFD0C81F4D2DFF00149112 /* LoginTableViewCell.m */,
+				DBCFD0CA1F4D2E1300149112 /* LoginTableViewCellModel.h */,
+				DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1126,10 +1141,10 @@
 		DBCFCE771F4D1FB800149112 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DBCFCE7B1F4D1FB800149112 /* Common-Header.h */,
 				DBCFCE781F4D1FB800149112 /* Common-Define.h */,
 				DBCFCE791F4D1FB800149112 /* Common-Function.h */,
 				DBCFCE7A1F4D1FB800149112 /* Common-Function.m */,
-				DBCFCE7B1F4D1FB800149112 /* Common-Header.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1195,18 +1210,18 @@
 		DBCFCEAB1F4D24E000149112 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DBCFD0C41F4D29FF00149112 /* OtherTableViewCell.h */,
-				DBCFD0C51F4D29FF00149112 /* OtherTableViewCell.m */,
-				DBCFD0C11F4D289800149112 /* iToast.h */,
-				DBCFD0C21F4D289800149112 /* iToast.m */,
-				DBCFCEAC1F4D24E000149112 /* HistoryView.h */,
-				DBCFCEAD1F4D24E000149112 /* HistoryView.m */,
 				DBCFCEAE1F4D24E000149112 /* ProfileViewController.h */,
 				DBCFCEAF1F4D24E000149112 /* ProfileViewController.m */,
 				DBCFCEB01F4D24E000149112 /* SettingViewController.h */,
 				DBCFCEB11F4D24E000149112 /* SettingViewController.m */,
 				DBCFCEB21F4D24E000149112 /* UserFeedbackViewController.h */,
 				DBCFCEB31F4D24E000149112 /* UserFeedbackViewController.m */,
+				DBCFD0C41F4D29FF00149112 /* OtherTableViewCell.h */,
+				DBCFD0C51F4D29FF00149112 /* OtherTableViewCell.m */,
+				DBCFD0C11F4D289800149112 /* iToast.h */,
+				DBCFD0C21F4D289800149112 /* iToast.m */,
+				DBCFCEAC1F4D24E000149112 /* HistoryView.h */,
+				DBCFCEAD1F4D24E000149112 /* HistoryView.m */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1958,6 +1973,7 @@
 				DBCFCE4C1F4C3A7500149112 /* TFHppleElement.m in Sources */,
 				DBCFCEA81F4D242000149112 /* MainCollectionViewController.m in Sources */,
 				DBCFCEA61F4D242000149112 /* GLCoverFlowLayout.m in Sources */,
+				DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */,
 				DBCFCE6E1F4D1EBF00149112 /* BaseTableViewController.m in Sources */,
 				DBCFCE831F4D200B00149112 /* GlobalValue.m in Sources */,
 				DBCFCE3D1F4C3A7500149112 /* README.md in Sources */,
@@ -1974,6 +1990,7 @@
 				DBCFCE341F4C3A7500149112 /* AFHTTPRequestOperationManager.m in Sources */,
 				DBCFCE421F4C3A7500149112 /* UIImageView+AFNetworking.m in Sources */,
 				DBCFCDDE1F4C25C600149112 /* UIViewController+AppBar.m in Sources */,
+				DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */,
 				DBCFCE501F4C3A7500149112 /* MJRefreshConst.m in Sources */,
 				DBCFCEB71F4D24E000149112 /* UserFeedbackViewController.m in Sources */,
 				DBCFCEA51F4D242000149112 /* GLCell.m in Sources */,
@@ -1997,6 +2014,7 @@
 				DBCFCE471F4C3A7500149112 /* FMDatabaseAdditions.m in Sources */,
 				DBCFCE391F4C3A7500149112 /* AFURLRequestSerialization.m in Sources */,
 				DBCFCE7C1F4D1FB800149112 /* Common-Function.m in Sources */,
+				DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */,
 				DBCFCE451F4C3A7500149112 /* UIWebView+AFNetworking.m in Sources */,
 				DBCFD0BD1F4D27F400149112 /* main.m in Sources */,
 				DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */,

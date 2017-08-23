@@ -1,49 +1,81 @@
 //
-//  LoginViewController.m
+//  RegisterViewController.m
 //  gangqinjiaocheng
 //
 //  Created by zhaosc on 17/8/22.
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import "LoginViewController.h"
 #import "RegisterViewController.h"
-
 #import "LoginTableViewCell.h"
 
 
-@interface LoginViewController ()
+@interface RegisterViewController ()
 
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) UIView *footView;
 
 @end
 
-@implementation LoginViewController
+@implementation RegisterViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setNavigationBarTitle:localizeString(@"login")];
+    [self setNavigationBarTitle:localizeString(@"register")];
 
+    [self presetData];
+}
+
+- (void)setTableView {
+    [self.tableView registerClass:[LoginTableViewCell class] forCellReuseIdentifier:kLoginTableViewCellIdentifier];
+    self.tableView.tableFooterView = self.footView;
+}
+
+- (void)presetData {
     self.listArray = [NSMutableArray new];
     
+    // 用户名
     LoginTableViewCellModel *userNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
     userNameCellModel.isFirstCell = YES;
     userNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_user_name"), @"BR15N"], nil);
     [userNameCellModel updateFrame];
     [self.listArray addObject:userNameCellModel];
     
+    // 密码
     LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
     passWordCellModel.isLastCell = YES;
     passWordCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_password"), @"BR15N"], nil);
     [passWordCellModel updateFrame];
     [self.listArray addObject:passWordCellModel];
-}
-
-- (void)setTableView {
-    [self.tableView registerClass:[LoginTableViewCell class] forCellReuseIdentifier:kLoginTableViewCellIdentifier];
-    self.tableView.tableFooterView = self.footView;
+    
+    // 确认密码
+    LoginTableViewCellModel *confirmCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    confirmCellModel.isLastCell = YES;
+    confirmCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_confirme_password"), @"BR15N"], nil);
+    [confirmCellModel updateFrame];
+    [self.listArray addObject:confirmCellModel];
+    
+    // 电话
+    LoginTableViewCellModel *phoneCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    phoneCellModel.isLastCell = YES;
+    phoneCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_phone"), @"BR15N"], nil);
+    [phoneCellModel updateFrame];
+    [self.listArray addObject:phoneCellModel];
+    
+    // 邮箱
+    LoginTableViewCellModel *emailCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    emailCellModel.isLastCell = YES;
+    emailCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_email"), @"BR15N"], nil);
+    [emailCellModel updateFrame];
+    [self.listArray addObject:emailCellModel];
+    
+    // 验证码
+    LoginTableViewCellModel *verificationCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellNormal];
+    verificationCellModel.isLastCell = YES;
+    verificationCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_verification"), @"BR15N"], nil);
+    [verificationCellModel updateFrame];
+    [self.listArray addObject:verificationCellModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,13 +112,8 @@
 
 
 #pragma mark - Action
-- (void)loginButtonAction {
-    // TODO... 登录
-}
-
 - (void)registerButtonAction {
-    RegisterViewController *vc = [[RegisterViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    // TODO... 注册
 }
 
 
@@ -96,21 +123,13 @@
         _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 120)];
         _footView.backgroundColor = [UIColor clearColor];
         
-        UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 20, CGRectGetWidth(self.tableView.frame) - 50*2, 40)];
-        [loginButton setFontAndTextColorByKey:@"W15B" forState:UIControlStateNormal];
-        [loginButton setTitle:localizeString(@"login") forState:UIControlStateNormal];
-        loginButton.backgroundColor = [UIColor orThemeColor];
-        loginButton.layer.cornerRadius = 5.f;
-        loginButton.layer.masksToBounds = YES;
-        [loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [_footView addSubview:loginButton];
-        
-        UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(loginButton.frame), CGRectGetMaxY(loginButton.frame) + 10, CGRectGetWidth(loginButton.frame), 30)];
-        NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
-        style.alignment = NSTextAlignmentCenter;
-        NSAttributedString *attribute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_register"), @"O14N"], @[style]);
-        [registerButton setAttributedTitle:attribute forState:UIControlStateNormal];
-        [registerButton addTarget:self action:@selector(registerButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 20, CGRectGetWidth(self.tableView.frame) - 50*2, 40)];
+        [registerButton setFontAndTextColorByKey:@"W15B" forState:UIControlStateNormal];
+        [registerButton setTitle:localizeString(@"register") forState:UIControlStateNormal];
+        registerButton.backgroundColor = [UIColor orThemeColor];
+        registerButton.layer.cornerRadius = 5.f;
+        registerButton.layer.masksToBounds = YES;
+        [registerButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [_footView addSubview:registerButton];
     }
     return _footView;
