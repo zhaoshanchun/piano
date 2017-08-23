@@ -923,8 +923,7 @@
 				DBCFCED81F4D275800149112 /* Resources */,
 				DBCFD0B01F4D27F300149112 /* SupportingFiles */,
 			);
-			name = Project;
-			path = base;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		DBCFCDB81F4C1B0A00149112 /* LaunchScreen */ = {
@@ -2129,8 +2128,8 @@
 					"$(PROJECT_DIR)/admob\\ sdk",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/base/SupportingFiles/Piano-prefix.pch";
-				INFOPLIST_FILE = base/SupportingFiles/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Project/SupportingFiles/Piano-prefix.pch";
+				INFOPLIST_FILE = Project/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kun.piano;
@@ -2155,8 +2154,8 @@
 					"$(PROJECT_DIR)/admob\\ sdk",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREFIX_HEADER = "$(SRCROOT)/base/SupportingFiles/Piano-prefix.pch";
-				INFOPLIST_FILE = base/SupportingFiles/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Project/SupportingFiles/Piano-prefix.pch";
+				INFOPLIST_FILE = Project/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kun.piano;
