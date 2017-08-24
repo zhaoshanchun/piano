@@ -45,7 +45,7 @@
             CGSize size = getSizeForAttributedString(self.titleAttriute, kLoginTableViewCellTitleWidth, MAXFLOAT);
             self.titleFrame = CGRectMake(kLoginTableViewCellLRMargin, topMargin, kLoginTableViewCellTitleWidth, size.height);
             
-            self.verificationFrame = CGRectMake(kLoginTableViewCellWidth - kLoginTableViewCellLRMargin - kVerificationWidth, topMargin, kVerificationWidth, kLoginTableViewCellInputHeight);
+            self.verificationFrame = CGRectMake(kLoginTableViewCellWidth - kLoginTableViewCellLRMargin - kVerificationWidth, topMargin + (kLoginTableViewCellInputHeight - kVerificationHeight)/2, kVerificationWidth, kVerificationHeight);
             self.inputFrame = CGRectMake(CGRectGetMaxX(self.titleFrame) + 10, topMargin, CGRectGetMinX(self.verificationFrame) - 10 - CGRectGetMaxX(self.titleFrame) - 10, kLoginTableViewCellInputHeight);
             self.cellHeight = CGRectGetMaxY(self.titleFrame) + bottomMargin;
             

@@ -115,7 +115,7 @@
 - (UIImageView *)iconImageView {
     if (_iconImageView == nil) {
         _iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [_iconImageView showBorder:[UIColor redColor]];
+        // [_iconImageView showBorder:[UIColor redColor]];
         _iconImageView.hidden = YES;
     }
     return _iconImageView;

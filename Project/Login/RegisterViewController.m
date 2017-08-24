@@ -90,7 +90,6 @@
 
 - (void)getVerification {
     [APIManager downloadWithUrl:@"http://www.appshopping.store/app/get_verify_code" completedHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        
         NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
         if (headers[@"key"]) {
             self.verificationKey = headers[@"key"];
@@ -98,7 +97,7 @@
         }
         
         NSLog(@"File downloaded to: %@", filePath);
-        self.verificationImageFilePath = [filePath absoluteString];
+        self.verificationImageFilePath = [[filePath absoluteString] stringByReplacingOccurrencesOfString:@"file://" withString:@""];
         // file:///Users/zhaosc/Library/Developer/CoreSimulator/Devices/4BFA1AB3-C11D-4FFE-9C35-D9E46A8C5E63/data/Containers/Data/Application/719C3E7A-8EC9-495D-93F5-EA53D6DB86D2/Documents/get_verify_code.png
         if (self.verificationImageFilePath.length > 0 && self.listArray.count > 0) {
             for (LoginTableViewCellModel *cellModel in self.listArray) {
@@ -136,8 +135,9 @@
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLoginTableViewCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     if (self.listArray.count > indexPath.row) {
-        cell.cellModel.indexPath = indexPath;
-        cell.cellModel = [self.listArray objectAtIndex:indexPath.row];
+        LoginTableViewCellModel *cellModel = [self.listArray objectAtIndex:indexPath.row];
+        cellModel.indexPath = indexPath;
+        cell.cellModel = cellModel;
     }
     return cell;
 }

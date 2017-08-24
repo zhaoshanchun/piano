@@ -13,7 +13,8 @@
 #define kLoginTableViewCellTBMargin 15.f
 #define kLoginTableViewCellTitleWidth 80.f
 #define kLoginTableViewCellInputHeight 30.f
-#define kVerificationWidth 50.f
+#define kVerificationWidth 78.f // 78x26
+#define kVerificationHeight 26.f
 
 typedef enum {
     LoginTableViewCellUserName,   // title + input
