@@ -78,4 +78,17 @@
     bar.tintColor = [UIColor blackColor];
     bar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor blackColor]};
 }
+
+//- (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated {
+//    if ([self.window.rootViewController isKindOfClass:[MainTabBarController class]]) {
+//        MainTabBarController *vc = (MainTabBarController *)self.window.rootViewController;
+//        if (vc.tabBar.hidden != hidden) {
+//            vc.tabBar.hidden = hidden;
+//        }
+//    }
+//}
+
+
 @end
+
+

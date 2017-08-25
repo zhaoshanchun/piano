@@ -10,9 +10,25 @@
 
 @interface BaseViewController ()
 
+@property (assign, nonatomic) BOOL tabbarHidden;
+
 @end
 
 @implementation BaseViewController
+
+- (instancetype)init {
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,18 +37,52 @@
     self.view.backgroundColor = [UIColor colorForKey:@"lgy"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.animating = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.animating = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (BOOL)interactivePopGestureShouldBegin {
+    return YES;
+}
+
+
+- (void)hideNavigationBarIfNeed {
+    // TODO...
+}
+
 
 - (CGFloat)pageWidth {
     return SCREEN_WIDTH;
 }
 
 - (CGFloat)pageHeight {
-    // TODO... translunt,hidenavigationBar等情况
-    return SCREEN_HEIGHT - (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
+    // translunt,hidenavigationBar,tabbar等情况
+    CGFloat pageHeight = SCREEN_HEIGHT;
+    
+    if (!self.tabbarHidden) {
+        pageHeight -= TAB_BAR_HEIGHT;
+    }
+    
+    if (!self.navigationController.isNavigationBarHidden) {
+        pageHeight -= (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
+    }
+    
+    return pageHeight;
 }
 
 @end

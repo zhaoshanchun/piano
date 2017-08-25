@@ -16,4 +16,6 @@
 
 @interface MainTabBarController : UITabBarController
 
+- (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated;
+
 @end

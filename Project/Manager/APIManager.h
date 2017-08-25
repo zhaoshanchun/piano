@@ -11,6 +11,7 @@
 
 
 #define kUser @"user"
+#define kFullName @"alias"
 #define kPassword @"password"
 #define kAlias @"alias"
 #define kPhone @"phone"

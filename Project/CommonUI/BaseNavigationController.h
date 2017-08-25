@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MainTabBarController;
+
 @interface BaseNavigationController : UINavigationController
+
+@property (strong, nonatomic) MainTabBarController *tabbarController;
 
 @end

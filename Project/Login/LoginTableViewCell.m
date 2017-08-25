@@ -52,6 +52,8 @@
     }
     _cellModel = cellModel;
     
+    self.iconImageView.hidden = YES;
+    
     self.titleLabel.frame = cellModel.titleFrame;
     self.titleLabel.attributedText = cellModel.titleAttriute;
     self.textField.frame = cellModel.inputFrame;
@@ -90,6 +92,11 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    return YES;
+}
+
 
 #pragma mark - Factory method
 - (UILabel *)titleLabel {
@@ -105,6 +112,7 @@
     if (_textField == nil) {
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.delegate = self;
+        _textField.returnKeyType = UIReturnKeyDone;
         [_textField showBorder:[UIColor orLineColor]];
         _textField.layer.cornerRadius = 4.f;
         _textField.layer.masksToBounds = YES;

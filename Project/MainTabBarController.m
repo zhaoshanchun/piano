@@ -7,6 +7,7 @@
 //
 
 #import "MainTabBarController.h"
+#import "BaseViewController.h"
 #import "BaseNavigationController.h"
 #import "MainCollectionViewController.h"
 #import "ProfileViewController.h"
@@ -24,7 +25,7 @@
     NSArray *childItemsArray = @[
                                  @{kClassKey  : @"MainCollectionViewController",
                                    kTextKey  : localizeString(@"tab_home"),
-                                   kTitleKey   : @"",
+                                   kTitleKey   : localizeString(@"tab_home"),
                                    kImgKey    : @"Home",
                                    kSelImgKey : @"Home"},
                                  
@@ -42,18 +43,21 @@
                                  
                                  @{kClassKey  : @"ProfileViewController",
                                    kTitleKey  : localizeString(@"tab_profile"),
-                                   kTextKey   : @"我的",
+                                   kTextKey   : localizeString(@"tab_profile"),
                                    kImgKey    : @"More",
                                    kSelImgKey : @"More"}
                                   ];
     
     [childItemsArray enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-        UIViewController *vc = [NSClassFromString(dict[kClassKey]) new];
+        BaseViewController *vc = [NSClassFromString(dict[kClassKey]) new];
         vc.title = dict[kTitleKey];
+        
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
+        nav.tabbarController = self;
         UITabBarItem *item = nav.tabBarItem;
         item.title = dict[kTextKey];
         item.image = [UIImage imageNamed:dict[kImgKey]];
+        
         //item.selectedImage = [[UIImage imageNamed:dict[kSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
        // [item setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0 green:(190 / 255.0) blue:(12 / 255.0) alpha:1]} forState:UIControlStateSelected];
         [self addChildViewController:nav];
@@ -115,6 +119,26 @@
     //5.执行任务
     [dataTask resume];
 }
+
+- (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.24 animations:^{
+            self.tabBar.hidden = hidden;
+        }];
+    } else {
+        self.tabBar.hidden = hidden;
+    }
+}
+
+//- (void)popToRootViewController {
+//    UIViewController *currentViewController = self.viewControllers[self.selectedIndex];
+//    if ([[(UIBaseNavigationController *)currentViewController viewControllers] count] > 1) {
+//        [(UIBaseNavigationController *)currentViewController popToRootViewControllerAnimated:NO];
+//    }
+//    if (self.tabBarHidden) {
+//        [self setControlsHidden:NO animated:YES];
+//    }
+//}
 
 @end
 

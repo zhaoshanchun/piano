@@ -21,7 +21,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        
+        self.hidesBottomBarWhenPushed = NO;
     }
     return self;
 }
@@ -30,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self setNavigationBarTitle:localizeString(@"page_title_profile")];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +49,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }
     return 20.f;
 }
 
@@ -67,23 +72,23 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
-            cell.textLabel.text = localizeString(@"登录");
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_login"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
             return cell;
         }
     } else if (indexPath.section == 1) {
         UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
         if (indexPath.row == 0) {
-            cell.textLabel.text = localizeString(@"profile_evaluate");
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_evaluate"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
         } else {
-            cell.textLabel.text = localizeString(@"profile_feedBack");
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_feedBack"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
         }
         return cell;
     } else {
         UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
-        cell.textLabel.text = localizeString(@"profile_history");
+        cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_history"), @"BR15N"], nil);
         return cell;
     }
     UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
@@ -91,9 +96,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        LoginViewController *vc = [LoginViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            LoginViewController *vc = [LoginViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             NSString *str = [NSString stringWithFormat:

@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) UIView *footView;
+@property (strong, nonatomic) NSIndexPath *edittingIndexPath;
 
 @property (strong, nonatomic) NSString *verificationImageFilePath;
 @property (strong, nonatomic) NSString *verificationKey;
@@ -26,8 +27,16 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"register")];
-
     [self presetData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -40,7 +49,13 @@
     [self.view endEditing:YES];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
 - (void)setTableView {
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeNone;
     [self.tableView registerClass:[LoginTableViewCell class] forCellReuseIdentifier:kLoginTableViewCellIdentifier];
     self.tableView.tableFooterView = self.footView;
 }
@@ -54,6 +69,12 @@
     userNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_user_name"), @"BR15N"], nil);
     [userNameCellModel updateFrame];
     [self.listArray addObject:userNameCellModel];
+    
+    // Full name
+    LoginTableViewCellModel *fullNameCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellFullName];
+    fullNameCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_full_name"), @"BR15N"], nil);
+    [fullNameCellModel updateFrame];
+    [self.listArray addObject:fullNameCellModel];
     
     // 密码
     LoginTableViewCellModel *passWordCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellPassWord];
@@ -149,26 +170,119 @@
 
 #pragma mark - LoginTableViewCellDelegate
 - (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
-    if (isEditting) {
-        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
-        [self.tableView scrollToRowAtIndexPath:cell.cellModel.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    } else {
-        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.edittingIndexPath = cell.cellModel.indexPath;
+}
+
+- (void)keyboardDidShow:(NSNotification *)aNotification {
+    // 获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    
+    self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - keyboardRect.size.height);
+    if (self.edittingIndexPath) {
+        [self.tableView scrollToRowAtIndexPath:self.edittingIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
 }
+
+- (void)keyboardDidHide:(NSNotification *)aNotification {
+    self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+}
+
 
 
 #pragma mark - Action
 - (void)registerButtonAction {
-    // TODO... 注册
+    // 注册
     [self.view endEditing:YES];
+    
+    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+    for (LoginTableViewCellModel *cellModel in self.listArray) {
+        switch (cellModel.loginCellellType) {
+            case LoginTableViewCellUserName: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUser];
+                break;
+            }
+            case LoginTableViewCellFullName: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kFullName];
+                break;
+            }
+            case LoginTableViewCellPassWord:
+            case LoginTableViewCellConfirmPassWord: {
+                if ([paramDict objectForKey:kPassword]) {
+                    NSString *passWord = [paramDict objectForKey:kPassword];
+                    if (![passWord isEqualToString:cellModel.inputedContent]) {
+                        // TODO... 密码不匹配
+                        break;
+                        return;
+                    }
+                } else {
+                    [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kPassword];
+                }
+                break;
+            }
+            case LoginTableViewCellPhone: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kPhone];
+                break;
+            }
+            case LoginTableViewCellMail: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kMail];
+                break;
+            }
+            case LoginTableViewCellVerification: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kCode];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    
+    // Check
+    if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
+        // [self.view makeToast:@"请填写用户名"];
+        return;
+    }
+    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {
+        // 密码长度
+        return;
+    }
+    if (![paramDict objectForKey:kMail] || [[paramDict objectForKey:kMail] length] == 0) {
+        // 邮件格式
+        return;
+    }
+    if (![paramDict objectForKey:kCode] || [[paramDict objectForKey:kCode] length] == 0) {
+        // 数字位数
+        return;
+    }
+    
+    // API request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.appshopping.store/app/register"]];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
+    NSString *param=[NSString stringWithFormat:@"user=%@&password=%@&alias=%@&phone=%@&mail=%@&key=%@&code=%@", [paramDict objectForKey:kUser], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
+    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *backData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (error) {
+        NSLog(@"error : %@",[error localizedDescription]);
+    } else {
+        NSLog(@"response : %@",response);
+        NSLog(@"backData : %@",[[NSString alloc]initWithData:backData encoding:NSUTF8StringEncoding]);
+    }
 }
 
 
 #pragma mark - Factory method
 - (UIView *)footView {
     if (_footView == nil) {
-        _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 120)];
+        _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 80)];
         _footView.backgroundColor = [UIColor clearColor];
         
         UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 20, CGRectGetWidth(self.tableView.frame) - 50*2, 40)];

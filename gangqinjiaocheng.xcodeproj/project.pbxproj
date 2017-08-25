@@ -12,7 +12,6 @@
 		BC5A26211EEA5D6B00101A85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5A26201EEA5D6B00101A85 /* Foundation.framework */; };
 		BC5A26271EEA5E4D00101A85 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5A26261EEA5E4D00101A85 /* CoreGraphics.framework */; };
 		BC5A285C1EEA6AA000101A85 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC5A285B1EEA6AA000101A85 /* MapKit.framework */; };
-		BC87B9CC1F028AD1000A3962 /* AdCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC87B9CB1F028AD1000A3962 /* AdCollectionViewCell.m */; };
 		BC9A63551EAC726C00B14AC1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A634A1EAC6E3700B14AC1 /* libstdc++.tbd */; };
 		BC9A63571EAC728A00B14AC1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A63561EAC728A00B14AC1 /* libsqlite3.tbd */; };
 		BC9A638D1EAF900F00B14AC1 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A637F1EAF8E1900B14AC1 /* libxml2.2.tbd */; };
@@ -43,6 +42,7 @@
 		DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC891F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m */; };
 		DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC8B1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m */; };
 		DB0EFC9E1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC8D1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m */; };
+		DB8202021F4E7B7A00494174 /* AdCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -391,8 +391,6 @@
 		BC5A26261EEA5E4D00101A85 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BC5A285B1EEA6AA000101A85 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BC682AEA1EEFC587007B1C46 /* libPods-gaoerfujiaolian.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-gaoerfujiaolian.a"; path = "../../../Library/Developer/Xcode/DerivedData/gaoerfujiaolian-bmhzxqcrmmreoecfytkzsqtrzusr/Build/Products/Release-iphonesimulator/libPods-gaoerfujiaolian.a"; sourceTree = "<group>"; };
-		BC87B9CA1F028AD1000A3962 /* AdCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdCollectionViewCell.h; sourceTree = "<group>"; };
-		BC87B9CB1F028AD1000A3962 /* AdCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdCollectionViewCell.m; sourceTree = "<group>"; };
 		BC9A633C1EAC654700B14AC1 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Firebase/AdMob/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BC9A633E1EAC665100B14AC1 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = Firebase/Analytics/GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		BC9A633F1EAC665100B14AC1 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Firebase/Analytics/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
@@ -451,6 +449,8 @@
 		DB0EFC8B1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		DB0EFC8C1F4DDD6400DE7B59 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		DB0EFC8D1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		DB8202001F4E7B7A00494174 /* AdCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdCollectionViewCell.h; sourceTree = "<group>"; };
+		DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdCollectionViewCell.m; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -909,8 +909,6 @@
 				BCB0C4841EA8EA1E004AB5FD /* AppDelegate.m */,
 				BCB0C4971EA8EEE5004AB5FD /* MainTabBarController.h */,
 				BCB0C4981EA8EEE5004AB5FD /* MainTabBarController.m */,
-				BC87B9CA1F028AD1000A3962 /* AdCollectionViewCell.h */,
-				BC87B9CB1F028AD1000A3962 /* AdCollectionViewCell.m */,
 				DBCFCE771F4D1FB800149112 /* Common */,
 				DBCFCE5F1F4D1EBF00149112 /* CommonUI */,
 				DBCFCDCF1F4C25C600149112 /* Categorys */,
@@ -1114,6 +1112,8 @@
 		DBCFCE5F1F4D1EBF00149112 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				DB8202001F4E7B7A00494174 /* AdCollectionViewCell.h */,
+				DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */,
 				DBCFCE661F4D1EBF00149112 /* BaseViewController.h */,
 				DBCFCE671F4D1EBF00149112 /* BaseViewController.m */,
 				DBCFCE641F4D1EBF00149112 /* BaseTableViewController.h */,
@@ -1970,6 +1970,7 @@
 				DBCFCE831F4D200B00149112 /* GlobalValue.m in Sources */,
 				DBCFCE8B1F4D20EA00149112 /* SearchDetailView.m in Sources */,
 				DB0EFC8E1F4DDD6400DE7B59 /* AFHTTPSessionManager.m in Sources */,
+				DB8202021F4E7B7A00494174 /* AdCollectionViewCell.m in Sources */,
 				BCB0C4991EA8EEE5004AB5FD /* MainTabBarController.m in Sources */,
 				DBCFCEB61F4D24E000149112 /* SettingViewController.m in Sources */,
 				DBCFCED61F4D25E900149112 /* SSLPickerView.m in Sources */,
@@ -2012,7 +2013,6 @@
 				DBCFCE821F4D200B00149112 /* AsyncImage.m in Sources */,
 				DBCFD0C01F4D285900149112 /* LBToAppStore.m in Sources */,
 				DBCFCEB41F4D24E000149112 /* HistoryView.m in Sources */,
-				BC87B9CC1F028AD1000A3962 /* AdCollectionViewCell.m in Sources */,
 				DB0EFC911F4DDD6400DE7B59 /* AFURLRequestSerialization.m in Sources */,
 				DBCFCE481F4C3A7500149112 /* FMDatabasePool.m in Sources */,
 				DBCFCED41F4D25E900149112 /* NoteDetialViewController.m in Sources */,

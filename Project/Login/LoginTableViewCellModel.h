@@ -18,6 +18,7 @@
 
 typedef enum {
     LoginTableViewCellUserName,   // title + input
+    LoginTableViewCellFullName,
     LoginTableViewCellPassWord,
     LoginTableViewCellConfirmPassWord,
     LoginTableViewCellPhone,

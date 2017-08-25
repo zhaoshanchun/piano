@@ -10,11 +10,13 @@
 #import "RegisterViewController.h"
 
 #import "LoginTableViewCell.h"
+#import "UIView+Toast.h"
 
 
 @interface LoginViewController () <LoginTableViewCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *listArray;
+@property (strong, nonatomic) NSIndexPath *edittingIndexPath;
 @property (strong, nonatomic) UIView *footView;
 
 @end
@@ -25,12 +27,30 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"login")];
-
     [self presetData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.view endEditing:YES];
+    
+    if (self.apiTask) {
+        [self.apiTask cancel];
+        self.apiTask = nil;
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)setTableView {
@@ -53,7 +73,6 @@
     [passWordCellModel updateFrame];
     [self.listArray addObject:passWordCellModel];
 }
-
 
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -86,12 +105,23 @@
 
 #pragma mark - LoginTableViewCellDelegate
 - (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting {
-    if (isEditting) {
-        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - 216);
-        [self.tableView scrollToRowAtIndexPath:cell.cellModel.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    } else {
-        self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+    self.edittingIndexPath = cell.cellModel.indexPath;
+}
+
+- (void)keyboardDidShow:(NSNotification *)aNotification {
+    // 获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    
+    self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), CGRectGetHeight(self.view.frame) - keyboardRect.size.height);
+    if (self.edittingIndexPath) {
+        [self.tableView scrollToRowAtIndexPath:self.edittingIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
+}
+
+- (void)keyboardDidHide:(NSNotification *)aNotification {
+    self.tableView.frame = CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
 }
 
 
@@ -100,42 +130,70 @@
     // 登录
     [self.view endEditing:YES];
     
-    // TODO... 错误判断
-    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
+    /*
+     http://www.appshopping.store/app/login?user=kunhuang&password=8888889
+     response: (post)
+     user
+     password
+     */
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
     for (LoginTableViewCellModel *cellModel in self.listArray) {
         switch (cellModel.loginCellellType) {
             case LoginTableViewCellUserName: {
-                [paramDict setObject:cellModel.inputedContent forKey:@"user"];
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUser];
                 break;
             }
-            case LoginTableViewCellPassWord:
-            case LoginTableViewCellConfirmPassWord: {
-                if ([paramDict objectForKey:kPassword]) {
-                    NSString *passWord = [paramDict objectForKey:kPassword];
-                    if (![passWord isEqualToString:cellModel.inputedContent]) {
-                        // TODO... 密码不匹配
-                    }
-                } else {
-                    [paramDict setObject:cellModel.inputedContent forKey:kPassword];
-                }
-                break;
-            }
-            case LoginTableViewCellPhone: {
-                [paramDict setObject:cellModel.inputedContent forKey:@""];
-                break;
-            }
-            case LoginTableViewCellMail: {
-                [paramDict setObject:cellModel.inputedContent forKey:@""];
-                break;
-            }
-            case LoginTableViewCellVerification: {
-                [paramDict setObject:cellModel.inputedContent forKey:@""];
+            case LoginTableViewCellPassWord: {
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kPassword];
                 break;
             }
             default:
                 break;
         }
+    }
+    if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
+//        [self.view makeToast:@"请填写用户名"];
+        return;
+    }
+    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {
+//        [self.view makeToast:@"请填写密码"];
+        return;
+    }
+ 
+ 
+    /*
+    self.apiTask = [APIManager requestWithApi:@"http://www.appshopping.store/app/login"
+                                    apiMethod:APIMethodPost
+                                    andParams:nil // @{kUser:@"kunhuang",kPassword:@"888888898"}
+                                progressBlock:nil
+                            completionHandler:^(id model, NSInteger statusCode, NSError *err) {
+        if (err) {
+            
+        } else {
+            
+        }
+    }];
+    */
+    
+   
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.appshopping.store/app/login"]]; // 默认为get请求
+    request.timeoutInterval = 10.0; // 设置请求超时为5秒
+    request.HTTPMethod = @"POST"; // 设置请求方法
+    // 设置请求体
+    // NSString *param=[NSString stringWithFormat:@"user=%@&password=%@", @"kunhuang", @"888888898"];
+    NSString *param = [NSString stringWithFormat:@"user=%@&password=%@", [paramDict objectForKey:kUser], [paramDict objectForKey:kPassword]];
+    // 把拼接后的字符串转换为data，设置请求体
+    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *backData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (error) {
+        NSLog(@"error : %@",[error localizedDescription]);
+    } else {
+        NSLog(@"response : %@",response);
+        NSLog(@"backData : %@",[[NSString alloc]initWithData:backData encoding:NSUTF8StringEncoding]);
     }
 }
 
@@ -149,7 +207,7 @@
 #pragma mark - Factory method
 - (UIView *)footView {
     if (_footView == nil) {
-        _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 120)];
+        _footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 100)];
         _footView.backgroundColor = [UIColor clearColor];
         
         UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 20, CGRectGetWidth(self.tableView.frame) - 50*2, 40)];

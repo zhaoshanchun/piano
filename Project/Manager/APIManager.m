@@ -58,7 +58,7 @@
                        completionHandler:(ApiResponseHandler)handler {
 
     AFHTTPRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    [serializer setTimeoutInterval:30];
+    [serializer setTimeoutInterval:60];
     [serializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
     
     

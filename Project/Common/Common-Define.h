@@ -63,6 +63,7 @@
 // Custom Tab Bar with 1px line at the top
 #define TAB_BAR_HEIGHT  50.f
 #define SR2_TOOL_BAR_HEIGHT  60.f
+#define KEYBOARD_HEIGHT  216.f
 
 
 #define LANG_EN     @"en"   // English
