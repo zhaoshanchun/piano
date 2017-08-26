@@ -1,17 +1,29 @@
 PODS:
+  - JSONModel (1.2.0)
+  - MBProgressHUD (0.9.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - Toast (2.4)
+  - UIActionSheet+Blocks (0.8.1)
+  - UIAlertView+Blocks (0.8.1)
 
 DEPENDENCIES:
+  - JSONModel (= 1.2)
+  - MBProgressHUD (~> 0.9)
   - SDWebImage (~> 3.8)
   - Toast (~> 2.4)
+  - UIActionSheet+Blocks (= 0.8.1)
+  - UIAlertView+Blocks (= 0.8.1)
 
 SPEC CHECKSUMS:
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  UIActionSheet+Blocks: 7fdab45fc8f15ac2dc1cd65af1470746600b5f46
+  UIAlertView+Blocks: 45c3d3b7194906702d3e9a14c7ece5581505646d
 
-PODFILE CHECKSUM: af61f0532b8fcf80ad90bf00f0857e352b987274
+PODFILE CHECKSUM: c5367d0b820bb0bd7b93084a587c475d8e1deab3
 
 COCOAPODS: 1.1.1

@@ -8,6 +8,14 @@
 
 #import "BaseTableViewController.h"
 
+@protocol LoginViewControllerDelegate <NSObject>
+
+- (void)loginSuccess;
+
+@end
+
 @interface LoginViewController : BaseTableViewController
+
+@property (weak, nonatomic) id<LoginViewControllerDelegate> delegate;
 
 @end

@@ -15,6 +15,7 @@
 #import "UIView+Helper.h"
 #import "UIView+Font.h"
 #import "UIImage+Helper.h"
+#import "JSONModel.h"
 
 
 #endif /* Common_Header_h */

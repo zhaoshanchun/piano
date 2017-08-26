@@ -213,7 +213,7 @@
                 if ([paramDict objectForKey:kPassword]) {
                     NSString *passWord = [paramDict objectForKey:kPassword];
                     if (![passWord isEqualToString:cellModel.inputedContent]) {
-                        // TODO... 密码不匹配
+                        [self.view makeToast:@"密码不匹配" duration:kToastDuration position:kToastPositionCenter];
                         break;
                         return;
                     }
@@ -241,7 +241,7 @@
     
     // Check
     if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
-        // [self.view makeToast:@"请填写用户名"];
+        [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {

@@ -9,10 +9,14 @@
 #import "ProfileViewController.h"
 #import "UserFeedbackViewController.h"
 #import "LoginViewController.h"
+#import "ProfileUserTableViewCell.h"
+#import "UIActionSheet+Blocks.h"
 
 #define kSectionNumber 3
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <LoginViewControllerDelegate>
+
+@property (strong, nonatomic) ProfileUserTableViewCellModel *userCellModel;
 
 @end
 
@@ -32,6 +36,7 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"page_title_profile")];
+    [self presetData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,8 +45,22 @@
 }
 
 - (void)setTableView {
+    [self.tableView registerClass:[ProfileUserTableViewCell class] forCellReuseIdentifier:kProfileUserTableViewCellIdentifier];
     [self.tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
 }
+
+- (void)presetData {
+    NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
+    if (userModelData) {
+        UserModel *userModel = [NSKeyedUnarchiver unarchiveObjectWithData:userModelData];
+        ProfileUserTableViewCellModel *cellModel = [ProfileUserTableViewCellModel new];
+        cellModel.userModel = userModel;
+        self.userCellModel = cellModel;
+    } else {
+        self.userCellModel = [ProfileUserTableViewCellModel new];
+    }
+}
+
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -68,12 +87,18 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return self.userCellModel.cellHeight;
+    }
+    return kCellDefaultHeight;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
-            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_login"), @"BR15N"], nil);
-            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
+            ProfileUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kProfileUserTableViewCellIdentifier forIndexPath:indexPath];
+            cell.cellModel = self.userCellModel;
             return cell;
         }
     } else if (indexPath.section == 1) {
@@ -98,8 +123,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            LoginViewController *vc = [LoginViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            if (self.userCellModel.userModel) {
+                // Logined, go to logout!
+                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:@"cancel取消" destructiveButtonTitle:nil otherButtonTitles:@[@"退出登陆"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                        // Logout
+                        saveObjectToUserDefaults(kLoginedUser, nil);
+                        self.userCellModel.userModel = nil;
+                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                    }
+                }];
+            } else {
+                // Unlogin, go to login page
+                LoginViewController *vc = [LoginViewController new];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -114,7 +153,23 @@
     }
 }
 
+
+
+#pragma mark - self
+- (void)loginSuccess {
+    NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
+    if (userModelData) {
+        UserModel *userModel = [NSKeyedUnarchiver unarchiveObjectWithData:userModelData];
+        self.userCellModel.userModel = userModel;
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+
 @end
+
+
+
 
 
 

@@ -81,7 +81,23 @@
 
 #define kEtagCna @"kEtagCna"
 
+#define kLoginedUser @"kLoginedUser"
 
+// Toast
+#define kToastDuration 2.0
+#define kToastPositionTop @"top"
+#define kToastPositionCenter @"center"
+#define kToastPositionBottom @"bottom"
+
+
+// -- Table View Cell --
+#define kCellDefaultHeight 44.0f
+// Left\right padding inside contentView
+#define kCellDefaultLRMargin 15.0f
+#define kCellDefaultTBMargin 15.0f
+// Right arrow size
+#define kCellDefaultAccessWidth 6.0f
+#define kCellDefaultAccessHeight 12.0f
 
 
 #endif /* CommonDefine_h */

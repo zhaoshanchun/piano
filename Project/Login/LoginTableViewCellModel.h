@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define kLoginTableViewCellWidth SCREEN_WIDTH
-#define kLoginTableViewCellLRMargin 15.f
-#define kLoginTableViewCellTBMargin 15.f
+#define kLoginTableViewCellLRMargin kCellDefaultLRMargin
+#define kLoginTableViewCellTBMargin kCellDefaultTBMargin
 #define kLoginTableViewCellTitleWidth 80.f
 #define kLoginTableViewCellInputHeight 30.f
 #define kVerificationWidth 78.f // 78x26

@@ -12,6 +12,8 @@
 #import "LoginTableViewCell.h"
 #import "UIView+Toast.h"
 
+#import "UserModel.h"
+
 
 @interface LoginViewController () <LoginTableViewCellDelegate>
 
@@ -152,11 +154,11 @@
         }
     }
     if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
-//        [self.view makeToast:@"请填写用户名"];
+        [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {
-//        [self.view makeToast:@"请填写密码"];
+        [self.view makeToast:@"请填写密码" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
  
@@ -194,7 +196,27 @@
     } else {
         NSLog(@"response : %@",response);
         NSLog(@"backData : %@",[[NSString alloc]initWithData:backData encoding:NSUTF8StringEncoding]);
+        
+        UserModel *userModel = [UserModel new];
+        userModel.userName = @"HK";
+        userModel.fullName = @"HuangKun";
+        NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+        saveObjectToUserDefaults(kLoginedUser, userModelData);
+        
+        // TODO... 登陆成功，返回上一级的 Profile 页面
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccess)]) {
+            [self.delegate loginSuccess];
+        }
     }
+    
+    /*
+    {
+        "msg": "successful",
+        "error": 0
+    }
+     */
 }
 
 - (void)registerButtonAction {
