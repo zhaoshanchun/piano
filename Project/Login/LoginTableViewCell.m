@@ -66,15 +66,6 @@
             UIImage *image = [UIImage imageWithContentsOfFile:cellModel.verificationFilePath];
             self.iconImageView.image = image;
         }
-//        if (cellModel.imageUrl.length > 0) {
-//            __weak typeof(self) weakSelf = self;
-//            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl]
-//                                  placeholderImage:[UIImage imageNamed:@""]
-//                                           options:SDWebImageLowPriority
-//                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                                             weakSelf.iconImageView.image = image;
-//                                         }];
-//        }
     }
 }
 

@@ -14,7 +14,7 @@
 
 #define kSectionNumber 3
 
-@interface ProfileViewController () <LoginViewControllerDelegate>
+@interface ProfileViewController () <LoginViewControllerDelegate, RegisterViewControllerDelegate>
 
 @property (strong, nonatomic) ProfileUserTableViewCellModel *userCellModel;
 
@@ -37,6 +37,9 @@
     
     [self setNavigationBarTitle:localizeString(@"page_title_profile")];
     [self presetData];
+    
+    // [[NSNotificationCenter defaultCenter] removeObserver:self name:kLanguageDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:kRegisterSuccessNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,8 +85,8 @@
         // 评价+反馈
         return 2;
     } else {
-        // 历史记录
-        return 1;
+        // 历史记录+收藏
+        return 2;
     }
 }
 
@@ -113,7 +116,13 @@
         return cell;
     } else {
         UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
-        cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_history"), @"BR15N"], nil);
+        if (indexPath.row == 0) {
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_history"), @"BR15N"], nil);
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
+        } else {
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_bookmark"), @"BR15N"], nil);
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
+        }
         return cell;
     }
     UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
@@ -137,6 +146,7 @@
                 // Unlogin, go to login page
                 LoginViewController *vc = [LoginViewController new];
                 vc.delegate = self;
+                vc.loginBackVC = self;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }
@@ -155,7 +165,7 @@
 
 
 
-#pragma mark - self
+#pragma mark - LoginViewControllerDelegate
 - (void)loginSuccess {
     NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
     if (userModelData) {
@@ -165,6 +175,10 @@
     }
 }
 
+#pragma mark - RegisterViewControllerDelegate
+- (void)registerSuccess {
+    [self loginSuccess];
+}
 
 @end
 

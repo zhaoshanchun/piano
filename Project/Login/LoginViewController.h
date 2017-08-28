@@ -7,6 +7,7 @@
 //
 
 #import "BaseTableViewController.h"
+#import "RegisterViewController.h"
 
 @protocol LoginViewControllerDelegate <NSObject>
 
@@ -17,5 +18,6 @@
 @interface LoginViewController : BaseTableViewController
 
 @property (weak, nonatomic) id<LoginViewControllerDelegate> delegate;
+@property (strong, nonatomic) BaseTableViewController *loginBackVC;
 
 @end

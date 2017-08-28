@@ -34,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self updateColorForNavBar:[UIColor orThemeColor] withAlpha:1.0];
     self.view.backgroundColor = [UIColor colorForKey:@"lgy"];
 }
 

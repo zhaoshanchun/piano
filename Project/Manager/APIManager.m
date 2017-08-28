@@ -10,8 +10,20 @@
 #import "AFURLRequestSerialization.h"
 #import "AFHTTPSessionManager.h"
 
+@interface APIManager ()
+
+@end
+
 @implementation APIManager
 
++ (NSOperationQueue *)queue {
+    static NSOperationQueue *queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        queue = [NSOperationQueue new];
+    });
+    return queue;
+}
 
 //- (NSURLSessionDataTask *)getData:(ApiResponseHandler)handler {
 //    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -33,6 +45,7 @@
 
 + (void)downloadWithUrl:(NSString *)url completedHandler:(DownLoadResponseHandler)handler {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
     NSURL *URL = [NSURL URLWithString:url];
@@ -42,7 +55,6 @@
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        NSLog(@"File downloaded to: %@", filePath);
         if (handler) {
             handler(response, filePath, error);
         }
@@ -122,4 +134,25 @@
     return task;
 }
 
+
++ (void)requestWithApi:(NSString *)api
+            httpMethod:(NSString *)httpMethod
+              httpBody:(NSString *)httpBody
+       responseHandler:(ResponseHndler )handler {
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", kHTTPHomeAddress, api];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = httpMethod;
+    request.HTTPBody = [httpBody dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[APIManager queue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        if (handler) {
+            handler(response, data, connectionError);
+        }
+    }];
+}
+
 @end
+
+

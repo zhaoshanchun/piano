@@ -100,4 +100,17 @@
 #define kCellDefaultAccessHeight 12.0f
 
 
+// Login/Register
+#define kRegisterSuccessNotification @"kRegisterSuccessNotification"
+
+
+// API Manager
+#define kHTTPMethodGet @"GET"
+#define kHTTPMethodPost @"POST"
+#define kHTTPHomeAddress @"http://www.appshopping.store/app"
+#define kAPILogin @"login"
+#define kAPIVerifiCode @"get_verify_code"
+#define kAPIRegister @"register"
+
+
 #endif /* CommonDefine_h */

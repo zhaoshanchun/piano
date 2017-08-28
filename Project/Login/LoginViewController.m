@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "RegisterViewController.h"
 
 #import "LoginTableViewCell.h"
 #import "UIView+Toast.h"
@@ -29,6 +28,7 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"login")];
+    [self setLeftBackButton];
     [self presetData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -132,17 +132,11 @@
     // 登录
     [self.view endEditing:YES];
     
-    /*
-     http://www.appshopping.store/app/login?user=kunhuang&password=8888889
-     response: (post)
-     user
-     password
-     */
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
     for (LoginTableViewCellModel *cellModel in self.listArray) {
         switch (cellModel.loginCellellType) {
             case LoginTableViewCellUserName: {
-                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUser];
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUserName];
                 break;
             }
             case LoginTableViewCellPassWord: {
@@ -153,7 +147,7 @@
                 break;
         }
     }
-    if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
+    if (![paramDict objectForKey:kUserName] || [[paramDict objectForKey:kUserName] length] == 0) {
         [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
@@ -162,61 +156,38 @@
         return;
     }
  
- 
-    /*
-    self.apiTask = [APIManager requestWithApi:@"http://www.appshopping.store/app/login"
-                                    apiMethod:APIMethodPost
-                                    andParams:nil // @{kUser:@"kunhuang",kPassword:@"888888898"}
-                                progressBlock:nil
-                            completionHandler:^(id model, NSInteger statusCode, NSError *err) {
-        if (err) {
-            
+    
+    [self.view showLoading];
+    __weak typeof(self) weakSelf = self;
+    NSString *param = [NSString stringWithFormat:@"user=%@&password=%@", [paramDict objectForKey:kUserName], [paramDict objectForKey:kPassword]];
+    [APIManager requestWithApi:kAPILogin httpMethod:kHTTPMethodPost httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!weakSelf) {
+            return;
+        }
+        [weakSelf.view hideLoading];
+        if (connectionError) {
+            MyLog(@"error : %@",[connectionError localizedDescription]);
         } else {
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            LoginResponseModel *loginResponseModel = [[LoginResponseModel alloc] initWithString:responseString error:nil];
+            if (loginResponseModel.errorCode != 0) {
+                [weakSelf.view makeToast:loginResponseModel.message duration:kToastDuration position:kToastPositionCenter];
+                return;
+            }
             
+            UserModel *userModel = loginResponseModel.user;
+            NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+            saveObjectToUserDefaults(kLoginedUser, userModelData);
+            
+            // 登陆成功，返回上一级的 Profile 页面
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(loginSuccess)]) {
+                    [weakSelf.delegate loginSuccess];
+                }
+            });
         }
     }];
-    */
-    
-   
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.appshopping.store/app/login"]]; // 默认为get请求
-    request.timeoutInterval = 10.0; // 设置请求超时为5秒
-    request.HTTPMethod = @"POST"; // 设置请求方法
-    // 设置请求体
-    // NSString *param=[NSString stringWithFormat:@"user=%@&password=%@", @"kunhuang", @"888888898"];
-    NSString *param = [NSString stringWithFormat:@"user=%@&password=%@", [paramDict objectForKey:kUser], [paramDict objectForKey:kPassword]];
-    // 把拼接后的字符串转换为data，设置请求体
-    request.HTTPBody = [param dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURLResponse *response;
-    NSError *error;
-    NSData *backData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (error) {
-        NSLog(@"error : %@",[error localizedDescription]);
-    } else {
-        NSLog(@"response : %@",response);
-        NSLog(@"backData : %@",[[NSString alloc]initWithData:backData encoding:NSUTF8StringEncoding]);
-        
-        UserModel *userModel = [UserModel new];
-        userModel.userName = @"HK";
-        userModel.fullName = @"HuangKun";
-        NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
-        saveObjectToUserDefaults(kLoginedUser, userModelData);
-        
-        // TODO... 登陆成功，返回上一级的 Profile 页面
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccess)]) {
-            [self.delegate loginSuccess];
-        }
-    }
-    
-    /*
-    {
-        "msg": "successful",
-        "error": 0
-    }
-     */
 }
 
 - (void)registerButtonAction {

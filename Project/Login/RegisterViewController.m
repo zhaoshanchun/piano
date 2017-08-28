@@ -8,7 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "LoginTableViewCell.h"
-
+#import "UserModel.h"
 
 @interface RegisterViewController () <LoginTableViewCellDelegate>
 
@@ -27,6 +27,7 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"register")];
+    [self setLeftBackButton];
     [self presetData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -110,25 +111,33 @@
 }
 
 - (void)getVerification {
-    [APIManager downloadWithUrl:@"http://www.appshopping.store/app/get_verify_code" completedHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+    [self cleanCacheVerficationImage];
+    __weak typeof(self) weakSelf = self;
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", kHTTPHomeAddress, kAPIVerifiCode];
+    [APIManager downloadWithUrl:urlString completedHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        if (!weakSelf) {
+            return ;
+        }
         NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
         if (headers[@"key"]) {
-            self.verificationKey = headers[@"key"];
-            NSLog(@"verificationKey = %@", self.verificationKey);
+            weakSelf.verificationKey = headers[@"key"];
+            MyLog(@"verificationKey = %@", weakSelf.verificationKey);
         }
         
-        NSLog(@"File downloaded to: %@", filePath);
-        self.verificationImageFilePath = [[filePath absoluteString] stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+        MyLog(@"File downloaded to: %@", filePath);
+        weakSelf.verificationImageFilePath = [[filePath absoluteString] stringByReplacingOccurrencesOfString:@"file://" withString:@""];
         // file:///Users/zhaosc/Library/Developer/CoreSimulator/Devices/4BFA1AB3-C11D-4FFE-9C35-D9E46A8C5E63/data/Containers/Data/Application/719C3E7A-8EC9-495D-93F5-EA53D6DB86D2/Documents/get_verify_code.png
-        if (self.verificationImageFilePath.length > 0 && self.listArray.count > 0) {
-            for (LoginTableViewCellModel *cellModel in self.listArray) {
+        if (weakSelf.verificationImageFilePath.length > 0 && self.listArray.count > 0) {
+            for (LoginTableViewCellModel *cellModel in weakSelf.listArray) {
                 if (LoginTableViewCellVerification == cellModel.loginCellellType) {
-                    cellModel.verificationFilePath = self.verificationImageFilePath;
+                    cellModel.verificationFilePath = weakSelf.verificationImageFilePath;
                     [cellModel updateFrame];
                     if (cellModel.indexPath) {
-                        [self.tableView beginUpdates];
-                        [self.tableView reloadRowsAtIndexPaths:@[cellModel.indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                        [self.tableView endUpdates];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [weakSelf.tableView beginUpdates];
+                            [weakSelf.tableView reloadRowsAtIndexPaths:@[cellModel.indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                            [weakSelf.tableView endUpdates];
+                        });
                     }
                     break;
                 }
@@ -137,6 +146,17 @@
     }];
 }
 
+- (void)cleanCacheVerficationImage {
+    // 每次获取验证码图片前先清理缓存
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:@"get_verify_code.png"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:filePath];
+    if (result) {
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+}
 
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -196,12 +216,11 @@
     // 注册
     [self.view endEditing:YES];
     
-    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
     for (LoginTableViewCellModel *cellModel in self.listArray) {
         switch (cellModel.loginCellellType) {
             case LoginTableViewCellUserName: {
-                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUser];
+                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kUserName];
                 break;
             }
             case LoginTableViewCellFullName: {
@@ -239,43 +258,57 @@
         }
     }
     
-    // Check
-    if (![paramDict objectForKey:kUser] || [[paramDict objectForKey:kUser] length] == 0) {
+    if (![paramDict objectForKey:kUserName] || [[paramDict objectForKey:kUserName] length] == 0) {
         [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
-    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {
-        // 密码长度
+    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] < 6 || [[paramDict objectForKey:kPassword] length] > 30) {
+        [self.view makeToast:@"请正确输入 6-20 位密码！" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kMail] || [[paramDict objectForKey:kMail] length] == 0) {
         // 邮件格式
+        [self.view makeToast:@"请正确输入邮件格式，仅支持（QQ邮箱、163邮箱、gmail邮箱）" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
-    if (![paramDict objectForKey:kCode] || [[paramDict objectForKey:kCode] length] == 0) {
+    if (![paramDict objectForKey:kCode] || [[paramDict objectForKey:kCode] length] != 4) {
         // 数字位数
+        [self.view makeToast:@"验证码错误！" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     
-    // API request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.appshopping.store/app/register"]];
-    request.timeoutInterval = 10.0;
-    request.HTTPMethod = @"POST";
     
-    // user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
-    NSString *param=[NSString stringWithFormat:@"user=%@&password=%@&alias=%@&phone=%@&mail=%@&key=%@&code=%@", [paramDict objectForKey:kUser], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
-    request.HTTPBody=[param dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURLResponse *response;
-    NSError *error;
-    NSData *backData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if (error) {
-        NSLog(@"error : %@",[error localizedDescription]);
-    } else {
-        NSLog(@"response : %@",response);
-        NSLog(@"backData : %@",[[NSString alloc]initWithData:backData encoding:NSUTF8StringEncoding]);
-    }
+    [self.view showLoading];
+    __weak typeof(self) weakSelf = self;
+    NSString *param=[NSString stringWithFormat:@"user=%@&alias=%@&password=%@&phone=%@&mail=%@&key=%@&code=%@", [paramDict objectForKey:kUserName], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
+    [APIManager requestWithApi:kAPIRegister httpMethod:kHTTPMethodGet httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!weakSelf) {
+            return;
+        }
+        [weakSelf.view hideLoading];
+        if (connectionError) {
+            MyLog(@"error : %@",[connectionError localizedDescription]);
+        } else {
+            // 注册错误返回格式，应该把error提到外面一层 {"mail":"","user":"","key":"","alias":"","code":"","phone":"","password":"","error":-1}
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            LoginResponseModel *loginResponseModel = [[LoginResponseModel alloc] initWithString:responseString error:nil];
+            
+            if (loginResponseModel.errorCode != 0) {
+                [weakSelf.view makeToast:loginResponseModel.message duration:kToastDuration position:kToastPositionCenter];
+                return;
+            }
+            
+            UserModel *userModel = loginResponseModel.user;
+            NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+            saveObjectToUserDefaults(kLoginedUser, userModelData);
+            
+            // 注册成功
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kRegisterSuccessNotification object:nil];
+            });
+        }
+    }];
 }
 
 

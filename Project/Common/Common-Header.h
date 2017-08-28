@@ -13,6 +13,7 @@
 #import "Common-Function.h"
 #import "UIColor+Helper.h"
 #import "UIView+Helper.h"
+#import "UIView+Loading.h"
 #import "UIView+Font.h"
 #import "UIImage+Helper.h"
 #import "JSONModel.h"

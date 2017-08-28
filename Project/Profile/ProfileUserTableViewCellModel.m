@@ -41,13 +41,14 @@
     } else {
         self.avatarImageFrame = CGRectMake(kProfileUserTableViewCellLRMargin, kProfileUserTableViewCellTBMargin, kProfileUserTableViewCellAvatarSize, kProfileUserTableViewCellAvatarSize);
         
-        self.mainAttribute = formatAttributedStringByORFontGuide(@[userModel.userName, @"BR16B"], nil);
+        self.mainAttribute = formatAttributedStringByORFontGuide(@[userModel.fullName, @"BR16B"], nil);
         CGFloat titleWidth = kProfileUserTableViewCellWidth - kProfileUserTableViewCellLRMargin - kCellDefaultAccessWidth - 10   - CGRectGetMaxX(self.avatarImageFrame) - 10;
         NSLog(@"titleWidth = %f", titleWidth);
         CGSize size = getSizeForAttributedString(self.mainAttribute, titleWidth, CGFLOAT_MAX);
         self.mainTitleFrame = CGRectMake(CGRectGetMaxX(self.avatarImageFrame) + 10, kProfileUserTableViewCellTBMargin, titleWidth, MIN(getFontByKey(@"BR16B").lineHeight*2, size.height));
         
-        self.detailAttribute = formatAttributedStringByORFontGuide(@[userModel.fullName, @"BR14N"], nil);
+        NSString *userName = [NSString stringWithFormat:@"账号: %@", userModel.userName];
+        self.detailAttribute = formatAttributedStringByORFontGuide(@[userName, @"BR14N"], nil);
         size = getSizeForAttributedString(self.detailAttribute, titleWidth, CGFLOAT_MAX);
         self.detailFrame = CGRectMake(CGRectGetMinX(self.mainTitleFrame), CGRectGetMaxY(self.mainTitleFrame) + 5, titleWidth, MIN(getFontByKey(@"BR14N").lineHeight*2, size.height));
         

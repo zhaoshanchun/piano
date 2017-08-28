@@ -19,6 +19,18 @@ typedef enum {
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *fullName;
 @property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *icon;
 @property (strong, nonatomic) NSString *email;
 
 @end
+
+@interface LoginResponseModel : JSONModel
+
+@property (assign, nonatomic) NSInteger errorCode;
+@property (strong, nonatomic) NSString *message;
+@property (strong, nonatomic) UserModel *user;
+
+// {"msg":"successful","user":{"mail":"594935658@qq.com","user":"kunhuang","alias":"kk","phone":"18688934656","icon":"9934827abb16e007a149e0c930cd603a"},"error":0}
+
+@end
+

@@ -8,6 +8,14 @@
 
 #import "BaseTableViewController.h"
 
+@protocol RegisterViewControllerDelegate <NSObject>
+
+- (void)registerSuccess;
+
+@end
+
 @interface RegisterViewController : BaseTableViewController
+
+@property (weak, nonatomic) id<RegisterViewControllerDelegate> delegate;
 
 @end

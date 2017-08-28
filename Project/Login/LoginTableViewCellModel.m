@@ -25,6 +25,7 @@
     CGFloat bottomMargin = kLoginTableViewCellTBMargin;
     switch (self.loginCellellType) {
         case LoginTableViewCellUserName:
+        case LoginTableViewCellFullName:
         case LoginTableViewCellPassWord:
         case LoginTableViewCellConfirmPassWord:
         case LoginTableViewCellPhone:

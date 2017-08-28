@@ -16,12 +16,15 @@
 "login" = "登录";
 "register" = "注册";
 
-// Tab
+
+// Tab Bar
 "tab_home" = "视频";
 "tab_profile" = "我的";
 
+
 // Page title
 "page_title_profile" = "我的";
+
 
 // Profile
 "profile_login" = "登录";
@@ -29,7 +32,7 @@
 
 "profile_title_register" = "去注册";
 "profile_title_user_name" = "用户名：";
-"profile_title_full_name" = "会员名称：";
+"profile_title_full_name" = "昵称：";
 "profile_title_password" = "密码：";
 "profile_title_confirme_password" = "确认密码：";
 "profile_title_phone" = "电话：";
@@ -40,4 +43,5 @@
 "profile_feedBack" = "意见反馈";
 "profile_feedBack_placeHolder" = "请输入您的宝贵意见!必须大于3个字符!";
 "profile_history" = "观看历史";
-"profile_contactUs" = "联系我们";
+"profile_bookmark" = "我的收藏";
+

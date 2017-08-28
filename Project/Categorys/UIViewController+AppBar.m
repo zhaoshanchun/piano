@@ -353,10 +353,10 @@ static CGFloat _topInsetForTabBar;
     [backBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [backBtn addTarget:self action:@selector(onBtnBackTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setFrame:CGRectMake(0, 0, 44, 44)];
-#if (DEBUG)
-    backBtn.layer.borderWidth = 1.0;
-    backBtn.layer.borderColor = [[UIColor redColor] CGColor];
-#endif
+//#if (DEBUG)
+//    backBtn.layer.borderWidth = 1.0;
+//    backBtn.layer.borderColor = [[UIColor redColor] CGColor];
+//#endif
     [self setLeftBarItem:@[[[UIBarButtonItem alloc] initWithCustomView:backBtn]] space:-6];
     return backBtn;
 }

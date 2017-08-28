@@ -10,7 +10,7 @@
 //#import "AFNetworking.h"
 
 
-#define kUser @"user"
+#define kUserName @"user"
 #define kFullName @"alias"
 #define kPassword @"password"
 #define kAlias @"alias"
@@ -36,8 +36,11 @@ typedef NS_ENUM(NSInteger, APIMethod) {
 
 typedef void (^ApiResponseHandler)(id model, NSInteger statusCode, NSError *err);
 typedef void (^DownLoadResponseHandler)(NSURLResponse *response, NSURL *filePath, NSError *error);
+typedef void (^ResponseHndler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
 @interface APIManager : NSObject
+
++ (NSOperationQueue *)queue;
 
 //- (NSURLSessionDataTask *)getData:(ApiResponseHandler)handler;
 
@@ -49,4 +52,12 @@ typedef void (^DownLoadResponseHandler)(NSURLResponse *response, NSURL *filePath
                            progressBlock:(void (^)(NSProgress *progress))progress
                        completionHandler:(ApiResponseHandler)handler;
 
++ (void)requestWithApi:(NSString *)api
+            httpMethod:(NSString *)httpMethod
+              httpBody:(NSString *)httpBody
+       responseHandler:(ResponseHndler )handler;
+
 @end
+
+
+
