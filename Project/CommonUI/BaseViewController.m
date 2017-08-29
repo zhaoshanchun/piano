@@ -10,8 +10,6 @@
 
 @interface BaseViewController ()
 
-@property (assign, nonatomic) BOOL tabbarHidden;
-
 @end
 
 @implementation BaseViewController
@@ -75,7 +73,7 @@
     // translunt,hidenavigationBar,tabbar等情况
     CGFloat pageHeight = SCREEN_HEIGHT;
     
-    if (!self.tabbarHidden) {
+    if (!self.hidesBottomBarWhenPushed) {
         pageHeight -= TAB_BAR_HEIGHT;
     }
     

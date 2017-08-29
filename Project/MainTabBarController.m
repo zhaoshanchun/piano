@@ -22,6 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 整个TabBar的背景色
+    // self.tabBar.barTintColor = [[UIColor orThemeColor] colorWithAlphaComponent:0.5];
+    // Tabbar Item 中元素的颜色
+    self.tabBar.unselectedItemTintColor = [UIColor colorForKey:@"dgy" withAlpha:1.0];
+    self.tabBar.tintColor = [UIColor colorForKey:@"br" withAlpha:1.0];
+    
     // Do any additional setup after loading the view.
     NSArray *childItemsArray = @[
                                  @{kClassKey  : @"HomePageViewController",    // @"HomeViewController",
@@ -59,8 +65,9 @@
         item.title = dict[kTextKey];
         item.image = [UIImage imageNamed:dict[kImgKey]];
         
-        //item.selectedImage = [[UIImage imageNamed:dict[kSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-       // [item setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0 green:(190 / 255.0) blue:(12 / 255.0) alpha:1]} forState:UIControlStateSelected];
+        // item.selectedImage = [UIImage imageNamed:dict[kImgKey]];
+        // item.selectedImage = [[UIImage imageNamed:dict[kSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        // [item setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0 green:(190 / 255.0) blue:(12 / 255.0) alpha:1]} forState:UIControlStateSelected];
         [self addChildViewController:nav];
     }];
     
@@ -130,6 +137,8 @@
         self.tabBar.hidden = hidden;
     }
 }
+
+#pragma mark - UITabBarDelegate
 
 //- (void)popToRootViewController {
 //    UIViewController *currentViewController = self.viewControllers[self.selectedIndex];

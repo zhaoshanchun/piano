@@ -45,14 +45,20 @@
     
     self.titles = @[@"新闻头条", @"国际要闻", @"体育", @"中国足球",];
     // 初始化
+    MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000
+    MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000
     _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight]) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
     
     self.view.layer.borderColor = [UIColor redColor].CGColor;
-    self.view.layer.borderWidth = 0.5f;
+    self.view.layer.borderWidth = 1.5f;
     
     self.scrollPageView.layer.borderColor = [UIColor greenColor].CGColor;
-    self.scrollPageView.layer.borderWidth = 0.5f;
+    self.scrollPageView.layer.borderWidth = 1.5f;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    MyLog(@"pageHeight = %f", [self pageHeight]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,11 +72,10 @@
 
 - (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index {
     UIViewController<ZJScrollPageViewChildVcDelegate> *childVc = reuseViewController;
-    
     if (!childVc) {
         childVc = [[HomeSubPageViewController alloc] init];
     }
-    //    NSLog(@"%ld-----%@",(long)index, childVc);
+    MyLog(@"%ld-----%@",(long)index, childVc);
     return childVc;
 }
 

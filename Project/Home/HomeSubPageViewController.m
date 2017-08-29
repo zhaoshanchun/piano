@@ -36,12 +36,11 @@
     
     self.zj_scrollViewController.title  = @"测试过";
     
-    if (index%2==0) {
-        self.view.backgroundColor = [UIColor blueColor];
-    } else {
-        self.view.backgroundColor = [UIColor greenColor];
-        
-    }
+//    if (index%2==0) {
+//        self.view.backgroundColor = [UIColor blueColor];
+//    } else {
+//        self.view.backgroundColor = [UIColor greenColor];
+//    }
 }
 
 // 使用系统的生命周期方法
