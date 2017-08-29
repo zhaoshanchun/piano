@@ -18,7 +18,7 @@
 
 - (instancetype)init {
     if (self = [super initWithNibName:nil bundle:nil]) {
-        self.hidesBottomBarWhenPushed = YES;
+        self.hidesBottomBarWhenPushed = YES;    // 默认当前页面不需要 Bottom Bar
     }
     return self;
 }

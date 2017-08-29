@@ -13,9 +13,7 @@
 @interface UIViewController (AppBar) <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) UIScrollView *scrollViewForTabBar;
-
 @property (weak, nonatomic) UIScrollView *scrollViewForHideNavBar;
-
 @property (assign, nonatomic) CGFloat topInsetForNavBar;
 
 // app bar helper
@@ -64,3 +62,5 @@
 - (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ )(void))completion;
 
 @end
+
+

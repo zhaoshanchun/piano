@@ -126,9 +126,7 @@ static CGFloat _topInsetForTabBar;
 }
 
 #pragma mark - UIGestureRecognizerDelegates
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
 
@@ -183,7 +181,6 @@ static CGFloat _topInsetForTabBar;
 }
 
 #pragma mark - UINavigationBar helper
-
 - (void)setNavigationBarTitle:(NSString *)title {
     UIFont *font = nil;
     UIColor *color = nil;

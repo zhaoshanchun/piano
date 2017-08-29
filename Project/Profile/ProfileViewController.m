@@ -25,7 +25,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.hidesBottomBarWhenPushed = NO;
+        self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
     }
     return self;
 }

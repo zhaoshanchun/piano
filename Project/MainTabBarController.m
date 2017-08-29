@@ -11,6 +11,7 @@
 #import "BaseNavigationController.h"
 #import "MainCollectionViewController.h"
 #import "ProfileViewController.h"
+#import "HomePageViewController.h"
 
 @interface MainTabBarController ()
 
@@ -23,21 +24,21 @@
     
     // Do any additional setup after loading the view.
     NSArray *childItemsArray = @[
-                                 @{kClassKey  : @"MainCollectionViewController",
-                                   kTextKey  : localizeString(@"tab_home"),
-                                   kTitleKey   : localizeString(@"tab_home"),
+                                 @{kClassKey  : @"HomePageViewController",    // @"HomeViewController",
+                                   kTextKey   : localizeString(@"tab_home"),
+                                   kTitleKey  : localizeString(@"tab_home"),
                                    kImgKey    : @"Home",
                                    kSelImgKey : @"Home"},
                                  
-                                 @{kClassKey  : @"HomeViewController",
-                                   kTextKey  : @"技巧",
-                                   kTitleKey   : @"基础知识、技巧",
+                                 @{kClassKey  : @"MainCollectionViewController",
+                                   kTextKey   : @"技巧",
+                                   kTitleKey  : @"基础知识、技巧",
                                    kImgKey    : @"Message",
                                    kSelImgKey : @"Message"},
                                  
                                  @{kClassKey  : @"NoteBookViewController",
-                                   kTextKey  : @"记录",
-                                   kTitleKey   : @"记录-NoteBook",
+                                   kTextKey   : @"记录",
+                                   kTitleKey  : @"记录-NoteBook",
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},
                                  
