@@ -12,26 +12,51 @@
 @interface BaseNavigationController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL isInit;
+
+// 使用： 在屏幕左边右滑返回上一级页面
 @property (nonatomic, assign, readwrite) BOOL isInteractivePopGesturing;
 
 @end
 
 @implementation BaseNavigationController
 
-- (instancetype)initWithTransparentBackground {
-    self = [self init];
+- (instancetype)init {
+    self = [super init];
     if (self) {
-        if (IS_IOS_8_OR_ABOVE) {
-            [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        } else {
-            [self setModalPresentationStyle:UIModalPresentationCurrentContext];
-        }
-        // Must set if the modlePresentationStyle is no default (UIModalPresentationFullScreen)
-        self.modalPresentationCapturesStatusBarAppearance = YES;
-        self.view.backgroundColor = [UIColor clearColor];
+        [self commonInit];
     }
     return self;
 }
+
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    /*
+    // Present 的方式，暂时不用管
+    if (IS_IOS_8_OR_ABOVE) {
+        [self setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    } else {
+        [self setModalPresentationStyle:UIModalPresentationCurrentContext];
+    }
+    */
+    
+    
+    // navigationBar.translucent 全部设置为NO
+    self.navigationBar.translucent = NO;
+    
+    // 设置NavigationBar颜色，主题颜色
+    [self updateColorForNavBar:[UIColor orThemeColor] withAlpha:1.0];
+    
+    // ViewController.view 那里设置每个页面默认背景色。所以这里设为 clearColor
+    self.view.backgroundColor = [UIColor clearColor];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,8 +74,7 @@
     
     if (self.isInit) {
         BaseViewController *currentViewController = [self.viewControllers lastObject];
-        self.navigationBar.translucent = currentViewController.navigationBarTranslucent;
-        [self updateNavigationBarTranslucent:currentViewController];
+        [self updateNavigationBar:currentViewController];
         self.isInit = NO;
     }
 }
@@ -60,11 +84,36 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)updateColorForNavBar:(UIColor *)color withAlpha:(CGFloat)alpha {
+    /*
+     alpha 两大作用：
+     1. ios7 之前，是否需要显示navigation bar
+     2. 对 navigation bar shadowImage 的显示与否。默认有shadowImage
+     */
+    
+    // iOS 7
+    if ([UINavigationBar instancesRespondToSelector:@selector(setBarTintColor:)]) {
+        [self.navigationBar setBarTintColor:color];
+        [self.navigationBar setBackgroundColor:color];
+    } else {
+        self.navigationBarHidden = (alpha != 1);
+    }
+    if (alpha == 1) {
+        self.navigationBar.shadowImage = nil;
+    } else {
+        self.navigationBar.shadowImage = [UIImage new];
+    }
+}
+
+
+#pragma mark - Overwrite UINavigationController method
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     self.interactivePopGestureRecognizer.enabled = NO;
     if (self.isInteractivePopGesturing) {
         self.isInteractivePopGesturing = NO;
     }
+    
     UIViewController *currentViewController = [self.viewControllers lastObject];
     if (animated && [currentViewController isKindOfClass:[BaseViewController class]]) {
         if ([(BaseViewController*)currentViewController animating]) {
@@ -73,16 +122,25 @@
             ((BaseViewController*)currentViewController).animating = YES;
         }
     }
+    
+    // 设置 bottomBar (Show/hide) for new pushed viewController
     MainTabBarController *tabbarController = self.tabbarController;
     [tabbarController setTabBarHidden:viewController.hidesBottomBarWhenPushed animated:animated];
+    
+    // 执行本该执行的push
     [super pushViewController:viewController animated:animated];
-    [self updateNavigationBarTranslucent:(BaseViewController *)viewController];
+    
+    // 设置 navigationBar (Show/hide) for new pushed viewController
+    [self updateNavigationBar:(BaseViewController *)viewController];
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     if (self.viewControllers.count >= 2) {
+        // 设置 navigationBar (Show/hide) for going to shows viewController (eg:[A, B], pop B, then going to shows A.).
         UIViewController *popViewController = [self.viewControllers objectAtIndex:[self.viewControllers count]-2];
-        [self updateNavigationBarTranslucent:(BaseViewController *)popViewController];
+        [self updateNavigationBar:(BaseViewController *)popViewController];
+        
+        // 设置 bottomBar (Show/hide) for going to shows viewController
         if (!self.isInteractivePopGesturing) {
             MainTabBarController *tabbarController = self.tabbarController;
             [tabbarController setTabBarHidden:popViewController.hidesBottomBarWhenPushed animated:animated];
@@ -94,48 +152,57 @@
 - (NSArray *)popToRootViewControllerAnimated:(BOOL)animated {
     UIViewController *rootViewController = [self.viewControllers firstObject];
     if (rootViewController) {
+        // 设置 bottomBar (Show/hide) for rootViewController
         MainTabBarController *tabbarController = self.tabbarController;
         [tabbarController setTabBarHidden:rootViewController.hidesBottomBarWhenPushed animated:animated];
-        [self updateNavigationBarTranslucent:(BaseViewController *)rootViewController];
+        
+        // 设置 navigationBar (Show/hide) for rootViewController
+        [self updateNavigationBar:(BaseViewController *)rootViewController];
     }
     return [super popToRootViewControllerAnimated:animated];
 }
 
 - (NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (viewController) {
+        // 设置 navigationBar (Show/hide) for going to shows viewController (eg:[A, B, C], pop to A, then going to shows A.).
         MainTabBarController *rootViewController = (MainTabBarController *)[[UIApplication sharedApplication].delegate window].rootViewController;
         [rootViewController setTabBarHidden:viewController.hidesBottomBarWhenPushed animated:animated];
-        [self updateNavigationBarTranslucent:(BaseViewController *)rootViewController];
+        
+        // 设置 bottomBar (Show/hide) for going to shows viewController
+        [self updateNavigationBar:(BaseViewController *)rootViewController];
     }
     return [super popToViewController:viewController animated:animated];
 }
 
-- (void)updateNavigationBarTranslucent:(BaseViewController *)viewController {
-    // Cannot updateNavigationBarTranslucent when it is interactivePopGesturing & navigationBar is transluencent
-    // If not, views will be displaced
-    if (self.navigationBar.translucent && !viewController.navigationBarTransparent && self.isInteractivePopGesturing) {
+- (void)updateNavigationBar:(BaseViewController *)viewController {
+    if (self.isInteractivePopGesturing) {
+        // 如果在【在屏幕左边右滑返回上一级页面】动作中，则不去更新
         return;
     }
-    if (self.navigationBar.translucent != viewController.navigationBarTranslucent) {
-        self.navigationBar.translucent = viewController.navigationBarTranslucent;
+    
+    /*
+    // 把Navigaton bar 设置为空白的代码
+    if ([self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault] == nil)  {
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationBar setShadowImage:[UIImage new]];
     }
-    if (viewController.navigationBarTransparent) {
-        if ([self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault] == nil)  {
-            [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-            [self.navigationBar setShadowImage:[UIImage new]];
-        }
-    } else if ([self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault] && !self.isInteractivePopGesturing) {
+    */
+    if ([self.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault]) {
         [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     }
     
-    // self.navigationController.navigationBarHidden = YES;
+    self.navigationBarHidden = viewController.hideNavigationBar;
+    self.navigationBar.barTintColor = [UIColor orThemeColor];
 }
 
+/*
+ // 把Navigaton bar 设置为空白的代码
 - (void)setNavigationBarTransparent {
     self.navigationBar.translucent = YES;
     [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[UIImage new]];
 }
+ */
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     if (self.statusBarStyleLightContent) {
@@ -153,10 +220,9 @@
     self.interactivePopGestureRecognizer.enabled = YES;
     if (self.isInteractivePopGesturing) {
         self.isInteractivePopGesturing = NO;
-        [(BaseViewController *)viewController hideNavigationBarIfNeed];
         MainTabBarController *tabbarController = self.tabbarController;
         [tabbarController setTabBarHidden:viewController.hidesBottomBarWhenPushed animated:animated];
-        [self updateNavigationBarTranslucent:(BaseViewController *)viewController];
+        [self updateNavigationBar:(BaseViewController *)viewController];
     }
 }
 
@@ -179,6 +245,7 @@
 }
 
 
+// 【在屏幕左边右滑返回上一级页面】
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if (self.viewControllers.count > 1) {

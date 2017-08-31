@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
-        self.navigationBarTranslucent = YES;
+        self.hideNavigationBar = YES;
     }
     return self;
 }
@@ -33,7 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //必要的设置, 如果没有设置可能导致内容显示不正常
+    
+    // ZJ-SDK 必要的设置, 如果没有设置可能导致内容显示不正常
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
@@ -44,7 +45,7 @@
     // 初始化
     // MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000   667.000000
     // MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000   617.000000
-    _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight]) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
+    _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight] - STATUS_BAR_HEIGHT) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
     
     self.view.layer.borderColor = [UIColor redColor].CGColor;

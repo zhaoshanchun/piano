@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.hideNavigationBar = NO;
     }
     return self;
 }

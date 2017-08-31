@@ -15,24 +15,30 @@
 @implementation BaseViewController
 
 - (instancetype)init {
-    if (self = [super initWithNibName:nil bundle:nil]) {
-        self.hidesBottomBarWhenPushed = YES;    // 默认当前页面不需要 Bottom Bar
+    self = [super init];
+    if (self) {
+        [self commonInit];
     }
     return self;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nil bundle:nil]) {
-        self.hidesBottomBarWhenPushed = YES;
+        [self commonInit];
     }
     return self;
+}
+
+- (void)commonInit {
+    self.hideNavigationBar = NO;            // 默认当前页面需要 Navigation Bar
+    self.hidesBottomBarWhenPushed = YES;    // 默认当前页面不需要 Bottom Bar
+    self.navigationController.navigationBar.barTintColor = [UIColor orThemeColor];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self updateColorForNavBar:[UIColor orThemeColor] withAlpha:1.0];
     self.view.backgroundColor = [UIColor colorForKey:@"lgy"];
 }
 
@@ -59,10 +65,7 @@
     return YES;
 }
 
-
-- (void)hideNavigationBarIfNeed {
-    // TODO...
-}
+// TODO...  status bar
 
 
 - (CGFloat)pageWidth {
@@ -77,7 +80,7 @@
         pageHeight -= TAB_BAR_HEIGHT;
     }
     
-    if (!self.navigationController.isNavigationBarHidden || !self.navigationBarTranslucent || self.navigationController.navigationBar.translucent) {
+    if (!self.navigationController.isNavigationBarHidden || !self.hideNavigationBar) {
         pageHeight -= (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
     }
     

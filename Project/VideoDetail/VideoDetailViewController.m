@@ -26,6 +26,9 @@
     [testBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [testBtn addTarget:self action:@selector(testBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
+    
+    self.view.layer.borderColor = [UIColor redColor].CGColor;
+    self.view.layer.borderWidth = 2.5f;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -35,6 +35,9 @@
     [testBtn addTarget:self action:@selector(testBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
     
+    self.view.layer.borderColor = [UIColor blueColor].CGColor;
+    self.view.layer.borderWidth = 1.5f;
+    
     // 设置 title
     // self.zj_scrollViewController.title  = @"测试过";
 }

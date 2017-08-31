@@ -14,18 +14,28 @@
 
 @interface BaseViewController : UIViewController
 
-// 所有viewController.navigationBar的显示与否，通过navigationBarTranslucent来控制
-@property (nonatomic, assign) BOOL navigationBarTranslucent;  //default is NO
-@property (nonatomic, assign) BOOL navigationBarTransparent;  //default is NO
+/*
+ 所有页面
+ viewController.navigationBar 的显示与否, default is NO
+ navigationController.navigationBar.translucent, All is NO。
+ BottomBar 的用 hidesBottomBarWhenPushed, default is NO
+ */
+@property (nonatomic, assign) BOOL hideNavigationBar;
 
-
-@property (strong, nonatomic) NSURLSessionDataTask *apiTask;
+/*
+ 防止重叠present
+ 避免问题：比如有时点按钮进子页面，还没开始present时，第二次按了按钮，这时就会重叠present。
+ */
 @property (nonatomic, assign) BOOL animating;
 
+/*
+ 为AFNetworking做网络控制用的。比如dealloc时，把未完成的 apiTask=nil
+ */
+@property (strong, nonatomic) NSURLSessionDataTask *apiTask;
+
+// 在屏幕左边缘往右滑返回上一页面用到
 // Should begin interactivePopGesture or not, implement it optionally, default return YES
 - (BOOL)interactivePopGestureShouldBegin;
-- (void)hideNavigationBarIfNeed;
-
 
 - (CGFloat)pageWidth;
 - (CGFloat)pageHeight;

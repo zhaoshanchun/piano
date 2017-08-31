@@ -454,8 +454,7 @@ static CGFloat _topInsetForTabBar;
     return btn;
 }
 
-#pragma mark -
-
+#pragma mark - Back button Action
 - (void)onBtnBackTouchUpInside:(UIButton *)btn {
     [self onBtnBackTouchUpInside:btn completion:nil];
 }
@@ -473,7 +472,6 @@ static CGFloat _topInsetForTabBar;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - UIScrollViewDelegate
 
 - (void)updateColorForNavBar:(UIColor *)color withAlpha:(CGFloat)alpha {
     // iOS 7
@@ -488,9 +486,10 @@ static CGFloat _topInsetForTabBar;
     } else {
         self.navigationController.navigationBar.shadowImage = [UIImage new];
     }
-    
 }
 
+
+#pragma mark - UIScrollViewDelegate
 - (CGFloat)scrollViewDidScrollForHideNavBar:(UIScrollView *)scrollView {
     CGFloat f = 0.0f;
     CGPoint offset = scrollView.contentOffset;
@@ -513,3 +512,5 @@ static CGFloat _topInsetForTabBar;
 }
 
 @end
+
+
