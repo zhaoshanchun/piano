@@ -14,8 +14,12 @@
 
 @interface BaseViewController : UIViewController
 
-@property (strong, nonatomic) NSURLSessionDataTask *apiTask;
+// 所有viewController.navigationBar的显示与否，通过navigationBarTranslucent来控制
+@property (nonatomic, assign) BOOL navigationBarTranslucent;  //default is NO
+@property (nonatomic, assign) BOOL navigationBarTransparent;  //default is NO
 
+
+@property (strong, nonatomic) NSURLSessionDataTask *apiTask;
 @property (nonatomic, assign) BOOL animating;
 
 // Should begin interactivePopGesture or not, implement it optionally, default return YES

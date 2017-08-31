@@ -47,6 +47,7 @@
         // Logined
         self.avatarImageView.hidden = NO;
         self.avatarImageView.frame = cellModel.avatarImageFrame;
+        self.avatarImageView.image = [UIImage imageNamed:@"AppIcon"];
     
         if (cellModel.detailAttribute.length > 0) {
             self.detailLabel.frame = cellModel.detailFrame;

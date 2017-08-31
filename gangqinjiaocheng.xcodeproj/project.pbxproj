@@ -363,6 +363,7 @@
 		DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0C51F4D29FF00149112 /* OtherTableViewCell.m */; };
 		DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0C81F4D2DFF00149112 /* LoginTableViewCell.m */; };
 		DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */; };
+		DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */; };
 		FB9C1CE929025DC7AFA16093 /* libPods-gangqinjiaocheng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A584A6547B34685E967D9C47 /* libPods-gangqinjiaocheng.a */; };
 /* End PBXBuildFile section */
 
@@ -865,6 +866,8 @@
 		DBCFD0C81F4D2DFF00149112 /* LoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCell.m; sourceTree = "<group>"; };
 		DBCFD0CA1F4D2E1300149112 /* LoginTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableViewCellModel.h; sourceTree = "<group>"; };
 		DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableViewCellModel.m; sourceTree = "<group>"; };
+		DBDEC9F51F566CE80078D3E1 /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
+		DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10B0B782C211CE05D61A087 /* Pods-sifakaoshi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sifakaoshi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sifakaoshi/Pods-sifakaoshi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1032,23 +1035,23 @@
 		DB1BB6481F55361E00E8B1F8 /* ZJScrollPageView */ = {
 			isa = PBXGroup;
 			children = (
+				DB1BB6531F55361E00E8B1F8 /* ZJScrollPageViewDelegate.h */,
+				DB1BB6511F55361E00E8B1F8 /* ZJScrollPageView.h */,
+				DB1BB6521F55361E00E8B1F8 /* ZJScrollPageView.m */,
+				DB1BB6541F55361E00E8B1F8 /* ZJScrollSegmentView.h */,
+				DB1BB6551F55361E00E8B1F8 /* ZJScrollSegmentView.m */,
+				DB1BB64F1F55361E00E8B1F8 /* ZJContentView.h */,
+				DB1BB6501F55361E00E8B1F8 /* ZJContentView.m */,
+				DB1BB64D1F55361E00E8B1F8 /* ZJCollectionView.h */,
+				DB1BB64E1F55361E00E8B1F8 /* ZJCollectionView.m */,
+				DB1BB6581F55361E00E8B1F8 /* ZJTitleView.h */,
+				DB1BB6591F55361E00E8B1F8 /* ZJTitleView.m */,
 				DB1BB6491F55361E00E8B1F8 /* UIView+ZJFrame.h */,
 				DB1BB64A1F55361E00E8B1F8 /* UIView+ZJFrame.m */,
 				DB1BB64B1F55361E00E8B1F8 /* UIViewController+ZJScrollPageController.h */,
 				DB1BB64C1F55361E00E8B1F8 /* UIViewController+ZJScrollPageController.m */,
-				DB1BB64D1F55361E00E8B1F8 /* ZJCollectionView.h */,
-				DB1BB64E1F55361E00E8B1F8 /* ZJCollectionView.m */,
-				DB1BB64F1F55361E00E8B1F8 /* ZJContentView.h */,
-				DB1BB6501F55361E00E8B1F8 /* ZJContentView.m */,
-				DB1BB6511F55361E00E8B1F8 /* ZJScrollPageView.h */,
-				DB1BB6521F55361E00E8B1F8 /* ZJScrollPageView.m */,
-				DB1BB6531F55361E00E8B1F8 /* ZJScrollPageViewDelegate.h */,
-				DB1BB6541F55361E00E8B1F8 /* ZJScrollSegmentView.h */,
-				DB1BB6551F55361E00E8B1F8 /* ZJScrollSegmentView.m */,
 				DB1BB6561F55361E00E8B1F8 /* ZJSegmentStyle.h */,
 				DB1BB6571F55361E00E8B1F8 /* ZJSegmentStyle.m */,
-				DB1BB6581F55361E00E8B1F8 /* ZJTitleView.h */,
-				DB1BB6591F55361E00E8B1F8 /* ZJTitleView.m */,
 			);
 			path = ZJScrollPageView;
 			sourceTree = "<group>";
@@ -1244,6 +1247,8 @@
 			children = (
 				DBCFCE8F1F4D214B00149112 /* PlayerViewController.h */,
 				DBCFCE901F4D214B00149112 /* PlayerViewController.m */,
+				DBDEC9F51F566CE80078D3E1 /* VideoDetailViewController.h */,
+				DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -2079,6 +2084,7 @@
 				DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */,
 				DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */,
 				DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */,
+				DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */,
 				DBCFCED11F4D25E900149112 /* NoteBook.m in Sources */,
 				DBCFCE5A1F4D1D0400149112 /* LoginViewController.m in Sources */,
 				DBCFCE521F4C3A7500149112 /* MJRefreshHeaderView.m in Sources */,

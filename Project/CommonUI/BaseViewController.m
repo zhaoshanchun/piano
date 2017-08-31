@@ -77,7 +77,7 @@
         pageHeight -= TAB_BAR_HEIGHT;
     }
     
-    if (!self.navigationController.isNavigationBarHidden) {
+    if (!self.navigationController.isNavigationBarHidden || !self.navigationBarTranslucent || self.navigationController.navigationBar.translucent) {
         pageHeight -= (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
     }
     

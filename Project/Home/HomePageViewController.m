@@ -25,6 +25,7 @@
     self = [super init];
     if (self) {
         self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.navigationBarTranslucent = YES;
     }
     return self;
 }
@@ -32,21 +33,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden = YES;
-    
     //必要的设置, 如果没有设置可能导致内容显示不正常
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
-    //显示滚动条
-    style.showLine = YES;
-    // 颜色渐变
-    style.gradualChangeTitleColor = YES;
+    style.showLine = YES;   //显示滚动条
+    style.gradualChangeTitleColor = YES;    // 颜色渐变
     
     self.titles = @[@"新闻头条", @"国际要闻", @"体育", @"中国足球",];
     // 初始化
-    MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000
-    MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000
+    // MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000   667.000000
+    // MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000   617.000000
     _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight]) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
     
@@ -58,7 +55,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    MyLog(@"pageHeight = %f", [self pageHeight]);
+    // MyLog(@"pageHeight = %f", [self pageHeight]);
 }
 
 - (void)didReceiveMemoryWarning {

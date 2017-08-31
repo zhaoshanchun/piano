@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NoteBook.h"
+#import "BaseViewController.h"
 
-@interface NoteBookViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
+@interface NoteBookViewController : BaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIActionSheetDelegate>
 {
     NSMutableArray *dataArray; //数据数组，可变，方便增删
 }

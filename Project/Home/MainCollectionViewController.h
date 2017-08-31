@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchView.h"
+#import "BaseViewController.h"
+
 @import GoogleMobileAds;
 
-@interface MainCollectionViewController : UIViewController<GADBannerViewDelegate>
+@interface MainCollectionViewController : BaseViewController<GADBannerViewDelegate>
 
 @property (nonatomic, copy) UICollectionView *collectionView;
 @property(nonatomic, strong) IBOutlet GADBannerView *bannerView;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class MainTabBarController;
 
@@ -14,4 +15,16 @@
 
 @property (strong, nonatomic) MainTabBarController *tabbarController;
 
+@property (nonatomic, assign) BOOL statusBarStyleLightContent;
+@property (nonatomic, assign, readonly) BOOL isInteractivePopGesturing;
+@property (nonatomic, assign, readonly) BOOL isNavigationBarTransparent;
+
+
+// Set with transparent background
+- (instancetype)initWithTransparentBackground;
+// Instantly set navigation bar transparent
+- (void)setNavigationBarTransparent;
+- (void)updateNavigationBarTranslucent:(BaseViewController *)viewController;
+
 @end
+

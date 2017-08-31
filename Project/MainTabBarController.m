@@ -71,6 +71,7 @@
         [self addChildViewController:nav];
     }];
     
+    // TODO...
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     // float udAppVersion = [[userDefaults objectForKey:@"appVersion"] intValue];
     [userDefaults setObject:@"0" forKey:@"appOnline"];
@@ -95,6 +96,7 @@
 }
 
 - (void)checkAppOnline {
+    // TODO...
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com//lookup?id=1231276398"]];
     NSLog(@"%s %@", __func__, url);
     

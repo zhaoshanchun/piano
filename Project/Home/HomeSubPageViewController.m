@@ -8,6 +8,7 @@
 
 #import "HomeSubPageViewController.h"
 #import "UIViewController+ZJScrollPageController.h"
+#import "VideoDetailViewController.h"
 
 @interface HomeSubPageViewController ()
 
@@ -16,9 +17,9 @@
 @implementation HomeSubPageViewController
 
 - (void)testBtnOnClick:(UIButton *)sender {
-    [self.view makeToast:@"点击" duration:kToastDuration position:kToastPositionCenter];
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,13 +35,17 @@
     [testBtn addTarget:self action:@selector(testBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
     
-    self.zj_scrollViewController.title  = @"测试过";
+    // 设置 title
+    // self.zj_scrollViewController.title  = @"测试过";
+}
+
+- (void)dealloc {
     
-//    if (index%2==0) {
-//        self.view.backgroundColor = [UIColor blueColor];
-//    } else {
-//        self.view.backgroundColor = [UIColor greenColor];
-//    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 // 使用系统的生命周期方法
@@ -68,44 +73,7 @@
     
 }
 
-// 使用ZJScrollPageViewChildVcDelegate提供的生命周期方法
 
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    NSLog(@"viewDidDisappear--------");
-//
-//}
-//- (void)zj_viewWillAppearForIndex:(NSInteger)index {
-//    NSLog(@"viewWillAppear------");
-//
-//}
-//
-//
-//- (void)zj_viewDidAppearForIndex:(NSInteger)index {
-//    NSLog(@"viewDidAppear-----");
-//
-//}
-//
-//
-//- (void)zj_viewWillDisappearForIndex:(NSInteger)index {
-//    NSLog(@"viewWillDisappear-----");
-//
-//}
-//
-//- (void)zj_viewDidDisappearForIndex:(NSInteger)index {
-//    NSLog(@"viewDidDisappear--------");
-//
-//}
-
-
-- (void)dealloc {
-    //    NSLog(@"%@-----test---销毁", self.description);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 
