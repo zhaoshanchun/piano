@@ -10,11 +10,12 @@
 
 
 // 每行显示多少个视频
-#define kContentListItemNumber 4
 #define kContentListCollectionViewCellWidth SCREEN_WIDTH
+#define kContentListItemNumber 2
 #define kContentListItemMargin 10.f
-#define kContentListItemWidth (kContentListCollectionViewCellWidth - kContentListItemMargin*3 - (kContentListItemMargin*1.5)*2)/kContentListItemNumber
-#define kContentListItemHeight 100
+#define kContentListItemWidth (kContentListCollectionViewCellWidth - kContentListItemMargin*5)/kContentListItemNumber
+#define kContentListItemHeight 120
+#define kContentListItemBottomPadding 10.f
 
 @interface ContentListCollectionViewCellModel : NSObject
 

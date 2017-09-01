@@ -21,8 +21,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]){
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.borderColor = [UIColor greenColor].CGColor;
-        self.layer.borderWidth = 0.5f;
+//        self.layer.borderColor = [UIColor greenColor].CGColor;
+//        self.layer.borderWidth = 0.5f;
         
         [self addContent];
     }
@@ -59,13 +59,17 @@
     if (_imageView == nil) {
         _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kContentListItemWidth, kContentListItemHeight*2/3)];
         _imageView.backgroundColor = [UIColor colorForKey:@"lgy"];
+        _imageView.layer.cornerRadius = 3.f;
+        _imageView.layer.masksToBounds = YES;
+        
+        _imageView.image = [UIImage imageNamed:@"AppIcon"];
     }
     return _imageView;
 }
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, CGRectGetWidth(self.imageView.frame), kContentListItemHeight - CGRectGetMaxY(self.imageView.frame) - 5)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame), CGRectGetWidth(self.imageView.frame), kContentListItemHeight - CGRectGetMaxY(self.imageView.frame))];
         _titleLabel.attributedText = formatAttributedStringByORFontGuide(@[@"最佳拍档", @"BR16N"], nil);
     }
     return _titleLabel;

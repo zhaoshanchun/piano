@@ -10,8 +10,9 @@
 #import "UIViewController+ZJScrollPageController.h"
 #import "VideoDetailViewController.h"
 #import "ContentListCollectionViewCell.h"
+#import "ContentListCollectionReusableView.h"
 
-@interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 
@@ -22,7 +23,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.hidesBottomBarWhenPushed = NO;
         self.hideNavigationBar = YES;
     }
     return self;
@@ -30,8 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)zj_viewDidLoadForIndex:(NSInteger)index {
@@ -45,6 +44,7 @@
     // 设置 title
     // self.zj_scrollViewController.title  = @"测试过";
     
+    // 在这里加content view, 不要在 viewDidLoad 中加
     [self.view addSubview:self.collectionView];
 }
 
@@ -92,6 +92,17 @@
     return 12;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    ContentListCollectionReusableView* reusableView;
+    if (UICollectionElementKindSectionHeader == kind) {
+        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier forIndexPath:indexPath];
+    }
+    reusableView.indexPath = indexPath;
+    reusableView.delegate = self;
+    reusableView.title = [NSString stringWithFormat:@"今日精选 %ld", indexPath.section];
+    return reusableView;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return kContentListItemNumber;
 }
@@ -116,14 +127,23 @@
     return CGSizeMake(kContentListItemWidth, kContentListItemHeight);
 }
 
+
+#pragma mark - ContentListCollectionReusableViewDelegate
+- (void)moreButtonAction:(NSIndexPath *)indexPath {
+    // TODO...
+    MyLog(@"section = %ld", (long)indexPath.section);
+}
+
+
 #pragma mark - Factory method
 - (UICollectionViewFlowLayout *)layout {
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
      layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = kContentListItemMargin;
-    layout.sectionInset = (UIEdgeInsets){10, 0, 0, 0};
+    // layout.sectionInset = (UIEdgeInsets){0, 0, 0, 0};
     layout.itemSize = (CGSize){kContentListItemWidth, kContentListItemHeight};
+    layout.headerReferenceSize=CGSizeMake(kContentListCollectionReusableViewWidth, kContentListCollectionReusableViewHeight);
     return layout;
 }
 
@@ -135,11 +155,12 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView setContentInset:UIEdgeInsetsMake(0, kContentListItemMargin*1.5, 0, kContentListItemMargin*1.5)];
+        [_collectionView setContentInset:UIEdgeInsetsMake(0, kContentListItemMargin, kContentListItemBottomPadding, kContentListItemMargin)];
         [_collectionView registerClass:[ContentListCollectionViewCell class] forCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier];
+        [_collectionView registerClass:[ContentListCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier];
         
-        _collectionView.layer.borderColor = [UIColor blackColor].CGColor;
-        _collectionView.layer.borderWidth = 4.5f;
+//        _collectionView.layer.borderColor = [UIColor blackColor].CGColor;
+//        _collectionView.layer.borderWidth = 4.5f;
     }
     return _collectionView;
 }

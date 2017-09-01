@@ -55,6 +55,7 @@
 		DB1BB6641F55373400E8B1F8 /* HomeSubPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB6631F55373400E8B1F8 /* HomeSubPageViewController.m */; };
 		DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */; };
 		DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */; };
+		DB2163881F5947BA00B6032E /* ContentListCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163871F5947BA00B6032E /* ContentListCollectionReusableView.m */; };
 		DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB51F5107C900EDADC2 /* UserModel.m */; };
 		DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB81F5112EE00EDADC2 /* ProfileUserTableViewCell.m */; };
 		DB575DBC1F51130800EDADC2 /* ProfileUserTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DBB1F51130800EDADC2 /* ProfileUserTableViewCellModel.m */; };
@@ -493,6 +494,8 @@
 		DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionViewCell.m; sourceTree = "<group>"; };
 		DB2163831F5906A100B6032E /* ContentListCollectionViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListCollectionViewCellModel.h; sourceTree = "<group>"; };
 		DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionViewCellModel.m; sourceTree = "<group>"; };
+		DB2163861F5947BA00B6032E /* ContentListCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListCollectionReusableView.h; sourceTree = "<group>"; };
+		DB2163871F5947BA00B6032E /* ContentListCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionReusableView.m; sourceTree = "<group>"; };
 		DB575DB41F5107C900EDADC2 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		DB575DB51F5107C900EDADC2 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		DB575DB71F5112EE00EDADC2 /* ProfileUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileUserTableViewCell.h; sourceTree = "<group>"; };
@@ -1286,6 +1289,8 @@
 				DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */,
 				DB2163831F5906A100B6032E /* ContentListCollectionViewCellModel.h */,
 				DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */,
+				DB2163861F5947BA00B6032E /* ContentListCollectionReusableView.h */,
+				DB2163871F5947BA00B6032E /* ContentListCollectionReusableView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2036,6 +2041,7 @@
 				DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */,
 				DB1A87351F53EB26000F160A /* UIView+Loading.m in Sources */,
 				DB0EFC961F4DDD6400DE7B59 /* AFAutoPurgingImageCache.m in Sources */,
+				DB2163881F5947BA00B6032E /* ContentListCollectionReusableView.m in Sources */,
 				DBCFCE4F1F4C3A7500149112 /* MJRefreshBaseView.m in Sources */,
 				DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */,
 				DBCFCECE1F4D25E900149112 /* AddNBViewController.m in Sources */,
