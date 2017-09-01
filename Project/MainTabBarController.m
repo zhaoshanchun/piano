@@ -25,8 +25,9 @@
     // 整个TabBar的背景色
     // self.tabBar.barTintColor = [[UIColor orThemeColor] colorWithAlphaComponent:0.5];
     // Tabbar Item 中元素的颜色
-    self.tabBar.unselectedItemTintColor = [UIColor colorForKey:@"dgy" withAlpha:1.0];
+    // self.tabBar.unselectedItemTintColor = [UIColor colorForKey:@"dgy" withAlpha:1.0];    // IOS 10 才能用
     self.tabBar.tintColor = [UIColor colorForKey:@"br" withAlpha:1.0];
+    
     
     // Do any additional setup after loading the view.
     NSArray *childItemsArray = @[

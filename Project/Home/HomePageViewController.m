@@ -43,14 +43,15 @@
     
     self.titles = @[@"新闻头条", @"国际要闻", @"体育", @"中国足球",];
     // 初始化
-    // MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000   667.000000
-    // MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000   617.000000
+     MyLog(@"SCREEN_HEIGHT = %f", SCREEN_HEIGHT);    // 568.000000   667.000000
+     MyLog(@"pageHeight = %f", [self pageHeight]);   // 518.000000   617.000000
     _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight] - STATUS_BAR_HEIGHT) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
+    MyLog(@"scrollPageView.frame.size.height = %f", _scrollPageView.frame.size.height); // 597.000000
     
     self.view.layer.borderColor = [UIColor redColor].CGColor;
     self.view.layer.borderWidth = 1.5f;
-    
+
     self.scrollPageView.layer.borderColor = [UIColor greenColor].CGColor;
     self.scrollPageView.layer.borderWidth = 1.5f;
 }

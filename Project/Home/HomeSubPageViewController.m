@@ -9,37 +9,43 @@
 #import "HomeSubPageViewController.h"
 #import "UIViewController+ZJScrollPageController.h"
 #import "VideoDetailViewController.h"
+#import "ContentListCollectionViewCell.h"
 
-@interface HomeSubPageViewController ()
+@interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (strong, nonatomic) UICollectionView *collectionView;
 
 @end
 
 @implementation HomeSubPageViewController
 
-- (void)testBtnOnClick:(UIButton *)sender {
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.hideNavigationBar = YES;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 }
 
 - (void)zj_viewDidLoadForIndex:(NSInteger)index {
+    
     //    NSLog(@"%@",self.view);
     //    NSLog(@"%@", self.zj_scrollViewController);
-    UIButton *testBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-    testBtn.backgroundColor = [UIColor whiteColor];
-    [testBtn setTitle:@"点击" forState:UIControlStateNormal];
-    [testBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [testBtn addTarget:self action:@selector(testBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:testBtn];
     
-    self.view.layer.borderColor = [UIColor blueColor].CGColor;
-    self.view.layer.borderWidth = 1.5f;
+//    self.view.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.view.layer.borderWidth = 1.5f;
     
     // 设置 title
     // self.zj_scrollViewController.title  = @"测试过";
+    
+    [self.view addSubview:self.collectionView];
 }
 
 - (void)dealloc {
@@ -77,6 +83,66 @@
 }
 
 
+#pragma mark - Action
+
+
+
+#pragma mark - collectionViewDelegate and collectionViewDatasource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 12;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return kContentListItemNumber;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ContentListCollectionViewCell *cell = (ContentListCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier forIndexPath:indexPath];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(kContentListItemWidth, kContentListItemHeight);
+}
+
+#pragma mark - Factory method
+- (UICollectionViewFlowLayout *)layout {
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = kContentListItemMargin;
+    layout.sectionInset = (UIEdgeInsets){10, 0, 0, 0};
+    layout.itemSize = (CGSize){kContentListItemWidth, kContentListItemHeight};
+    return layout;
+}
+
+- (UICollectionView *)collectionView {
+    if (_collectionView == nil) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], CGRectGetHeight(self.view.frame)) collectionViewLayout:[self layout]];
+        _collectionView.backgroundView = nil;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        [_collectionView setContentInset:UIEdgeInsetsMake(0, kContentListItemMargin*1.5, 0, kContentListItemMargin*1.5)];
+        [_collectionView registerClass:[ContentListCollectionViewCell class] forCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier];
+        
+        _collectionView.layer.borderColor = [UIColor blackColor].CGColor;
+        _collectionView.layer.borderWidth = 4.5f;
+    }
+    return _collectionView;
+}
 
 
 

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden = NO;
-    [self setNavigationBarTitle:@"Video detail!"];
+    [self setNavigationBarTitle:@"Video detail"];
     
     UIButton *testBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
     testBtn.backgroundColor = [UIColor whiteColor];

@@ -53,6 +53,8 @@
 		DB1BB6601F55361E00E8B1F8 /* ZJSegmentStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB6571F55361E00E8B1F8 /* ZJSegmentStyle.m */; };
 		DB1BB6611F55361E00E8B1F8 /* ZJTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB6591F55361E00E8B1F8 /* ZJTitleView.m */; };
 		DB1BB6641F55373400E8B1F8 /* HomeSubPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB6631F55373400E8B1F8 /* HomeSubPageViewController.m */; };
+		DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */; };
+		DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */; };
 		DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB51F5107C900EDADC2 /* UserModel.m */; };
 		DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB81F5112EE00EDADC2 /* ProfileUserTableViewCell.m */; };
 		DB575DBC1F51130800EDADC2 /* ProfileUserTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DBB1F51130800EDADC2 /* ProfileUserTableViewCellModel.m */; };
@@ -487,6 +489,10 @@
 		DB1BB6591F55361E00E8B1F8 /* ZJTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJTitleView.m; sourceTree = "<group>"; };
 		DB1BB6621F55373400E8B1F8 /* HomeSubPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSubPageViewController.h; sourceTree = "<group>"; };
 		DB1BB6631F55373400E8B1F8 /* HomeSubPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSubPageViewController.m; sourceTree = "<group>"; };
+		DB2163801F59065B00B6032E /* ContentListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListCollectionViewCell.h; sourceTree = "<group>"; };
+		DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionViewCell.m; sourceTree = "<group>"; };
+		DB2163831F5906A100B6032E /* ContentListCollectionViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListCollectionViewCellModel.h; sourceTree = "<group>"; };
+		DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionViewCellModel.m; sourceTree = "<group>"; };
 		DB575DB41F5107C900EDADC2 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		DB575DB51F5107C900EDADC2 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		DB575DB71F5112EE00EDADC2 /* ProfileUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileUserTableViewCell.h; sourceTree = "<group>"; };
@@ -1276,6 +1282,10 @@
 				DB1BB6461F5535C400E8B1F8 /* HomePageViewController.m */,
 				DB1BB6621F55373400E8B1F8 /* HomeSubPageViewController.h */,
 				DB1BB6631F55373400E8B1F8 /* HomeSubPageViewController.m */,
+				DB2163801F59065B00B6032E /* ContentListCollectionViewCell.h */,
+				DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */,
+				DB2163831F5906A100B6032E /* ContentListCollectionViewCellModel.h */,
+				DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2027,6 +2037,7 @@
 				DB1A87351F53EB26000F160A /* UIView+Loading.m in Sources */,
 				DB0EFC961F4DDD6400DE7B59 /* AFAutoPurgingImageCache.m in Sources */,
 				DBCFCE4F1F4C3A7500149112 /* MJRefreshBaseView.m in Sources */,
+				DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */,
 				DBCFCECE1F4D25E900149112 /* AddNBViewController.m in Sources */,
 				DBCFCED01F4D25E900149112 /* DatabaseOperation.m in Sources */,
 				DBCFCE4A1F4C3A7500149112 /* FMResultSet.m in Sources */,
@@ -2100,6 +2111,7 @@
 				DB0EFC931F4DDD6400DE7B59 /* AFURLSessionManager.m in Sources */,
 				DBCFCE541F4C3A7500149112 /* CLPlayerMaskView.m in Sources */,
 				DB1BB6471F5535C400E8B1F8 /* HomePageViewController.m in Sources */,
+				DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */,
 				DBCFCE461F4C3A7500149112 /* FMDatabase.m in Sources */,
 				DBCFCE471F4C3A7500149112 /* FMDatabaseAdditions.m in Sources */,
 				DBCFCE7C1F4D1FB800149112 /* Common-Function.m in Sources */,
