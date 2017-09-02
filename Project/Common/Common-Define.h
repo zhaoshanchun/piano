@@ -105,12 +105,19 @@
 
 
 // API Manager
+#define kHTTPTimeoutInterval 15.0f
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
 #define kHTTPHomeAddress @"http://www.appshopping.store/app"
 #define kAPILogin @"login"
 #define kAPIVerifiCode @"get_verify_code"
 #define kAPIRegister @"register"
+
+// Content list
+#define kAPIHome @"home_page"
+#define kAPIContentList @"program_list"
+#define kAPIContentDetail @"program_source"
+
 
 
 #endif /* CommonDefine_h */

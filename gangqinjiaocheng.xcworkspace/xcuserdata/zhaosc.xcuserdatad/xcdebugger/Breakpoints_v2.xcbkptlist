@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Project/Home/HomeSubPageViewController.m"
-            timestampString = "525949706.043269"
+            filePath = "Project/VideoDetail/VideoDetailViewController.m"
+            timestampString = "526066699.107753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "-moreButtonAction:"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "-getSource"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

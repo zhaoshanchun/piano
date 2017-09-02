@@ -24,6 +24,7 @@
 		BCBB707F1EC05314001D25C2 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633F1EAC665100B14AC1 /* GoogleSymbolUtilities.framework */; };
 		BCBB70801EC05314001D25C2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633E1EAC665100B14AC1 /* GoogleToolboxForMac.framework */; };
 		BCBB70951EC07AF7001D25C2 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */; };
+		DB0E69D51F5AA3D800C5FE4C /* ContentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0E69D41F5AA3D800C5FE4C /* ContentListModel.m */; };
 		DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */; };
 		DB0EFC8E1F4DDD6400DE7B59 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC6B1F4DDD6400DE7B59 /* AFHTTPSessionManager.m */; };
 		DB0EFC8F1F4DDD6400DE7B59 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC6E1F4DDD6400DE7B59 /* AFNetworkReachabilityManager.m */; };
@@ -430,6 +431,8 @@
 		BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "admob sdk/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		C706C9C5A0CAAF3C0E88C624 /* Pods-huazhuangjiaocheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huazhuangjiaocheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-huazhuangjiaocheng/Pods-huazhuangjiaocheng.release.xcconfig"; sourceTree = "<group>"; };
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB0E69D31F5AA3D800C5FE4C /* ContentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListModel.h; sourceTree = "<group>"; };
+		DB0E69D41F5AA3D800C5FE4C /* ContentListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListModel.m; sourceTree = "<group>"; };
 		DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		DB0EFC661F4D6BE300DE7B59 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		DB0EFC6A1F4DDD6400DE7B59 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -1234,6 +1237,8 @@
 				DBCFCE811F4D200B00149112 /* GlobalValue.m */,
 				DB575DB41F5107C900EDADC2 /* UserModel.h */,
 				DB575DB51F5107C900EDADC2 /* UserModel.m */,
+				DB0E69D31F5AA3D800C5FE4C /* ContentListModel.h */,
+				DB0E69D41F5AA3D800C5FE4C /* ContentListModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -2093,6 +2098,7 @@
 				DBCFCEB71F4D24E000149112 /* UserFeedbackViewController.m in Sources */,
 				DBCFCEA51F4D242000149112 /* GLCell.m in Sources */,
 				DB1BB65C1F55361E00E8B1F8 /* ZJCollectionView.m in Sources */,
+				DB0E69D51F5AA3D800C5FE4C /* ContentListModel.m in Sources */,
 				DBCFCE8D1F4D20EA00149112 /* SearchViewController.m in Sources */,
 				DBCFCE4D1F4C3A7500149112 /* XPathQuery.m in Sources */,
 				DBCFCE491F4C3A7500149112 /* FMDatabaseQueue.m in Sources */,

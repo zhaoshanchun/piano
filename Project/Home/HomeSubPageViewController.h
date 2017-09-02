@@ -8,7 +8,10 @@
 
 #import "BaseViewController.h"
 #import "ZJScrollPageViewDelegate.h"
+#import "ContentListModel.h"
 
 @interface HomeSubPageViewController : BaseViewController <ZJScrollPageViewChildVcDelegate>
+
+@property (strong, nonatomic) ClassifyModel *classModel;
 
 @end

@@ -12,6 +12,7 @@
 
 // {"msg":"successful","user":{"mail":"594935658@qq.com","user":"kunhuang","alias":"kk","phone":"18688934656","icon":"9934827abb16e007a149e0c930cd603a"},"error":0}
 +(JSONKeyMapper*)keyMapper {
+    // 左边是api返回的字段 : 右边是我们Model中匹配的字段
     return [[JSONKeyMapper alloc] initWithDictionary:@{
                                                        @"user": @"userName",
                                                        @"alias": @"fullName",

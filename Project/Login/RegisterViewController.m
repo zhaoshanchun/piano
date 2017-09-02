@@ -112,6 +112,7 @@
 
 - (void)getVerification {
     [self cleanCacheVerficationImage];
+    
     __weak typeof(self) weakSelf = self;
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", kHTTPHomeAddress, kAPIVerifiCode];
     [APIManager downloadWithUrl:urlString completedHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {

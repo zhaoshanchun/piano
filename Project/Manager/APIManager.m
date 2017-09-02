@@ -142,9 +142,11 @@
     
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", kHTTPHomeAddress, api];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.timeoutInterval = 10.0;
+    request.timeoutInterval = kHTTPTimeoutInterval;
     request.HTTPMethod = httpMethod;
-    request.HTTPBody = [httpBody dataUsingEncoding:NSUTF8StringEncoding];
+    if (httpBody.length > 0) {
+        request.HTTPBody = [httpBody dataUsingEncoding:NSUTF8StringEncoding];
+    }
     
     [NSURLConnection sendAsynchronousRequest:request queue:[APIManager queue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
         if (handler) {

@@ -34,16 +34,6 @@
 }
 
 - (void)zj_viewDidLoadForIndex:(NSInteger)index {
-    
-    //    NSLog(@"%@",self.view);
-    //    NSLog(@"%@", self.zj_scrollViewController);
-    
-//    self.view.layer.borderColor = [UIColor blueColor].CGColor;
-//    self.view.layer.borderWidth = 1.5f;
-    
-    // 设置 title
-    // self.zj_scrollViewController.title  = @"测试过";
-    
     // 在这里加content view, 不要在 viewDidLoad 中加
     [self.view addSubview:self.collectionView];
 }
@@ -83,8 +73,49 @@
 }
 
 
+- (void)setClassModel:(ClassifyModel *)classModel {
+    _classModel = classModel;
+    if (classModel == nil) {
+        return;
+    }
+    
+    [self getContentList];
+}
+
+
 #pragma mark - Action
 
+
+#pragma mark - API Action
+- (void)getContentList {
+    [self.view showLoading];
+    __weak typeof(self) weakSelf = self;
+    // http://www.appshopping.store/app/program_list?appid=yixuekaoshi&classifyid=1&from=0&to=20
+    NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi&classifyid=%ld&from=0&to=20", kAPIContentList, (long)self.classModel.classifyId];
+    [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!weakSelf) {
+            return;
+        }
+        [weakSelf.view hideLoading];
+        
+        if (connectionError) {
+            MyLog(@"error : %@",[connectionError localizedDescription]);
+        } else {
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            ContentListModel *contentListModel = [[ContentListModel alloc] initWithString:responseString error:nil];
+            if (contentListModel.errorCode != 0) {
+                [weakSelf.view makeToast:contentListModel.msg duration:kToastDuration position:kToastPositionCenter];
+                return;
+            }
+            
+            if (contentListModel.programs.count > 0) {
+                // TODO... Show data
+                MyLog(@"count = %ld", contentListModel.programs.count);
+            }
+            
+        }
+    }];
+}
 
 
 #pragma mark - collectionViewDelegate and collectionViewDatasource
@@ -117,10 +148,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+//
+//}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

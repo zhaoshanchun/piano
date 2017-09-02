@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UILabel *titleLabel;
-//@property (strong, nonatomic) UILabel *detailLabel;
+@property (strong, nonatomic) UILabel *detailLabel;
 
 @end
 
@@ -21,8 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]){
         self.backgroundColor = [UIColor whiteColor];
-//        self.layer.borderColor = [UIColor greenColor].CGColor;
-//        self.layer.borderWidth = 0.5f;
+//        [self showBorder:[UIColor greenColor]];
         
         [self addContent];
     }
@@ -32,7 +31,7 @@
 - (void)addContent {
     [self addSubview:self.imageView];
     [self addSubview:self.titleLabel];
-//    [self addSubview:self.detailLabel];
+    [self addSubview:self.detailLabel];
 }
 
 - (void)setCellModel:(ContentListCollectionViewCellModel *)cellModel {
@@ -57,30 +56,32 @@
 #pragma mark - Factory method
 - (UIImageView *)imageView {
     if (_imageView == nil) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kContentListItemWidth, kContentListItemHeight*2/3)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kContentListItemWidth, kContentListItemImageHeight)];  // 45 是留给下面文字部分的
         _imageView.backgroundColor = [UIColor colorForKey:@"lgy"];
         _imageView.layer.cornerRadius = 3.f;
         _imageView.layer.masksToBounds = YES;
         
-        _imageView.image = [UIImage imageNamed:@"AppIcon"];
+        _imageView.image = [UIImage imageNamed:@"Placeholder"];
     }
     return _imageView;
 }
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame), CGRectGetWidth(self.imageView.frame), kContentListItemHeight - CGRectGetMaxY(self.imageView.frame))];
-        _titleLabel.attributedText = formatAttributedStringByORFontGuide(@[@"最佳拍档", @"BR16N"], nil);
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, CGRectGetWidth(self.imageView.frame), 20)];
+        _titleLabel.attributedText = formatAttributedStringByORFontGuide(@[@"敦刻尔克", @"BR16N"], nil);
+//        [_titleLabel showBorder:[UIColor redColor]];
     }
     return _titleLabel;
 }
-//- (UILabel *)detailLabel {
-//    if (_detailLabel == nil) {
-//        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        _detailLabel.hidden = YES;
-//    }
-//    return _detailLabel;
-//}
+- (UILabel *)detailLabel {
+    if (_detailLabel == nil) {
+        _detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.titleLabel.frame) + 2, CGRectGetWidth(self.titleLabel.frame), 18)];
+        _detailLabel.attributedText = formatAttributedStringByORFontGuide(@[@"9月2日开启登陆作战", @"dgy13N"], nil);
+//        [_detailLabel showBorder:[UIColor blueColor]];
+    }
+    return _detailLabel;
+}
 
 @end
 

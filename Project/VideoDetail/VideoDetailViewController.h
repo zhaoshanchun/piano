@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "ContentListModel.h"
 
 @interface VideoDetailViewController : BaseViewController
 

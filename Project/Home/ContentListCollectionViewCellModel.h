@@ -13,8 +13,10 @@
 #define kContentListCollectionViewCellWidth SCREEN_WIDTH
 #define kContentListItemNumber 2
 #define kContentListItemMargin 10.f
-#define kContentListItemWidth (kContentListCollectionViewCellWidth - kContentListItemMargin*5)/kContentListItemNumber
-#define kContentListItemHeight 120
+#define kContentListItemTextHeight 45 // 45 是留给下面文字部分的高度
+#define kContentListItemWidth (kContentListCollectionViewCellWidth - kContentListItemMargin*(kContentListItemNumber+1))/kContentListItemNumber
+#define kContentListItemImageHeight (kContentListItemWidth*9/16)    // 视频截图 16：9
+#define kContentListItemHeight (kContentListItemImageHeight + kContentListItemTextHeight)
 #define kContentListItemBottomPadding 10.f
 
 @interface ContentListCollectionViewCellModel : NSObject

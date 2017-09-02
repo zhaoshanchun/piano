@@ -27,8 +27,9 @@
     [testBtn addTarget:self action:@selector(testBtnOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
     
-    self.view.layer.borderColor = [UIColor redColor].CGColor;
-    self.view.layer.borderWidth = 2.5f;
+    
+    [self getSource];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +39,35 @@
 
 - (void)testBtnOnClick:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - API Action
+- (void)getSource {
+    [self.view showLoading];
+    __weak typeof(self) weakSelf = self;
+    // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
+    NSString *apiName = [NSString stringWithFormat:@"%@?uuid=XMTc0MDc2NDIxMg==&cert=12345", kAPIContentDetail];
+    [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!weakSelf) {
+            return;
+        }
+        [weakSelf.view hideLoading];
+        
+        if (connectionError) {
+            MyLog(@"error : %@",[connectionError localizedDescription]);
+        } else {
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            SourceResponseModel *responseModel = [[SourceResponseModel alloc] initWithString:responseString error:nil];
+            if (responseModel.errorCode != 0) {
+                [weakSelf.view makeToast:responseModel.msg duration:kToastDuration position:kToastPositionCenter];
+                return;
+            }
+            
+            SourceModel *sourceModel = responseModel.object;
+            MyLog(@"sourceModel.title = %@", sourceModel.title);
+        }
+    }];
 }
 
 @end

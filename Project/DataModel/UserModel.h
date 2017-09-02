@@ -8,10 +8,12 @@
 
 #import <JSONModel/JSONModel.h>
 
+
 typedef enum {
     UserLoginStatusUnLogin,
     UserLoginStatusLogined
 } UserLoginStatus;
+
 
 @interface UserModel : JSONModel <NSCoding>
 
@@ -23,6 +25,9 @@ typedef enum {
 @property (strong, nonatomic) NSString *email;
 
 @end
+@protocol UserModel <NSObject>
+@end
+
 
 @interface LoginResponseModel : JSONModel
 
@@ -32,5 +37,7 @@ typedef enum {
 
 // {"msg":"successful","user":{"mail":"594935658@qq.com","user":"kunhuang","alias":"kk","phone":"18688934656","icon":"9934827abb16e007a149e0c930cd603a"},"error":0}
 
+@end
+@protocol LoginResponseModel <NSObject>
 @end
 
