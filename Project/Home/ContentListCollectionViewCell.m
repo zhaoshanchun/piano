@@ -7,6 +7,7 @@
 //
 
 #import "ContentListCollectionViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface ContentListCollectionViewCell ()
 
@@ -31,7 +32,7 @@
 - (void)addContent {
     [self addSubview:self.imageView];
     [self addSubview:self.titleLabel];
-    [self addSubview:self.detailLabel];
+//    [self addSubview:self.detailLabel];
 }
 
 - (void)setCellModel:(ContentListCollectionViewCellModel *)cellModel {
@@ -40,7 +41,21 @@
     }
     _cellModel = cellModel;
     
-    // TODO...
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl] placeholderImage:[UIImage imageNamed:@""]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl]
+                      placeholderImage:[UIImage imageNamed:@"Placeholder"]
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                             
+                             }];
+    
+    self.titleLabel.attributedText = cellModel.titleAttribute;
+    
+//    if (cellModel.detailAttribute.length > 0) {
+//        self.detailLabel.hidden = NO;
+//        self.detailLabel.attributedText = cellModel.detailAttribute;
+//    } else {
+//        self.detailLabel.hidden = YES;
+//    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -68,8 +83,9 @@
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, CGRectGetWidth(self.imageView.frame), 20)];
-        _titleLabel.attributedText = formatAttributedStringByORFontGuide(@[@"敦刻尔克", @"BR16N"], nil);
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, CGRectGetWidth(self.imageView.frame), 40)];
+        _titleLabel.numberOfLines = 2;
+//        _titleLabel.attributedText = formatAttributedStringByORFontGuide(@[@"敦刻尔克", @"BR16N"], nil);
 //        [_titleLabel showBorder:[UIColor redColor]];
     }
     return _titleLabel;
@@ -77,7 +93,7 @@
 - (UILabel *)detailLabel {
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.titleLabel.frame) + 2, CGRectGetWidth(self.titleLabel.frame), 18)];
-        _detailLabel.attributedText = formatAttributedStringByORFontGuide(@[@"9月2日开启登陆作战", @"dgy13N"], nil);
+        // _detailLabel.attributedText = formatAttributedStringByORFontGuide(@[@"9月2日开启登陆作战", @"dgy13N"], nil);
 //        [_detailLabel showBorder:[UIColor blueColor]];
     }
     return _detailLabel;

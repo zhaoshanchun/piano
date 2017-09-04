@@ -15,6 +15,7 @@
 @interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
+@property (strong, nonatomic) NSMutableArray *dataArray;
 
 @end
 
@@ -25,6 +26,8 @@
     if (self) {
         self.hidesBottomBarWhenPushed = NO;
         self.hideNavigationBar = YES;
+        
+        self.dataArray = [NSMutableArray new];
     }
     return self;
 }
@@ -79,6 +82,13 @@
         return;
     }
     
+    if (self.dataArray.count > 0) {
+        [self.dataArray removeAllObjects];
+        [self.collectionView reloadData];
+    }
+    
+    // TODO... 这里应该判断一下getContentList的api是否有正在执行，如果是，让它cancel。 那就需要修改APIManager
+    
     [self getContentList];
 }
 
@@ -91,7 +101,7 @@
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/program_list?appid=yixuekaoshi&classifyid=1&from=0&to=20
-    NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi&classifyid=%ld&from=0&to=20", kAPIContentList, (long)self.classModel.classifyId];
+    NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi&classifyid=%ld&from=%ld&to=%d", kAPIContentList, (long)self.classModel.classifyId, self.dataArray.count, kHTTPLoadCount];
     [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
@@ -110,36 +120,59 @@
             
             if (contentListModel.programs.count > 0) {
                 // TODO... Show data
-                MyLog(@"count = %ld", contentListModel.programs.count);
+                // MyLog(@"count = %ld", contentListModel.programs.count);
+                [weakSelf addContentList:contentListModel.programs];
             }
             
         }
     }];
 }
 
+- (void)addContentList:(NSArray *)contentList {
+    if (contentList.count == 0) {
+        return;
+    }
+    
+    for (ContentModel *contentModel in contentList) {
+        ContentListCollectionViewCellModel *cellModel = [ContentListCollectionViewCellModel new];
+        cellModel.contentModel = contentModel;
+        [self.dataArray addObject:cellModel];
+    }
+    
+    if (self.dataArray.count > 0) {
+        [self.collectionView reloadData];
+    }
+}
+
 
 #pragma mark - collectionViewDelegate and collectionViewDatasource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 12;
+    return 1;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    ContentListCollectionReusableView* reusableView;
-    if (UICollectionElementKindSectionHeader == kind) {
-        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier forIndexPath:indexPath];
-    }
-    reusableView.indexPath = indexPath;
-    reusableView.delegate = self;
-    reusableView.title = [NSString stringWithFormat:@"今日精选 %ld", indexPath.section];
-    return reusableView;
-}
+// 如果需要 Section head，打开
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    ContentListCollectionReusableView* reusableView;
+//    if (UICollectionElementKindSectionHeader == kind) {
+//        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier forIndexPath:indexPath];
+//    }
+//    reusableView.indexPath = indexPath;
+//    reusableView.delegate = self;
+//    reusableView.title = [NSString stringWithFormat:@"今日精选 %ld", indexPath.section];
+//    return reusableView;
+//}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return kContentListItemNumber;
+    return self.dataArray.count;
+    // return kContentListItemNumber;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ContentListCollectionViewCell *cell = (ContentListCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier forIndexPath:indexPath];
+    if (indexPath.row < self.dataArray.count) {
+        ContentListCollectionViewCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
+        cell.cellModel = cellModel;
+    }
     return cell;
 }
 
@@ -171,9 +204,10 @@
      layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = kContentListItemMargin;
-    // layout.sectionInset = (UIEdgeInsets){0, 0, 0, 0};
+     layout.sectionInset = (UIEdgeInsets){10, 0, 0, 0};
     layout.itemSize = (CGSize){kContentListItemWidth, kContentListItemHeight};
-    layout.headerReferenceSize=CGSizeMake(kContentListCollectionReusableViewWidth, kContentListCollectionReusableViewHeight);
+    // 如果需要 Section head，打开
+    // layout.headerReferenceSize = CGSizeMake(kContentListCollectionReusableViewWidth, kContentListCollectionReusableViewHeight);
     return layout;
 }
 
@@ -187,7 +221,8 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView setContentInset:UIEdgeInsetsMake(0, kContentListItemMargin, kContentListItemBottomPadding, kContentListItemMargin)];
         [_collectionView registerClass:[ContentListCollectionViewCell class] forCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier];
-        [_collectionView registerClass:[ContentListCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier];
+        // 如果需要 Section head，打开
+        // [_collectionView registerClass:[ContentListCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier];
         
 //        _collectionView.layer.borderColor = [UIColor blackColor].CGColor;
 //        _collectionView.layer.borderWidth = 4.5f;

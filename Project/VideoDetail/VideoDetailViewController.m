@@ -44,6 +44,7 @@
 
 #pragma mark - API Action
 - (void)getSource {
+    MyLog(@"   >>>   showLoading   >>>   ");
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
@@ -52,6 +53,7 @@
         if (!weakSelf) {
             return;
         }
+        MyLog(@"   >>>   hideLoading   >>>   ");
         [weakSelf.view hideLoading];
         
         if (connectionError) {

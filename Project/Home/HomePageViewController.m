@@ -10,6 +10,7 @@
 #import "ZJScrollPageView.h"
 #import "HomeSubPageViewController.h"
 #import "ContentListModel.h"
+#import "UIImage+Helper.h"
 
 
 @interface HomePageViewController ()<ZJScrollPageViewDelegate>
@@ -50,10 +51,13 @@
     style.showLine = YES;   //显示滚动条
     style.gradualChangeTitleColor = YES;    // 颜色渐变
     
-    // 初始化]
     _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight] - STATUS_BAR_HEIGHT) segmentStyle:style titles:@[@"首页"] parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
     
+    _scrollPageView.segmentView.backgroundColor = [UIColor orThemeColor];
+    
+    
+    // 获取主要分类
     [self getClassList];
 }
 

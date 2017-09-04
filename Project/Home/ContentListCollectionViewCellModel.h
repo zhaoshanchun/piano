@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ContentListModel.h"
 
 // 每行显示多少个视频
 #define kContentListCollectionViewCellWidth SCREEN_WIDTH
@@ -21,12 +21,14 @@
 
 @interface ContentListCollectionViewCellModel : NSObject
 
+@property (strong, nonatomic) ContentModel *contentModel;
+
 @property (assign, nonatomic) CGSize size;
 @property (strong, nonatomic) NSString *imageUrl;
 @property (assign, nonatomic) CGRect imageFrame;
 @property (strong, nonatomic) NSAttributedString *titleAttribute;
 @property (assign, nonatomic) CGRect titleFrame;
-@property (strong, nonatomic) NSAttributedString *detailAttribute;
-@property (assign, nonatomic) CGRect detialFrame;
+//@property (strong, nonatomic) NSAttributedString *detailAttribute;
+//@property (assign, nonatomic) CGRect detialFrame;
 
 @end
