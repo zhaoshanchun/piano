@@ -150,7 +150,9 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[APIManager queue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
         if (handler) {
-            handler(response, data, connectionError);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(response, data, connectionError);
+            });
         }
     }];
 }

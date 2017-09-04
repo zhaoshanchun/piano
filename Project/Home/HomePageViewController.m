@@ -50,8 +50,9 @@
     ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
     style.showLine = YES;   //显示滚动条
     style.gradualChangeTitleColor = YES;    // 颜色渐变
+    style.segmentHeight = 64.0f;
     
-    _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageHeight] - STATUS_BAR_HEIGHT) segmentStyle:style titles:@[@"首页"] parentViewController:self delegate:self];
+    _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageHeight]) segmentStyle:style titles:@[@"首页"] parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];
     
     _scrollPageView.segmentView.backgroundColor = [UIColor orThemeColor];
@@ -94,6 +95,14 @@
     return childVc;
 }
 
+- (BOOL)scrollPageController:(UIViewController *)scrollPageController contentScrollView:(ZJCollectionView *)scrollView shouldBeginPanGesture:(UIPanGestureRecognizer *)panGesture {
+    return YES;
+}
+
+- (void)setUpTitleView:(ZJTitleView *)titleView forIndex:(NSInteger)index {
+    
+}
+
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
     return NO;
 }
@@ -101,7 +110,7 @@
 
 #pragma mark - API Action
 - (void)getClassList {
-    [self.view showLoading];
+//    [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/home_page?appid=yixuekaoshi
     NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi", kAPIHome];
@@ -109,7 +118,7 @@
         if (!weakSelf) {
             return;
         }
-        [weakSelf.view hideLoading];
+//        [weakSelf.view hideLoading];
         
         if (connectionError) {
             MyLog(@"error : %@",[connectionError localizedDescription]);

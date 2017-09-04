@@ -98,7 +98,7 @@
 
 #pragma mark - API Action
 - (void)getContentList {
-    [self.view showLoading];
+//    [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/program_list?appid=yixuekaoshi&classifyid=1&from=0&to=20
     NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi&classifyid=%ld&from=%ld&to=%d", kAPIContentList, (long)self.classModel.classifyId, self.dataArray.count, kHTTPLoadCount];
@@ -106,7 +106,7 @@
         if (!weakSelf) {
             return;
         }
-        [weakSelf.view hideLoading];
+//        [weakSelf.view hideLoading];
         
         if (connectionError) {
             MyLog(@"error : %@",[connectionError localizedDescription]);

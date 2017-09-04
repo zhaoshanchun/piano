@@ -203,9 +203,9 @@ static CGFloat const contentSizeXOff = 20.0;
 
 - (void)setUpTitleViewsPosition {
     CGFloat titleX = 0.0;
-    CGFloat titleY = 0.0;
+    CGFloat titleY = 20.0;  // Mark:Change by ken
     CGFloat titleW = 0.0;
-    CGFloat titleH = self.zj_height - self.segmentStyle.scrollLineHeight;
+    CGFloat titleH = self.zj_height - self.segmentStyle.scrollLineHeight - titleY;  // Mark:Change by ken
     
     if (!self.segmentStyle.isScrollTitle) {// 标题不能滚动, 平分宽度
         titleW = self.scrollView.bounds.size.width / self.titles.count;

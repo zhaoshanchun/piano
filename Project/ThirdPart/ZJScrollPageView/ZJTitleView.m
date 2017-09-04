@@ -37,6 +37,9 @@
         _isShowImage = NO;
         [self addSubview:self.label];
         
+        // Mark:Change by ken
+        // self.layer.borderColor = [UIColor redColor].CGColor;
+        // self.layer.borderWidth = 0.5f;
     }
     
     return self;
@@ -52,7 +55,11 @@
     [super layoutSubviews];
     
     if (!_isShowImage) {
-        self.label.frame = self.bounds;
+        // self.label.frame = self.bounds;
+        // Mark:Change by ken
+        CGFloat originX = 0;
+        CGFloat originY = (CGRectGetHeight(self.bounds) - _titleSize.height)/2;
+        self.label.frame = CGRectMake(originX, originY, _titleSize.width, _titleSize.height);
     }
 }
 
