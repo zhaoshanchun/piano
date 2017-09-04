@@ -149,6 +149,11 @@
                     weakSelf.collectionView.mj_footer.hidden = YES;
                 }
             }
+            
+            if (self.dataArray.count == 0) {
+                [weakSelf handleError:0 errorMsg:@"暂时没有该类型视频，请稍后再试！"];
+                return;
+            }
         }
     }];
 }
