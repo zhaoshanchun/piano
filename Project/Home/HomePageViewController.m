@@ -32,9 +32,6 @@
     if (self) {
         self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
         self.hideNavigationBar = YES;
-        
-//        self.listArray = [NSMutableArray new];
-//        [self.listArray addObject:@"首页"];
     }
     return self;
 }
@@ -63,7 +60,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    // MyLog(@"pageHeight = %f", [self pageHeight]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,12 +68,10 @@
 }
 
 - (NSInteger)numberOfChildViewControllers {
-//    return self.listArray.count;
     if (self.homePageModel.classify.count > 0) {
         return self.homePageModel.classify.count;
     } else {
-        // @[@"首页"]
-        return 1;
+        return 1;   // @[@"首页"]
     }
 }
 
@@ -85,22 +79,12 @@
     HomeSubPageViewController<ZJScrollPageViewChildVcDelegate> *childVc = reuseViewController;
     if (!childVc) {
         childVc = [[HomeSubPageViewController alloc] init];
-        
         if (self.homePageModel.classify.count > index) {
             childVc.classModel = [self.homePageModel.classify objectAtIndex:index];
         }
     }
     MyLog(@"%ld-----%@",(long)index, childVc);
-    
     return childVc;
-}
-
-- (BOOL)scrollPageController:(UIViewController *)scrollPageController contentScrollView:(ZJCollectionView *)scrollView shouldBeginPanGesture:(UIPanGestureRecognizer *)panGesture {
-    return YES;
-}
-
-- (void)setUpTitleView:(ZJTitleView *)titleView forIndex:(NSInteger)index {
-    
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
@@ -108,9 +92,17 @@
 }
 
 
+#pragma mark - Empty page and Action
+- (void)emptyAction {
+    [self hideEmptyParam];
+    [self getClassList];
+}
+
+
+
 #pragma mark - API Action
 - (void)getClassList {
-//    [self.view showLoading];
+    [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/home_page?appid=yixuekaoshi
     NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi", kAPIHome];
@@ -118,31 +110,43 @@
         if (!weakSelf) {
             return;
         }
-//        [weakSelf.view hideLoading];
+        [weakSelf.view hideLoading];
         
         if (connectionError) {
-            MyLog(@"error : %@",[connectionError localizedDescription]);
+            MyLog(@"error : %@", [connectionError localizedDescription]);
+            [weakSelf handleError:0 errorMsg:[connectionError localizedDescription]];
         } else {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            self.homePageModel = [[ContentListModel alloc] initWithString:responseString error:nil];
-            if (self.homePageModel.errorCode != 0) {
-                [weakSelf.view makeToast:self.homePageModel.msg duration:kToastDuration position:kToastPositionCenter];
+            weakSelf.homePageModel = [[ContentListModel alloc] initWithString:responseString error:nil];
+            if (weakSelf.homePageModel.errorCode != 0) {
+                // [weakSelf.view makeToast:self.homePageModel.msg duration:kToastDuration position:kToastPositionCenter];
+                [weakSelf handleError:weakSelf.homePageModel.errorCode errorMsg:@""];
                 return;
             }
             
             if (self.homePageModel.classify.count > 0) {
                 // 刷新 顶部 segment 列表
                 NSMutableArray *listArray = [NSMutableArray new];
-                for (ClassifyModel *classModel in self.homePageModel.classify) {
+                for (ClassifyModel *classModel in weakSelf.homePageModel.classify) {
                     [listArray addObject:classModel.classifyName];
                 }
                 if (listArray.count > 0) {
-                    [self.scrollPageView reloadWithNewTitles:listArray];
+                    [weakSelf.scrollPageView reloadWithNewTitles:listArray];
                 }
             }
-            
         }
     }];
+}
+
+- (void)handleError:(NSInteger )errorCode errorMsg:(NSString *)errorMsg {
+    NSString *error = @"";
+    if (errorMsg.length > 0) {
+        error = errorMsg;
+    } else if (errorCode > 0) {
+        // TODO...  根据 error code 提示错误信息
+        error = @"获取数据失败，请重试！";
+    }
+    [self showEmptyTitle:error];
 }
 
 

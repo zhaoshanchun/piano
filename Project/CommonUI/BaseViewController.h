@@ -40,4 +40,12 @@
 - (CGFloat)pageWidth;
 - (CGFloat)pageHeight;
 
+
+#pragma mark - Empty page and Action
+- (void)showEmptyTitle:(NSString *)emptyTitle;
+- (void)hideEmptyParam;
+- (void)emptyAction;
+
 @end
+
+

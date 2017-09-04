@@ -11,6 +11,7 @@
 #import "VideoDetailViewController.h"
 #import "ContentListCollectionViewCell.h"
 #import "ContentListCollectionReusableView.h"
+#import "MJRefresh.h"
 
 @interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate>
 
@@ -93,12 +94,19 @@
 }
 
 
+
+#pragma mark - Empty page and Action
+- (void)emptyAction {
+    [self hideEmptyParam];
+    [self getContentList];
+}
+
 #pragma mark - Action
 
 
 #pragma mark - API Action
 - (void)getContentList {
-//    [self.view showLoading];
+    [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/program_list?appid=yixuekaoshi&classifyid=1&from=0&to=20
     NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi&classifyid=%ld&from=%ld&to=%d", kAPIContentList, (long)self.classModel.classifyId, self.dataArray.count, kHTTPLoadCount];
@@ -106,24 +114,41 @@
         if (!weakSelf) {
             return;
         }
-//        [weakSelf.view hideLoading];
+        [weakSelf.view hideLoading];
+        if (weakSelf.collectionView.mj_footer) {
+            [weakSelf.collectionView.mj_footer endRefreshing];
+        }
         
         if (connectionError) {
-            MyLog(@"error : %@",[connectionError localizedDescription]);
+            // TODO... 断网或超时：The request time out。 如果改为提示中文？
+            MyLog(@"error : %@", [connectionError localizedDescription]);
+            [weakSelf handleError:0 errorMsg:[connectionError localizedDescription]];
         } else {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             ContentListModel *contentListModel = [[ContentListModel alloc] initWithString:responseString error:nil];
             if (contentListModel.errorCode != 0) {
-                [weakSelf.view makeToast:contentListModel.msg duration:kToastDuration position:kToastPositionCenter];
+                // [weakSelf.view makeToast:contentListModel.msg duration:kToastDuration position:kToastPositionCenter];
+                [weakSelf handleError:contentListModel.errorCode errorMsg:@""];
                 return;
             }
             
             if (contentListModel.programs.count > 0) {
-                // TODO... Show data
-                // MyLog(@"count = %ld", contentListModel.programs.count);
                 [weakSelf addContentList:contentListModel.programs];
             }
             
+            // Add Refreshing: when 1.do not have add Refreshing yet 2. load data == 20, means have more data can be loaded 2. first time load
+            if (!weakSelf.collectionView.mj_footer
+                && contentListModel.programs.count == kHTTPLoadCount
+                && (weakSelf.dataArray.count - contentListModel.programs.count) == 0) {
+                // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
+                self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getContentList)];
+            }
+            if (weakSelf.collectionView.mj_footer) {
+                // End load. No more data
+                if (contentListModel.programs.count < kHTTPLoadCount){
+                    weakSelf.collectionView.mj_footer.hidden = YES;
+                }
+            }
         }
     }];
 }
@@ -144,13 +169,29 @@
     }
 }
 
+- (void)handleError:(NSInteger )errorCode errorMsg:(NSString *)errorMsg {
+    NSString *error = @"";
+    if (errorMsg.length > 0) {
+        error = errorMsg;
+    } else if (errorCode > 0) {
+        // TODO...  根据 error code 提示错误信息
+        error = @"获取数据失败，请重试！";
+    }
+    
+    if (self.dataArray.count == 0) {
+        [self showEmptyTitle:error];
+    } else {
+        [self.view makeToast:error duration:kToastDuration position:kToastPositionCenter];
+    }
+}
+
 
 #pragma mark - collectionViewDelegate and collectionViewDatasource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-// 如果需要 Section head，打开
+// Mark: 如果需要 Section head，打开
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 //    ContentListCollectionReusableView* reusableView;
 //    if (UICollectionElementKindSectionHeader == kind) {
@@ -164,7 +205,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
-    // return kContentListItemNumber;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,10 +221,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
-
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(kContentListItemWidth, kContentListItemHeight);
@@ -193,7 +229,7 @@
 
 #pragma mark - ContentListCollectionReusableViewDelegate
 - (void)moreButtonAction:(NSIndexPath *)indexPath {
-    // TODO...
+    // Mark: 如果需要 Section head，打开
     MyLog(@"section = %ld", (long)indexPath.section);
 }
 
@@ -204,9 +240,10 @@
      layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = kContentListItemMargin;
-     layout.sectionInset = (UIEdgeInsets){10, 0, 0, 0};
     layout.itemSize = (CGSize){kContentListItemWidth, kContentListItemHeight};
-    // 如果需要 Section head，打开
+    layout.sectionInset = (UIEdgeInsets){10, 0, 0, 0};
+    // Mark: 如果需要 Section head，打开
+    // layout.sectionInset = (UIEdgeInsets){0, 0, 0, 0};
     // layout.headerReferenceSize = CGSizeMake(kContentListCollectionReusableViewWidth, kContentListCollectionReusableViewHeight);
     return layout;
 }
@@ -221,15 +258,12 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView setContentInset:UIEdgeInsetsMake(0, kContentListItemMargin, kContentListItemBottomPadding, kContentListItemMargin)];
         [_collectionView registerClass:[ContentListCollectionViewCell class] forCellWithReuseIdentifier:kContentListCollectionViewCellIdentifier];
-        // 如果需要 Section head，打开
+        // Mark: 如果需要 Section head，打开
         // [_collectionView registerClass:[ContentListCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kContentListCollectionReusableViewIdentifier];
-        
-//        _collectionView.layer.borderColor = [UIColor blackColor].CGColor;
-//        _collectionView.layer.borderWidth = 4.5f;
     }
     return _collectionView;
 }
 
-
-
 @end
+
+
