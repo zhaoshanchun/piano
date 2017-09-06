@@ -43,6 +43,8 @@
 		DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC891F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m */; };
 		DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC8B1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m */; };
 		DB0EFC9E1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC8D1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m */; };
+		DB14D59A1F602304008316E8 /* VideoDetailHeadwCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB14D5991F602304008316E8 /* VideoDetailHeadwCell.m */; };
+		DB14D59D1F602422008316E8 /* VideoDetailHeadwCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB14D59C1F602422008316E8 /* VideoDetailHeadwCellModel.m */; };
 		DB1A87351F53EB26000F160A /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A87341F53EB26000F160A /* UIView+Loading.m */; };
 		DB1BB6471F5535C400E8B1F8 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB6461F5535C400E8B1F8 /* HomePageViewController.m */; };
 		DB1BB65A1F55361E00E8B1F8 /* UIView+ZJFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1BB64A1F55361E00E8B1F8 /* UIView+ZJFrame.m */; };
@@ -465,6 +467,10 @@
 		DB0EFC8B1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		DB0EFC8C1F4DDD6400DE7B59 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		DB0EFC8D1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		DB14D5981F602304008316E8 /* VideoDetailHeadwCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailHeadwCell.h; sourceTree = "<group>"; };
+		DB14D5991F602304008316E8 /* VideoDetailHeadwCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailHeadwCell.m; sourceTree = "<group>"; };
+		DB14D59B1F602422008316E8 /* VideoDetailHeadwCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailHeadwCellModel.h; sourceTree = "<group>"; };
+		DB14D59C1F602422008316E8 /* VideoDetailHeadwCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailHeadwCellModel.m; sourceTree = "<group>"; };
 		DB1A87331F53EB26000F160A /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Loading.h"; sourceTree = "<group>"; };
 		DB1A87341F53EB26000F160A /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Loading.m"; sourceTree = "<group>"; };
 		DB1BB6451F5535C400E8B1F8 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
@@ -1230,6 +1236,10 @@
 				DBCFCE901F4D214B00149112 /* PlayerViewController.m */,
 				DBDEC9F51F566CE80078D3E1 /* VideoDetailViewController.h */,
 				DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */,
+				DB14D5981F602304008316E8 /* VideoDetailHeadwCell.h */,
+				DB14D5991F602304008316E8 /* VideoDetailHeadwCell.m */,
+				DB14D59B1F602422008316E8 /* VideoDetailHeadwCellModel.h */,
+				DB14D59C1F602422008316E8 /* VideoDetailHeadwCellModel.m */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -2069,6 +2079,7 @@
 				DB0EFC991F4DDD6400DE7B59 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */,
 				DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */,
+				DB14D59D1F602422008316E8 /* VideoDetailHeadwCellModel.m in Sources */,
 				DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */,
 				DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */,
 				DBCFCED11F4D25E900149112 /* NoteBook.m in Sources */,
@@ -2092,6 +2103,7 @@
 				DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */,
 				DB1BB65D1F55361E00E8B1F8 /* ZJContentView.m in Sources */,
 				DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */,
+				DB14D59A1F602304008316E8 /* VideoDetailHeadwCell.m in Sources */,
 				DB1BB65F1F55361E00E8B1F8 /* ZJScrollSegmentView.m in Sources */,
 				DBCFD0BD1F4D27F400149112 /* main.m in Sources */,
 				DB0EFC901F4DDD6400DE7B59 /* AFSecurityPolicy.m in Sources */,

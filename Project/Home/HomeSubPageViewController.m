@@ -13,6 +13,8 @@
 #import "ContentListCollectionReusableView.h"
 #import "MJRefresh.h"
 
+#import "PlayerViewController.h"
+
 @interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -222,6 +224,17 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // {@"XODU1MTQ5ODQ0.jpg", @"10分钟学会双手演奏欢乐颂", @"XODU1MTQ5ODQ0", @"11:33", @"0590", @"", @""},
+//    object.icon = files[i][0];
+//    object.title = files[i][1];
+//    object.uid = files[i][2];
+//    object.time = files[i][3];
+//    object.code = files[i][4];
+//    object.clent_id = files[i][5];
+//    object.password = files[i][6];
+    // [self.navigationController pushViewController:[PlayerViewController playerViewControllerWithVideoPath:@"" Title:@"10分钟学会双手演奏欢乐颂" Index:@"XODU1MTQ5ODQ0" Ccode:@"0590"] animated:YES];
+    
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

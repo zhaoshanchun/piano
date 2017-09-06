@@ -47,15 +47,15 @@
 
 /*
 video_uri	String	http://pl-ali.youku.com/playlist/m3u8?vid=XMTc0MDc2NDIxMg%3D%3D&type=mp4&ups_client_netip=183.39.228.130&ups_ts=1504339488&utid=12345&ccode=0590&psid=d01311edae1b23c82b5bfc0196c481c8&duration=5754&expire=18000&ups_key=be81075278d624eb3d2556dab7b0a479
-score	String	8.8
-seconds	Integer	5755
-plays	Integer	137
-size	Integer	216715414
-comment_id	String
-title	String	2016中药师强化提升课程-中药学专业知识一《一》
-uuid	String	XMTc0MDc2NDIxMg==
-bad_review	Integer	0
-praise	Integer	58
+score	String	8.8         评分
+seconds	Integer	5755        时长：秒
+plays	Integer	137         播放次数
+size	Integer	216715414   大小：字节
+comment_id	String          id
+title	String	2016中药师强化提升课程-中药学专业知识一《一》   标题
+uuid	String	XMTc0MDc2NDIxMg==   uuid
+bad_review	Integer	0       评论
+praise	Integer	58          点赞
 */
 
 @property (strong, nonatomic) NSString *videoUri;
