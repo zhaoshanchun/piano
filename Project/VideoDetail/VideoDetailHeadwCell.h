@@ -13,7 +13,7 @@
 
 @protocol VideoDetailHeadwCellDelegate <NSObject>
 
-- (void)commonAction;
+//- (void)commonAction;
 - (void)shareAction;
 - (void)downLoadAction;
 - (void)praiseAction;

@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *detailLabel;
-@property (strong, nonatomic) UIButton *commonButton;
+//@property (strong, nonatomic) UIButton *commonButton;
 @property (strong, nonatomic) UIButton *shareButton;
 @property (strong, nonatomic) UIButton *downLoadButton;
 @property (strong, nonatomic) UIButton *praiseButton;
@@ -57,7 +57,7 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.detailLabel];
     
-    [self.contentView addSubview:self.commonButton];
+//    [self.contentView addSubview:self.commonButton];
     [self.contentView addSubview:self.shareButton];
     [self.contentView addSubview:self.downLoadButton];
     [self.contentView addSubview:self.praiseButton];
@@ -77,22 +77,22 @@
     self.detailLabel.frame = cellModel.detailFrame;
     self.detailLabel.attributedText = cellModel.detailAttribute;
     
-    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+//    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     
-    self.praiseButton.frame = CGRectMake(kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.commonButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
-    self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.commonButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
-    self.shareButton.frame = CGRectMake(CGRectGetMinX(self.downLoadButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.commonButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.praiseButton.frame = CGRectMake(kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.shareButton.frame = CGRectMake(CGRectGetMinX(self.downLoadButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     
     self.bottomLine.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - 0.5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, 0.5);
 }
 
 
 #pragma mark - Button Action
-- (void)commonButtonActon {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(commonAction)]) {
-        [self.delegate commonAction];
-    }
-}
+//- (void)commonButtonActon {
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(commonAction)]) {
+//        [self.delegate commonAction];
+//    }
+//}
 - (void)shareButtonActon {
     if (self.delegate && [self.delegate respondsToSelector:@selector(shareAction)]) {
         [self.delegate shareAction];
@@ -128,16 +128,16 @@
     return _detailLabel;
 }
 
-- (UIButton *)commonButton {
-    if (_commonButton == nil) {
-        _commonButton = [[UIButton alloc] init];
-        [_commonButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
-        [_commonButton setTitle:localizeString(@"") forState:UIControlStateNormal];
-        [_commonButton addTarget:self action:@selector(commonButtonActon) forControlEvents:UIControlEventTouchUpInside];
-//        [_commonButton showBorder:[UIColor redColor]];
-    }
-    return _commonButton;
-}
+//- (UIButton *)commonButton {
+//    if (_commonButton == nil) {
+//        _commonButton = [[UIButton alloc] init];
+//        [_commonButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
+//        [_commonButton setTitle:localizeString(@"") forState:UIControlStateNormal];
+//        [_commonButton addTarget:self action:@selector(commonButtonActon) forControlEvents:UIControlEventTouchUpInside];
+////        [_commonButton showBorder:[UIColor redColor]];
+//    }
+//    return _commonButton;
+//}
 - (UIButton *)shareButton {
     if (_shareButton == nil) {
         _shareButton = [[UIButton alloc] init];

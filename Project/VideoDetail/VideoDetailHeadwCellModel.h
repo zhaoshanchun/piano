@@ -30,7 +30,9 @@
 
 @property (assign, nonatomic) CGFloat cellHeight;
 
+// 暂时不需要评论
 //@property (assign, nonatomic) CGRect commonFrame;
+
 //@property (assign, nonatomic) CGRect shareFrame;
 //@property (assign, nonatomic) CGRect downLoadFrame;
 //@property (assign, nonatomic) CGRect praiseFrame;

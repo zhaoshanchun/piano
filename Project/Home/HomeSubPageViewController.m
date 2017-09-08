@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) NSMutableArray *contentList;
 
 @end
 
@@ -31,6 +32,7 @@
         self.hideNavigationBar = YES;
         
         self.dataArray = [NSMutableArray new];
+        self.contentList = [NSMutableArray new];
     }
     return self;
 }
@@ -165,13 +167,15 @@
         return;
     }
     
+    [self.contentList addObjectsFromArray:contentList];
+    
     for (ContentModel *contentModel in contentList) {
         ContentListCollectionViewCellModel *cellModel = [ContentListCollectionViewCellModel new];
         cellModel.contentModel = contentModel;
         [self.dataArray addObject:cellModel];
     }
     
-    if (self.dataArray.count > 0) {
+    if (contentList.count > 0) {
         [self.collectionView reloadData];
     }
 }
@@ -224,18 +228,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // {@"XODU1MTQ5ODQ0.jpg", @"10分钟学会双手演奏欢乐颂", @"XODU1MTQ5ODQ0", @"11:33", @"0590", @"", @""},
-//    object.icon = files[i][0];
-//    object.title = files[i][1];
-//    object.uid = files[i][2];
-//    object.time = files[i][3];
-//    object.code = files[i][4];
-//    object.clent_id = files[i][5];
-//    object.password = files[i][6];
-    // [self.navigationController pushViewController:[PlayerViewController playerViewControllerWithVideoPath:@"" Title:@"10分钟学会双手演奏欢乐颂" Index:@"XODU1MTQ5ODQ0" Ccode:@"0590"] animated:YES];
-    
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
+    ContentListCollectionViewCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithUUID:cellModel.contentModel.uuid];
+    vc.allContentsArray = [self.contentList copy];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

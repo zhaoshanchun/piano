@@ -41,7 +41,7 @@
     }
     _cellModel = cellModel;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl] placeholderImage:[UIImage imageNamed:@""]];
+    // [self.imageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl] placeholderImage:[UIImage imageNamed:@""]];
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:cellModel.imageUrl]
                       placeholderImage:[UIImage imageNamed:@"Placeholder"]
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

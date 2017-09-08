@@ -10,22 +10,31 @@
 #import "CLPlayerView.h"
 #import "UIBaseTableViewCell.h"
 #import "VideoDetailHeadwCell.h"
+#import "VideoDetailMoreVideoCell.h"
+
+#define kDefaultMoreContentNumber 3
 
 @interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate>
 
+@property (strong, nonatomic) NSString *uuid;
+
 @property (strong, nonatomic) CLPlayerView *playerView;
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *listArray;
+
+@property (strong, nonatomic) VideoDetailHeadwCellModel *detailHeadCellModel;
+@property (strong, nonatomic) NSMutableArray *moreArray;
 
 @end
 
 @implementation VideoDetailViewController
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithUUID:(NSString *)uuid {
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        self.uuid = uuid;
+        self.moreArray = [NSMutableArray new];
+        
         self.hideNavigationBar = YES;
-        _listArray = [NSMutableArray new];
     }
     return self;
 }
@@ -36,7 +45,8 @@
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
-    [self getSource];
+    [self presetMoreContents];
+    [self getSourceForUuid:self.uuid];
 }
 
 - (void)dealloc {
@@ -53,12 +63,71 @@
 }
 
 
+- (void)presetMoreContents {
+    if (self.allContentsArray.count > 0) {
+        NSInteger currentIndex = [self checkIndexForConten:self.uuid inArray:self.allContentsArray];
+        NSArray *moreContents = [self getMoreContentsForIndex:currentIndex];
+        for (int i = 0; i < moreContents.count; i++) {
+            ContentModel *contentModel = [moreContents objectAtIndex:i];
+            VideoDetailMoreVideoCellModel *moreCellModel = [VideoDetailMoreVideoCellModel new];
+            moreCellModel.contentModel = contentModel;
+            [self.moreArray addObject:moreCellModel];
+        }
+        VideoDetailMoreVideoCellModel *moreCellModel = [self.moreArray lastObject];
+        moreCellModel.isLastOne = YES;
+        [self.tableView reloadData];
+    }
+}
+
+- (NSInteger)checkIndexForConten:(NSString *)uuid inArray:(NSArray *)allList {
+    if (uuid.length == 0 || allList.count == 0 || allList.count == 1) {
+        return 0;
+    }
+    for (NSInteger i = 0; i < allList.count; i++) {
+        ContentModel *loopModel = [allList objectAtIndex:i];
+        if (loopModel && [loopModel.uuid isEqualToString:uuid]) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+// 拿相邻的三个给deatil 页面，当做相关视频
+- (NSArray *)getMoreContentsForIndex:(NSInteger)index {
+    if (self.allContentsArray.count <= 1 || index >= self.allContentsArray.count) {
+        return [NSArray new];
+    }
+    NSMutableArray *contents = [NSMutableArray new];
+    
+    if (self.allContentsArray.count < (kDefaultMoreContentNumber + 1)) {
+        for (NSInteger i = 0; i < self.allContentsArray.count; i++) {
+            if (i != index) {
+                [contents addObject:[self.allContentsArray objectAtIndex:i]];
+            }
+        }
+        return contents;
+    }
+    
+    NSInteger loopIndex = index;
+    while (contents.count < kDefaultMoreContentNumber) {
+        loopIndex ++;
+        if (loopIndex >= self.allContentsArray.count) {
+            loopIndex = 0;
+        }
+        if (loopIndex != index) {
+            [contents addObject:[self.allContentsArray objectAtIndex:loopIndex]];
+        }
+    };
+    
+    return contents;
+}
+
 #pragma mark - API Action
-- (void)getSource {
+- (void)getSourceForUuid:(NSString *)uuid {
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
-    NSString *apiName = [NSString stringWithFormat:@"%@?uuid=XMTc0MDc2NDIxMg==&cert=12345", kAPIContentDetail];
+    NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@==&cert=%@", kAPIContentDetail, uuid, @"12345"];
     [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
@@ -81,9 +150,8 @@
             
             [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
             
-            VideoDetailHeadwCellModel *cellModel = [VideoDetailHeadwCellModel new];
-            cellModel.sourceModel = sourceModel;
-            [self.listArray addObject:cellModel];
+            _detailHeadCellModel = [VideoDetailHeadwCellModel new];
+            self.detailHeadCellModel.sourceModel = sourceModel;
             [self.tableView reloadData];
         }
     }];
@@ -103,39 +171,70 @@
     }
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // First Section: Detail head
+    // Second section: More content list
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listArray.count + 3;
+    if (section == 0) {
+        return (self.detailHeadCellModel ? 1 : 0);
+    } else if (section == 1) {
+        return self.moreArray.count;
+    }
+    return 0;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 && [self.listArray count] > indexPath.row) {
-        VideoDetailHeadwCellModel *cellModel = [self.listArray objectAtIndex:0];
-        return cellModel.cellHeight;
+    if (indexPath.section == 0) {
+        if (self.detailHeadCellModel) {
+            return self.detailHeadCellModel.cellHeight;
+        } else {
+            return 0;
+        }
+    } else if (indexPath.section == 1) {
+        if ([self.moreArray count] > indexPath.row) {
+            VideoDetailMoreVideoCellModel *cellModel = [self.moreArray objectAtIndex:indexPath.row];
+            return cellModel.cellHeight;
+        }
     }
-    return kCellDefaultHeight;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 && [self.listArray count] > indexPath.row) {
-        VideoDetailHeadwCellModel *cellModel = [self.listArray objectAtIndex:0];
+    if (indexPath.section == 0 && self.detailHeadCellModel) {
         VideoDetailHeadwCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailHeadwCellIdentifier forIndexPath:indexPath];
         cell.indexPath = indexPath;
         cell.delegate = self;
+        cell.cellModel = self.detailHeadCellModel;
+        return cell;
+        
+    } else if (indexPath.section == 1 && [self.moreArray count] > indexPath.row) {
+        VideoDetailMoreVideoCellModel *cellModel = [self.moreArray objectAtIndex:indexPath.row];
+        VideoDetailMoreVideoCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailMoreVideoCellIdentifier forIndexPath:indexPath];
+        cell.indexPath = indexPath;
         cell.cellModel = cellModel;
         return cell;
     }
     UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
-    cell.textLabel.textColor = [UIColor redColor];
-    cell.textLabel.text = @"相关视频";
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return;
+    } else if (indexPath.section == 1) {
+        // TODO... delegate back to push other video
+    }
 }
 
 
 #pragma mark - VideoDetailHeadwCellDelegate
-- (void)commonAction {
-    MyLog(@"commonAction");
-}
+//- (void)commonAction {
+//    MyLog(@"commonAction");
+//}
 
 - (void)shareAction {
     MyLog(@"shareAction");
@@ -192,6 +291,7 @@
         
         [_tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
         [_tableView registerClass:[VideoDetailHeadwCell class] forCellReuseIdentifier:kVideoDetailHeadwCellIdentifier];
+        [_tableView registerClass:[VideoDetailMoreVideoCell class] forCellReuseIdentifier:kVideoDetailMoreVideoCellIdentifier];
     }
     return _tableView;
 }

@@ -80,7 +80,6 @@
 
 
 #define kEtagCna @"kEtagCna"
-
 #define kLoginedUser @"kLoginedUser"
 
 // Toast
