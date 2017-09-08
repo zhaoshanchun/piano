@@ -24,6 +24,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.hideNavigationBar = YES;
         _listArray = [NSMutableArray new];
     }
     return self;
@@ -32,8 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBarHidden = NO;
-    
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
@@ -41,9 +40,11 @@
 }
 
 - (void)dealloc {
-    [self.playerView pausePlay];
-    [self.playerView destroyPlayer];
-    _playerView = nil;
+    if (_playerView) {
+        [_playerView pausePlay];
+        [_playerView destroyPlayer];
+        _playerView = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,14 +154,22 @@
 #pragma mark - Factory method
 - (CLPlayerView *)playerView {
     if (_playerView == nil) {
-        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
+        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageWidth]*9/16)];
+        [_playerView backButton:^(UIButton *button) {
+            [self.navigationController popViewControllerAnimated:YES];
+            if (_playerView) {
+                [_playerView pausePlay];
+                [_playerView destroyPlayer];
+                _playerView = nil;
+            }
+        }];
     }
     return _playerView;
 }
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.playerView.frame), [self pageWidth], [self pageHeight] - CGRectGetHeight(self.playerView.frame))];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.playerView.frame), [self pageWidth], [self pageHeight] - CGRectGetMaxY(self.playerView.frame))];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

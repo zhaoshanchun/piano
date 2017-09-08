@@ -115,7 +115,7 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.numberOfLines = 0;
-        [_titleLabel showBorder:[UIColor blueColor]];
+//        [_titleLabel showBorder:[UIColor blueColor]];
     }
     return _titleLabel;
 }
@@ -123,7 +123,7 @@
 - (UILabel *)detailLabel {
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] init];
-        [_detailLabel showBorder:[UIColor blueColor]];
+//        [_detailLabel showBorder:[UIColor blueColor]];
     }
     return _detailLabel;
 }
@@ -134,7 +134,7 @@
         [_commonButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
         [_commonButton setTitle:localizeString(@"") forState:UIControlStateNormal];
         [_commonButton addTarget:self action:@selector(commonButtonActon) forControlEvents:UIControlEventTouchUpInside];
-        [_commonButton showBorder:[UIColor redColor]];
+//        [_commonButton showBorder:[UIColor redColor]];
     }
     return _commonButton;
 }
@@ -143,7 +143,7 @@
         _shareButton = [[UIButton alloc] init];
         [_shareButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
         [_shareButton addTarget:self action:@selector(shareButtonActon) forControlEvents:UIControlEventTouchUpInside];
-        [_shareButton showBorder:[UIColor redColor]];
+//        [_shareButton showBorder:[UIColor redColor]];
     }
     return _shareButton;
 }
@@ -152,7 +152,7 @@
         _downLoadButton = [[UIButton alloc] init];
         [_downLoadButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
         [_downLoadButton addTarget:self action:@selector(downLoadButtonActon) forControlEvents:UIControlEventTouchUpInside];
-        [_downLoadButton showBorder:[UIColor redColor]];
+//        [_downLoadButton showBorder:[UIColor redColor]];
     }
     return _downLoadButton;
 }
@@ -161,7 +161,7 @@
         _praiseButton = [[UIButton alloc] init];
         [_praiseButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
         [_praiseButton addTarget:self action:@selector(praiseButtonActon) forControlEvents:UIControlEventTouchUpInside];
-        [_praiseButton showBorder:[UIColor redColor]];
+//        [_praiseButton showBorder:[UIColor redColor]];
     }
     return _praiseButton;
 }

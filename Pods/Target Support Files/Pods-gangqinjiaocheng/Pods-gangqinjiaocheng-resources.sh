@@ -74,9 +74,11 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "CLPlayer/CLPlayer/Resource/CLPlayer.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "CLPlayer/CLPlayer/Resource/CLPlayer.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 

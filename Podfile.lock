@@ -1,5 +1,8 @@
 PODS:
+  - CLPlayer (1.1.1):
+    - Masonry
   - JSONModel (1.2.0)
+  - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.12)
   - SDWebImage (3.8.2):
@@ -10,6 +13,7 @@ PODS:
   - UIAlertView+Blocks (0.8.1)
 
 DEPENDENCIES:
+  - CLPlayer
   - JSONModel (= 1.2)
   - MBProgressHUD (~> 0.9)
   - MJRefresh
@@ -19,7 +23,9 @@ DEPENDENCIES:
   - UIAlertView+Blocks (= 0.8.1)
 
 SPEC CHECKSUMS:
+  CLPlayer: 01be34f37a4bfef333c6b4ba33be81782576563e
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -27,6 +33,6 @@ SPEC CHECKSUMS:
   UIActionSheet+Blocks: 7fdab45fc8f15ac2dc1cd65af1470746600b5f46
   UIAlertView+Blocks: 45c3d3b7194906702d3e9a14c7ece5581505646d
 
-PODFILE CHECKSUM: 364eedda7d1e6ac0373ad4af2b6c17342a77db79
+PODFILE CHECKSUM: af0c08794ebb22507909d8909dd04d3cb5fc14e0
 
 COCOAPODS: 1.1.1

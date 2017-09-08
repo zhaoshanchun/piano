@@ -77,10 +77,6 @@
 		DBCFCE4B1F4C3A7500149112 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE1B1F4C3A7400149112 /* TFHpple.m */; };
 		DBCFCE4C1F4C3A7500149112 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE1D1F4C3A7400149112 /* TFHppleElement.m */; };
 		DBCFCE4D1F4C3A7500149112 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE1F1F4C3A7400149112 /* XPathQuery.m */; };
-		DBCFCE531F4C3A7500149112 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCE2C1F4C3A7500149112 /* CLPlayer.bundle */; };
-		DBCFCE541F4C3A7500149112 /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE2E1F4C3A7500149112 /* CLPlayerMaskView.m */; };
-		DBCFCE551F4C3A7500149112 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE301F4C3A7500149112 /* CLPlayerView.m */; };
-		DBCFCE561F4C3A7500149112 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE321F4C3A7500149112 /* CLSlider.m */; };
 		DBCFCE5A1F4D1D0400149112 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE591F4D1D0400149112 /* LoginViewController.m */; };
 		DBCFCE5E1F4D1E1B00149112 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE5D1F4D1E1B00149112 /* APIManager.m */; };
 		DBCFCE6C1F4D1EBF00149112 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCE611F4D1EBF00149112 /* BaseNavigationController.m */; };
@@ -536,13 +532,6 @@
 		DBCFCE1D1F4C3A7400149112 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
 		DBCFCE1E1F4C3A7400149112 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
 		DBCFCE1F1F4C3A7400149112 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
-		DBCFCE2C1F4C3A7500149112 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
-		DBCFCE2D1F4C3A7500149112 /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
-		DBCFCE2E1F4C3A7500149112 /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
-		DBCFCE2F1F4C3A7500149112 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
-		DBCFCE301F4C3A7500149112 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
-		DBCFCE311F4C3A7500149112 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
-		DBCFCE321F4C3A7500149112 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
 		DBCFCE581F4D1D0400149112 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DBCFCE591F4D1D0400149112 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DBCFCE5C1F4D1E1B00149112 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
@@ -1093,7 +1082,6 @@
 				DB0EFC681F4DDD6400DE7B59 /* AFNetworking */,
 				DBCFCE0D1F4C3A7400149112 /* FMDB */,
 				DBCFCE191F4C3A7400149112 /* Hpple */,
-				DBCFCE2B1F4C3A7500149112 /* Player */,
 			);
 			path = ThirdPart;
 			sourceTree = "<group>";
@@ -1127,20 +1115,6 @@
 				DBCFCE1F1F4C3A7400149112 /* XPathQuery.m */,
 			);
 			path = Hpple;
-			sourceTree = "<group>";
-		};
-		DBCFCE2B1F4C3A7500149112 /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				DBCFCE2C1F4C3A7500149112 /* CLPlayer.bundle */,
-				DBCFCE2D1F4C3A7500149112 /* CLPlayerMaskView.h */,
-				DBCFCE2E1F4C3A7500149112 /* CLPlayerMaskView.m */,
-				DBCFCE2F1F4C3A7500149112 /* CLPlayerView.h */,
-				DBCFCE301F4C3A7500149112 /* CLPlayerView.m */,
-				DBCFCE311F4C3A7500149112 /* CLSlider.h */,
-				DBCFCE321F4C3A7500149112 /* CLSlider.m */,
-			);
-			path = Player;
 			sourceTree = "<group>";
 		};
 		DBCFCE571F4D1D0400149112 /* Login */ = {
@@ -1894,7 +1868,6 @@
 				DBCFCFE81F4D275900149112 /* XMjQ3ODU1NjMwOA==.jpg in Resources */,
 				DBCFD0911F4D275900149112 /* XODU1MTQ5ODQ0.jpg in Resources */,
 				DBCFD0231F4D275900149112 /* XMTM4NzQ3MzA3Mg==.jpg in Resources */,
-				DBCFCE531F4C3A7500149112 /* CLPlayer.bundle in Resources */,
 				DBCFD0191F4D275900149112 /* XMTM4NDc0MjU2OA==.jpg in Resources */,
 				DBCFD0401F4D275900149112 /* XMTY1MTIyNDgxNg==.jpg in Resources */,
 				DBCFCFE71F4D275900149112 /* XMjM1OTAyMjYw.jpg in Resources */,
@@ -2035,7 +2008,6 @@
 				DBCFCE8C1F4D20EA00149112 /* SearchView.m in Sources */,
 				DBCFCEA91F4D242000149112 /* ShowMoreItemH.m in Sources */,
 				DBCFCE5E1F4D1E1B00149112 /* APIManager.m in Sources */,
-				DBCFCE561F4C3A7500149112 /* CLSlider.m in Sources */,
 				BCB0C4851EA8EA1E004AB5FD /* AppDelegate.m in Sources */,
 				DBCFCEA71F4D242000149112 /* HomeViewController.m in Sources */,
 				DB0EFC9A1F4DDD6400DE7B59 /* UIButton+AFNetworking.m in Sources */,
@@ -2046,7 +2018,6 @@
 				DBCFCE4B1F4C3A7500149112 /* TFHpple.m in Sources */,
 				DBCFD0C31F4D289800149112 /* iToast.m in Sources */,
 				DBCFCE701F4D1EBF00149112 /* OSButton.m in Sources */,
-				DBCFCE551F4C3A7500149112 /* CLPlayerView.m in Sources */,
 				DBCFCE4C1F4C3A7500149112 /* TFHppleElement.m in Sources */,
 				DBCFCEA81F4D242000149112 /* MainCollectionViewController.m in Sources */,
 				DBCFCEA61F4D242000149112 /* GLCoverFlowLayout.m in Sources */,
@@ -2094,7 +2065,6 @@
 				DB0EFC971F4DDD6400DE7B59 /* AFImageDownloader.m in Sources */,
 				DB1BB65A1F55361E00E8B1F8 /* UIView+ZJFrame.m in Sources */,
 				DB0EFC931F4DDD6400DE7B59 /* AFURLSessionManager.m in Sources */,
-				DBCFCE541F4C3A7500149112 /* CLPlayerMaskView.m in Sources */,
 				DB1BB6471F5535C400E8B1F8 /* HomePageViewController.m in Sources */,
 				DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */,
 				DBCFCE461F4C3A7500149112 /* FMDatabase.m in Sources */,

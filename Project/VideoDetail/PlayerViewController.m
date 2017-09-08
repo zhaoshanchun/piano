@@ -84,7 +84,6 @@
     //self.navigationController.navigationBar.titleTextAttributes = dict;
     
     [self setupView];
-    [self.playerView setAutoFullScreen:NO];
 
     if(self.model == 0 || self.videoPath == nil) {
         // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
