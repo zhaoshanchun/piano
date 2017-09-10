@@ -123,12 +123,17 @@
 }
 
 #pragma mark - API Action
+// TODO... 历史记录：传 uuid+videoPath(本地路径)
 - (void)getSourceForUuid:(NSString *)uuid {
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
+    // TODO... cert 使用 cna
     // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
-    NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@==&cert=%@", kAPIContentDetail, uuid, @"12345"];
-    [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
+    NSString *cert = @"KRAgEpA+sWECAduFZDEk+TbE";
+    cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
+    [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
         }
@@ -145,8 +150,6 @@
             }
             
             SourceModel *sourceModel = responseModel.object;
-//            MyLog(@"sourceModel.title = %@", sourceModel.title);
-//            [self setNavigationBarTitle:sourceModel.title];
             
             [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
             
@@ -253,6 +256,7 @@
 #pragma mark - Factory method
 - (CLPlayerView *)playerView {
     if (_playerView == nil) {
+        // TODO... 覆盖 status bar
         _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageWidth]*9/16)];
         [_playerView backButton:^(UIButton *button) {
             [self.navigationController popViewControllerAnimated:YES];

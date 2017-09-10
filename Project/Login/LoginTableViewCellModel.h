@@ -42,6 +42,10 @@ typedef enum {
 @property (strong, nonatomic) NSString *placeHolder;
 @property (strong, nonatomic) NSString *inputedContent;
 
+@property (strong, nonatomic) NSAttributedString *dorpDownTitleAttribute;
+@property (assign, nonatomic) BOOL isDorpDowning;
+@property (assign, nonatomic) CGRect dorpDownButtonFrame;
+
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
 - (id)initWithType:(LoginTableViewCellType)loginCellType;

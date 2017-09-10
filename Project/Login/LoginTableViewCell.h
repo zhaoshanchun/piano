@@ -15,6 +15,7 @@
 @protocol LoginTableViewCellDelegate <NSObject>
 
 - (void)updateFrameForEdittingCell:(LoginTableViewCell *)cell isEditting:(BOOL)isEditting;
+- (void)dropDownButtonClickCell:(LoginTableViewCell *)cell isOpen:(BOOL)openDropDownList;
 
 @end
 

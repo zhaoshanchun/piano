@@ -15,6 +15,8 @@
 @property (strong, nonatomic) UITextField *textField;
 @property (strong, nonatomic) UIImageView *iconImageView;
 
+@property (strong, nonatomic) UIButton *dropDownListButton;
+
 @end
 
 @implementation LoginTableViewCell
@@ -35,6 +37,7 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.textField];
     [self.contentView addSubview:self.iconImageView];
+    [self.contentView addSubview:self.dropDownListButton];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -53,11 +56,14 @@
     _cellModel = cellModel;
     
     self.iconImageView.hidden = YES;
+    self.dropDownListButton.hidden = YES;
     
     self.titleLabel.frame = cellModel.titleFrame;
     self.titleLabel.attributedText = cellModel.titleAttriute;
     self.textField.frame = cellModel.inputFrame;
     self.textField.placeholder = cellModel.placeHolder;
+    self.textField.text = cellModel.inputedContent;
+    // [self.textField borderRectForBounds:CGRectMake(5, 0, CGRectGetWidth(cellModel.inputFrame) - 5*2, CGRectGetHeight(cellModel.inputFrame))];
     
     if (LoginTableViewCellVerification == cellModel.loginCellellType) {
         self.iconImageView.hidden = NO;
@@ -66,6 +72,18 @@
             UIImage *image = [UIImage imageWithContentsOfFile:cellModel.verificationFilePath];
             self.iconImageView.image = image;
         }
+    } else if (LoginTableViewCellMail == cellModel.loginCellellType) {
+        self.dropDownListButton.hidden = NO;
+        self.dropDownListButton.frame = cellModel.dorpDownButtonFrame;
+        
+        [self.dropDownListButton setAttributedTitle:cellModel.dorpDownTitleAttribute forState:UIControlStateNormal];
+        UIImage *image = [UIImage imageNamed:cellModel.isDorpDowning ? @"common_up_arrow" : @"common_down_arrow"];
+        [self.dropDownListButton setImage:image forState:UIControlStateNormal];
+        
+        CGFloat margin = 5;
+        CGSize size = getSizeForAttributedString(cellModel.dorpDownTitleAttribute, MAXFLOAT, MAXFLOAT);
+        [self.dropDownListButton setImageEdgeInsets:UIEdgeInsetsMake(0, size.width + margin, 0, -(size.width + margin/2))];
+        [self.dropDownListButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -(image.size.width + margin/2), 0, image.size.width + margin)];
     }
 }
 
@@ -91,6 +109,13 @@
 }
 
 
+#pragma mark - button Action
+- (void)dropDownListButtonClick {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropDownButtonClickCell:isOpen:)]) {
+        [self.delegate dropDownButtonClickCell:self isOpen:!self.cellModel.isDorpDowning];
+    }
+}
+
 #pragma mark - Factory method
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
@@ -106,9 +131,11 @@
         _textField = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField.delegate = self;
         _textField.returnKeyType = UIReturnKeyDone;
+        [_textField setFontAndTextColorByKey:@"DGY14N"];
         [_textField showBorder:[UIColor orLineColor]];
         _textField.layer.cornerRadius = 4.f;
         _textField.layer.masksToBounds = YES;
+        // _textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 1)];
     }
     return _textField;
 }
@@ -122,5 +149,23 @@
     return _iconImageView;
 }
 
+- (UIButton *)dropDownListButton {
+    if (_dropDownListButton == nil) {
+        NSAttributedString *titleAttribute = formatAttributedStringByORFontGuide(@[@"@qq.com", @"BR15N"], nil);
+        UIImage *image = [UIImage imageNamed:@"common_down_arrow"];
+        CGSize size = getSizeForAttributedString(titleAttribute, MAXFLOAT, MAXFLOAT);
+        CGFloat width = size.width + 5 + image.size.width;
+        _dropDownListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, MAX(size.height, image.size.height))];
+        [_dropDownListButton setAttributedTitle:titleAttribute forState:UIControlStateNormal];
+        [_dropDownListButton setImage:image forState:UIControlStateNormal];
+        [_dropDownListButton addTarget:self action:@selector(dropDownListButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        _dropDownListButton.hidden = YES;
+        
+//        [_dropDownListButton showBorder:[UIColor redColor]];
+    }
+    return _dropDownListButton;
+}
 
 @end
+
+

@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "LoginTableViewCell.h"
 #import "UserModel.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface RegisterViewController () <LoginTableViewCellDelegate>
 
@@ -19,6 +20,8 @@
 @property (strong, nonatomic) NSString *verificationImageFilePath;
 @property (strong, nonatomic) NSString *verificationKey;
 
+@property (strong, nonatomic) NSArray *dropDownListArry;
+
 @end
 
 @implementation RegisterViewController
@@ -28,6 +31,8 @@
     
     [self setNavigationBarTitle:localizeString(@"register")];
     [self setLeftBackButton];
+    
+    self.dropDownListArry = [NSArray arrayWithObjects:@"@qq.com", @"@163.com", @"@gmail.com", nil];
     [self presetData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -38,6 +43,7 @@
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -98,6 +104,8 @@
     // 邮箱
     LoginTableViewCellModel *emailCellModel = [[LoginTableViewCellModel alloc] initWithType:LoginTableViewCellMail];
     emailCellModel.titleAttriute = formatAttributedStringByORFontGuide(@[localizeString(@"profile_title_email"), @"BR15N"], nil);
+    emailCellModel.dorpDownTitleAttribute = formatAttributedStringByORFontGuide(@[[self.dropDownListArry objectAtIndex:0], @"BR15N"], nil);
+    emailCellModel.isDorpDowning = NO;
     [emailCellModel updateFrame];
     [self.listArray addObject:emailCellModel];
     
@@ -194,6 +202,54 @@
     self.edittingIndexPath = cell.cellModel.indexPath;
 }
 
+- (void)dropDownButtonClickCell:(LoginTableViewCell *)cell isOpen:(BOOL)openDropDownList {
+    // Hide keyboard
+    [self.view endEditing:YES];
+    
+    // Update arrow direction
+    for (LoginTableViewCellModel *cellModel in self.listArray) {
+        if (LoginTableViewCellMail == cellModel.loginCellellType) {
+            cellModel.isDorpDowning = openDropDownList;
+            [cellModel updateFrame];
+            if (cellModel.indexPath) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView beginUpdates];
+                    [self.tableView reloadRowsAtIndexPaths:@[cellModel.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    [self.tableView endUpdates];
+                });
+            }
+            break;
+        }
+    }
+    
+    // show dropDownList
+    [UIActionSheet showInView:self.view withTitle:localizeString(@"请选择邮箱类型") cancelButtonTitle:localizeString(@"取消") destructiveButtonTitle:nil otherButtonTitles:self.dropDownListArry tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        NSString *emailType = @"";
+        if (buttonIndex < [self.dropDownListArry count]) {
+            emailType = [self.dropDownListArry objectAtIndex:buttonIndex - 1];
+        }
+        for (LoginTableViewCellModel *cellModel in self.listArray) {
+            if (LoginTableViewCellMail == cellModel.loginCellellType) {
+                cellModel.isDorpDowning = NO;
+                if (emailType.length > 0) {
+                    cellModel.dorpDownTitleAttribute = formatAttributedStringByORFontGuide(@[emailType, @"BR15N"], nil);
+                }
+                [cellModel updateFrame];
+                if (cellModel.indexPath) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView beginUpdates];
+                        [self.tableView reloadRowsAtIndexPaths:@[cellModel.indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                        [self.tableView endUpdates];
+                    });
+                }
+                break;
+            }
+        }
+    }];
+}
+
+
+#pragma mark - Keyboard Notification
 - (void)keyboardDidShow:(NSNotification *)aNotification {
     // 获取键盘的高度
     NSDictionary *userInfo = [aNotification userInfo];
@@ -247,7 +303,8 @@
                 break;
             }
             case LoginTableViewCellMail: {
-                [paramDict setObject:(cellModel.inputedContent.length > 0) ? cellModel.inputedContent : @"" forKey:kMail];
+                NSString *email = [NSString stringWithFormat:@"%@%@", cellModel.inputedContent, cellModel.dorpDownTitleAttribute.string];
+                [paramDict setObject:email forKey:kMail];
                 break;
             }
             case LoginTableViewCellVerification: {
@@ -263,11 +320,11 @@
         [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
-    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] < 6 || [[paramDict objectForKey:kPassword] length] > 30) {
+    if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] < 6 || [[paramDict objectForKey:kPassword] length] > 20) {
         [self.view makeToast:@"请正确输入 6-20 位密码！" duration:kToastDuration position:kToastPositionCenter];
         return;
     }
-    if (![paramDict objectForKey:kMail] || [[paramDict objectForKey:kMail] length] == 0) {
+    if (![paramDict objectForKey:kMail] || !isValidEmail([paramDict objectForKey:kMail])) {
         // 邮件格式
         [self.view makeToast:@"请正确输入邮件格式，仅支持（QQ邮箱、163邮箱、gmail邮箱）" duration:kToastDuration position:kToastPositionCenter];
         return;
@@ -278,11 +335,13 @@
         return;
     }
     
-    
+    // http://www.appshopping.store/app/register?user=kens&password=password&alias=alias&phone=123&mail=mail&key=test&code=test
+    // http://www.appshopping.store/app/register?user=Zz&alias=Zz&password=111111&phone=&mail=594935658@qq.com&key=0ef49b865d7842d6acb7dc78263dedb5&code=B6M2
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
-    NSString *param=[NSString stringWithFormat:@"user=%@&alias=%@&password=%@&phone=%@&mail=%@&key=%@&code=%@", [paramDict objectForKey:kUserName], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
-    [APIManager requestWithApi:kAPIRegister httpMethod:kHTTPMethodGet httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    // NSString *apiName=[NSString stringWithFormat:@"%@?user=%@&alias=%@&password=%@&phone=%@&mail=%@&key=%@&code=%@", kAPIRegister, [paramDict objectForKey:kUserName], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
+    NSString *body=[NSString stringWithFormat:@"user=%@&alias=%@&password=%@&phone=%@&mail=%@&key=%@&code=%@", [paramDict objectForKey:kUserName], [paramDict objectForKey:kFullName], [paramDict objectForKey:kPassword], [paramDict objectForKey:kPhone], [paramDict objectForKey:kMail], self.verificationKey, [paramDict objectForKey:kCode]];
+    [APIManager requestWithApi:kAPIRegister httpMethod:kHTTPMethodPost httpBody:body responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
         }
@@ -294,20 +353,24 @@
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             LoginResponseModel *loginResponseModel = [[LoginResponseModel alloc] initWithString:responseString error:nil];
             
-            if (loginResponseModel.errorCode != 0) {
-                [weakSelf.view makeToast:loginResponseModel.message duration:kToastDuration position:kToastPositionCenter];
+            if (loginResponseModel.errorCode == 0) {
+                UserModel *userModel = loginResponseModel.user;
+                NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+                saveObjectToUserDefaults(kLoginedUser, userModelData);
+                
+                // 注册成功
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kRegisterSuccessNotification object:nil];
+                });
                 return;
+            } else {
+                if (loginResponseModel.message.length > 0) {
+                    [weakSelf.view makeToast:loginResponseModel.message duration:kToastDuration position:kToastPositionCenter];
+                } else {
+                    [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试！") duration:kToastDuration position:kToastPositionCenter];
+                }
             }
-            
-            UserModel *userModel = loginResponseModel.user;
-            NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
-            saveObjectToUserDefaults(kLoginedUser, userModelData);
-            
-            // 注册成功
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kRegisterSuccessNotification object:nil];
-            });
         }
     }];
 }

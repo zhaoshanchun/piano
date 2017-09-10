@@ -88,130 +88,14 @@ static CnaManager *_sharedManager;
                                                     // [userDefaults setObject:cna forKey:kEtagCna];
                                                     saveObjectToUserDefaults(kEtagCna, cna);
                                                     
-                                                    //6.解析服务器返回的数据
-                                                    //说明：（此处返回的数据是JSON格式的，因此使用NSJSONSerialization进行反序列化处理）
-                                                    //NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    //NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                                                    //NSLog(@"--->%@",str);
-                                                    if (self.vid == nil) {
-                                                        [self parseHtml:self.htmlUrl];
-                                                    }
-                                                    [self analysisUrl:[cna stringByReplacingOccurrencesOfString:@"\"" withString:@""] vid:_vid];
-                                                }
-                                            }];
-    //5.执行任务
-    [dataTask resume];
-}
-
-// TODO... self.ccode 是个什么东西啊
-- (void)analysisUrl:(NSString *)cna vid:(NSString *)vid {
-    cna = [cna stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    cna = [cna stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-    
-    NSString *urlStr;
-    if (self.clent_id == nil || self.password == nil) {
-        urlStr = [NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld", self.ccode, self.vid, cna, time(nil)];
-    } else {
-        urlStr = [NSString stringWithFormat:@"https://ups.youku.com/ups/get.json?&ccode=%@&client_ip=192.168.2.1&vid=%@&utid=%@&client_ts=%ld&client_id=%@&password=%@", self.ccode, self.vid, cna, time(nil), self.clent_id, self.password];
-    }
-    NSLog(@"urlStr--->%@", urlStr);
-    NSURL *url = [NSURL URLWithString:urlStr];
-    
-    //2.创建请求对象
-    //请求对象内部默认已经包含了请求头和请求方法（GET）
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    //3.获得会话对象
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                if (error == nil) {
-                                                    //6.解析服务器返回的数据
-                                                    //说明：（此处返回的数据是JSON格式的，因此使用NSJSONSerialization进行反序列化处理）
-                                                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSString *dstUrl = dict[@"data"][@"stream"][0][@"m3u8_url"];
-                                                    NSLog(@"--->dstUrl = %@", dstUrl);
                                                     
-                                                    if(dstUrl == nil) {
-                                                        NSLog(@"--->dict %@", dict);
-                                                        // TODO... @"网络异常，无法正常播放！"
-                                                    } else {
-                                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                            // TODO... 传 dstUrl 出去播放
-                                                            // _playerView.url = [NSURL URLWithString:dstUrl];
-                                                            // [_playerView playVideo];
-                                                            
-                                                        });
-                                                    }
+                                                    // TODO... 如果获取不到Etag，则用当前时间戳
+                                                    
                                                 }
                                             }];
     //5.执行任务
     [dataTask resume];
 }
-
-- (BOOL)parseHtml:(NSString *)htmlString {
-    //NSString *htmlString = @"http://e.youku.com/cp/ECONDU4NDQ=/ECHNjE4MDQ0?";
-    NSLog(@"---parseHtml: > %@", htmlString);
-    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:htmlString]];
-    // NSLog(@"---htmlData: > %@", htmlData);
-    
-    if(htmlData == nil) {
-        return NO;
-    }
-    
-    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
-    if (xpathParser == nil) {
-        return NO;
-    }
-    
-    NSArray *itemArray = [xpathParser searchWithXPathQuery:@"//script[@type = 'text/javascript']"];
-    if(itemArray == nil) {
-        return NO;
-    }
-    //NSLog(@"---itemArray: > %@", itemArray);
-    
-    for(TFHppleElement *element in itemArray) {
-        NSString *string = [element content];
-        if(![string containsString:@"window.playData"]) {
-            continue;
-        }
-        
-        if([string containsString:@"password"]) {
-            NSArray *array = [string componentsSeparatedByString:@"password\":\""];
-            if(array && [array count] >= 2) {
-                array = [array[1] componentsSeparatedByString:@"\"}"];
-                if(array && [array count] >= 2) {
-                    NSString *password = array[0];
-                    self.password = password;
-                    NSLog(@"---password: > %@", password);
-                }
-            }
-        }
-        if([string containsString:@"clent_id"]) {
-            NSArray *array = [string componentsSeparatedByString:@"clent_id\":\""];
-            if(array && [array count] >= 2) {
-                array = [array[1] componentsSeparatedByString:@"\","];
-                if(array && [array count] >= 2) {
-                    NSString *clent_id = array[0];
-                    self.clent_id = clent_id;
-                    NSLog(@"---clent_id> %@", clent_id);
-                }
-            }
-        }
-        if([string containsString:@"res"]) {
-            NSArray *array = [string componentsSeparatedByString:@"res\":\""];
-            if(array && [array count] >= 2) {
-                array = [array[1] componentsSeparatedByString:@"\","];
-                if(array && [array count] >= 2) {
-                    NSString *vid = array[0];
-                    self.vid = vid;
-                    NSLog(@"---vid> %@", vid);
-                }
-            }
-        }
-    }
-    return YES;
-}
-
 
 
 @end
