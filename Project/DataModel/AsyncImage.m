@@ -49,9 +49,7 @@
     
     if(obj == nil || obj.previewPath == nil){
         //[cell.loading startAnimating];
-        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        // NSString *cna = [userDefaults objectForKey:kEtagCna];
-        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        NSString *cna = getStringFromUserDefaults(kSourceEtag);
         if(cna == nil)
         {
             [self analysisCookie];
@@ -88,9 +86,7 @@
     
     if(obj == nil || obj.previewPath == nil){
         //[cell.loading startAnimating];
-        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        // NSString *cna = [userDefaults objectForKey:kEtagCna];
-        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        NSString *cna = getStringFromUserDefaults(kSourceEtag);
         if(cna == nil)
         {
             [self analysisCookie];
@@ -122,9 +118,7 @@
                                       cna = [cna stringByReplacingOccurrencesOfString:@"/" withString:@""];
                                       
                                       if (error == nil) {
-                                          // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                                          // [userDefaults setObject:cna forKey:kEtagCna];
-                                          saveObjectToUserDefaults(kEtagCna, cna);
+                                          saveObjectToUserDefaults(kSourceEtag, cna);
                                           [self analysisUrl:cna id:self.videoObject.uid];
                                       }
                                   }];

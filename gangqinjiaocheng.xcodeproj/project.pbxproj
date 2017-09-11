@@ -362,7 +362,7 @@
 		DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFD0CB1F4D2E1300149112 /* LoginTableViewCellModel.m */; };
 		DBDA76391F623B5C00C46177 /* VideoDetailMoreVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA76381F623B5C00C46177 /* VideoDetailMoreVideoCell.m */; };
 		DBDA763C1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA763B1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m */; };
-		DBDA763F1F6277FE00C46177 /* CnaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA763E1F6277FE00C46177 /* CnaManager.m */; };
+		DBDA763F1F6277FE00C46177 /* EtagManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA763E1F6277FE00C46177 /* EtagManager.m */; };
 		DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */; };
 		FB9C1CE929025DC7AFA16093 /* libPods-gangqinjiaocheng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A584A6547B34685E967D9C47 /* libPods-gangqinjiaocheng.a */; };
 /* End PBXBuildFile section */
@@ -865,8 +865,8 @@
 		DBDA76381F623B5C00C46177 /* VideoDetailMoreVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailMoreVideoCell.m; sourceTree = "<group>"; };
 		DBDA763A1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailMoreVideoCellModel.h; sourceTree = "<group>"; };
 		DBDA763B1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailMoreVideoCellModel.m; sourceTree = "<group>"; };
-		DBDA763D1F6277FE00C46177 /* CnaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CnaManager.h; sourceTree = "<group>"; };
-		DBDA763E1F6277FE00C46177 /* CnaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CnaManager.m; sourceTree = "<group>"; };
+		DBDA763D1F6277FE00C46177 /* EtagManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EtagManager.h; sourceTree = "<group>"; };
+		DBDA763E1F6277FE00C46177 /* EtagManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EtagManager.m; sourceTree = "<group>"; };
 		DBDEC9F51F566CE80078D3E1 /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
 		DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1146,8 +1146,8 @@
 			children = (
 				DBCFCE5C1F4D1E1B00149112 /* APIManager.h */,
 				DBCFCE5D1F4D1E1B00149112 /* APIManager.m */,
-				DBDA763D1F6277FE00C46177 /* CnaManager.h */,
-				DBDA763E1F6277FE00C46177 /* CnaManager.m */,
+				DBDA763D1F6277FE00C46177 /* EtagManager.h */,
+				DBDA763E1F6277FE00C46177 /* EtagManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2047,7 +2047,7 @@
 				DB1BB6601F55361E00E8B1F8 /* ZJSegmentStyle.m in Sources */,
 				BCB0C4991EA8EEE5004AB5FD /* MainTabBarController.m in Sources */,
 				DBCFCEB61F4D24E000149112 /* SettingViewController.m in Sources */,
-				DBDA763F1F6277FE00C46177 /* CnaManager.m in Sources */,
+				DBDA763F1F6277FE00C46177 /* EtagManager.m in Sources */,
 				DB1BB65B1F55361E00E8B1F8 /* UIViewController+ZJScrollPageController.m in Sources */,
 				DBCFCED61F4D25E900149112 /* SSLPickerView.m in Sources */,
 				DBCFCEAA1F4D242000149112 /* ShowMoreItemV.m in Sources */,

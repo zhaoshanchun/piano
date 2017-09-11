@@ -79,7 +79,8 @@
 #define TestDevice              @"a492223edaf92cbf1987951af14e360a" ///admob test device
 
 
-#define kEtagCna @"kEtagCna"
+#define kSourceEtag @"kSourceEtag"
+#define kSourceEtagCacheTime @"kSourceEtagCacheTime"
 #define kLoginedUser @"kLoginedUser"
 
 // Toast

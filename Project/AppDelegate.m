@@ -13,8 +13,6 @@
 
 #import "APIManager.h"
 
-#import "CnaManager.h"
-
 @interface AppDelegate ()
 
 @end
@@ -43,9 +41,6 @@
     [GADMobileAds configureWithApplicationID:AdmobApplicationID];
     globalValue = [[GlobalValue alloc] init];
     [NSThread sleepForTimeInterval:4.0];
-    
-    
-    [[CnaManager sharedManager] analysisCookie];
     
     
     return YES;

@@ -86,9 +86,7 @@
     [self setupView];
 
     if(self.model == 0 || self.videoPath == nil) {
-        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        // NSString *cna = [userDefaults objectForKey:kEtagCna];
-        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        NSString *cna = getStringFromUserDefaults(kSourceEtag);
         if(cna == nil) {
             [self analysisCookie];
         } else {
@@ -317,9 +315,7 @@
     self.section = 0;
     self.videoPath = object.videoPath;
     if (self.model == 0 || self.videoPath == nil) {
-        // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        // NSString *cna = [userDefaults objectForKey:kEtagCna];
-        NSString *cna = getStringFromUserDefaults(kEtagCna);
+        NSString *cna = getStringFromUserDefaults(kSourceEtag);
         if(cna == nil) {
             [self analysisCookie];
         } else{
@@ -358,9 +354,7 @@
                                       NSLog(@"%s--->2 %@ cna %@", __func__, error, cna);
                                       
                                       if (error == nil) {
-                                          // NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                                          // [userDefaults setObject:cna forKey:kEtagCna];
-                                          saveObjectToUserDefaults(kEtagCna, cna);
+                                          saveObjectToUserDefaults(kSourceEtag, cna);
 
                                           //6.解析服务器返回的数据
                                           //说明：（此处返回的数据是JSON格式的，因此使用NSJSONSerialization进行反序列化处理）

@@ -11,8 +11,10 @@
 #import "UIBaseTableViewCell.h"
 #import "VideoDetailHeadwCell.h"
 #import "VideoDetailMoreVideoCell.h"
+#import "EtagManager.h"
 
 #define kDefaultMoreContentNumber 3
+#define kMoreListHeadHeight 40.f
 
 @interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate>
 
@@ -125,38 +127,40 @@
 #pragma mark - API Action
 // TODO... 历史记录：传 uuid+videoPath(本地路径)
 - (void)getSourceForUuid:(NSString *)uuid {
+    
     [self.view showLoading];
-    __weak typeof(self) weakSelf = self;
-    // TODO... cert 使用 cna
-    // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
-    // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
-    NSString *cert = @"KRAgEpA+sWECAduFZDEk+TbE";
-    cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
-    NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
-    [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!weakSelf) {
-            return;
-        }
-        [weakSelf.view hideLoading];
+    [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
+        __weak typeof(self) weakSelf = self;
         
-        if (connectionError) {
-            MyLog(@"error : %@",[connectionError localizedDescription]);
-        } else {
-            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            SourceResponseModel *responseModel = [[SourceResponseModel alloc] initWithString:responseString error:nil];
-            if (responseModel.errorCode != 0) {
-                [weakSelf.view makeToast:responseModel.msg duration:kToastDuration position:kToastPositionCenter];
+        // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
+        // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
+        NSString *cert = etag;
+        cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
+        NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
+        [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!weakSelf) {
                 return;
             }
+            [weakSelf.view hideLoading];
             
-            SourceModel *sourceModel = responseModel.object;
-            
-            [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
-            
-            _detailHeadCellModel = [VideoDetailHeadwCellModel new];
-            self.detailHeadCellModel.sourceModel = sourceModel;
-            [self.tableView reloadData];
-        }
+            if (!connectionError) {
+                NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                SourceResponseModel *responseModel = [[SourceResponseModel alloc] initWithString:responseString error:nil];
+                if (responseModel.errorCode != 0) {
+                    [weakSelf.view makeToast:responseModel.msg duration:kToastDuration position:kToastPositionCenter];
+                    return;
+                }
+                
+                SourceModel *sourceModel = responseModel.object;
+                [weakSelf.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
+                
+                _detailHeadCellModel = [VideoDetailHeadwCellModel new];
+                weakSelf.detailHeadCellModel.sourceModel = sourceModel;
+                [weakSelf.tableView reloadData];
+            } else {
+                [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
+            }
+        }];
     }];
 }
 
@@ -178,6 +182,24 @@
     // First Section: Detail head
     // Second section: More content list
     return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1 && self.moreArray.count > 0) {
+        return kMoreListHeadHeight;
+    }
+    return 0;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1 && self.moreArray.count > 0) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kMoreListHeadHeight)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
+        label.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"相关视频"), @"BR16B"], nil);
+        [view addSubview:label];
+        return view;
+    }
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
