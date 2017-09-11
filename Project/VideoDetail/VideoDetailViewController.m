@@ -11,13 +11,20 @@
 #import "UIBaseTableViewCell.h"
 #import "VideoDetailHeadwCell.h"
 #import "VideoDetailMoreVideoCell.h"
+#import "VideoDetailHistoryCell.h"
 #import "EtagManager.h"
+#import "HistoryManager.h"
 
 #define kDefaultMoreContentNumber 3
-#define kMoreListHeadHeight 40.f
+#define kSectionHeadHeight 40.f
+#define kSections 3
+// First Section: Detail head
+// Second section: More content list
+// History view
 
-@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate>
+@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate>
 
+@property (strong, nonatomic) ContentModel *contentModel;
 @property (strong, nonatomic) NSString *uuid;
 
 @property (strong, nonatomic) CLPlayerView *playerView;
@@ -25,6 +32,7 @@
 
 @property (strong, nonatomic) VideoDetailHeadwCellModel *detailHeadCellModel;
 @property (strong, nonatomic) NSMutableArray *moreArray;
+@property (strong, nonatomic) NSArray *historyArray;
 
 @end
 
@@ -41,6 +49,18 @@
     return self;
 }
 
+- (instancetype)initWithContentModel:(ContentModel *)contentModel {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        self.uuid = contentModel.uuid;
+        self.contentModel = contentModel;
+        self.moreArray = [NSMutableArray new];
+        
+        self.hideNavigationBar = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -49,6 +69,8 @@
     
     [self presetMoreContents];
     [self getSourceForUuid:self.uuid];
+    
+    self.historyArray = [[HistoryManager sharedManager] getAllHistoryList];
 }
 
 - (void)dealloc {
@@ -157,6 +179,16 @@
                 _detailHeadCellModel = [VideoDetailHeadwCellModel new];
                 weakSelf.detailHeadCellModel.sourceModel = sourceModel;
                 [weakSelf.tableView reloadData];
+                
+                // Save History
+                if (weakSelf.contentModel) {
+                    [[HistoryManager sharedManager] saveContentToHistory:weakSelf.contentModel];
+                } else {
+                    ContentModel *contentModel = [ContentModel new];
+                    contentModel.uuid = sourceModel.uuid;
+                    contentModel.title = sourceModel.title;
+                    [[HistoryManager sharedManager] saveContentToHistory:contentModel];
+                }
             } else {
                 [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
             }
@@ -179,23 +211,24 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // First Section: Detail head
-    // Second section: More content list
-    return 2;
+    return kSections;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1 && self.moreArray.count > 0) {
-        return kMoreListHeadHeight;
+    if ((section == 1 && self.moreArray.count > 0)
+        || (section == 2 && self.historyArray.count > 0)) {
+        return kSectionHeadHeight;
     }
     return 0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1 && self.moreArray.count > 0) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kMoreListHeadHeight)];
+    if ((section == 1 && self.moreArray.count > 0)
+        || (section == 2 && self.historyArray.count > 0)) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
-        label.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"相关视频"), @"BR16B"], nil);
+        NSString *sectionTitle = (section == 1) ? localizeString(@"相关视频") : localizeString(@"历史记录");
+        label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
         [view addSubview:label];
         return view;
     }
@@ -207,6 +240,8 @@
         return (self.detailHeadCellModel ? 1 : 0);
     } else if (section == 1) {
         return self.moreArray.count;
+    } else if (section == 2) {
+        return 1;
     }
     return 0;
 }
@@ -224,6 +259,8 @@
             VideoDetailMoreVideoCellModel *cellModel = [self.moreArray objectAtIndex:indexPath.row];
             return cellModel.cellHeight;
         }
+    } else if (indexPath.section == 2) {
+        return kHistoryListItemImageHeight;
     }
     return 0;
 }
@@ -242,7 +279,13 @@
         cell.indexPath = indexPath;
         cell.cellModel = cellModel;
         return cell;
+    } else if (indexPath.section == 2) {
+        VideoDetailHistoryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailHistoryCellIdentifier forIndexPath:indexPath];
+        cell.historyView.delegate = self;
+        [cell.historyView reloadHistory];
+        return cell;
     }
+    
     UIBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUIBaseTableViewCellIndentifier forIndexPath:indexPath];
     return cell;
 }
@@ -251,7 +294,11 @@
     if (indexPath.section == 0) {
         return;
     } else if (indexPath.section == 1) {
-        // TODO... delegate back to push other video
+        // TODO... 这里应该通过delegate返回上一层，然后再进入另一个视频的播放页
+        VideoDetailMoreVideoCellModel *cellModel = [self.moreArray objectAtIndex:indexPath.row];
+        VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:cellModel.contentModel];
+        vc.allContentsArray = [self.allContentsArray copy];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -273,6 +320,14 @@
     MyLog(@"praiseAction");
 }
 
+
+#pragma mark - HistoryListViewDelegate
+- (void)selectedHistory:(ContentModel *)contentModel {
+    // TODO... 这里应该通过delegate返回上一层，然后再进入另一个视频的播放页
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
+    vc.allContentsArray = [self.allContentsArray copy];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 #pragma mark - Factory method
@@ -318,6 +373,7 @@
         [_tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
         [_tableView registerClass:[VideoDetailHeadwCell class] forCellReuseIdentifier:kVideoDetailHeadwCellIdentifier];
         [_tableView registerClass:[VideoDetailMoreVideoCell class] forCellReuseIdentifier:kVideoDetailMoreVideoCellIdentifier];
+        [_tableView registerClass:[VideoDetailHistoryCell class] forCellReuseIdentifier:kVideoDetailHistoryCellIdentifier];
     }
     return _tableView;
 }

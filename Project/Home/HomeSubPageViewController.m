@@ -229,7 +229,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ContentListCollectionViewCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithUUID:cellModel.contentModel.uuid];
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:cellModel.contentModel];
     vc.allContentsArray = [self.contentList copy];
     [self.navigationController pushViewController:vc animated:YES];
 }

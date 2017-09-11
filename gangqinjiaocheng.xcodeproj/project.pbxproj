@@ -363,7 +363,12 @@
 		DBDA76391F623B5C00C46177 /* VideoDetailMoreVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA76381F623B5C00C46177 /* VideoDetailMoreVideoCell.m */; };
 		DBDA763C1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA763B1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m */; };
 		DBDA763F1F6277FE00C46177 /* EtagManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA763E1F6277FE00C46177 /* EtagManager.m */; };
+		DBDA76421F66812C00C46177 /* HistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA76411F66812C00C46177 /* HistoryManager.m */; };
+		DBDA76461F668A1A00C46177 /* HistoryListView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDA76451F668A1A00C46177 /* HistoryListView.m */; };
 		DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */; };
+		DBE1DBD11F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD01F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m */; };
+		DBE1DBD41F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD31F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m */; };
+		DBE1DBD71F66DDC7009A8DF8 /* VideoDetailHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD61F66DDC7009A8DF8 /* VideoDetailHistoryCell.m */; };
 		FB9C1CE929025DC7AFA16093 /* libPods-gangqinjiaocheng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A584A6547B34685E967D9C47 /* libPods-gangqinjiaocheng.a */; };
 /* End PBXBuildFile section */
 
@@ -867,8 +872,18 @@
 		DBDA763B1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailMoreVideoCellModel.m; sourceTree = "<group>"; };
 		DBDA763D1F6277FE00C46177 /* EtagManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EtagManager.h; sourceTree = "<group>"; };
 		DBDA763E1F6277FE00C46177 /* EtagManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EtagManager.m; sourceTree = "<group>"; };
+		DBDA76401F66812C00C46177 /* HistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryManager.h; sourceTree = "<group>"; };
+		DBDA76411F66812C00C46177 /* HistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryManager.m; sourceTree = "<group>"; };
+		DBDA76441F668A1A00C46177 /* HistoryListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryListView.h; sourceTree = "<group>"; };
+		DBDA76451F668A1A00C46177 /* HistoryListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryListView.m; sourceTree = "<group>"; };
 		DBDEC9F51F566CE80078D3E1 /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
 		DBDEC9F61F566CE80078D3E1 /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
+		DBE1DBCF1F66CFA9009A8DF8 /* HistoryListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryListCollectionViewCell.h; sourceTree = "<group>"; };
+		DBE1DBD01F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryListCollectionViewCell.m; sourceTree = "<group>"; };
+		DBE1DBD21F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryListCollectionViewCellModel.h; sourceTree = "<group>"; };
+		DBE1DBD31F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryListCollectionViewCellModel.m; sourceTree = "<group>"; };
+		DBE1DBD51F66DDC7009A8DF8 /* VideoDetailHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailHistoryCell.h; sourceTree = "<group>"; };
+		DBE1DBD61F66DDC7009A8DF8 /* VideoDetailHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailHistoryCell.m; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10B0B782C211CE05D61A087 /* Pods-sifakaoshi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sifakaoshi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sifakaoshi/Pods-sifakaoshi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1148,6 +1163,8 @@
 				DBCFCE5D1F4D1E1B00149112 /* APIManager.m */,
 				DBDA763D1F6277FE00C46177 /* EtagManager.h */,
 				DBDA763E1F6277FE00C46177 /* EtagManager.m */,
+				DBDA76401F66812C00C46177 /* HistoryManager.h */,
+				DBDA76411F66812C00C46177 /* HistoryManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1155,6 +1172,7 @@
 		DBCFCE5F1F4D1EBF00149112 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				DBDA76431F668A0000C46177 /* History */,
 				DB8202001F4E7B7A00494174 /* AdCollectionViewCell.h */,
 				DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */,
 				DBCFCE661F4D1EBF00149112 /* BaseViewController.h */,
@@ -1229,6 +1247,8 @@
 				DBDA76381F623B5C00C46177 /* VideoDetailMoreVideoCell.m */,
 				DBDA763A1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.h */,
 				DBDA763B1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m */,
+				DBE1DBD51F66DDC7009A8DF8 /* VideoDetailHistoryCell.h */,
+				DBE1DBD61F66DDC7009A8DF8 /* VideoDetailHistoryCell.m */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -1600,6 +1620,19 @@
 				DBCFD0B71F4D27F300149112 /* Piano-prefix.pch */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		DBDA76431F668A0000C46177 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				DBDA76441F668A1A00C46177 /* HistoryListView.h */,
+				DBDA76451F668A1A00C46177 /* HistoryListView.m */,
+				DBE1DBD21F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.h */,
+				DBE1DBD31F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m */,
+				DBE1DBCF1F66CFA9009A8DF8 /* HistoryListCollectionViewCell.h */,
+				DBE1DBD01F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		E9FFCFCBF5222906E582A159 /* Frameworks */ = {
@@ -2022,12 +2055,14 @@
 				DBCFCEA41F4D242000149112 /* CollectionViewCell.m in Sources */,
 				DBCFCDDD1F4C25C600149112 /* UIView+Helper.m in Sources */,
 				DBCFCE8C1F4D20EA00149112 /* SearchView.m in Sources */,
+				DBDA76461F668A1A00C46177 /* HistoryListView.m in Sources */,
 				DBCFCEA91F4D242000149112 /* ShowMoreItemH.m in Sources */,
 				DBCFCE5E1F4D1E1B00149112 /* APIManager.m in Sources */,
 				BCB0C4851EA8EA1E004AB5FD /* AppDelegate.m in Sources */,
 				DBCFCEA71F4D242000149112 /* HomeViewController.m in Sources */,
 				DB0EFC9A1F4DDD6400DE7B59 /* UIButton+AFNetworking.m in Sources */,
 				DBCFCECF1F4D25E900149112 /* Database.m in Sources */,
+				DBE1DBD11F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m in Sources */,
 				DBCFCDDC1F4C25C600149112 /* UIView+Font.m in Sources */,
 				DB1BB6611F55361E00E8B1F8 /* ZJTitleView.m in Sources */,
 				DBCFCED31F4D25E900149112 /* NoteBookViewController.m in Sources */,
@@ -2038,6 +2073,7 @@
 				DBCFCEA81F4D242000149112 /* MainCollectionViewController.m in Sources */,
 				DBCFCEA61F4D242000149112 /* GLCoverFlowLayout.m in Sources */,
 				DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */,
+				DBE1DBD41F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m in Sources */,
 				DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */,
 				DBCFCE6E1F4D1EBF00149112 /* BaseTableViewController.m in Sources */,
 				DBCFCE831F4D200B00149112 /* GlobalValue.m in Sources */,
@@ -2064,6 +2100,7 @@
 				DBCFCE4D1F4C3A7500149112 /* XPathQuery.m in Sources */,
 				DBCFCE491F4C3A7500149112 /* FMDatabaseQueue.m in Sources */,
 				DB1BB65E1F55361E00E8B1F8 /* ZJScrollPageView.m in Sources */,
+				DBE1DBD71F66DDC7009A8DF8 /* VideoDetailHistoryCell.m in Sources */,
 				DB0EFC991F4DDD6400DE7B59 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */,
 				DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */,
@@ -2073,6 +2110,7 @@
 				DBCFCED11F4D25E900149112 /* NoteBook.m in Sources */,
 				DBCFCE5A1F4D1D0400149112 /* LoginViewController.m in Sources */,
 				DBCFCE6D1F4D1EBF00149112 /* BaseTableViewCell.m in Sources */,
+				DBDA76421F66812C00C46177 /* HistoryManager.m in Sources */,
 				DBCFCE711F4D1EBF00149112 /* UIBaseTableViewCell.m in Sources */,
 				DB1BB6641F55373400E8B1F8 /* HomeSubPageViewController.m in Sources */,
 				DBCFCED21F4D25E900149112 /* NoteBookCell.m in Sources */,

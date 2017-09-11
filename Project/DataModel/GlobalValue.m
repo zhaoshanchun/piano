@@ -297,7 +297,7 @@ NSString* files[][7] = {
     // 2.打开数据库
     if ([self.db open]) {
         NSLog(@"打开HistoryDb成功");
-        BOOL success = [self.db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_history (id integer PRIMARY KEY AUTOINCREMENT, uid text NOT NULL);"];
+        BOOL success = [self.db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_history (id integer PRIMARY KEY AUTOINCREMENT, uid text NOT NULL, title text, preview text);"];
         if (success) {
             NSLog(@"创建表成功");
         } else {

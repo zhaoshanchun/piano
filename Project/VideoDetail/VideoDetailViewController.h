@@ -11,7 +11,8 @@
 
 @interface VideoDetailViewController : BaseViewController
 
-- (instancetype)initWithUUID:(NSString *)uuid NS_DESIGNATED_INITIALIZER; // 只能通过这个方法进这个页面
+- (instancetype)initWithUUID:(NSString *)uuid NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContentModel:(ContentModel *)contentModel NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
