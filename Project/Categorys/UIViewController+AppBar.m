@@ -460,9 +460,6 @@ static CGFloat _topInsetForTabBar;
 }
 
 - (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ __nullable)(void))completion {
-//    if ([self respondsToSelector:@selector(apiOperation)]) {
-//        [((UIBaseViewController *)self).apiOperation cancel];
-//    }    
     if (isPresentViewController(self)){
         if ([self.navigationController.viewControllers firstObject] == self) {
             [self dismissViewControllerAnimated:YES completion:completion];
@@ -470,6 +467,9 @@ static CGFloat _topInsetForTabBar;
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
+    if (completion) {
+        completion();
+    }
 }
 
 

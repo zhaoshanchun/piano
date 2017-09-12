@@ -21,7 +21,8 @@
     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
     style.alignment = NSTextAlignmentLeft;
     style.lineBreakMode = NSLineBreakByTruncatingTail;
-    self.titleAttribute = formatAttributedStringByORFontGuide(@[contentModel.title, @"BR15N"], @[style]);
+    self.titleAttribute = formatAttributedStringByORFontGuide(@[contentModel.title, @"DGY12N"], @[style]);
+    // DGY12N.lineHeight = 14
 }
 
 @end

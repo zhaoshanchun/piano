@@ -18,9 +18,11 @@
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
 #define kSections 3
-// First Section: Detail head
-// Second section: More content list
-// History view
+/*
+ 0: Detail head
+ 1: More content list
+ 2: History view
+ */
 
 @interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate>
 
@@ -43,7 +45,6 @@
     if (self) {
         self.uuid = uuid;
         self.moreArray = [NSMutableArray new];
-        
         self.hideNavigationBar = YES;
     }
     return self;
@@ -55,7 +56,6 @@
         self.uuid = contentModel.uuid;
         self.contentModel = contentModel;
         self.moreArray = [NSMutableArray new];
-        
         self.hideNavigationBar = YES;
     }
     return self;
@@ -64,18 +64,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.historyArray = [[HistoryManager sharedManager] getAllHistoryList];
+    
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
     [self presetMoreContents];
     [self getSourceForUuid:self.uuid];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
-    self.historyArray = [[HistoryManager sharedManager] getAllHistoryList];
+    // Save History to DB
+    if (self.contentModel) {
+        [[HistoryManager sharedManager] saveContentToHistory:self.contentModel];
+    } else if (self.detailHeadCellModel.sourceModel) {
+        ContentModel *contentModel = [ContentModel new];
+        contentModel.uuid = self.detailHeadCellModel.sourceModel.uuid;
+        contentModel.title = self.detailHeadCellModel.sourceModel.title;
+        [[HistoryManager sharedManager] saveContentToHistory:contentModel];
+    }
+    
+    if (_playerView) {
+        [self.playerView pausePlay];
+    }
 }
 
 - (void)dealloc {
     if (_playerView) {
-        [_playerView pausePlay];
         [_playerView destroyPlayer];
         _playerView = nil;
     }
@@ -175,20 +192,11 @@
                 
                 SourceModel *sourceModel = responseModel.object;
                 [weakSelf.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
+                [weakSelf.playerView playVideo];
                 
                 _detailHeadCellModel = [VideoDetailHeadwCellModel new];
                 weakSelf.detailHeadCellModel.sourceModel = sourceModel;
                 [weakSelf.tableView reloadData];
-                
-                // Save History
-                if (weakSelf.contentModel) {
-                    [[HistoryManager sharedManager] saveContentToHistory:weakSelf.contentModel];
-                } else {
-                    ContentModel *contentModel = [ContentModel new];
-                    contentModel.uuid = sourceModel.uuid;
-                    contentModel.title = sourceModel.title;
-                    [[HistoryManager sharedManager] saveContentToHistory:contentModel];
-                }
             } else {
                 [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
             }
@@ -240,7 +248,7 @@
         return (self.detailHeadCellModel ? 1 : 0);
     } else if (section == 1) {
         return self.moreArray.count;
-    } else if (section == 2) {
+    } else if (section == 2 && self.historyArray.count > 0) {
         return 1;
     }
     return 0;
@@ -251,8 +259,6 @@
     if (indexPath.section == 0) {
         if (self.detailHeadCellModel) {
             return self.detailHeadCellModel.cellHeight;
-        } else {
-            return 0;
         }
     } else if (indexPath.section == 1) {
         if ([self.moreArray count] > indexPath.row) {
@@ -260,7 +266,9 @@
             return cellModel.cellHeight;
         }
     } else if (indexPath.section == 2) {
-        return kHistoryListItemImageHeight;
+        if (self.historyArray.count > 0) {
+            return kHistoryListItemHeight;
+        }
     }
     return 0;
 }
@@ -279,10 +287,10 @@
         cell.indexPath = indexPath;
         cell.cellModel = cellModel;
         return cell;
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 2 && self.historyArray.count > 0) {
         VideoDetailHistoryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailHistoryCellIdentifier forIndexPath:indexPath];
         cell.historyView.delegate = self;
-        [cell.historyView reloadHistory];
+        cell.historyView.historyList = [self.historyArray copy];
         return cell;
     }
     
@@ -294,11 +302,16 @@
     if (indexPath.section == 0) {
         return;
     } else if (indexPath.section == 1) {
-        // TODO... 这里应该通过delegate返回上一层，然后再进入另一个视频的播放页
         VideoDetailMoreVideoCellModel *cellModel = [self.moreArray objectAtIndex:indexPath.row];
-        VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:cellModel.contentModel];
-        vc.allContentsArray = [self.allContentsArray copy];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self onBtnBackTouchUpInside:nil completion:^{
+            if (_playerView) {
+                [_playerView destroyPlayer];
+                _playerView = nil;
+            }
+            if (self.delegate && [self.delegate respondsToSelector:@selector(playContent:)]) {
+                [self.delegate playContent:cellModel.contentModel];
+            }
+        }];
     }
 }
 
@@ -307,7 +320,7 @@
 //- (void)commonAction {
 //    MyLog(@"commonAction");
 //}
-
+// TODO...
 - (void)shareAction {
     MyLog(@"shareAction");
 }
@@ -323,25 +336,35 @@
 
 #pragma mark - HistoryListViewDelegate
 - (void)selectedHistory:(ContentModel *)contentModel {
-    // TODO... 这里应该通过delegate返回上一层，然后再进入另一个视频的播放页
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
-    vc.allContentsArray = [self.allContentsArray copy];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self onBtnBackTouchUpInside:nil completion:^{
+        if (_playerView) {
+            [_playerView destroyPlayer];
+            _playerView = nil;
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(playContent:)]) {
+            [self.delegate playContent:contentModel];
+        }
+    }];
 }
 
 
 #pragma mark - Factory method
 - (CLPlayerView *)playerView {
     if (_playerView == nil) {
-        // TODO... 覆盖 status bar
-        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageWidth]*9/16)];
+        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
+        //返回按钮点击事件回调
         [_playerView backButton:^(UIButton *button) {
-            [self.navigationController popViewControllerAnimated:YES];
             if (_playerView) {
-                [_playerView pausePlay];
                 [_playerView destroyPlayer];
                 _playerView = nil;
             }
+            [self onBtnBackTouchUpInside:nil completion:^{
+                
+            }];
+        }];
+        //播放完成回调
+        [_playerView endPlay:^{
+            
         }];
     }
     return _playerView;
@@ -368,7 +391,7 @@
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
-        _tableView.tableFooterView = [UIView new];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], 50)];
         
         [_tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
         [_tableView registerClass:[VideoDetailHeadwCell class] forCellReuseIdentifier:kVideoDetailHeadwCellIdentifier];

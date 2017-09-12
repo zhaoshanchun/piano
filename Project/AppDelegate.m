@@ -42,6 +42,8 @@
     globalValue = [[GlobalValue alloc] init];
     [NSThread sleepForTimeInterval:4.0];
     
+    saveObjectToUserDefaults(kSourceEtag, nil);
+    saveObjectToUserDefaults(kSourceEtagCacheTime, nil);
     
     return YES;
 }

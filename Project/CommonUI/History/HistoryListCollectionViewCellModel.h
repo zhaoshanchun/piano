@@ -10,11 +10,14 @@
 #import "ContentListModel.h"
 
 #define kHistoryListCollectionViewWidth SCREEN_WIDTH
-#define kHistoryListItemNumber 3
+#define kHistoryListItemNumber 3.1
 #define kHistoryListItemMargin 10.f
+#define kHistoryListItemTextHeight 47
 #define kHistoryListItemWidth (kHistoryListCollectionViewWidth - kHistoryListItemMargin*(kHistoryListItemNumber+1))/kHistoryListItemNumber
 #define kHistoryListItemImageHeight (kHistoryListItemWidth*9/16)    // 视频截图 16：9
 #define kHistoryListItemHeight (kHistoryListItemImageHeight + kHistoryListItemTextHeight)
+
+
 
 @interface HistoryListCollectionViewCellModel : NSObject
 

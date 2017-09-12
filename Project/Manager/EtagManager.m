@@ -58,13 +58,15 @@ static EtagManager *_sharedManager;
                                                 NSString *etag = headers[@"Etag"];
                                                 etag = [etag stringByReplacingOccurrencesOfString:@"/" withString:@""];
                                                 
-                                                if (error == nil) {
+                                                if (error == nil && etag.length > 0) {
                                                     saveObjectToUserDefaults(kSourceEtag, etag);
                                                     saveObjectToUserDefaults(kSourceEtagCacheTime, [NSDate date]);
                                                     if (weakSelf.etagBackHandler) {
                                                         weakSelf.etagBackHandler(etag, nil);
                                                     }
                                                 } else {
+                                                    saveObjectToUserDefaults(kSourceEtag, nil);
+                                                    saveObjectToUserDefaults(kSourceEtagCacheTime, nil);
                                                     if (weakSelf.etagBackHandler) {
                                                         weakSelf.etagBackHandler([NSString stringWithFormat:@"%f", [[NSDate new] timeIntervalSince1970]], nil);
                                                     }

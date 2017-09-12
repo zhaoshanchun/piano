@@ -27,10 +27,14 @@
     return self;
 }
 
-- (void)reloadHistory {
+- (void)setHistoryList:(NSArray *)historyList {
+    if (historyList.count == 0) {
+        return;
+    }
+    _historyList = historyList;
+    
     // 按存入的顺序反序显示
-    NSMutableArray *historyArray = [[HistoryManager sharedManager] getAllHistoryList];
-    NSArray *sortArray = [[historyArray reverseObjectEnumerator] allObjects];
+    NSArray *sortArray = [[historyList reverseObjectEnumerator] allObjects];
     for (int i = 0; i < [sortArray count]; i++) {
         ContentModel *contentModel = [sortArray objectAtIndex:i];
         HistoryListCollectionViewCellModel *cellModel = [HistoryListCollectionViewCellModel new];
@@ -39,6 +43,7 @@
     }
     [self.collectionView reloadData];
 }
+
 
 #pragma mark - collectionViewDelegate and collectionViewDatasource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -67,30 +72,30 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kHistoryListItemWidth, kHistoryListItemImageHeight);
+    return CGSizeMake(kHistoryListItemWidth, kHistoryListItemHeight);
 }
 
 
 #pragma mark - Factory method
 - (UICollectionViewFlowLayout *)layout {
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.minimumLineSpacing = 0;
-    layout.minimumInteritemSpacing = 5;
-    layout.itemSize = (CGSize){50, 50};
-    layout.sectionInset = (UIEdgeInsets){0, 0, 0, 0};
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.minimumLineSpacing = kHistoryListItemMargin;
+    layout.minimumInteritemSpacing = 0;
+    layout.itemSize = (CGSize){kHistoryListItemWidth, kHistoryListItemHeight};
+    // layout.sectionInset = (UIEdgeInsets){0, 0, 0, 0};
     return layout;
 }
 
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:[self layout]];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kHistoryListCollectionViewWidth, kHistoryListItemHeight) collectionViewLayout:[self layout]];
         _collectionView.backgroundView = nil;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 5)];
+        [_collectionView setContentInset:UIEdgeInsetsMake(0, kHistoryListItemMargin, 0, 0)];
         [_collectionView registerClass:[HistoryListCollectionViewCell class] forCellWithReuseIdentifier:kHistoryListCollectionViewCellIdentifier];
     }
     return _collectionView;

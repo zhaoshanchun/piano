@@ -19,7 +19,7 @@
     self.imageUrl = contentModel.preview;
     self.imageFrame = CGRectMake(kVideoDetailMoreVideoCellLRPadding, 0, kVideoDetailMoreVideoCellImageWidth, kVideoDetailMoreVideoCellImageHeight);
     
-    self.titleAttribute = formatAttributedStringByORFontGuide(@[contentModel.title, @"BR15N"], nil);
+    self.titleAttribute = formatAttributedStringByORFontGuide(@[contentModel.title, @"BR14N"], nil);
     CGFloat titleWidth = kVideoDetailMoreVideoCellWidth - kVideoDetailMoreVideoCellLRPadding*2 - CGRectGetMaxX(self.imageFrame);
     CGSize size = getSizeForAttributedString(self.titleAttribute, titleWidth, MAXFLOAT);
     self.titleFrame = CGRectMake(CGRectGetMaxX(self.imageFrame) + kVideoDetailMoreVideoCellLRPadding, 0, titleWidth, size.height);

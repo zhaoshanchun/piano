@@ -45,8 +45,7 @@
 #pragma mark - Factory method
 - (HistoryListView *)historyView {
     if (_historyView == nil) {
-        _historyView = [[HistoryListView alloc] initWithFrame:CGRectMake(0, 0, kHistoryListCollectionViewWidth, kHistoryListItemImageHeight)];
-        [_historyView showBorder:[UIColor greenColor]];
+        _historyView = [[HistoryListView alloc] initWithFrame:CGRectMake(0, 0, kHistoryListCollectionViewWidth, kHistoryListItemHeight)];
     }
     return _historyView;
 }

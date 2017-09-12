@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *detailLabel;
+// TODO... 上次观看到 23:40
 
 @end
 
@@ -22,8 +22,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]){
         self.backgroundColor = [UIColor whiteColor];
-        [self showBorder:[UIColor greenColor]];
-        
         [self addContent];
     }
     return self;
@@ -47,6 +45,7 @@
                              }];
     
     self.titleLabel.attributedText = cellModel.titleAttribute;
+    [self.titleLabel adjustsFontSizeToFitWidth];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -62,7 +61,7 @@
 #pragma mark - Factory method
 - (UIImageView *)imageView {
     if (_imageView == nil) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kHistoryListItemWidth, kHistoryListItemImageHeight)];  // 45 是留给下面文字部分的
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kHistoryListItemWidth, kHistoryListItemImageHeight)];
         _imageView.backgroundColor = [UIColor colorForKey:@"lgy"];
         _imageView.layer.cornerRadius = 3.f;
         _imageView.layer.masksToBounds = YES;
@@ -74,11 +73,12 @@
 
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, CGRectGetWidth(self.imageView.frame), 40)];
-        _titleLabel.numberOfLines = 2;
-        [_titleLabel showBorder:[UIColor redColor]];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.imageView.frame), CGRectGetMaxY(self.imageView.frame) + 5, kHistoryListItemWidth, kHistoryListItemTextHeight - 5)];
+        _titleLabel.numberOfLines = 0;
     }
     return _titleLabel;
 }
 
 @end
+
+

@@ -15,7 +15,7 @@
 
 #import "PlayerViewController.h"
 
-@interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate>
+@interface HomeSubPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource, ContentListCollectionReusableViewDelegate, VideoDetailViewControllerDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
@@ -230,6 +230,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ContentListCollectionViewCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:cellModel.contentModel];
+    vc.delegate = self;
     vc.allContentsArray = [self.contentList copy];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -244,6 +245,15 @@
 - (void)moreButtonAction:(NSIndexPath *)indexPath {
     // Mark: 如果需要 Section head，打开
     MyLog(@"section = %ld", (long)indexPath.section);
+}
+
+
+#pragma mark - VideoDetailViewControllerDelegate
+- (void)playContent:(ContentModel *)contentModel {
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
+    vc.delegate = self;
+    vc.allContentsArray = [self.contentList copy];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -18,12 +18,11 @@
 @interface HistoryListView : UIView
 
 @property (weak, nonatomic) id<HistoryListViewDelegate> delegate;
+@property (strong, nonatomic) NSArray *historyList;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (instancetype)init:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-
-- (void)reloadHistory;
 
 @end

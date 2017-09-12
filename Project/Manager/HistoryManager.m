@@ -96,20 +96,20 @@ static HistoryManager *_sharedManager;
     cmd = [cmd stringByAppendingString:@"'"];
     cmd = [cmd stringByAppendingString:contentModel.uuid];
     cmd = [cmd stringByAppendingString:@"';"];
-    NSLog(@"%s cmd: %@", __func__, cmd);   // DELETE FROM t_history WHERE uid=='XMTgyMzY0MjQ5Mg==';
+    // NSLog(@"%s cmd: %@", __func__, cmd);   // DELETE FROM t_history WHERE uid=='XMTgyMzY0MjQ5Mg==';
     
     BOOL success = [self.db executeUpdate:cmd];
     if (success) {
-        NSLog(@"删除成功: %@", contentModel.uuid);
+        // NSLog(@"删除成功: %@", contentModel.uuid);
     } else {
-        NSLog(@"删除失败: %@", contentModel.uuid);
+        // NSLog(@"删除失败: %@", contentModel.uuid);
     }
     
     success = [self.db executeUpdate:@"INSERT INTO t_history (uid, title, preview) VALUES (?, ?, ?);" withArgumentsInArray:@[contentModel.uuid, contentModel.title, contentModel.preview]];
     if (success) {
-        NSLog(@"插入成功: %@", contentModel.uuid);
+        // NSLog(@"插入成功: %@", contentModel.uuid);
     } else {
-        NSLog(@"插入失败: %@", contentModel.uuid);
+        // NSLog(@"插入失败: %@", contentModel.uuid);
     }
     [self.db close];
 }
@@ -123,11 +123,11 @@ static HistoryManager *_sharedManager;
     // 查询数据
     FMResultSet *result = [self.db executeQuery:@"SELECT id, uid, title, preview FROM t_history;"];
     while ([result next]) {
-        int ID = [result intForColumnIndex:0];
         NSString *uid = [result stringForColumnIndex:1];
         NSString *title = [result stringForColumnIndex:2];
         NSString *preview = [result stringForColumnIndex:3];
-        NSLog(@"ID: %zd, uuid: %@, title:%@, preview:%@", ID, uid, title, preview);
+        // int ID = [result intForColumnIndex:0];
+        // NSLog(@"ID: %zd, uuid: %@, title:%@, preview:%@", ID, uid, title, preview);
         ContentModel *content = [ContentModel new];
         content.uuid = uid;
         content.title = title;
@@ -135,7 +135,7 @@ static HistoryManager *_sharedManager;
         [historyListArray addObject:content];
     }
     [self.db close];
-    NSLog(@"NSMutableArray: %@", historyListArray);
+    // NSLog(@"NSMutableArray: %@", historyListArray);
     return historyListArray;
 }
 
