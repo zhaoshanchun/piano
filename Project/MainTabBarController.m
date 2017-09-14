@@ -12,6 +12,7 @@
 #import "MainCollectionViewController.h"
 #import "ProfileViewController.h"
 #import "HomePageViewController.h"
+#import "DownloadController.h"
 
 @interface MainTabBarController ()
 
@@ -38,13 +39,13 @@
                                    kSelImgKey : @"Home"},
                                  
                                  @{kClassKey  : @"MainCollectionViewController",
-                                   kTextKey   : @"技巧",
+                                   kTextKey   : @"分享",
                                    kTitleKey  : @"基础知识、技巧",
                                    kImgKey    : @"Message",
                                    kSelImgKey : @"Message"},
                                  
-                                 @{kClassKey  : @"NoteBookViewController",
-                                   kTextKey   : @"记录",
+                                 @{kClassKey  : @"DownloadController",
+                                   kTextKey   : @"离线",
                                    kTitleKey  : @"记录-NoteBook",
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},

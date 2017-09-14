@@ -9,11 +9,14 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "GlobalValue.h"
+#import "DownloadManage.h"
 //@import Firebase;
 
 #import "APIManager.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) DownloadManage *downladManage;
 
 @end
 
@@ -28,6 +31,10 @@
     // Override point for customization after application launch.
     
     saveObjectToUserDefaults(kLanguagekey, nil);
+    
+    _downladManage = [DownloadManage sharedInstance];
+    [self.downladManage start];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [MainTabBarController new];
@@ -72,6 +79,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self.downladManage stop];
 }
 
 - (void)setupNavBar {

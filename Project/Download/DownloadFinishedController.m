@@ -6,14 +6,14 @@
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import "DownloadUnfinishedController.h"
+#import "DownloadFinishedController.h"
 #import "DownloadTableViewCell.h"
 #import "DownloadManage.h"
 #import "UIImageView+WebCache.h"
 
-#define UnFinishedCellIdentifier @"DownloadUnfinishedController"
+#define FinishedCellIdentifier @"DownloadFinishedController"
 
-@interface DownloadUnfinishedController ()<UITableViewDataSource, UITableViewDelegate, ProgramDownloadDelegate>
+@interface DownloadFinishedController ()<UITableViewDataSource, UITableViewDelegate, ProgramDownloadDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
 @property DownloadManage *dlManage;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation DownloadUnfinishedController
+@implementation DownloadFinishedController
 
 - (id)init {
     self = [super init];
@@ -36,17 +36,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"%s", __func__);
-
+    
     self.dlManage = [DownloadManage sharedInstance];
-//    [self.dlManage add_download:@"XMTcwMTY0NDI0OA==" url:@"1111" icon:@"https://vthumb.ykimg.com//054104085829AC546A0A4E0454251170" title:@"XMTcwMTY0NDI0OA"];
-//    [self.dlManage add_download:@"XMTcwMTYzNDgzMg==" url:@"1111" icon:@"https://vthumb.ykimg.com//054104085829AC546A0A4E0454251170" title:@"XMTcwMTYzNDgzMg"];
-//    [self.dlManage add_download:@"XMTcwNDc1NjY2MA==" url:@"1111" icon:@"https://vthumb.ykimg.com//054104085829AC546A0A4E0454251170" title:@"XMTcwNDc1NjY2MA"];
-
+    
     self.array = [NSMutableArray array];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    // CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    // CGRect rectNav = self.navigationController.navigationBar.frame;
-    //float topHight = rectNav.size.height + rectStatus.size.height;
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+    CGRect rectNav = self.navigationController.navigationBar.frame;
+    // float topHight = rectNav.size.height + rectStatus.size.height;
+    float topHight = 0;
     _tableView = [UITableView new];
     _tableView.rowHeight = 70;
     _tableView.delegate = self;
@@ -57,9 +55,9 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-    [self.tableView registerClass:[DownloadTableViewCell class] forCellReuseIdentifier:UnFinishedCellIdentifier];
+    [self.tableView registerClass:[DownloadTableViewCell class] forCellReuseIdentifier:FinishedCellIdentifier];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:topHight]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:15]];
     
@@ -78,7 +76,7 @@
 {
     NSLog(@"%s", __func__);
     self.dlManage.delegate = self;
-    self.array = [_dlManage select_download_task:NO];
+    self.array = [_dlManage select_download_task:YES];
     for(int i = 0; i < self.array.count; i++)
     {
         DLTASK *task = self.array[i];
@@ -93,35 +91,6 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.dlManage.delegate = nil;
-}
-
--(void)dlSwitchButtonAciton:(UIButton *)btn
-{
-    long section = (long)btn.tag;
-    DLTASK *task = _array[section];
-
-    NSLog(@"dlSwitchButtonAciton %d", [self.dlManage status:task.uuid]);
-
-   // btn.selected = !btn.selected;
-    if([self.dlManage status:task.uuid])
-    {
-        NSLog(@"pause");
-        [self.dlManage pause_download:task.uuid];
-    }
-    else
-    {
-        NSLog(@"download");
-        [self.dlManage start_download:task.uuid];
-    }
-    /*
-    if(btn.selected == YES)
-    {
-        [self.dlManage start_download:task.uuid];
-    }else
-    {
-        [self.dlManage pause_download:task.uuid];
-    }
-    */
 }
 
 -(void) rate:(NSString *)uuid rate:(double)rate
@@ -184,34 +153,41 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     long section = [indexPath section];
-    DownloadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UnFinishedCellIdentifier forIndexPath:indexPath];
+    DownloadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishedCellIdentifier forIndexPath:indexPath];
     //DownloadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UnFinishedCellIdentifier];
     DLTASK *task = _array[section];
     
     if([self.dlManage status:task.uuid])
     {
         cell.dlSwitchButton.selected = YES;
-       // NSLog(@"dlSwitchButton.selected YES");
+        // NSLog(@"dlSwitchButton.selected YES");
     }
     else
     {
         cell.dlSwitchButton.selected = NO;
         //NSLog(@"dlSwitchButton.selected NO");
     }
+    cell.playImageView.hidden = NO;
+    cell.dlSwitchButton.hidden = YES;
+    cell.processView.hidden = YES;
+    cell.processValue.hidden = YES;
+    cell.rateValue.hidden = YES;
     cell.title.text = task.title;
     [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:task.icon]];
     cell.processView.progress = task.progress;
     cell.rateValue.text = [NSString stringWithFormat:@"%0.0fkb/s", task.rate];
     cell.processValue.text = [NSString stringWithFormat:@"%0.0f%%", task.progress*100];
-    [cell.dlSwitchButton setTag:section];
-    [cell.dlSwitchButton addTarget:self action:@selector(dlSwitchButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [cell.dlSwitchButton setTag:section];    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //long row = [indexPath row];
-    //NSLog(@"row: %ld", row);
+    long section = [indexPath section];
+    DLTASK *task = _array[section];
+
+    NSURL *url = [_dlManage get_play_url:task.uuid];
+    NSLog(@"url: %@", url);
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -296,13 +272,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

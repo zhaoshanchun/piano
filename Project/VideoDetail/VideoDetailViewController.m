@@ -14,6 +14,7 @@
 #import "VideoDetailHistoryCell.h"
 #import "EtagManager.h"
 #import "HistoryManager.h"
+#import "DownloadManage.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
@@ -27,7 +28,7 @@
 @interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate>
 
 @property (strong, nonatomic) ContentModel *contentModel;
-@property (strong, nonatomic) NSString *uuid;
+@property (strong, nonatomic) SourceModel *sourceModel;
 
 @property (strong, nonatomic) CLPlayerView *playerView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -36,25 +37,26 @@
 @property (strong, nonatomic) NSMutableArray *moreArray;
 @property (strong, nonatomic) NSArray *historyArray;
 
+@property (strong, nonatomic) DownloadManage *dlManage;
+
 @end
 
 @implementation VideoDetailViewController
 
-- (instancetype)initWithUUID:(NSString *)uuid {
+- (instancetype)initWithContentModel:(ContentModel *)contentModel {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.uuid = uuid;
+        self.contentModel = contentModel;
         self.moreArray = [NSMutableArray new];
         self.hideNavigationBar = YES;
     }
     return self;
 }
 
-- (instancetype)initWithContentModel:(ContentModel *)contentModel {
+- (instancetype)initWithSourceModel:(SourceModel *)sourceModel {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.uuid = contentModel.uuid;
-        self.contentModel = contentModel;
+        self.sourceModel = sourceModel;
         self.moreArray = [NSMutableArray new];
         self.hideNavigationBar = YES;
     }
@@ -65,12 +67,18 @@
     [super viewDidLoad];
     
     self.historyArray = [[HistoryManager sharedManager] getAllHistoryList];
+    self.dlManage = [DownloadManage sharedInstance];
     
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
-    [self presetMoreContents];
-    [self getSourceForUuid:self.uuid];
+    if (self.sourceModel) {
+        [self presetMoreContentsForUuid:self.sourceModel.uuid];
+        [self handleSourceModel:self.sourceModel];
+    } else if (self.contentModel) {
+        [self presetMoreContentsForUuid:self.contentModel.uuid];
+        [self getSourceForUuid:self.contentModel.uuid];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -79,10 +87,10 @@
     // Save History to DB
     if (self.contentModel) {
         [[HistoryManager sharedManager] saveContentToHistory:self.contentModel];
-    } else if (self.detailHeadCellModel.sourceModel) {
+    } else if (self.sourceModel) {
         ContentModel *contentModel = [ContentModel new];
-        contentModel.uuid = self.detailHeadCellModel.sourceModel.uuid;
-        contentModel.title = self.detailHeadCellModel.sourceModel.title;
+        contentModel.uuid = self.sourceModel.uuid;
+        contentModel.title = self.sourceModel.title;
         [[HistoryManager sharedManager] saveContentToHistory:contentModel];
     }
     
@@ -104,9 +112,10 @@
 }
 
 
-- (void)presetMoreContents {
+#pragma mark - More contents
+- (void)presetMoreContentsForUuid:(NSString *)uuid {
     if (self.allContentsArray.count > 0) {
-        NSInteger currentIndex = [self checkIndexForConten:self.uuid inArray:self.allContentsArray];
+        NSInteger currentIndex = [self checkIndexForConten:uuid inArray:self.allContentsArray];
         NSArray *moreContents = [self getMoreContentsForIndex:currentIndex];
         for (int i = 0; i < moreContents.count; i++) {
             ContentModel *contentModel = [moreContents objectAtIndex:i];
@@ -163,6 +172,17 @@
     return contents;
 }
 
+
+- (void)handleSourceModel:(SourceModel *)sourceModel {
+    [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
+    [self.playerView playVideo];
+    
+    _detailHeadCellModel = [VideoDetailHeadwCellModel new];
+    self.detailHeadCellModel.sourceModel = sourceModel;
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - API Action
 // TODO... 历史记录：传 uuid+videoPath(本地路径)
 - (void)getSourceForUuid:(NSString *)uuid {
@@ -190,13 +210,8 @@
                     return;
                 }
                 
-                SourceModel *sourceModel = responseModel.object;
-                [weakSelf.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
-                [weakSelf.playerView playVideo];
-                
-                _detailHeadCellModel = [VideoDetailHeadwCellModel new];
-                weakSelf.detailHeadCellModel.sourceModel = sourceModel;
-                [weakSelf.tableView reloadData];
+                weakSelf.sourceModel = responseModel.object;
+                [weakSelf handleSourceModel:weakSelf.sourceModel];
             } else {
                 [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
             }
@@ -327,6 +342,8 @@
 
 - (void)downLoadAction {
     MyLog(@"downLoadAction");
+    [self.dlManage add_download:self.contentModel.uuid url:@"" icon:self.contentModel.preview title:self.contentModel.title];
+    [self.dlManage start_download:self.contentModel.uuid];
 }
 
 - (void)praiseAction {

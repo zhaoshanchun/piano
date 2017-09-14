@@ -1,5 +1,5 @@
 //
-//  DownloadUnfinishedController.h
+//  DownloadController.h
 //  sifakaoshi
 //
 //  Created by kun on 2017/9/7.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface DownloadUnfinishedController : BaseViewController
+@interface DownloadController : BaseViewController
 
 @end

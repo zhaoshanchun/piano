@@ -63,6 +63,27 @@
 		DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB81F5112EE00EDADC2 /* ProfileUserTableViewCell.m */; };
 		DB575DBC1F51130800EDADC2 /* ProfileUserTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DBB1F51130800EDADC2 /* ProfileUserTableViewCellModel.m */; };
 		DB8202021F4E7B7A00494174 /* AdCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */; };
+		DBA0C6EE1F69663600A82D95 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E11F69663600A82D95 /* DownloadController.m */; };
+		DBA0C6EF1F69663600A82D95 /* DownloadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E31F69663600A82D95 /* DownloadFile.m */; };
+		DBA0C6F01F69663600A82D95 /* DownloadFinishedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E51F69663600A82D95 /* DownloadFinishedController.m */; };
+		DBA0C6F11F69663600A82D95 /* DownloadManage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E71F69663600A82D95 /* DownloadManage.m */; };
+		DBA0C6F21F69663600A82D95 /* DownloadSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E91F69663600A82D95 /* DownloadSetViewController.m */; };
+		DBA0C6F31F69663600A82D95 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6EB1F69663600A82D95 /* DownloadTableViewCell.m */; };
+		DBA0C6F41F69663600A82D95 /* DownloadUnfinishedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6ED1F69663600A82D95 /* DownloadUnfinishedController.m */; };
+		DBA0C7181F6967BB00A82D95 /* GCDWebDAVServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6F71F6967BB00A82D95 /* GCDWebDAVServer.m */; };
+		DBA0C7191F6967BB00A82D95 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6FB1F6967BB00A82D95 /* GCDWebServer.m */; };
+		DBA0C71A1F6967BB00A82D95 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6FD1F6967BB00A82D95 /* GCDWebServerConnection.m */; };
+		DBA0C71B1F6967BB00A82D95 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6FF1F6967BB00A82D95 /* GCDWebServerFunctions.m */; };
+		DBA0C71C1F6967BB00A82D95 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7031F6967BB00A82D95 /* GCDWebServerRequest.m */; };
+		DBA0C71D1F6967BB00A82D95 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7051F6967BB00A82D95 /* GCDWebServerResponse.m */; };
+		DBA0C71E1F6967BB00A82D95 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7081F6967BB00A82D95 /* GCDWebServerDataRequest.m */; };
+		DBA0C71F1F6967BB00A82D95 /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C70A1F6967BB00A82D95 /* GCDWebServerFileRequest.m */; };
+		DBA0C7201F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C70C1F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m */; };
+		DBA0C7211F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C70E1F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.m */; };
+		DBA0C7221F6967BB00A82D95 /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7111F6967BB00A82D95 /* GCDWebServerDataResponse.m */; };
+		DBA0C7231F6967BB00A82D95 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7131F6967BB00A82D95 /* GCDWebServerErrorResponse.m */; };
+		DBA0C7241F6967BB00A82D95 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */; };
+		DBA0C7251F6967BB00A82D95 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -512,6 +533,50 @@
 		DB575DBB1F51130800EDADC2 /* ProfileUserTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileUserTableViewCellModel.m; sourceTree = "<group>"; };
 		DB8202001F4E7B7A00494174 /* AdCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdCollectionViewCell.h; sourceTree = "<group>"; };
 		DB8202011F4E7B7A00494174 /* AdCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdCollectionViewCell.m; sourceTree = "<group>"; };
+		DBA0C6E01F69663600A82D95 /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadController.h; sourceTree = "<group>"; };
+		DBA0C6E11F69663600A82D95 /* DownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadController.m; sourceTree = "<group>"; };
+		DBA0C6E21F69663600A82D95 /* DownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFile.h; sourceTree = "<group>"; };
+		DBA0C6E31F69663600A82D95 /* DownloadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFile.m; sourceTree = "<group>"; };
+		DBA0C6E41F69663600A82D95 /* DownloadFinishedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFinishedController.h; sourceTree = "<group>"; };
+		DBA0C6E51F69663600A82D95 /* DownloadFinishedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFinishedController.m; sourceTree = "<group>"; };
+		DBA0C6E61F69663600A82D95 /* DownloadManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManage.h; sourceTree = "<group>"; };
+		DBA0C6E71F69663600A82D95 /* DownloadManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManage.m; sourceTree = "<group>"; };
+		DBA0C6E81F69663600A82D95 /* DownloadSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSetViewController.h; sourceTree = "<group>"; };
+		DBA0C6E91F69663600A82D95 /* DownloadSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSetViewController.m; sourceTree = "<group>"; };
+		DBA0C6EA1F69663600A82D95 /* DownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTableViewCell.h; sourceTree = "<group>"; };
+		DBA0C6EB1F69663600A82D95 /* DownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTableViewCell.m; sourceTree = "<group>"; };
+		DBA0C6EC1F69663600A82D95 /* DownloadUnfinishedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUnfinishedController.h; sourceTree = "<group>"; };
+		DBA0C6ED1F69663600A82D95 /* DownloadUnfinishedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUnfinishedController.m; sourceTree = "<group>"; };
+		DBA0C6F61F6967BB00A82D95 /* GCDWebDAVServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebDAVServer.h; sourceTree = "<group>"; };
+		DBA0C6F71F6967BB00A82D95 /* GCDWebDAVServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebDAVServer.m; sourceTree = "<group>"; };
+		DBA0C6FA1F6967BB00A82D95 /* GCDWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServer.h; sourceTree = "<group>"; };
+		DBA0C6FB1F6967BB00A82D95 /* GCDWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServer.m; sourceTree = "<group>"; };
+		DBA0C6FC1F6967BB00A82D95 /* GCDWebServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerConnection.h; sourceTree = "<group>"; };
+		DBA0C6FD1F6967BB00A82D95 /* GCDWebServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerConnection.m; sourceTree = "<group>"; };
+		DBA0C6FE1F6967BB00A82D95 /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
+		DBA0C6FF1F6967BB00A82D95 /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFunctions.m; sourceTree = "<group>"; };
+		DBA0C7001F6967BB00A82D95 /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
+		DBA0C7011F6967BB00A82D95 /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerPrivate.h; sourceTree = "<group>"; };
+		DBA0C7021F6967BB00A82D95 /* GCDWebServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerRequest.h; sourceTree = "<group>"; };
+		DBA0C7031F6967BB00A82D95 /* GCDWebServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerRequest.m; sourceTree = "<group>"; };
+		DBA0C7041F6967BB00A82D95 /* GCDWebServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerResponse.h; sourceTree = "<group>"; };
+		DBA0C7051F6967BB00A82D95 /* GCDWebServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerResponse.m; sourceTree = "<group>"; };
+		DBA0C7071F6967BB00A82D95 /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataRequest.h; sourceTree = "<group>"; };
+		DBA0C7081F6967BB00A82D95 /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataRequest.m; sourceTree = "<group>"; };
+		DBA0C7091F6967BB00A82D95 /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileRequest.h; sourceTree = "<group>"; };
+		DBA0C70A1F6967BB00A82D95 /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileRequest.m; sourceTree = "<group>"; };
+		DBA0C70B1F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
+		DBA0C70C1F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
+		DBA0C70D1F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
+		DBA0C70E1F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
+		DBA0C7101F6967BB00A82D95 /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataResponse.h; sourceTree = "<group>"; };
+		DBA0C7111F6967BB00A82D95 /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataResponse.m; sourceTree = "<group>"; };
+		DBA0C7121F6967BB00A82D95 /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
+		DBA0C7131F6967BB00A82D95 /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
+		DBA0C7141F6967BB00A82D95 /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileResponse.h; sourceTree = "<group>"; };
+		DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
+		DBA0C7161F6967BB00A82D95 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
+		DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -980,6 +1045,7 @@
 				DBCFCE8E1F4D214B00149112 /* VideoDetail */,
 				DBCFCE841F4D20EA00149112 /* Search */,
 				DBCFCEB81F4D25E900149112 /* NoteBook */,
+				DBA0C6DF1F69663500A82D95 /* Download */,
 				DBCFCEAB1F4D24E000149112 /* Profile */,
 				DBCFCE571F4D1D0400149112 /* Login */,
 				DBCFCDE31F4C3A7400149112 /* ThirdPart */,
@@ -1072,6 +1138,95 @@
 			path = ZJScrollPageView;
 			sourceTree = "<group>";
 		};
+		DBA0C6DF1F69663500A82D95 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C6E01F69663600A82D95 /* DownloadController.h */,
+				DBA0C6E11F69663600A82D95 /* DownloadController.m */,
+				DBA0C6E21F69663600A82D95 /* DownloadFile.h */,
+				DBA0C6E31F69663600A82D95 /* DownloadFile.m */,
+				DBA0C6E61F69663600A82D95 /* DownloadManage.h */,
+				DBA0C6E71F69663600A82D95 /* DownloadManage.m */,
+				DBA0C6EA1F69663600A82D95 /* DownloadTableViewCell.h */,
+				DBA0C6EB1F69663600A82D95 /* DownloadTableViewCell.m */,
+				DBA0C6E41F69663600A82D95 /* DownloadFinishedController.h */,
+				DBA0C6E51F69663600A82D95 /* DownloadFinishedController.m */,
+				DBA0C6EC1F69663600A82D95 /* DownloadUnfinishedController.h */,
+				DBA0C6ED1F69663600A82D95 /* DownloadUnfinishedController.m */,
+				DBA0C6E81F69663600A82D95 /* DownloadSetViewController.h */,
+				DBA0C6E91F69663600A82D95 /* DownloadSetViewController.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		DBA0C6F51F6967BB00A82D95 /* GCDWebDAVServer */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C6F61F6967BB00A82D95 /* GCDWebDAVServer.h */,
+				DBA0C6F71F6967BB00A82D95 /* GCDWebDAVServer.m */,
+			);
+			path = GCDWebDAVServer;
+			sourceTree = "<group>";
+		};
+		DBA0C6F81F6967BB00A82D95 /* GCDWebServer */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C6F91F6967BB00A82D95 /* Core */,
+				DBA0C7061F6967BB00A82D95 /* Requests */,
+				DBA0C70F1F6967BB00A82D95 /* Responses */,
+			);
+			path = GCDWebServer;
+			sourceTree = "<group>";
+		};
+		DBA0C6F91F6967BB00A82D95 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C6FA1F6967BB00A82D95 /* GCDWebServer.h */,
+				DBA0C6FB1F6967BB00A82D95 /* GCDWebServer.m */,
+				DBA0C6FC1F6967BB00A82D95 /* GCDWebServerConnection.h */,
+				DBA0C6FD1F6967BB00A82D95 /* GCDWebServerConnection.m */,
+				DBA0C6FE1F6967BB00A82D95 /* GCDWebServerFunctions.h */,
+				DBA0C6FF1F6967BB00A82D95 /* GCDWebServerFunctions.m */,
+				DBA0C7001F6967BB00A82D95 /* GCDWebServerHTTPStatusCodes.h */,
+				DBA0C7011F6967BB00A82D95 /* GCDWebServerPrivate.h */,
+				DBA0C7021F6967BB00A82D95 /* GCDWebServerRequest.h */,
+				DBA0C7031F6967BB00A82D95 /* GCDWebServerRequest.m */,
+				DBA0C7041F6967BB00A82D95 /* GCDWebServerResponse.h */,
+				DBA0C7051F6967BB00A82D95 /* GCDWebServerResponse.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		DBA0C7061F6967BB00A82D95 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C7071F6967BB00A82D95 /* GCDWebServerDataRequest.h */,
+				DBA0C7081F6967BB00A82D95 /* GCDWebServerDataRequest.m */,
+				DBA0C7091F6967BB00A82D95 /* GCDWebServerFileRequest.h */,
+				DBA0C70A1F6967BB00A82D95 /* GCDWebServerFileRequest.m */,
+				DBA0C70B1F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.h */,
+				DBA0C70C1F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m */,
+				DBA0C70D1F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.h */,
+				DBA0C70E1F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		DBA0C70F1F6967BB00A82D95 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C7101F6967BB00A82D95 /* GCDWebServerDataResponse.h */,
+				DBA0C7111F6967BB00A82D95 /* GCDWebServerDataResponse.m */,
+				DBA0C7121F6967BB00A82D95 /* GCDWebServerErrorResponse.h */,
+				DBA0C7131F6967BB00A82D95 /* GCDWebServerErrorResponse.m */,
+				DBA0C7141F6967BB00A82D95 /* GCDWebServerFileResponse.h */,
+				DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */,
+				DBA0C7161F6967BB00A82D95 /* GCDWebServerStreamedResponse.h */,
+				DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		DBCFCDB81F4C1B0A00149112 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1102,6 +1257,8 @@
 		DBCFCDE31F4C3A7400149112 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				DBA0C6F51F6967BB00A82D95 /* GCDWebDAVServer */,
+				DBA0C6F81F6967BB00A82D95 /* GCDWebServer */,
 				DB1BB6481F55361E00E8B1F8 /* ZJScrollPageView */,
 				DB0EFC681F4DDD6400DE7B59 /* AFNetworking */,
 				DBCFCE0D1F4C3A7400149112 /* FMDB */,
@@ -2038,7 +2195,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBA0C7181F6967BB00A82D95 /* GCDWebDAVServer.m in Sources */,
 				DBCFCE6C1F4D1EBF00149112 /* BaseNavigationController.m in Sources */,
+				DBA0C71F1F6967BB00A82D95 /* GCDWebServerFileRequest.m in Sources */,
 				DB0EFC9B1F4DDD6400DE7B59 /* UIImageView+AFNetworking.m in Sources */,
 				DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */,
 				DB1A87351F53EB26000F160A /* UIView+Loading.m in Sources */,
@@ -2047,21 +2206,28 @@
 				DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */,
 				DBCFCECE1F4D25E900149112 /* AddNBViewController.m in Sources */,
 				DBCFCED01F4D25E900149112 /* DatabaseOperation.m in Sources */,
+				DBA0C7221F6967BB00A82D95 /* GCDWebServerDataResponse.m in Sources */,
 				DBCFCE4A1F4C3A7500149112 /* FMResultSet.m in Sources */,
 				DB0EFC8F1F4DDD6400DE7B59 /* AFNetworkReachabilityManager.m in Sources */,
 				DB0EFC951F4DDD6400DE7B59 /* README.md in Sources */,
 				DB575DBC1F51130800EDADC2 /* ProfileUserTableViewCellModel.m in Sources */,
+				DBA0C7231F6967BB00A82D95 /* GCDWebServerErrorResponse.m in Sources */,
 				DBDA763C1F623B6B00C46177 /* VideoDetailMoreVideoCellModel.m in Sources */,
 				DBCFCEA41F4D242000149112 /* CollectionViewCell.m in Sources */,
 				DBCFCDDD1F4C25C600149112 /* UIView+Helper.m in Sources */,
 				DBCFCE8C1F4D20EA00149112 /* SearchView.m in Sources */,
 				DBDA76461F668A1A00C46177 /* HistoryListView.m in Sources */,
 				DBCFCEA91F4D242000149112 /* ShowMoreItemH.m in Sources */,
+				DBA0C71B1F6967BB00A82D95 /* GCDWebServerFunctions.m in Sources */,
+				DBA0C6F01F69663600A82D95 /* DownloadFinishedController.m in Sources */,
+				DBA0C6F41F69663600A82D95 /* DownloadUnfinishedController.m in Sources */,
+				DBA0C6EE1F69663600A82D95 /* DownloadController.m in Sources */,
 				DBCFCE5E1F4D1E1B00149112 /* APIManager.m in Sources */,
 				BCB0C4851EA8EA1E004AB5FD /* AppDelegate.m in Sources */,
 				DBCFCEA71F4D242000149112 /* HomeViewController.m in Sources */,
 				DB0EFC9A1F4DDD6400DE7B59 /* UIButton+AFNetworking.m in Sources */,
 				DBCFCECF1F4D25E900149112 /* Database.m in Sources */,
+				DBA0C7191F6967BB00A82D95 /* GCDWebServer.m in Sources */,
 				DBE1DBD11F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m in Sources */,
 				DBCFCDDC1F4C25C600149112 /* UIView+Font.m in Sources */,
 				DB1BB6611F55361E00E8B1F8 /* ZJTitleView.m in Sources */,
@@ -2072,6 +2238,7 @@
 				DBCFCE4C1F4C3A7500149112 /* TFHppleElement.m in Sources */,
 				DBCFCEA81F4D242000149112 /* MainCollectionViewController.m in Sources */,
 				DBCFCEA61F4D242000149112 /* GLCoverFlowLayout.m in Sources */,
+				DBA0C7241F6967BB00A82D95 /* GCDWebServerFileResponse.m in Sources */,
 				DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */,
 				DBE1DBD41F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m in Sources */,
 				DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */,
@@ -2079,8 +2246,13 @@
 				DBCFCE831F4D200B00149112 /* GlobalValue.m in Sources */,
 				DBCFCE8B1F4D20EA00149112 /* SearchDetailView.m in Sources */,
 				DB0EFC8E1F4DDD6400DE7B59 /* AFHTTPSessionManager.m in Sources */,
+				DBA0C6F11F69663600A82D95 /* DownloadManage.m in Sources */,
 				DB8202021F4E7B7A00494174 /* AdCollectionViewCell.m in Sources */,
+				DBA0C71C1F6967BB00A82D95 /* GCDWebServerRequest.m in Sources */,
+				DBA0C71A1F6967BB00A82D95 /* GCDWebServerConnection.m in Sources */,
 				DB1BB6601F55361E00E8B1F8 /* ZJSegmentStyle.m in Sources */,
+				DBA0C6EF1F69663600A82D95 /* DownloadFile.m in Sources */,
+				DBA0C71E1F6967BB00A82D95 /* GCDWebServerDataRequest.m in Sources */,
 				BCB0C4991EA8EEE5004AB5FD /* MainTabBarController.m in Sources */,
 				DBCFCEB61F4D24E000149112 /* SettingViewController.m in Sources */,
 				DBDA763F1F6277FE00C46177 /* EtagManager.m in Sources */,
@@ -2093,17 +2265,21 @@
 				DBCFCDDE1F4C25C600149112 /* UIViewController+AppBar.m in Sources */,
 				DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */,
 				DBCFCEB71F4D24E000149112 /* UserFeedbackViewController.m in Sources */,
+				DBA0C7211F6967BB00A82D95 /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				DBCFCEA51F4D242000149112 /* GLCell.m in Sources */,
 				DB1BB65C1F55361E00E8B1F8 /* ZJCollectionView.m in Sources */,
 				DB0E69D51F5AA3D800C5FE4C /* ContentListModel.m in Sources */,
 				DBCFCE8D1F4D20EA00149112 /* SearchViewController.m in Sources */,
 				DBCFCE4D1F4C3A7500149112 /* XPathQuery.m in Sources */,
 				DBCFCE491F4C3A7500149112 /* FMDatabaseQueue.m in Sources */,
+				DBA0C6F21F69663600A82D95 /* DownloadSetViewController.m in Sources */,
 				DB1BB65E1F55361E00E8B1F8 /* ZJScrollPageView.m in Sources */,
 				DBE1DBD71F66DDC7009A8DF8 /* VideoDetailHistoryCell.m in Sources */,
 				DB0EFC991F4DDD6400DE7B59 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				DBCFD0C61F4D29FF00149112 /* OtherTableViewCell.m in Sources */,
 				DB0EFC9C1F4DDD6400DE7B59 /* UIProgressView+AFNetworking.m in Sources */,
+				DBA0C6F31F69663600A82D95 /* DownloadTableViewCell.m in Sources */,
+				DBA0C7251F6967BB00A82D95 /* GCDWebServerStreamedResponse.m in Sources */,
 				DB14D59D1F602422008316E8 /* VideoDetailHeadwCellModel.m in Sources */,
 				DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */,
 				DBDEC9F71F566CE80078D3E1 /* VideoDetailViewController.m in Sources */,
@@ -2116,6 +2292,7 @@
 				DBCFCED21F4D25E900149112 /* NoteBookCell.m in Sources */,
 				DBCFCEA31F4D242000149112 /* CollectionReusableView.m in Sources */,
 				DBCFCE911F4D214B00149112 /* PlayerViewController.m in Sources */,
+				DBA0C7201F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				DB0EFC921F4DDD6400DE7B59 /* AFURLResponseSerialization.m in Sources */,
 				DB0EFC971F4DDD6400DE7B59 /* AFImageDownloader.m in Sources */,
 				DBDA76391F623B5C00C46177 /* VideoDetailMoreVideoCell.m in Sources */,
@@ -2133,6 +2310,7 @@
 				DB1BB65F1F55361E00E8B1F8 /* ZJScrollSegmentView.m in Sources */,
 				DBCFD0BD1F4D27F400149112 /* main.m in Sources */,
 				DB0EFC901F4DDD6400DE7B59 /* AFSecurityPolicy.m in Sources */,
+				DBA0C71D1F6967BB00A82D95 /* GCDWebServerResponse.m in Sources */,
 				DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */,
 				DBCFCE821F4D200B00149112 /* AsyncImage.m in Sources */,
 				DBCFD0C01F4D285900149112 /* LBToAppStore.m in Sources */,

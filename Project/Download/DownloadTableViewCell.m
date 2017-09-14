@@ -153,7 +153,7 @@
     _dlSwitchButton.translatesAutoresizingMaskIntoConstraints = NO;
     _dlSwitchButton.clipsToBounds = YES;
     [_dlSwitchButton setImage:[UIImage imageNamed:@"download_start.png"] forState:UIControlStateNormal];
-    //[_dlSwitchButton setImage:[UIImage imageNamed:@"download_stop.png"] forState:UIControlStateSelected];
+    [_dlSwitchButton setImage:[UIImage imageNamed:@"download_stop.png"] forState:UIControlStateSelected];
    // [_dlSwitchButton setBackgroundImage:[UIImage imageNamed:@"download_start.png"] forState:UIControlStateNormal];
     _dlSwitchButton.layer.cornerRadius = 3;
     _dlSwitchButton.layer.masksToBounds =YES;
