@@ -84,6 +84,7 @@
 		DBA0C7231F6967BB00A82D95 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7131F6967BB00A82D95 /* GCDWebServerErrorResponse.m */; };
 		DBA0C7241F6967BB00A82D95 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */; };
 		DBA0C7251F6967BB00A82D95 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */; };
+		DBA0C7701F6B823200A82D95 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C76F1F6B823200A82D95 /* NSString+Helper.m */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -577,6 +578,8 @@
 		DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
 		DBA0C7161F6967BB00A82D95 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
 		DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
+		DBA0C76E1F6B823200A82D95 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		DBA0C76F1F6B823200A82D95 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -1250,6 +1253,8 @@
 				DBCFCDD71F4C25C600149112 /* UIView+Helper.m */,
 				DBCFCDD81F4C25C600149112 /* UIViewController+AppBar.h */,
 				DBCFCDD91F4C25C600149112 /* UIViewController+AppBar.m */,
+				DBA0C76E1F6B823200A82D95 /* NSString+Helper.h */,
+				DBA0C76F1F6B823200A82D95 /* NSString+Helper.m */,
 			);
 			path = Categorys;
 			sourceTree = "<group>";
@@ -2205,6 +2210,7 @@
 				DB2163881F5947BA00B6032E /* ContentListCollectionReusableView.m in Sources */,
 				DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */,
 				DBCFCECE1F4D25E900149112 /* AddNBViewController.m in Sources */,
+				DBA0C7701F6B823200A82D95 /* NSString+Helper.m in Sources */,
 				DBCFCED01F4D25E900149112 /* DatabaseOperation.m in Sources */,
 				DBA0C7221F6967BB00A82D95 /* GCDWebServerDataResponse.m in Sources */,
 				DBCFCE4A1F4C3A7500149112 /* FMResultSet.m in Sources */,

@@ -107,10 +107,12 @@
 // API Manager
 #define kHTTPLoadCount 20
 #define kHTTPTimeoutInterval 10.0f
+#define kHTTPPostTimeoutInterval 120.0f
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
 #define kHTTPHomeAddress @"http://www.appshopping.store/app"
 #define kAPILogin @"login"
+#define kAPISetAvatar @"upload_icon?"
 #define kAPIVerifiCode @"get_verify_code"
 #define kAPIRegister @"register"
 

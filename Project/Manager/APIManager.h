@@ -46,16 +46,22 @@ typedef void (^ResponseHndler)(NSURLResponse *response, NSData *data, NSError *c
 
 + (void)downloadWithUrl:(NSString *)url completedHandler:(DownLoadResponseHandler)handler;
 
+/*使用 AFNetworking */
 + (NSURLSessionDataTask *)requestWithApi:(NSString *)url
                                apiMethod:(APIMethod)apiMethod
                                andParams:(id)params
                            progressBlock:(void (^)(NSProgress *progress))progress
                        completionHandler:(ApiResponseHandler)handler;
 
+/*使用系统的request */
 + (void)requestWithApi:(NSString *)api
             httpMethod:(NSString *)httpMethod
               httpBody:(NSString *)httpBody
        responseHandler:(ResponseHndler )handler;
+
++ (void)postImageWithApI:(NSString *)apiName
+                   image:(UIImage *)image
+         responseHandler:(ResponseHndler )handler;
 
 @end
 

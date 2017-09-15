@@ -184,9 +184,7 @@
 
 
 #pragma mark - API Action
-// TODO... 历史记录：传 uuid+videoPath(本地路径)
 - (void)getSourceForUuid:(NSString *)uuid {
-    
     [self.view showLoading];
     [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
         __weak typeof(self) weakSelf = self;
@@ -335,13 +333,12 @@
 //- (void)commonAction {
 //    MyLog(@"commonAction");
 //}
-// TODO...
+
 - (void)shareAction {
     MyLog(@"shareAction");
 }
 
 - (void)downLoadAction {
-    MyLog(@"downLoadAction");
     [self.dlManage add_download:self.contentModel.uuid url:@"" icon:self.contentModel.preview title:self.contentModel.title];
     [self.dlManage start_download:self.contentModel.uuid];
 }
@@ -363,6 +360,7 @@
         }
     }];
 }
+
 
 
 #pragma mark - Factory method

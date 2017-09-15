@@ -16,6 +16,8 @@
 
 + (UIImage *)imageNamedWithScreenWidth:(NSString *)name;
 
++ (UIImage *)fixOrientation:(UIImage *)aImage;
+
 - (UIImage *)imageWithCornerRadius:(CGFloat)radius;
 
 - (UIImage *)resizableImageWithSize:(CGSize)size;

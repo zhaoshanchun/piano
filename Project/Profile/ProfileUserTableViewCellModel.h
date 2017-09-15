@@ -14,11 +14,12 @@
 #define kProfileUserTableViewCellLRMargin kCellDefaultLRMargin
 #define kProfileUserTableViewCellTBMargin kCellDefaultTBMargin
 
-#define kProfileUserTableViewCellAvatarSize 40.f
+#define kProfileUserTableViewCellAvatarSize 44.f
 
 
 @interface ProfileUserTableViewCellModel : NSObject
 
+@property (strong, nonatomic) UIImage *avatarImage;
 @property (strong, nonatomic) UserModel *userModel;
 
 @property (strong, nonatomic) NSAttributedString *mainAttribute;

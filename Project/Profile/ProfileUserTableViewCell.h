@@ -11,8 +11,15 @@
 
 #define kProfileUserTableViewCellIdentifier @"kProfileUserTableViewCellIdentifier"
 
+@protocol ProfileUserTableViewCellDelegate <NSObject>
+
+- (void)tapedAvatar;
+
+@end
+
 @interface ProfileUserTableViewCell : UIBaseTableViewCell
 
+@property (weak, nonatomic) id<ProfileUserTableViewCellDelegate> delegate;
 @property (strong, nonatomic) ProfileUserTableViewCellModel *cellModel;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 

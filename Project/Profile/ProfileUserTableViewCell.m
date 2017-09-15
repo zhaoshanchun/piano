@@ -47,7 +47,17 @@
         // Logined
         self.avatarImageView.hidden = NO;
         self.avatarImageView.frame = cellModel.avatarImageFrame;
-        self.avatarImageView.image = [UIImage imageNamed:@"AppIcon"];
+        if (cellModel.avatarImage) {
+            self.avatarImageView.image = cellModel.avatarImage;
+        } else if (cellModel.userModel.icon.length > 0) {
+            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.userModel.icon]
+                                    placeholderImage:[UIImage imageNamed:@"avatar"]
+                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                         
+                                     }];
+        } else {
+            self.avatarImageView.image = [UIImage imageNamed:@"avatar"];
+        }
     
         if (cellModel.detailAttribute.length > 0) {
             self.detailLabel.frame = cellModel.detailFrame;
@@ -61,14 +71,24 @@
     self.rightImageView.frame = cellModel.rightImageFrame;
 }
 
+- (void)avatarTaped {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tapedAvatar)]) {
+        [self.delegate tapedAvatar];
+    }
+}
+
 #pragma mark - Factory method
 - (UIImageView *)avatarImageView {
     if (_avatarImageView == nil) {
         _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        _avatarImageView.backgroundColor = [UIColor colorForKey:@"lgr"];
         _avatarImageView.layer.cornerRadius = kProfileUserTableViewCellAvatarSize/2;
         _avatarImageView.layer.masksToBounds = YES;
+        _avatarImageView.image = [UIImage imageNamed:@"avatar"];
         _avatarImageView.hidden = YES;
+        
+        _avatarImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarTaped)];
+        [_avatarImageView addGestureRecognizer:tap];
     }
     return _avatarImageView;
 }
