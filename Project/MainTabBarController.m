@@ -10,9 +10,11 @@
 #import "BaseViewController.h"
 #import "BaseNavigationController.h"
 #import "MainCollectionViewController.h"
-#import "ProfileViewController.h"
+
 #import "HomePageViewController.h"
+#import "ShareListViewController.h"
 #import "DownloadController.h"
+#import "ProfileViewController.h"
 
 @interface MainTabBarController ()
 
@@ -38,15 +40,15 @@
                                    kImgKey    : @"Home",
                                    kSelImgKey : @"Home"},
                                  
-                                 @{kClassKey  : @"MainCollectionViewController",
-                                   kTextKey   : @"分享",
-                                   kTitleKey  : @"基础知识、技巧",
+                                 @{kClassKey  : @"ShareListViewController",
+                                   kTextKey   : localizeString(@"热门推荐"),
+                                   kTitleKey  : localizeString(@"热门推荐"),
                                    kImgKey    : @"Message",
                                    kSelImgKey : @"Message"},
                                  
                                  @{kClassKey  : @"DownloadController",
-                                   kTextKey   : @"离线",
-                                   kTitleKey  : @"记录-NoteBook",
+                                   kTextKey   : localizeString(@"离线"),
+                                   kTitleKey  : localizeString(@"离线"),
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},
                                  

@@ -120,6 +120,11 @@
 #define kAPIHome @"home_page"
 #define kAPIContentList @"program_list"
 #define kAPIContentDetail @"program_source"
+#define kAPIShareSubmit @"share_submit"
+#define kAPIShareList @"share_list"
+
+// TODO... appid 为什么叫这个？？？
+#define kAPPID @"yixuekaoshi"
 
 
 

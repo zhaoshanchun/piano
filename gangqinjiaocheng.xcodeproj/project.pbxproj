@@ -85,6 +85,10 @@
 		DBA0C7241F6967BB00A82D95 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7151F6967BB00A82D95 /* GCDWebServerFileResponse.m */; };
 		DBA0C7251F6967BB00A82D95 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */; };
 		DBA0C7701F6B823200A82D95 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C76F1F6B823200A82D95 /* NSString+Helper.m */; };
+		DBA0C7741F6BCB1800A82D95 /* ShareListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7731F6BCB1800A82D95 /* ShareListViewController.m */; };
+		DBA0C7771F6BCEC400A82D95 /* ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7761F6BCEC300A82D95 /* ShareModel.m */; };
+		DBA0C77A1F6C338E00A82D95 /* ShareListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */; };
+		DBA0C77D1F6C339D00A82D95 /* ShareListTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -580,6 +584,14 @@
 		DBA0C7171F6967BB00A82D95 /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
 		DBA0C76E1F6B823200A82D95 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		DBA0C76F1F6B823200A82D95 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		DBA0C7721F6BCB1800A82D95 /* ShareListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareListViewController.h; sourceTree = "<group>"; };
+		DBA0C7731F6BCB1800A82D95 /* ShareListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareListViewController.m; sourceTree = "<group>"; };
+		DBA0C7751F6BCEC300A82D95 /* ShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareModel.h; sourceTree = "<group>"; };
+		DBA0C7761F6BCEC300A82D95 /* ShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareModel.m; sourceTree = "<group>"; };
+		DBA0C7781F6C338E00A82D95 /* ShareListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareListTableViewCell.h; sourceTree = "<group>"; };
+		DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareListTableViewCell.m; sourceTree = "<group>"; };
+		DBA0C77B1F6C339D00A82D95 /* ShareListTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareListTableViewCellModel.h; sourceTree = "<group>"; };
+		DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareListTableViewCellModel.m; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -1048,6 +1060,7 @@
 				DBCFCE8E1F4D214B00149112 /* VideoDetail */,
 				DBCFCE841F4D20EA00149112 /* Search */,
 				DBCFCEB81F4D25E900149112 /* NoteBook */,
+				DBA0C7711F6BCAFD00A82D95 /* Share */,
 				DBA0C6DF1F69663500A82D95 /* Download */,
 				DBCFCEAB1F4D24E000149112 /* Profile */,
 				DBCFCE571F4D1D0400149112 /* Login */,
@@ -1230,6 +1243,19 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		DBA0C7711F6BCAFD00A82D95 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0C7721F6BCB1800A82D95 /* ShareListViewController.h */,
+				DBA0C7731F6BCB1800A82D95 /* ShareListViewController.m */,
+				DBA0C7781F6C338E00A82D95 /* ShareListTableViewCell.h */,
+				DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */,
+				DBA0C77B1F6C339D00A82D95 /* ShareListTableViewCellModel.h */,
+				DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		DBCFCDB81F4C1B0A00149112 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,6 +1403,8 @@
 				DB575DB51F5107C900EDADC2 /* UserModel.m */,
 				DB0E69D31F5AA3D800C5FE4C /* ContentListModel.h */,
 				DB0E69D41F5AA3D800C5FE4C /* ContentListModel.m */,
+				DBA0C7751F6BCEC300A82D95 /* ShareModel.h */,
+				DBA0C7761F6BCEC300A82D95 /* ShareModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -2202,6 +2230,7 @@
 			files = (
 				DBA0C7181F6967BB00A82D95 /* GCDWebDAVServer.m in Sources */,
 				DBCFCE6C1F4D1EBF00149112 /* BaseNavigationController.m in Sources */,
+				DBA0C7741F6BCB1800A82D95 /* ShareListViewController.m in Sources */,
 				DBA0C71F1F6967BB00A82D95 /* GCDWebServerFileRequest.m in Sources */,
 				DB0EFC9B1F4DDD6400DE7B59 /* UIImageView+AFNetworking.m in Sources */,
 				DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -2268,6 +2297,7 @@
 				DB0EFC9E1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m in Sources */,
 				DBCFCEB51F4D24E000149112 /* ProfileViewController.m in Sources */,
 				DBCFCE6F1F4D1EBF00149112 /* BaseViewController.m in Sources */,
+				DBA0C77A1F6C338E00A82D95 /* ShareListTableViewCell.m in Sources */,
 				DBCFCDDE1F4C25C600149112 /* UIViewController+AppBar.m in Sources */,
 				DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */,
 				DBCFCEB71F4D24E000149112 /* UserFeedbackViewController.m in Sources */,
@@ -2300,6 +2330,7 @@
 				DBCFCE911F4D214B00149112 /* PlayerViewController.m in Sources */,
 				DBA0C7201F6967BB00A82D95 /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				DB0EFC921F4DDD6400DE7B59 /* AFURLResponseSerialization.m in Sources */,
+				DBA0C7771F6BCEC400A82D95 /* ShareModel.m in Sources */,
 				DB0EFC971F4DDD6400DE7B59 /* AFImageDownloader.m in Sources */,
 				DBDA76391F623B5C00C46177 /* VideoDetailMoreVideoCell.m in Sources */,
 				DB1BB65A1F55361E00E8B1F8 /* UIView+ZJFrame.m in Sources */,
@@ -2308,6 +2339,7 @@
 				DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */,
 				DBCFCE461F4C3A7500149112 /* FMDatabase.m in Sources */,
 				DBCFCE471F4C3A7500149112 /* FMDatabaseAdditions.m in Sources */,
+				DBA0C77D1F6C339D00A82D95 /* ShareListTableViewCellModel.m in Sources */,
 				DBCFCE7C1F4D1FB800149112 /* Common-Function.m in Sources */,
 				DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */,
 				DB1BB65D1F55361E00E8B1F8 /* ZJContentView.m in Sources */,

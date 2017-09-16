@@ -105,7 +105,7 @@
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/home_page?appid=yixuekaoshi
-    NSString *apiName = [NSString stringWithFormat:@"%@?appid=yixuekaoshi", kAPIHome];
+    NSString *apiName = [NSString stringWithFormat:@"%@?appid=%@", kAPIHome, kAPPID];
     [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;

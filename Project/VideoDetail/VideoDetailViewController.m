@@ -336,6 +336,33 @@
 
 - (void)shareAction {
     MyLog(@"shareAction");
+    
+    // TODO... login check
+    
+    NSString *uuid = @"";
+    NSString *preview = @"";
+    NSString *title = @"";
+    if (self.contentModel) {
+        uuid = self.contentModel.uuid;
+        preview = self.contentModel.preview;
+        title = self.contentModel.title;
+    } else if (self.sourceModel) {
+        uuid = self.sourceModel.uuid;
+        title = self.sourceModel.title;
+        // TODO... 需要在 SourceModel 中增加 preview
+        // preview = self.sourceModel.
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    // http://www.appshopping.store/app/share_submit?user=kunhuang&uuid=XMTc0MDc2NDIxMg&content=123456&preview=icon&title=111
+    NSString *postData = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@&preview=%@&title=%@", @"kunhuang", uuid, @"我的分享", @"", title];
+    [APIManager requestWithApi:kAPIShareSubmit httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+            [weakSelf.view makeToast:localizeString(@"分享成功！") duration:kToastDuration position:kToastPositionCenter];
+        } else {
+            [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试") duration:kToastDuration position:kToastPositionCenter];
+        }
+    }];
 }
 
 - (void)downLoadAction {
