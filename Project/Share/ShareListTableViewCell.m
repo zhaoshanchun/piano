@@ -14,6 +14,8 @@
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UILabel *detailLabel;
 @property (strong, nonatomic) CLPlayerView *playerView;
+@property (strong, nonatomic) UIImageView *placeHolderImageView;
+@property (strong, nonatomic) UIButton *placeHolderButton;
 @property (strong, nonatomic) UILabel *titleLabel;
 
 @end
@@ -70,7 +72,8 @@
     
     self.playerView.frame = cellModel.playViewFrame;
     if (cellModel.shareModel.videoUrl.length > 0) {
-        self.playerView.url = [NSURL URLWithString:cellModel.shareModel.videoUrl];
+        // self.playerView.url = [NSURL URLWithString:cellModel.shareModel.videoUrl];
+        // [self.playerView pausePlay];
     }
     
     self.titleLabel.frame = cellModel.titleFrame;
@@ -112,6 +115,21 @@
         }];
     }
     return _playerView;
+}
+
+- (UIImageView *)placeHolderImageView {
+    if (_placeHolderImageView == nil) {
+        _placeHolderImageView = [[UIImageView alloc] init];
+    }
+    return _placeHolderImageView;
+}
+
+- (UIButton *)placeHolderButton {
+    if (_placeHolderButton == nil) {
+        UIImage *image = [UIImage imageNamed:@"play"];
+        _placeHolderButton = [[UIButton alloc] init];
+    }
+    return _placeHolderButton;
 }
 
 - (UILabel *)titleLabel {

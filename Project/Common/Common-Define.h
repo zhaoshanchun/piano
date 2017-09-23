@@ -110,9 +110,11 @@
 #define kHTTPPostTimeoutInterval 120.0f
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
-#define kHTTPHomeAddress @"http://www.appshopping.store/app"
+// #define kHTTPHomeAddress @"http://www.appshopping.store/app"
+#define kHTTPHomeAddress @"http://119.23.174.22/app"
 #define kAPILogin @"login"
 #define kAPISetAvatar @"upload_icon?"
+#define kAPIGetImage @"get_image?file="
 #define kAPIVerifiCode @"get_verify_code"
 #define kAPIRegister @"register"
 

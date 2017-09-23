@@ -24,8 +24,8 @@
         self.cellHeight = CGRectGetMaxY(self.contentFrame) + kShareListTableViewCellTBPadding;
     }
     
-    if (shareModel.user.length > 0) {
-        self.detailAttribute = formatAttributedStringByORFontGuide(@[shareModel.user, @"DGY13N"], nil);
+    if (shareModel.alias.length > 0) {
+        self.detailAttribute = formatAttributedStringByORFontGuide(@[shareModel.alias, @"DGY13N"], nil);
         CGSize size = getSizeForAttributedString(self.detailAttribute, kShareListTableViewCellPlayViewWidth, MAXFLOAT);
         self.detailFrame = CGRectMake(kShareListTableViewCellLRPadding, CGRectGetMaxY(self.contentFrame), kShareListTableViewCellPlayViewWidth, size.height);
         self.cellHeight = CGRectGetMaxY(self.detailFrame) + kShareListTableViewCellTBPadding;

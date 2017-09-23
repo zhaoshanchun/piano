@@ -11,6 +11,8 @@
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "UIView+Toast.h"
+#import "UIAlertView+Blocks.h"
+#import "UserModel.h"
 
 @interface BaseViewController : UIViewController
 
@@ -32,6 +34,9 @@
  为AFNetworking做网络控制用的。比如dealloc时，把未完成的 apiTask=nil
  */
 @property (strong, nonatomic) NSURLSessionDataTask *apiTask;
+
+@property (strong, nonatomic) UserModel *userModel;
+
 
 // 在屏幕左边缘往右滑返回上一页面用到
 // Should begin interactivePopGesture or not, implement it optionally, default return YES

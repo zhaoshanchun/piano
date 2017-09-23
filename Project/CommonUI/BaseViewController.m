@@ -158,6 +158,16 @@
     return _emptyButton;
 }
 
+- (UserModel *)userModel {
+    if (_userModel == nil) {
+        NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
+        if (userModelData) {
+            _userModel = [NSKeyedUnarchiver unarchiveObjectWithData:userModelData];
+        }
+    }
+    return _userModel;
+}
+
 
 @end
 

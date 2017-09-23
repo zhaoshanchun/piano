@@ -14,7 +14,7 @@
 #import "UserModel.h"
 
 
-@interface LoginViewController () <LoginTableViewCellDelegate>
+@interface LoginViewController () <LoginTableViewCellDelegate, RegisterViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *listArray;
 @property (strong, nonatomic) NSIndexPath *edittingIndexPath;
@@ -181,10 +181,12 @@
             
             // 登陆成功，返回上一级的 Profile 页面
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(loginSuccess)]) {
-                    [weakSelf.delegate loginSuccess];
-                }
+                // [weakSelf.navigationController popViewControllerAnimated:YES];
+                [weakSelf onBtnBackTouchUpInside:nil completion:^{
+                    if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(loginSuccess)]) {
+                        [weakSelf.delegate loginSuccess];
+                    }
+                }];                
             });
         }
     }];
@@ -193,7 +195,18 @@
 - (void)registerButtonAction {
     [self.view endEditing:YES];
     RegisterViewController *vc = [[RegisterViewController alloc] init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+#pragma mark - RegisterViewControllerDelegate
+- (void)registerSuccess {
+    [self onBtnBackTouchUpInside:nil completion:^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccess)]) {
+            [self.delegate loginSuccess];
+        }
+    }];
 }
 
 

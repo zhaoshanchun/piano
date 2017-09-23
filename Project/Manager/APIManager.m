@@ -176,7 +176,8 @@
         }
     }
     
-    NSData *imageData = UIImageJPEGRepresentation([UIImage fixOrientation:image], 0.5);   // 压缩并转换成为二进制数据
+    // 压缩并转换成为二进制数据
+    NSData *imageData = UIImageJPEGRepresentation([UIImage fixOrientation:image], 0.01);
     MyLog(@" ---- img len: %lu  ---- \n", (unsigned long)imageData.length);
     
     
@@ -194,7 +195,7 @@
     
     // 3. Content-Type:image/png \r\n  // 图片类型为png
     [myString appendString:[NSString stringWithFormat:@"Content-Type:multipart/form-data\r\n"]];
-    [myString appendString:[NSString stringWithFormat:@"key: %@\r\n", [NSString base64EncodedForString:userName]]];
+    [myString appendString:[NSString stringWithFormat:@"key: %@\r\n", [NSString base64EncodedForString:[NSString stringWithFormat:@"icon%@", userName]]]];
     
     // 4. Content-Transfer-Encoding: binary\r\n\r\n  // 编码方式
     [myString appendString:@"Content-Transfer-Encoding: binary\r\n\r\n"];

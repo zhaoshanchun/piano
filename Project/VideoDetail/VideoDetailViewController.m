@@ -15,6 +15,8 @@
 #import "EtagManager.h"
 #import "HistoryManager.h"
 #import "DownloadManage.h"
+#import "LoginViewController.h"
+#import "ShareContentViewController.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
@@ -25,7 +27,13 @@
  2: History view
  */
 
-@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate>
+
+typedef  NS_ENUM(NSInteger, ActionType) {
+    ActionForNone,
+    ActionForShare,
+};
+
+@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate, LoginViewControllerDelegate, ShareContentViewControllerDelegate>
 
 @property (strong, nonatomic) ContentModel *contentModel;
 @property (strong, nonatomic) SourceModel *sourceModel;
@@ -38,6 +46,8 @@
 @property (strong, nonatomic) NSArray *historyArray;
 
 @property (strong, nonatomic) DownloadManage *dlManage;
+
+@property (assign, nonatomic) ActionType actonType;
 
 @end
 
@@ -329,6 +339,20 @@
 }
 
 
+#pragma mark - HistoryListViewDelegate
+- (void)selectedHistory:(ContentModel *)contentModel {
+    [self onBtnBackTouchUpInside:nil completion:^{
+        if (_playerView) {
+            [_playerView destroyPlayer];
+            _playerView = nil;
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(playContent:)]) {
+            [self.delegate playContent:contentModel];
+        }
+    }];
+}
+
+
 #pragma mark - VideoDetailHeadwCellDelegate
 //- (void)commonAction {
 //    MyLog(@"commonAction");
@@ -337,7 +361,19 @@
 - (void)shareAction {
     MyLog(@"shareAction");
     
-    // TODO... login check
+    // Login check
+    if (!self.userModel) {
+        [UIAlertView showWithTitle:localizeString(@"您尚未登录，是否去登录？") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"YES")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                // Go to login page
+                self.actonType = ActionForShare;
+                LoginViewController *vc = [LoginViewController new];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        return;
+    }
     
     NSString *uuid = @"";
     NSString *preview = @"";
@@ -353,16 +389,9 @@
         // preview = self.sourceModel.
     }
     
-    __weak typeof(self) weakSelf = self;
-    // http://www.appshopping.store/app/share_submit?user=kunhuang&uuid=XMTc0MDc2NDIxMg&content=123456&preview=icon&title=111
-    NSString *postData = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@&preview=%@&title=%@", @"kunhuang", uuid, @"我的分享", @"", title];
-    [APIManager requestWithApi:kAPIShareSubmit httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!connectionError) {
-            [weakSelf.view makeToast:localizeString(@"分享成功！") duration:kToastDuration position:kToastPositionCenter];
-        } else {
-            [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试") duration:kToastDuration position:kToastPositionCenter];
-        }
-    }];
+    ShareContentViewController *vc = [[ShareContentViewController alloc] initWithTitle:title];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)downLoadAction {
@@ -375,19 +404,41 @@
 }
 
 
-#pragma mark - HistoryListViewDelegate
-- (void)selectedHistory:(ContentModel *)contentModel {
-    [self onBtnBackTouchUpInside:nil completion:^{
-        if (_playerView) {
-            [_playerView destroyPlayer];
-            _playerView = nil;
-        }
-        if (self.delegate && [self.delegate respondsToSelector:@selector(playContent:)]) {
-            [self.delegate playContent:contentModel];
+#pragma mark - LoginViewControllerDelegate
+- (void)loginSuccess {
+    if (ActionForShare == self.actonType) {
+        [self shareAction];
+    }
+    self.actonType = ActionForNone;
+}
+
+#pragma mark - ShareContentViewControllerDelegate
+- (void)shareWithContent:(NSString *)shareContent {
+    NSString *uuid = @"";
+    NSString *preview = @"";
+    NSString *title = @"";
+    if (self.contentModel) {
+        uuid = self.contentModel.uuid;
+        preview = self.contentModel.preview;
+        title = self.contentModel.title;
+    } else if (self.sourceModel) {
+        uuid = self.sourceModel.uuid;
+        title = self.sourceModel.title;
+        // TODO... 需要在 SourceModel 中增加 preview
+        // preview = self.sourceModel.
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    // http://www.appshopping.store/app/share_submit?user=kunhuang&uuid=XMTc0MDc2NDIxMg&content=123456
+    NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@&content=%@", kAPIShareSubmit, self.userModel.userName, uuid, shareContent];
+    [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+            [weakSelf.view makeToast:localizeString(@"分享成功！") duration:kToastDuration position:kToastPositionCenter];
+        } else {
+            [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
 }
-
 
 
 #pragma mark - Factory method

@@ -39,8 +39,12 @@
     [self setNavigationBarTitle:localizeString(@"page_title_profile")];
     [self presetData];
     
-    // [[NSNotificationCenter defaultCenter] removeObserver:self name:kLanguageDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRegisterSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:kRegisterSuccessNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRegisterSuccessNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,11 +58,9 @@
 }
 
 - (void)presetData {
-    NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
-    if (userModelData) {
-        UserModel *userModel = [NSKeyedUnarchiver unarchiveObjectWithData:userModelData];
+    if (self.userModel) {
         ProfileUserTableViewCellModel *cellModel = [ProfileUserTableViewCellModel new];
-        cellModel.userModel = userModel;
+        cellModel.userModel = self.userModel;
         self.userCellModel = cellModel;
     } else {
         self.userCellModel = [ProfileUserTableViewCellModel new];
@@ -148,7 +150,6 @@
                 // Unlogin, go to login page
                 LoginViewController *vc = [LoginViewController new];
                 vc.delegate = self;
-                vc.loginBackVC = self;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }
@@ -166,7 +167,6 @@
 }
 
 
-
 #pragma mark - LoginViewControllerDelegate
 - (void)loginSuccess {
     NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
@@ -177,7 +177,8 @@
     }
 }
 
-#pragma mark - RegisterViewControllerDelegate
+
+#pragma mark - kRegisterSuccessNotification
 - (void)registerSuccess {
     [self loginSuccess];
 }
@@ -321,10 +322,13 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if (image) {
+        image = [image scaledToSize:CGSizeMake(100, 100)];
+        [self uploadAvatar:image];
+    }
+    
     [picker dismissViewControllerAnimated:YES completion:^{
-        if (image) {
-            [self uploadAvatar:image];
-        }
     }];
 }
 
@@ -339,10 +343,8 @@
     
     
     // Post image to server
-    // [NSString stringWithFormat:@"http://www.appshopping.store/app/upload_icon?"]
     __weak typeof(self) weakSelf = self;
     [APIManager postImageWithApI:kAPISetAvatar image:image responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        // msg": "key error
         if (connectionError) {
             [weakSelf.view makeToast:localizeString(@"上传头像失败！") duration:kToastDuration position:kToastPositionCenter];
         }

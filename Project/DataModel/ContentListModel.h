@@ -69,6 +69,8 @@ praise	Integer	58          点赞
 @property (assign, nonatomic) NSInteger badReview;
 @property (assign, nonatomic) NSInteger praise;
 
+@property (strong, nonatomic) NSString *preview;
+
 @end
 @protocol SourceModel <NSObject>
 @end

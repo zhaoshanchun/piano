@@ -50,10 +50,14 @@
         if (cellModel.avatarImage) {
             self.avatarImageView.image = cellModel.avatarImage;
         } else if (cellModel.userModel.icon.length > 0) {
-            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.userModel.icon]
-                                    placeholderImage:[UIImage imageNamed:@"avatar"]
+            // 返回 01a1aaa5514546c0ed7d9bdad8374487 ，拼成 http://119.23.174.22/app/get_image?file=76f6071b946309b82cad9f6b1372ffb3 来用
+            NSString *iconUrl = [NSString stringWithFormat:@"%@/%@%@", kHTTPHomeAddress, kAPIGetImage, cellModel.userModel.icon];
+            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl]
+                                    placeholderImage:nil
                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                         
+                                               if (error) {
+                                                   [self.avatarImageView setImage:[UIImage imageNamed:@"avatar"]];
+                                               }
                                      }];
         } else {
             self.avatarImageView.image = [UIImage imageNamed:@"avatar"];

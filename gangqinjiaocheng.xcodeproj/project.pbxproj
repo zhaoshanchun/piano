@@ -59,6 +59,7 @@
 		DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163811F59065B00B6032E /* ContentListCollectionViewCell.m */; };
 		DB2163851F5906A100B6032E /* ContentListCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */; };
 		DB2163881F5947BA00B6032E /* ContentListCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2163871F5947BA00B6032E /* ContentListCollectionReusableView.m */; };
+		DB2BF81D1F7013DA0034ECB3 /* ShareContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2BF81C1F7013DA0034ECB3 /* ShareContentViewController.m */; };
 		DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB51F5107C900EDADC2 /* UserModel.m */; };
 		DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DB81F5112EE00EDADC2 /* ProfileUserTableViewCell.m */; };
 		DB575DBC1F51130800EDADC2 /* ProfileUserTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB575DBB1F51130800EDADC2 /* ProfileUserTableViewCellModel.m */; };
@@ -530,6 +531,8 @@
 		DB2163841F5906A100B6032E /* ContentListCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionViewCellModel.m; sourceTree = "<group>"; };
 		DB2163861F5947BA00B6032E /* ContentListCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListCollectionReusableView.h; sourceTree = "<group>"; };
 		DB2163871F5947BA00B6032E /* ContentListCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentListCollectionReusableView.m; sourceTree = "<group>"; };
+		DB2BF81B1F7013DA0034ECB3 /* ShareContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareContentViewController.h; sourceTree = "<group>"; };
+		DB2BF81C1F7013DA0034ECB3 /* ShareContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareContentViewController.m; sourceTree = "<group>"; };
 		DB575DB41F5107C900EDADC2 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		DB575DB51F5107C900EDADC2 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		DB575DB71F5112EE00EDADC2 /* ProfileUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileUserTableViewCell.h; sourceTree = "<group>"; };
@@ -1252,6 +1255,8 @@
 				DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */,
 				DBA0C77B1F6C339D00A82D95 /* ShareListTableViewCellModel.h */,
 				DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */,
+				DB2BF81B1F7013DA0034ECB3 /* ShareContentViewController.h */,
+				DB2BF81C1F7013DA0034ECB3 /* ShareContentViewController.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -2344,6 +2349,7 @@
 				DB575DB61F5107C900EDADC2 /* UserModel.m in Sources */,
 				DB1BB65D1F55361E00E8B1F8 /* ZJContentView.m in Sources */,
 				DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */,
+				DB2BF81D1F7013DA0034ECB3 /* ShareContentViewController.m in Sources */,
 				DB14D59A1F602304008316E8 /* VideoDetailHeadwCell.m in Sources */,
 				DB1BB65F1F55361E00E8B1F8 /* ZJScrollSegmentView.m in Sources */,
 				DBCFD0BD1F4D27F400149112 /* main.m in Sources */,

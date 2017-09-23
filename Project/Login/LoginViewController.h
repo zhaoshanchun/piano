@@ -18,6 +18,5 @@
 @interface LoginViewController : BaseTableViewController
 
 @property (weak, nonatomic) id<LoginViewControllerDelegate> delegate;
-@property (strong, nonatomic) BaseTableViewController *loginBackVC;
 
 @end

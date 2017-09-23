@@ -36,7 +36,12 @@
     [self setNavigationBarTitle:localizeString(@"热门推荐")];
     
     _dataArray = [NSMutableArray new];
-    [self getShareList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if (self.dataArray.count == 0) {
+        [self getShareList];
+    }
 }
 
 - (void)setTableView {
@@ -103,8 +108,8 @@
 - (void)getShareList {
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
-    // http://www.appshopping.store/app/share_list?from=0&to=100
-    NSString *apiName = [NSString stringWithFormat:@"%@?from=%ld&to=%d", kAPIShareList, self.dataArray.count, kHTTPLoadCount];
+    // http://www.appshopping.store/app/share_list?from=0&to=100  // kHTTPLoadCount
+    NSString *apiName = [NSString stringWithFormat:@"%@?from=%ld&to=%d", kAPIShareList, self.dataArray.count, 100];
     [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
@@ -135,6 +140,9 @@
             }
             if (weakSelf.tableView.mj_footer) {
                 // End load. No more data
+                
+                // TODO... 在底部显示 : 没有更多数据了  .
+                
                 if (shareListModel.objects.count < kHTTPLoadCount){
                     weakSelf.tableView.mj_footer.hidden = YES;
                 }
