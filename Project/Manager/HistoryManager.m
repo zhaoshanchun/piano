@@ -106,7 +106,7 @@ static HistoryManager *_sharedManager;
         // NSLog(@"删除失败: %@", contentModel.uuid);
     }
     
-    success = [self.db executeUpdate:@"INSERT INTO t_history (uid, title, preview) VALUES (?, ?, ?);" withArgumentsInArray:@[contentModel.uuid, contentModel.title, contentModel.preview]];
+    success = [self.db executeUpdate:@"INSERT INTO t_history (uid, title, preview) VALUES (?, ?, ?);" withArgumentsInArray:@[contentModel.uuid, (contentModel.title.length > 0) ? contentModel.title : @"", (contentModel.preview.length > 0) ? contentModel.preview : @""]];
     if (success) {
         // NSLog(@"插入成功: %@", contentModel.uuid);
     } else {

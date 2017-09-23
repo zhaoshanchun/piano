@@ -48,6 +48,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (strong, nonatomic) DownloadManage *dlManage;
 
 @property (assign, nonatomic) ActionType actonType;
+@property (assign, nonatomic) BOOL isShareing;
 
 @end
 
@@ -91,8 +92,24 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (_playerView && self.isShareing) {
+        [self.playerView playVideo];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    if (_playerView && self.isShareing) {
+        [self.playerView pausePlay];
+    }
+}
+
+- (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ __nullable)(void))completion {
+    [super onBtnBackTouchUpInside:btn completion:completion];
     
     // Save History to DB
     if (self.contentModel) {
@@ -389,6 +406,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         // preview = self.sourceModel.
     }
     
+    self.isShareing = YES;
     ShareContentViewController *vc = [[ShareContentViewController alloc] initWithTitle:title];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -414,6 +432,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 #pragma mark - ShareContentViewControllerDelegate
 - (void)shareWithContent:(NSString *)shareContent {
+    
     NSString *uuid = @"";
     NSString *preview = @"";
     NSString *title = @"";
@@ -429,9 +448,11 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
     
     __weak typeof(self) weakSelf = self;
-    // http://www.appshopping.store/app/share_submit?user=kunhuang&uuid=XMTc0MDc2NDIxMg&content=123456
+    // 要先播放，uuid被放到缓存中了，然后才能分享
+    // http://119.23.174.22/app/share_submit?user=kunhuang&uuid=XMTgyMzY0NDQ0NA&content=方尽快答复
     NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@&content=%@", kAPIShareSubmit, self.userModel.userName, uuid, shareContent];
     [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        weakSelf.isShareing = NO;
         if (!connectionError) {
             [weakSelf.view makeToast:localizeString(@"分享成功！") duration:kToastDuration position:kToastPositionCenter];
         } else {

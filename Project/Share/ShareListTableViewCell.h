@@ -25,4 +25,6 @@
 @property (strong, nonatomic) ShareListTableViewCellModel *cellModel;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 
+// - (void)stopPlay;
+
 @end

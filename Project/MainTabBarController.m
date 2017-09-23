@@ -30,6 +30,11 @@
     // Tabbar Item 中元素的颜色
     // self.tabBar.unselectedItemTintColor = [UIColor colorForKey:@"dgy" withAlpha:1.0];    // IOS 10 才能用
     self.tabBar.tintColor = [UIColor colorForKey:@"br" withAlpha:1.0];
+    // 在tabBar顶部增加一条分割线
+    CALayer *border = [CALayer layer];
+    border.frame = CGRectMake(0, 0, self.tabBar.frame.size.width, 0.5);
+    [border setBackgroundColor:[UIColor orLineColor].CGColor];
+    [self.tabBar.layer addSublayer:border];
     
     
     // Do any additional setup after loading the view.

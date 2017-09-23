@@ -10,10 +10,15 @@
 #import "ShareListTableViewCell.h"
 #import "ShareModel.h"
 #import "MJRefresh.h"
+#import "EtagManager.h"
+#import "ContentListModel.h"
+#import "CLPlayerView.h"
+#import "VideoDetailViewController.h"
 
-@interface ShareListViewController () <ShareListTableViewCellDelegate>
+@interface ShareListViewController () <ShareListTableViewCellDelegate, VideoDetailViewControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) CLPlayerView *playerView;
 
 @end
 
@@ -34,6 +39,7 @@
     // Do any additional setup after loading the view.
     
     [self setNavigationBarTitle:localizeString(@"热门推荐")];
+    // [self.view addSubview:self.playerView];
     
     _dataArray = [NSMutableArray new];
 }
@@ -100,7 +106,22 @@
 
 #pragma mark - ShareListTableViewCellDelegate
 - (void)playVideoForCell:(ShareListTableViewCell *)cell {
+    // [self getSourceForUuid:cell.cellModel.shareModel.uuid];
     
+    ShareModel *shareModel = cell.cellModel.shareModel;
+    ContentModel *contentModel = [ContentModel new];
+    contentModel.title = shareModel.title;
+    contentModel.uuid = shareModel.uuid;
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - VideoDetailViewControllerDelegate
+- (void)playContent:(ContentModel *)contentModel {
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -153,6 +174,42 @@
     }];
 }
 
+/*
+- (void)getSourceForUuid:(NSString *)uuid {
+    [self.view showLoading];
+    [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
+        __weak typeof(self) weakSelf = self;
+        
+        // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
+        // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
+        NSString *cert = etag;
+        cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
+        NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
+        [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!weakSelf) {
+                return;
+            }
+            [weakSelf.view hideLoading];
+            
+            if (!connectionError) {
+                NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                SourceResponseModel *responseModel = [[SourceResponseModel alloc] initWithString:responseString error:nil];
+                if (responseModel.errorCode != 0) {
+                    [weakSelf.view makeToast:responseModel.msg duration:kToastDuration position:kToastPositionCenter];
+                    return;
+                }
+                
+                SourceModel *sourceModel = responseModel.object;
+                [weakSelf play:sourceModel];
+            } else {
+                [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
+            }
+        }];
+    }];
+}
+*/
+
+#pragma mark - Helper
 - (void)addContentList:(NSArray *)contentList {
     if (contentList.count == 0) {
         return;
@@ -185,7 +242,34 @@
     }
 }
 
+/*
+- (void)play:(SourceModel *)souceModel {
+    self.playerView.hidden = NO;
+    [self.playerView setUrl:[NSURL URLWithString:souceModel.videoUri]];
+    [self.playerView playVideo];
+}
 
 
+#pragma mark - Factory method
+- (CLPlayerView *)playerView {
+    if (_playerView == nil) {
+        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
+        _playerView.hidden = YES;
+        
+        //返回按钮点击事件回调
+        [_playerView backButton:^(UIButton *button) {
+            if (_playerView) {
+                [_playerView pausePlay];
+                _playerView.hidden = YES;
+            }
+        }];
+        //播放完成回调
+        [_playerView endPlay:^{
+            _playerView.hidden = YES;
+        }];
+    }
+    return _playerView;
+}
+*/
 
 @end
