@@ -341,7 +341,7 @@
     self.userCellModel.avatarImage = image;
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     
-    
+    // IOS 图片上传处理 图片压缩 图片处理 http://blog.csdn.net/yidu_blog/article/details/50837740
     // Post image to server
     __weak typeof(self) weakSelf = self;
     [APIManager postImageWithApI:kAPISetAvatar image:image responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {

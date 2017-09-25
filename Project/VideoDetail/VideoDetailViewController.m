@@ -263,16 +263,23 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if ((section == 1 && self.moreArray.count > 0)
-        || (section == 2 && self.historyArray.count > 0)) {
+    if (section == 1 && self.moreArray.count > 0) {
+        return kSectionHeadHeight;
+    } else if (section == 2) {
         return kSectionHeadHeight;
     }
     return 0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if ((section == 1 && self.moreArray.count > 0)
-        || (section == 2 && self.historyArray.count > 0)) {
+    if (section == 1 && self.moreArray.count > 0) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
+        NSString *sectionTitle = (section == 1) ? localizeString(@"相关视频") : localizeString(@"历史记录");
+        label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
+        [view addSubview:label];
+        return view;
+    }  else if (section == 2) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
         NSString *sectionTitle = (section == 1) ? localizeString(@"相关视频") : localizeString(@"历史记录");

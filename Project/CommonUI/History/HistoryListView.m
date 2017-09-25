@@ -22,7 +22,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.collectionView];
-        _listArray = [NSMutableArray new];
     }
     return self;
 }
@@ -32,6 +31,7 @@
         return;
     }
     _historyList = historyList;
+    _listArray = [NSMutableArray new];
     
     // 按存入的顺序反序显示
     NSArray *sortArray = [[historyList reverseObjectEnumerator] allObjects];

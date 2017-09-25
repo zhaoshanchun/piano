@@ -42,7 +42,8 @@ static HistoryManager *_sharedManager;
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
     NSString *sqlFilePath = [path stringByAppendingPathComponent:@"history.sqlite"];
     self.db = [FMDatabase databaseWithPath:sqlFilePath];
-    // /Users/zhaosc/Library/Developer/CoreSimulator/Devices/2F851296-E330-4036-869F-A231800ACD7A/data/Containers/Data/Application/C47F6836-DB14-48B1-A572-BC86C4DBA684/Documents/history.sqlite
+    MyLog(@"sqlFilePath = %@", sqlFilePath);
+    // Users/zhaosc/Library/Developer/CoreSimulator/Devices/2F851296-E330-4036-869F-A231800ACD7A/data/Containers/Data/Application/E1DF108A-BBEC-4739-B6FD-BCEA0386366A/Documents/history.sqlite
     
     // 2.打开数据库
     if ([self.db open]) {
@@ -136,7 +137,6 @@ static HistoryManager *_sharedManager;
         [historyListArray addObject:content];
     }
     [self.db close];
-    // NSLog(@"NSMutableArray: %@", historyListArray);
     return historyListArray;
 }
 
