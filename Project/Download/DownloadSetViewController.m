@@ -28,13 +28,12 @@
     [super viewDidLoad];
     self.dlManage = [DownloadManage sharedInstance];
     // Do any additional setup after loading the view.
-    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    CGRect rectNav = self.navigationController.navigationBar.frame;
+    
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     UIButton *evaluate = [UIButton new];
     evaluate.backgroundColor = [UIColor whiteColor];
     // evaluate.frame = CGRectMake(0, 20 + rectStatus.size.height + rectNav.size.height, self.view.bounds.size.width, 45);
-    evaluate.frame = CGRectMake(0, 0, self.view.bounds.size.width, 45);
+    evaluate.frame = CGRectMake(0, 10, self.view.bounds.size.width, 45);
     evaluate.tag = 1;
     [evaluate addTarget:self action:@selector(ClickClear:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:evaluate];
