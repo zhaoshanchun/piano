@@ -46,14 +46,14 @@
                                    kSelImgKey : @"Home"},
                                  
                                  @{kClassKey  : @"ShareListViewController",
-                                   kTextKey   : localizeString(@"热门推荐"),
-                                   kTitleKey  : localizeString(@"热门推荐"),
+                                   kTextKey   : localizeString(@"tab_share"),
+                                   kTitleKey  : localizeString(@"tab_share"),
                                    kImgKey    : @"Message",
                                    kSelImgKey : @"Message"},
                                  
                                  @{kClassKey  : @"DownloadController",
-                                   kTextKey   : localizeString(@"离线"),
-                                   kTitleKey  : localizeString(@"离线"),
+                                   kTextKey   : localizeString(@"tab_download"),
+                                   kTitleKey  : localizeString(@"tab_download"),
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},
                                  

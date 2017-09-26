@@ -7,23 +7,80 @@
 */
 
 
-"Hello_World" = "Hello world!";
+// Common
+"no" = "No";
+"yes" = "Yes";
+"confirm" = "Confirm";
+"cancel" = "Cancel";
+"delete" = "Delete";
+"nitice" = "Notice";
 
-// Common 
 "search" = "Search";
 "more" = "More";
 "commit" = "Commit";
+"login" = "Login";
+"register" = "Register";
 
-// Tab
+
+// Tab Bar
 "tab_home" = "Home";
 "tab_profile" = "Me";
+"tab_share" = "Public share";
+"tab_download" = "Download";
+
 
 // Page title
 "page_title_profile" = "Me";
 
+
 // Profile
+"profile_login" = "Login";
+"profile_logout" = "Logout";
+"profile_alert_login" = "Login now ?";
+
+"profile_title_register" = "Go to register";
+"profile_title_user_name" = "User name: ";
+"profile_title_full_name" = "Name: ";
+"profile_title_password" = "Password: ";
+"profile_title_confirme_password" = "Confirm Password: ";
+"profile_title_phone" = "Number: ";
+"profile_title_email" = "Email: ";
+"profile_title_verification" = "Verification code: ";
+"profile_title_select_email_type" = "Please select a mailbox type";
+
 "profile_evaluate" = "Evaluate this app";
 "profile_feedBack" = "Feed back";
 "profile_feedBack_placeHolder" = "Please feed back, min 3 character!";
 "profile_history" = "View history";
+"profile_bookmark" = "My bookmark";
+
+"more_contents" = "Related videos";
+"view_historys" = "Play history";
+"view_play_times" = "Play %ld times ";
+"view_play_score" = "%@ Points ";
+"view_play_praise" = "%ld Praise ";
+
+"error_alert_upload_abnormal_image" = "Abnormal image, upload fail!";
+"error_alert_upload_avatar" = "Upload Avatar fail!";
+"error_alert_network_fail" = "Network is unusual, please try again later!";
+"error_alert_network_fail_recall" = "Get data failed, please try again!";
+
+// Toast
+"toast_input_username" = "Please input user name";
+"toast_input_password" = "Please input password";
+"toast_input_password_notice" = "Please input password(6-20 characters)";
+"toast_input_email_notice" = "Please input correct email format (QQ mailbox, 163 email, gmail)";
+"toast_input_virificacion_error" = "Verification code error!";
+"toast_input_password_unmatch" = "Password does not match";
+
+// share
+"share_success" = "Share success!";
+
+// download
+"download_title_loading" = "Unfinished cache";
+"download_title_loaded" = "Finished cache";
+"download_title_clean_all" = "Clear all cache";
+"download_notice" = "Tip: the cache list gestures left can delete the corresponding item cache data independently.";
+"alert_clean_all_check" = "Clear all cache data?";
+
 

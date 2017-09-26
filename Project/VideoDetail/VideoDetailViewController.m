@@ -275,14 +275,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     if (section == 1 && self.moreArray.count > 0) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
-        NSString *sectionTitle = (section == 1) ? localizeString(@"相关视频") : localizeString(@"历史记录");
+        NSString *sectionTitle = (section == 1) ? localizeString(@"more_contents") : localizeString(@"view_historys");
         label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
         [view addSubview:label];
         return view;
     }  else if (section == 2) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
-        NSString *sectionTitle = (section == 1) ? localizeString(@"相关视频") : localizeString(@"历史记录");
+        NSString *sectionTitle = (section == 1) ? localizeString(@"more_contents") : localizeString(@"view_historys");
         label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
         [view addSubview:label];
         return view;
@@ -387,7 +387,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     
     // Login check
     if (!self.userModel) {
-        [UIAlertView showWithTitle:localizeString(@"您尚未登录，是否去登录？") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"YES")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 // Go to login page
                 self.actonType = ActionForShare;
@@ -461,9 +461,9 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         weakSelf.isShareing = NO;
         if (!connectionError) {
-            [weakSelf.view makeToast:localizeString(@"分享成功！") duration:kToastDuration position:kToastPositionCenter];
+            [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
         } else {
-            [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试") duration:kToastDuration position:kToastPositionCenter];
+            [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
 }

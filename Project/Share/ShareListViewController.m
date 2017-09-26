@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setNavigationBarTitle:localizeString(@"热门推荐")];
+    [self setNavigationBarTitle:localizeString(@"tab_share")];
     // [self.view addSubview:self.playerView];
     
     _dataArray = [NSMutableArray new];
@@ -232,7 +232,7 @@
         error = errorMsg;
     } else if (errorCode > 0) {
         // TODO...  根据 error code 提示错误信息
-        error = localizeString(@"获取数据失败，请重试！");
+        error = localizeString(@"error_alert_network_fail_recall");
     }
     
     if (self.dataArray.count == 0) {

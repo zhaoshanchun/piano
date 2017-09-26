@@ -23,9 +23,9 @@
     CGSize size = getSizeForAttributedString(self.titleAttribute, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, MAXFLOAT);
     self.titleFrame = CGRectMake(kVideoDetailHeadwCellLRPadding, kVideoDetailHeadwCellTBPadding, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, size.height);
     
-    NSString *playsString = [NSString stringWithFormat:@"%ld%@ ", sourceModel.plays, localizeString(@"次播放")];
-    NSString *scoreString = [NSString stringWithFormat:@"%@%@ ", sourceModel.score, localizeString(@"分")];
-    NSString *praiseString = [NSString stringWithFormat:@"%ld%@ ", sourceModel.praise, localizeString(@"人点赞")];
+    NSString *playsString = [NSString stringWithFormat:localizeString(@"view_play_times"), sourceModel.plays];
+    NSString *scoreString = [NSString stringWithFormat:localizeString(@"view_play_score"), sourceModel.score];
+    NSString *praiseString = [NSString stringWithFormat:localizeString(@"view_play_praise"), sourceModel.praise];
     self.detailAttribute = formatAttributedStringByORFontGuide(@[playsString, @"DGY13N", scoreString, @"DGY13N", praiseString, @"DGY13N",], nil);
     size = getSizeForAttributedString(self.detailAttribute, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, MAXFLOAT);
     self.detailFrame = CGRectMake(kVideoDetailHeadwCellLRPadding, CGRectGetMaxY(self.titleFrame) + 5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, size.height);

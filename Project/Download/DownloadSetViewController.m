@@ -42,7 +42,7 @@
     
     UILabel *label1 = [UILabel new];
     label1.font = [UIFont systemFontOfSize:16];
-    label1.text = @"清除所有缓存";
+    label1.text = localizeString(@"download_title_loaded");
     label1.translatesAutoresizingMaskIntoConstraints = NO;
     label1.textColor = [UIColor blackColor];
     label1.numberOfLines = 0;
@@ -68,7 +68,7 @@
     
     UILabel *tips = [UILabel new];
     tips.font = [UIFont systemFontOfSize:12];
-    tips.text = @"提示: 缓存列表手势左划可单独删除对于项缓存数据.";
+    tips.text = localizeString(@"download_notice");
     tips.translatesAutoresizingMaskIntoConstraints = NO;
     tips.textColor = [UIColor grayColor];
     tips.numberOfLines = 0;
@@ -89,9 +89,9 @@
 
 -(void)ClickClear:(UIButton *)bt
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"清除所有缓存数据？" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:localizeString(@"notice") message:localizeString(@"alert_clean_all_check") preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:localizeString(@"cancel") style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:localizeString(@"confirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [self.dlManage remove_all];
     }]];
     
