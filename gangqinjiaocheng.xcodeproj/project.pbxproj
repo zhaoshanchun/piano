@@ -1903,8 +1903,8 @@
 				TargetAttributes = {
 					BCB0C47C1EA8EA1E004AB5FD = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = RFEHYD7CKK;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = Q339ZDBMU4;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -2474,7 +2474,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RFEHYD7CKK;
+				DEVELOPMENT_TEAM = Q339ZDBMU4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Firebase/AdMob",
@@ -2489,10 +2489,10 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kun.piano;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SZVideo.kk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d6ed44de-99d5-4f49-811d-c9fd0de8715c";
-				PROVISIONING_PROFILE_SPECIFIER = KunDevelpoer;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -2503,7 +2503,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RFEHYD7CKK;
+				DEVELOPMENT_TEAM = Q339ZDBMU4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Firebase/AdMob",
@@ -2515,10 +2515,10 @@
 				INFOPLIST_FILE = Project/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kun.piano;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SZVideo.kk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d6ed44de-99d5-4f49-811d-c9fd0de8715c";
-				PROVISIONING_PROFILE_SPECIFIER = KunDevelpoer;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

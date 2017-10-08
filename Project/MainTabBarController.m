@@ -9,7 +9,6 @@
 #import "MainTabBarController.h"
 #import "BaseViewController.h"
 #import "BaseNavigationController.h"
-#import "MainCollectionViewController.h"
 
 #import "HomePageViewController.h"
 #import "ShareListViewController.h"
