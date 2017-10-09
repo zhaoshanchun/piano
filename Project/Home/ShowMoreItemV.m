@@ -6,7 +6,7 @@
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import "MainCollectionViewController.h"
+// #import "MainCollectionViewController.h"
 #import "CollectionViewCell.h"
 #import "CollectionReusableView.h"
 #import "AsyncImage.h"

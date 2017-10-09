@@ -148,11 +148,11 @@
         }
     }
     if (![paramDict objectForKey:kUserName] || [[paramDict objectForKey:kUserName] length] == 0) {
-        [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_username") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] == 0) {
-        [self.view makeToast:@"请填写密码" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_password") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
  

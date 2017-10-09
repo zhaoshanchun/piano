@@ -339,7 +339,7 @@
 
 -(void) uploadAvatar:(UIImage *)image {
     if (!image) {
-        [self.view makeToast:localizeString(@"图片异常，无法上传！") duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"error_alert_upload_abnormal_image") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     
@@ -351,7 +351,7 @@
     __weak typeof(self) weakSelf = self;
     [APIManager postImageWithApI:kAPISetAvatar image:image responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError) {
-            [weakSelf.view makeToast:localizeString(@"上传头像失败！") duration:kToastDuration position:kToastPositionCenter];
+            [weakSelf.view makeToast:localizeString(@"error_alert_upload_avatar") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
 }

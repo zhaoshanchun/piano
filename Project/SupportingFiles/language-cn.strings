@@ -7,9 +7,15 @@
 */
 
 
-"Hello_World" = "你好，世界!";
 
-// 公共通用
+// Common
+"no" = "不是";
+"yes" = "是的";
+"confirm" = "确定";
+"cancel" = "取消";
+"delete" = "删除";
+"nitice" = "提示";
+
 "search" = "搜索";
 "more" = "更多";
 "commit" = "提交";
@@ -20,6 +26,8 @@
 // Tab Bar
 "tab_home" = "首页";
 "tab_profile" = "我的";
+"tab_share" = "热门推荐";
+"tab_download" = "离线";
 
 
 // Page title
@@ -29,6 +37,7 @@
 // Profile
 "profile_login" = "登录";
 "profile_logout" = "退出登录";
+"profile_alert_login" = "您尚未登录，是否去登录？";
 
 "profile_title_register" = "去注册";
 "profile_title_user_name" = "用户名：";
@@ -38,10 +47,43 @@
 "profile_title_phone" = "电话：";
 "profile_title_email" = "邮箱：";
 "profile_title_verification" = "验证码：";
+"profile_title_select_email_type" = "请选择邮箱类型";
 
 "profile_evaluate" = "评价应用";
 "profile_feedBack" = "意见反馈";
 "profile_feedBack_placeHolder" = "请输入您的宝贵意见!必须大于3个字符!";
 "profile_history" = "观看历史";
 "profile_bookmark" = "我的收藏";
+
+"more_contents" = "相关视频";
+"view_historys" = "历史记录";
+"view_play_times" = "%ld 次播放 ";
+"view_play_score" = "%@ 分 ";
+"view_play_praise" = "%ld 人点赞 ";
+
+"error_alert_upload_abnormal_image" = "图片异常，上传失败！";
+"error_alert_upload_avatar" = "上传头像失败！";
+"error_alert_network_fail" = "网络异常，请稍后再试！";
+"error_alert_network_fail_recall" = "获取数据失败，请重试！";
+
+// Toast
+"toast_input_username" = "请填写用户名";
+"toast_input_password" = "请填写密码";
+"toast_input_password_notice" = "请正确输入 6-20 位密码！";
+"toast_input_email_notice" = "请正确输入邮件格式，仅支持（QQ邮箱、163邮箱、gmail邮箱）";
+"toast_input_virificacion_error" = "验证码错误！";
+"toast_input_password_unmatch" = "密码不匹配";
+
+// share
+"share_success" = "分享成功！";
+
+// download
+"download_title_loading" = "未完成缓存";
+"download_title_loaded" = "已完成缓存";
+"download_title_clean_all" = "清除所有缓存";
+"download_notice" = "提示: 缓存列表手势左划可单独删除对应项缓存数据。";
+"alert_clean_all_check" = "清除所有缓存数据？";
+
+
+
 

@@ -223,7 +223,7 @@
     }
     
     // show dropDownList
-    [UIActionSheet showInView:self.view withTitle:localizeString(@"请选择邮箱类型") cancelButtonTitle:localizeString(@"取消") destructiveButtonTitle:nil otherButtonTitles:self.dropDownListArry tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    [UIActionSheet showInView:self.view withTitle:localizeString(@"profile_title_select_email_type") cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:self.dropDownListArry tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         NSString *emailType = @"";
         if (buttonIndex < [self.dropDownListArry count]) {
             emailType = [self.dropDownListArry objectAtIndex:buttonIndex - 1];
@@ -289,7 +289,7 @@
                 if ([paramDict objectForKey:kPassword]) {
                     NSString *passWord = [paramDict objectForKey:kPassword];
                     if (![passWord isEqualToString:cellModel.inputedContent]) {
-                        [self.view makeToast:@"密码不匹配" duration:kToastDuration position:kToastPositionCenter];
+                        [self.view makeToast:localizeString(@"toast_input_password_unmatch") duration:kToastDuration position:kToastPositionCenter];
                         break;
                         return;
                     }
@@ -317,21 +317,21 @@
     }
     
     if (![paramDict objectForKey:kUserName] || [[paramDict objectForKey:kUserName] length] == 0) {
-        [self.view makeToast:@"请填写用户名" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_username") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kPassword] || [[paramDict objectForKey:kPassword] length] < 6 || [[paramDict objectForKey:kPassword] length] > 20) {
-        [self.view makeToast:@"请正确输入 6-20 位密码！" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_password_notice") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kMail] || !isValidEmail([paramDict objectForKey:kMail])) {
         // 邮件格式
-        [self.view makeToast:@"请正确输入邮件格式，仅支持（QQ邮箱、163邮箱、gmail邮箱）" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_email_notice") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     if (![paramDict objectForKey:kCode] || [[paramDict objectForKey:kCode] length] != 4) {
         // 数字位数
-        [self.view makeToast:@"验证码错误！" duration:kToastDuration position:kToastPositionCenter];
+        [self.view makeToast:localizeString(@"toast_input_virificacion_error") duration:kToastDuration position:kToastPositionCenter];
         return;
     }
     
@@ -368,7 +368,7 @@
                 if (loginResponseModel.message.length > 0) {
                     [weakSelf.view makeToast:loginResponseModel.message duration:kToastDuration position:kToastPositionCenter];
                 } else {
-                    [weakSelf.view makeToast:localizeString(@"网络异常，请稍后再试！") duration:kToastDuration position:kToastPositionCenter];
+                    [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
                 }
             }
         }

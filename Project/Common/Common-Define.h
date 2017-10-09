@@ -79,24 +79,23 @@
 #define TestDevice              @"a492223edaf92cbf1987951af14e360a" ///admob test device
 
 
-#define kSourceEtag @"kSourceEtag"
-#define kSourceEtagCacheTime @"kSourceEtagCacheTime"
-#define kLoginedUser @"kLoginedUser"
+#define kSourceEtag             @"kSourceEtag"
+#define kSourceEtagCacheTime    @"kSourceEtagCacheTime"
+#define kLoginedUser            @"kLoginedUser"
+
 
 // Toast
-#define kToastDuration 2.0
-#define kToastPositionTop @"top"
-#define kToastPositionCenter @"center"
-#define kToastPositionBottom @"bottom"
+#define kToastDuration      2.0
+#define kToastPositionTop   @"top"
+#define kToastPositionCenter    @"center"
+#define kToastPositionBottom    @"bottom"
 
 
 // -- Table View Cell --
 #define kCellDefaultHeight 44.0f
-// Left\right padding inside contentView
 #define kCellDefaultLRMargin 15.0f
 #define kCellDefaultTBMargin 15.0f
-// Right arrow size
-#define kCellDefaultAccessWidth 6.0f
+#define kCellDefaultAccessWidth 6.0f    // Right arrow size
 #define kCellDefaultAccessHeight 12.0f
 
 
@@ -120,7 +119,7 @@
 #define kAPIRegister @"register"
 
 // Content list
-#define kAPIHome @"home_page"
+#define kAPIHome    @"home_page"
 #define kAPIContentList @"program_list"
 #define kAPIContentDetail @"program_source"
 #define kAPIShareSubmit @"share_submit"

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserFeedbackViewController : UIViewController
+#import "BaseViewController.h"
+
+@interface UserFeedbackViewController : BaseViewController
 
 @end

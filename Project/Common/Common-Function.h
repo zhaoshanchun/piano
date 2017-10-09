@@ -1,9 +1,9 @@
 //
 //  Common-Function.h
-//  OpenRice
+//  gangqinjiaocheng
 //
-//  Created by hangyuen on 9/10/14.
-//  Copyright (c) 2014 OpenRice Limited. All rights reserved.
+//  Created by zhaosc on 17/8/13.
+//  Copyright © 2017年 kun. All rights reserved.
 //
 
 #ifndef OpenRice_Common_Function_h

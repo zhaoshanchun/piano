@@ -33,10 +33,6 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden=YES;
 
-    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-
-    
     UITextView *contentTextView = [UITextView new];
     contentTextView.translatesAutoresizingMaskIntoConstraints = NO;
     contentTextView.backgroundColor = [UIColor whiteColor];
@@ -54,7 +50,7 @@
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:contentTextView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:230]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:contentTextView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:rectStatus.size.height + rectNav.size.height + 10]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:contentTextView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:10]];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:contentTextView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-5]];
     

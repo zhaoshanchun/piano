@@ -26,12 +26,6 @@ static void * LoadingViewPropertyKey = &LoadingViewPropertyKey;
         [iv startAnimating];
         iv.center = v.center;
 
-//        UIResponder *parentResponder = self.nextResponder;
-//        if ([parentResponder isKindOfClass:[UIBaseViewController class]]) {
-//            if ([(UIBaseViewController *)parentResponder navigationBarTranslucent]) {
-//                iv.center = (CGPoint){ iv.center.x, iv.center.y + (NAVIGATION_BAR_HEIGHT+STATUS_BAR_HEIGHT) / 2 };
-//            }
-//        }
         objc_setAssociatedObject(self, LoadingViewPropertyKey, v, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return v;

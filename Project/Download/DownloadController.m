@@ -66,8 +66,8 @@
     sgc.translatesAutoresizingMaskIntoConstraints = NO;
     sgc.selectedSegmentIndex = 0;
     //设置segment的文字
-    [sgc setTitle:@"未完成缓存" forSegmentAtIndex:0];
-    [sgc setTitle:@"已完成缓存" forSegmentAtIndex:1];
+    [sgc setTitle:localizeString(@"download_title_loading") forSegmentAtIndex:0];
+    [sgc setTitle:localizeString(@"download_title_loaded") forSegmentAtIndex:1];
     //监听点击
     [sgc addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
     
@@ -109,8 +109,8 @@
     //默认选中的位置
     sgc.selectedSegmentIndex = 0;
     //设置segment的文字
-    [sgc setTitle:@"未完成缓存" forSegmentAtIndex:0];
-    [sgc setTitle:@"已完成缓存" forSegmentAtIndex:1];
+    [sgc setTitle:localizeString(@"download_title_loading") forSegmentAtIndex:0];
+    [sgc setTitle:localizeString(@"download_title_loaded") forSegmentAtIndex:1];
     //监听点击
     [sgc addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
     return sgc;
