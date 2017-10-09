@@ -221,6 +221,9 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         NSString *cert = etag;
         cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
         NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
+        
+        NSLog(@"postData: %@", postData);
+        
         [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             if (!weakSelf) {
                 return;

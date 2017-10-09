@@ -1,52 +1,55 @@
 //
-//  DownloadUnfinishedController.m
-//  sifakaoshi
+//  FavoriteViewController.m
+//  gangqinjiaocheng
 //
-//  Created by kun on 2017/9/7.
+//  Created by kun on 2017/9/26.
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import "DownloadFinishedController.h"
-#import "DownloadTableViewCell.h"
-#import "DownloadManage.h"
+#import "FavoriteViewController.h"
+#import "FavoriteTableViewCell.h"
+#import "FavoritesManager.h"
 #import "UIImageView+WebCache.h"
 #import "VideoDetailViewController.h"
 #import "BaseNavigationController.h"
 
-#define FinishedCellIdentifier @"DownloadFinishedController"
+#define FavoriteCellIdentifier @"FavoriteCellIdentifier"
 
-@interface DownloadFinishedController ()<UITableViewDataSource, UITableViewDelegate, ProgramDownloadDelegate>
+
+@interface FavoriteViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
-@property DownloadManage *dlManage;
 @property NSMutableArray *array;
+@property FavoritesManager *favoritesManager;
 
 @end
 
-@implementation DownloadFinishedController
+@implementation FavoriteViewController
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.hidesBottomBarWhenPushed = YES;
-        self.hideNavigationBar = NO;
-    }
-    return self;
+- (void)initData{
+    self.favoritesManager = [FavoritesManager sharedManager];
+    
+    [self.favoritesManager add:@"XMTc0MDgzODc1Ng==" title:@"XMTc0MDgzODc1Ng==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
+    [self.favoritesManager add:@"XMTcwMTY0ODU4OA==" title:@"XMTcwMTY0ODU4OA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
+    [self.favoritesManager add:@"XMTcwNDgwOTc4NA==" title:@"XMTcwNDgwOTc4NA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
+
+    self.array = [self.favoritesManager getFavoriteArray];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSLog(@"%s", __func__);
+- (void)initView{
     
-    self.dlManage = [DownloadManage sharedInstance];
+    UIView *head = [UIView new];
+    head.backgroundColor = [UIColor orThemeColor];
+    head.frame = CGRectMake(0, 0, self.view.bounds.size.width, 60);
+    [self.view addSubview:head];
     
-    self.array = [NSMutableArray array];
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-    // float topHight = rectNav.size.height + rectStatus.size.height;
-    float topHight = 0;
+    UIButton *back = [UIButton new];
+    back.frame = CGRectMake(10, 26, 20, 22);
+    back.contentMode = UIViewContentModeScaleAspectFit;
+    [back setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(OnBack:) forControlEvents:UIControlEventTouchUpInside];    //back.image = [UIImage imageNamed:@"Back"];
+    [head addSubview:back];
+    
     _tableView = [UITableView new];
     _tableView.rowHeight = 70;
     _tableView.delegate = self;
@@ -57,92 +60,38 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-    [self.tableView registerClass:[DownloadTableViewCell class] forCellReuseIdentifier:FinishedCellIdentifier];
+    [self.tableView registerClass:[FavoriteTableViewCell class] forCellReuseIdentifier:FavoriteCellIdentifier];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:topHight]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:head attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:15]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-15]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+}
+
+- (void)OnBack:(id)bt
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
+    
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self];
+    //self = nav;
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    [self initData];
+    [self initView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"%s", __func__);
-    self.dlManage.delegate = self;
-    self.array = [_dlManage select_download_task:YES];
-    for(int i = 0; i < self.array.count; i++)
-    {
-        DLTASK *task = self.array[i];
-        if(task.total == 0)
-            task.progress = 0;
-        else
-            task.progress = (float)task.completed/(float)task.total;
-    }
-    [_tableView reloadData];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    self.dlManage.delegate = nil;
-}
-
--(void) rate:(NSString *)uuid rate:(double)rate
-{
-    //NSLog(@"%@ %f", uuid, rate);
-    for(int i = 0; i < _array.count; i++)
-    {
-        DLTASK *task = _array[i];
-        if(task && [task.uuid isEqualToString:uuid])
-        {
-            task.section = i;
-            task.rate = rate;
-            [self performSelectorOnMainThread:@selector(updateUI:) withObject:task waitUntilDone:NO];
-        }
-    }
-}
-
--(void)progress:(NSString *)uuid progress:(float)progress
-{
-    //NSLog(@"%@ %f", uuid, progress);
-    for(int i = 0; i < _array.count; i++)
-    {
-        DLTASK *task = _array[i];
-        if(task && [task.uuid isEqualToString:uuid])
-        {
-            task.section = i;
-            task.progress = progress;
-            [self performSelectorOnMainThread:@selector(updateUI:) withObject:task waitUntilDone:NO];
-        }
-    }
-}
-
--(void)event:(NSString *)uuid event:(int)event error:(int)error;
-{
-    NSLog(@"%s event %d", __func__, event);
-    if(event == 1)
-    {
-        
-    }
-    else if(event == 2)
-    {
-        
-    }
-}
-
--(void)updateUI:(DLTASK *)task
-{
-    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:task.section]; //你需要更新的组数
-    
-    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];  //collection 相同
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -155,49 +104,28 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     long section = [indexPath section];
-    DownloadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishedCellIdentifier forIndexPath:indexPath];
-    //DownloadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UnFinishedCellIdentifier];
-    DLTASK *task = _array[section];
-    
-    if([self.dlManage status:task.uuid])
-    {
-        cell.dlSwitchButton.selected = YES;
-        // NSLog(@"dlSwitchButton.selected YES");
-    }
-    else
-    {
-        cell.dlSwitchButton.selected = NO;
-        //NSLog(@"dlSwitchButton.selected NO");
-    }
-    cell.playImageView.hidden = NO;
-    cell.dlSwitchButton.hidden = YES;
-    cell.processView.hidden = YES;
-    cell.processValue.hidden = YES;
-    cell.rateValue.hidden = YES;
-    cell.title.text = task.title;
-    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:task.icon]];
-    cell.processView.progress = task.progress;
-    cell.rateValue.text = [NSString stringWithFormat:@"%0.0fkb/s", task.rate];
-    cell.processValue.text = [NSString stringWithFormat:@"%0.0f%%", task.progress*100];
-    [cell.dlSwitchButton setTag:section];    
+    FavoriteObject *obj = [self.array objectAtIndex:section];
+    FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:obj.preview]];
+   // cell.title.text = obj.title;
+    cell.title.text = @"标题标题标题标题标题标题标题标题标题标";
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     long section = [indexPath section];
-    DLTASK *task = _array[section];
-
-    NSURL *url = [_dlManage get_play_url:task.uuid];
-    NSLog(@"url: %@", url);
-
+    FavoriteObject *obj = [self.array objectAtIndex:section];
     ContentModel *model = [ContentModel new];
-    model.uuid = task.uuid;
-    model.title = task.title;
-    model.preview = task.icon;
+    model.uuid = obj.uuid;
+    model.title = obj.title;
+    model.preview = obj.preview;
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:model];
-    
+
     BaseNavigationController *navigationController = [[BaseNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navigationController animated:NO completion:nil];
+
+    
+    NSLog(@"%s", __func__);
 
 }
 
@@ -217,7 +145,6 @@
     [headerView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     return headerView;
 }
-
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.tableView)
@@ -261,9 +188,7 @@
             //            [_classArray removeObjectAtIndex:indexPath.row];
             ///[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             //NSLog(@"delete section: %ld", [indexPath section]);
-            DLTASK *task = _array[indexPath.section];
-            [_dlManage remove_download:task.uuid];
-            [self.array removeObjectAtIndex:indexPath.section];
+            //[self.array removeObjectAtIndex:indexPath.section];
             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
             
         }]];
@@ -282,14 +207,15 @@
     return NO;
 }
 
+
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

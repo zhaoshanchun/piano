@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "ProfileUserTableViewCell.h"
 #import "UIActionSheet+Blocks.h"
+#import "FavoriteViewController.h"
 
 #define kSectionNumber 3
 
@@ -162,7 +163,11 @@
             [self.navigationController pushViewController:[UserFeedbackViewController new] animated:YES];
         }
     } else {
-        
+        if (indexPath.row == 0) {
+        } else {
+            //[self.navigationController pushViewController:[FavoriteViewController new] animated:YES];
+            [ self presentViewController:[FavoriteViewController new] animated: YES completion:nil];
+        }
     }
 }
 
