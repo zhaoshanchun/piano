@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "UIBaseTableViewCell.h"
+#import "MJRefresh.h"
 
 @interface BaseTableViewController : BaseViewController
 

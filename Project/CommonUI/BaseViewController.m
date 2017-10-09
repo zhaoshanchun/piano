@@ -129,7 +129,8 @@
 - (UIView *)emptyView {
     if (_emptyView == nil) {
         _emptyView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, [self pageWidth] - 20*2, 0)];
-        _emptyView.backgroundColor = rgb(@"FFFFFF", 0.9f);
+        // _emptyView.backgroundColor = rgb(@"FFFFFF", 0.9f);
+        _emptyView.backgroundColor = [UIColor clearColor];
         _emptyView.hidden = YES;
     }
     return _emptyView;
