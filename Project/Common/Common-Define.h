@@ -105,6 +105,7 @@
 
 // API Manager
 #define kHTTPLoadCount 20
+#define kHTTPShareListLoadCount 5
 #define kHTTPTimeoutInterval 10.0f
 #define kHTTPPostTimeoutInterval 120.0f
 #define kHTTPMethodGet @"GET"

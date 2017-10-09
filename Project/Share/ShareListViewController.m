@@ -9,11 +9,19 @@
 #import "ShareListViewController.h"
 #import "ShareListTableViewCell.h"
 #import "ShareModel.h"
-#import "MJRefresh.h"
 #import "EtagManager.h"
 #import "ContentListModel.h"
 #import "CLPlayerView.h"
 #import "VideoDetailViewController.h"
+
+
+/*
+ 参考：
+ [iOS]仿微博视频边下边播之滑动TableView自动播放 http://www.jianshu.com/p/3946317760a6
+ 
+ 播放：
+ 用id和etag去拿url，然后再播放
+ */
 
 @interface ShareListViewController () <ShareListTableViewCellDelegate, VideoDetailViewControllerDelegate>
 
@@ -100,7 +108,7 @@
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // [_playerView destroyPlayer];
-
+    // TODO...
 }
 
 
@@ -130,7 +138,7 @@
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/share_list?from=0&to=100  // kHTTPLoadCount
-    NSString *apiName = [NSString stringWithFormat:@"%@?from=%ld&to=%d", kAPIShareList, self.dataArray.count, 100];
+    NSString *apiName = [NSString stringWithFormat:@"%@?from=%ld&to=%d", kAPIShareList, self.dataArray.count, kHTTPShareListLoadCount];
     [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!weakSelf) {
             return;
@@ -167,6 +175,11 @@
                 if (shareListModel.objects.count < kHTTPLoadCount){
                     weakSelf.tableView.mj_footer.hidden = YES;
                 }
+            }
+            
+            if (self.dataArray.count == 0) {
+                [weakSelf handleError:0 errorMsg:@"暂时没有小伙伴分享，请稍后再试！"];
+                return;
             }
         } else {
             [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
@@ -208,6 +221,12 @@
     }];
 }
 */
+
+#pragma mark - Empty page and Action
+- (void)emptyAction {
+    [self hideEmptyParam];
+    [self getShareList];
+}
 
 #pragma mark - Helper
 - (void)addContentList:(NSArray *)contentList {
