@@ -189,6 +189,10 @@ static DownloadManage *_downloadManage;
 -(BOOL)add_download:(NSString *)uuid url:(NSString *)url icon:(NSString *)icon title:(NSString *)title
 {
     sqlite3_stmt *stmt;
+    
+    if(uuid == nil || icon == nil)
+        return false;
+    
     if(![self open_db])
     {
         NSLog(@"open sqlite db failed");
@@ -479,6 +483,8 @@ static DownloadManage *_downloadManage;
 
 -(BOOL)start_download:(NSString *)uuid
 {
+    if(uuid == nil)
+        return false;
     [self.suspend setValue:@"NO" forKey:uuid];
     return [self get_m3u8_url:uuid];
 }
