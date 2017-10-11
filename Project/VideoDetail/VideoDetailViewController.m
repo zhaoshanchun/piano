@@ -48,7 +48,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (strong, nonatomic) DownloadManage *dlManage;
 
 @property (assign, nonatomic) ActionType actonType;
-@property (assign, nonatomic) BOOL isShareing;
+@property (assign, nonatomic) BOOL shouldPausePlay;
 
 @end
 
@@ -95,7 +95,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (_playerView && self.isShareing) {
+    if (_playerView && self.shouldPausePlay) {
+        self.shouldPausePlay = NO;
         [self.playerView playVideo];
     }
 }
@@ -103,7 +104,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if (_playerView && self.isShareing) {
+    if (_playerView && self.shouldPausePlay) {
         [self.playerView pausePlay];
     }
 }
@@ -394,6 +395,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
             if (buttonIndex == 1) {
                 // Go to login page
                 self.actonType = ActionForShare;
+                self.shouldPausePlay = YES;
                 LoginViewController *vc = [LoginViewController new];
                 vc.delegate = self;
                 [self.navigationController pushViewController:vc animated:YES];
@@ -401,6 +403,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         }];
         return;
     }
+    
+    self.shouldPausePlay = YES;
     
     NSString *uuid = @"";
     NSString *preview = @"";
@@ -416,7 +420,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         // preview = self.sourceModel.
     }
     
-    self.isShareing = YES;
     ShareContentViewController *vc = [[ShareContentViewController alloc] initWithTitle:title];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -460,6 +463,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 #pragma mark - LoginViewControllerDelegate
 - (void)loginSuccess {
     if (ActionForShare == self.actonType) {
+        self.shouldPausePlay = NO;
         [self shareAction];
     }
     self.actonType = ActionForNone;
@@ -467,6 +471,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 #pragma mark - ShareContentViewControllerDelegate
 - (void)shareWithContent:(NSString *)shareContent {
+    self.shouldPausePlay = NO;
     
     NSString *uuid = @"";
     NSString *preview = @"";
@@ -487,7 +492,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     // http://119.23.174.22/app/share_submit?user=kunhuang&uuid=XMTgyMzY0NDQ0NA&content=方尽快答复
     NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@&content=%@", kAPIShareSubmit, self.userModel.userName, uuid, shareContent];
     [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        weakSelf.isShareing = NO;
         if (!connectionError) {
             [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
         } else {
