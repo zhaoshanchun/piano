@@ -29,7 +29,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-gangqinjiaocheng.xcscheme</key>
+		<key>Pods-apps.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,7 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1BA6FB09F51EBA0539B372CC59D49C28</key>
+		<key>371E66B003F21D18ED750FEF9F56DB48</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3AE324317B530F356AF741D33D993DD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6E7D79013F0E8E4B15462B3ED78D7263</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>70BC44266C6FFE30D2C57129458E070B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79DAF2EC29373493E2A951CD4B10D1BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>962302106D30116350CF998FB65E4B3A</key>
+		<key>7916601C0172D3CEEC8C4B7E1C378339</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CEB6B13B774465DC14086B711C188EFC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E604FCA12F313385DBE174AC4BE55E8B</key>
+		<key>D0DEC35FC269EA9CD52261B4A4808C7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

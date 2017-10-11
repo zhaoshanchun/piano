@@ -12,14 +12,7 @@
 //间隙
 #define Padding        10
 //顶部底部工具条高度
-#define ToolBarHeight     40
-//进度条颜色
-#define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
-//缓冲颜色
-#define ProgressTintColor [UIColor orangeColor]
-//播放完成颜色
-#define PlayFinishColor   [UIColor whiteColor]
-
+#define ToolBarHeight     50
 
 @interface CLPlayerMaskView ()
 
@@ -38,6 +31,8 @@
     [self addSubview:self.topToolBar];
     [self addSubview:self.bottomToolBar];
     [self addSubview:self.activity];
+//    self.activity.hidden = YES;
+    [self addSubview:self.failButton];
     [self.topToolBar addSubview:self.backButton];
     [self.bottomToolBar addSubview:self.playButton];
     [self.bottomToolBar addSubview:self.fullButton];
@@ -45,13 +40,8 @@
     [self.bottomToolBar addSubview:self.totalTimeLabel];
     [self.bottomToolBar addSubview:self.progress];
     [self.bottomToolBar addSubview:self.slider];
-    [self addSubview:self.failButton];
-    [self makeConstraints];
-    
-    
-    self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-    self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-    
+    self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
+    self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
 }
 #pragma mark - 约束
 - (void)makeConstraints{
@@ -68,6 +58,7 @@
     //转子
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,13 +81,13 @@
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.mas_right).offset(Padding);
-        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
-        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
@@ -115,9 +106,19 @@
         make.center.equalTo(self);
     }];
 }
-
-
-
+#pragma mark -- 设置颜色
+-(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
+    _progressBackgroundColor = progressBackgroundColor;
+    _progress.trackTintColor = progressBackgroundColor;
+}
+-(void)setProgressBufferColor:(UIColor *)progressBufferColor{
+    _progressBufferColor        = progressBufferColor;
+    _progress.progressTintColor = progressBufferColor;
+}
+-(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
+    _progressPlayFinishColor      = progressPlayFinishColor;
+    _slider.minimumTrackTintColor = _progressPlayFinishColor;
+}
 #pragma mark - 懒加载
 //顶部工具条
 - (UIView *) topToolBar{
@@ -136,10 +137,13 @@
     return _bottomToolBar;
 }
 //转子
-- (UIActivityIndicatorView *) activity{
+- (AILoadingView *) activity{
     if (_activity == nil){
-        _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        [_activity startAnimating];
+        _activity = [[AILoadingView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _activity.strokeColor = [UIColor whiteColor];
+//        _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [_activity starAnimation];
+        _activity.hidden      = NO;
     }
     return _activity;
 }
@@ -178,8 +182,8 @@
     if (_currentTimeLabel == nil){
         _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
-        _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
-        _currentTimeLabel.text      = @"00:00";
+        _currentTimeLabel.adjustsFontSizeToFitWidth = YES;
+        _currentTimeLabel.text = @"00:00";
         _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _currentTimeLabel;
@@ -189,8 +193,8 @@
     if (_totalTimeLabel == nil){
         _totalTimeLabel = [[UILabel alloc] init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
-        _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
-        _totalTimeLabel.text      = @"00:00";
+        _totalTimeLabel.adjustsFontSizeToFitWidth = YES;
+        _totalTimeLabel.text = @"00:00";
         _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _totalTimeLabel;
@@ -199,8 +203,6 @@
 - (UIProgressView *) progress{
     if (_progress == nil){
         _progress = [[UIProgressView alloc] init];
-        _progress.trackTintColor = ProgressColor;
-        _progress.progressTintColor = ProgressTintColor;
     }
     return _progress;
 }
@@ -214,8 +216,6 @@
         [_slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         // slider结束滑动事件
         [_slider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
-        //左边颜色
-        _slider.minimumTrackTintColor = PlayFinishColor;
         //右边颜色
         _slider.maximumTrackTintColor = [UIColor clearColor];
     }
@@ -235,7 +235,6 @@
     }
     return _failButton;
 }
-
 #pragma mark - 按钮点击事件
 //返回按钮
 - (void)backButtonAction:(UIButton *)button{
@@ -266,7 +265,8 @@
 //失败按钮
 - (void)failButtonAction:(UIButton *)button{
     self.failButton.hidden = YES;
-    [self.activity startAnimating];
+    [self.activity starAnimation];
+    self.activity.hidden   = NO;
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{
@@ -297,6 +297,11 @@
     }else{
         NSLog(@"没有实现代理或者没有设置代理人");
     }
+}
+#pragma mark - 布局
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self makeConstraints];
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{

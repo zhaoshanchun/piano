@@ -1313,7 +1313,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BCB0C4781EA8EA1E004AB5FD /* Build configuration list for PBXProject "apps" */;
+			buildConfigurationList = BCB0C4781EA8EA1E004AB5FD /* Build configuration list for PBXProject "apps.temp_caseinsensitive_rename" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1389,7 +1389,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FFC7221686423D282353BE45 /* [CP] Embed Pods Frameworks */ = {
@@ -1713,7 +1713,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BCB0C4781EA8EA1E004AB5FD /* Build configuration list for PBXProject "apps" */ = {
+		BCB0C4781EA8EA1E004AB5FD /* Build configuration list for PBXProject "apps.temp_caseinsensitive_rename" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BCB0C4921EA8EA1E004AB5FD /* Debug */,
