@@ -1155,7 +1155,6 @@
 		DBCFCED81F4D275800149112 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DBCFCED91F4D275800149112 /* img */,
 				DBCFCFBC1F4D275900149112 /* loading_step1.png */,
 				BCE417351F8DB4F8002940CC /* welcome.jpg */,
 				DBCFCFBD1F4D275900149112 /* loading_step2.png */,
@@ -1168,13 +1167,6 @@
 				DBCFCFC41F4D275900149112 /* word.doc */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		DBCFCED91F4D275800149112 /* img */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = img;
 			sourceTree = "<group>";
 		};
 		DBCFD0B01F4D27F300149112 /* SupportingFiles */ = {
