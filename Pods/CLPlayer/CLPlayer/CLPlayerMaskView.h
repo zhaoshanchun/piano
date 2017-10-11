@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CLSlider.h"
-#import "AILoadingView.h"
 @protocol CLPlayerMaskViewDelegate <NSObject>
 /**返回按钮代理*/
 - (void)cl_backButtonAction:(UIButton *)button;
@@ -26,13 +25,14 @@
 - (void)cl_failButtonAction:(UIButton *)button;
 @end
 
+
 @interface CLPlayerMaskView : UIButton
 /**顶部工具条*/
 @property (nonatomic,strong) UIView *topToolBar;
 /**底部工具条*/
 @property (nonatomic,strong) UIView *bottomToolBar;
 /**转子*/
-@property (nonatomic,strong) AILoadingView *activity;
+@property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**顶部工具条返回按钮*/
 @property (nonatomic,strong) UIButton *backButton;
 /**底部工具条播放按钮*/
@@ -51,11 +51,5 @@
 @property (nonatomic,strong) UIButton *failButton;
 /**代理人*/
 @property (nonatomic,weak) id<CLPlayerMaskViewDelegate> delegate;
-/**进度条背景颜色*/
-@property (nonatomic,strong) UIColor *progressBackgroundColor;
-/**缓冲条缓冲进度颜色*/
-@property (nonatomic,strong) UIColor *progressBufferColor;
-/**进度条播放完成颜色*/
-@property (nonatomic,strong) UIColor *progressPlayFinishColor;
 
 @end

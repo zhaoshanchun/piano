@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 
-target 'gangqinjiaocheng' do
+target ‘apps’ do
 
 platform :ios, '7.0'
 
