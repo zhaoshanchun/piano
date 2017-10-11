@@ -37,7 +37,7 @@
 - (void)addContent {
     [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.detailLabel];
-    // [self.contentView addSubview:self.playerView];
+    [self.contentView addSubview:self.playerView];
     [self.contentView addSubview:self.placeHolderImageView];
     [self.contentView addSubview:self.placeHolderButton];
     [self.playerView addSubview:self.titleLabel];
@@ -72,14 +72,14 @@
         self.detailLabel.attributedText = cellModel.detailAttribute;
     }
     
-    // self.playerView.frame = cellModel.playViewFrame;
+    self.playerView.frame = cellModel.playViewFrame;
+    self.playerView.url = nil;
     
     self.placeHolderImageView.hidden = NO;
-    self.placeHolderButton.hidden = NO;
     self.placeHolderImageView.frame = cellModel.playViewFrame;
-    self.placeHolderButton.center = self.placeHolderImageView.center;
     if (cellModel.shareModel.icon.length > 0) {
         NSString *iconUrl = [NSString stringWithFormat:@"%@/%@%@", kHTTPHomeAddress, kAPIGetImage, cellModel.shareModel.icon];
+        MyLog(@"Share list cell placeholder image = %@", iconUrl);
         [self.placeHolderImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl]
                                 placeholderImage:nil
                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -89,6 +89,8 @@
                                        }];
     }
     
+    self.placeHolderButton.hidden = NO;
+    self.placeHolderButton.center = self.playerView.center;
     
     self.titleLabel.frame = cellModel.titleFrame;
     self.titleLabel.attributedText = cellModel.titleAttribute;
@@ -96,18 +98,26 @@
 }
 
 - (void)playAction {
-    // self.placeHolderImageView.hidden = YES;
-    // self.placeHolderButton.hidden = YES;
-    // self.playerView.url = [NSURL URLWithString:self.cellModel.shareModel.videoUrl];
+    self.placeHolderImageView.hidden = YES;
+    self.placeHolderButton.hidden = YES;
+    [self startPlay];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(playVideoForCell:)]) {
-        [self.delegate playVideoForCell:self];
-    }
+    // if (self.delegate && [self.delegate respondsToSelector:@selector(playVideoForCell:)]) {
+    //    [self.delegate playVideoForCell:self];
+    // }
 }
 
-// - (void)stopPlay {
-//     [self.playerView destroyPlayer];
-// }
+
+- (void)startPlay {
+    self.playerView.url = [NSURL URLWithString:self.cellModel.shareModel.video_url];
+    [self.playerView playVideo];
+}
+
+- (void)stopPlay {
+    self.placeHolderImageView.hidden = NO;
+    self.placeHolderButton.hidden = NO;
+    [self.playerView destroyPlayer];
+}
 
 
 #pragma mark - Factory method
@@ -150,7 +160,7 @@
         _placeHolderImageView = [[UIImageView alloc] init];
         _placeHolderImageView.hidden = YES;
         
-        [_placeHolderImageView showBorder:[UIColor redColor]];
+        // [_placeHolderImageView showBorder:[UIColor redColor]];
     }
     return _placeHolderImageView;
 }
@@ -163,7 +173,7 @@
         [_placeHolderButton addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
         _placeHolderButton.hidden = YES;
         
-        [_placeHolderButton showBorder:[UIColor greenColor]];
+        // [_placeHolderButton showBorder:[UIColor greenColor]];
     }
     return _placeHolderButton;
 }

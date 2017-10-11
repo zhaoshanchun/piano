@@ -11,7 +11,8 @@
 #import "BaseNavigationController.h"
 
 #import "HomePageViewController.h"
-#import "ShareListViewController.h"
+// #import "ShareListViewController.h"
+#import "PublicShareViewController.h"
 #import "DownloadController.h"
 #import "ProfileViewController.h"
 
@@ -44,7 +45,8 @@
                                    kImgKey    : @"Home",
                                    kSelImgKey : @"Home"},
                                  
-                                 @{kClassKey  : @"ShareListViewController",
+                                 // @{kClassKey  : @"ShareListViewController",
+                                 @{kClassKey  : @"PublicShareViewController",
                                    kTextKey   : localizeString(@"tab_share"),
                                    kTitleKey  : localizeString(@"tab_share"),
                                    kImgKey    : @"Message",

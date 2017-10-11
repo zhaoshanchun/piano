@@ -29,6 +29,7 @@
 
 @interface ShareModel : JSONModel
 
+@property (strong, nonatomic) NSString *video_url;
 @property (assign, nonatomic) NSInteger plays;
 @property (assign, nonatomic) NSInteger size;
 @property (strong, nonatomic) NSString *content;
@@ -41,8 +42,7 @@
 @property (strong, nonatomic) NSString *score;
 @property (assign, nonatomic) NSInteger seconds;
 @property (strong, nonatomic) NSString *alias;
-
-@property (strong, nonatomic) NSString *videoUrl;
+@property (strong, nonatomic) NSString *preview;
 
 @end
 @protocol ShareModel <NSObject>

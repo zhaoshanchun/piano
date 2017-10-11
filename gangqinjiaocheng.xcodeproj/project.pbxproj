@@ -102,6 +102,11 @@
 		DBA0C7771F6BCEC400A82D95 /* ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7761F6BCEC300A82D95 /* ShareModel.m */; };
 		DBA0C77A1F6C338E00A82D95 /* ShareListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */; };
 		DBA0C77D1F6C339D00A82D95 /* ShareListTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */; };
+		DBCD239E1F8E585300F6CB8F /* CLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCD23991F8E585300F6CB8F /* CLModel.m */; };
+		DBCD239F1F8E585300F6CB8F /* CLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCD239B1F8E585300F6CB8F /* CLTableViewCell.m */; };
+		DBCD23A01F8E585300F6CB8F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCD239D1F8E585300F6CB8F /* UIView+CLSetRect.m */; };
+		DBCD23A31F8E58CD00F6CB8F /* PublicShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCD23A21F8E58CD00F6CB8F /* PublicShareViewController.m */; };
+		DBCD23A51F8E5B1A00F6CB8F /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = DBCD23A41F8E5B1A00F6CB8F /* Date.json */; };
 		DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */; };
 		DBCFCDDA1F4C25C600149112 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */; };
 		DBCFCDDB1F4C25C600149112 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCDD31F4C25C600149112 /* UIImage+Helper.m */; };
@@ -397,6 +402,15 @@
 		DBA0C7791F6C338E00A82D95 /* ShareListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareListTableViewCell.m; sourceTree = "<group>"; };
 		DBA0C77B1F6C339D00A82D95 /* ShareListTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareListTableViewCellModel.h; sourceTree = "<group>"; };
 		DBA0C77C1F6C339D00A82D95 /* ShareListTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareListTableViewCellModel.m; sourceTree = "<group>"; };
+		DBCD23981F8E585300F6CB8F /* CLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLModel.h; sourceTree = "<group>"; };
+		DBCD23991F8E585300F6CB8F /* CLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLModel.m; sourceTree = "<group>"; };
+		DBCD239A1F8E585300F6CB8F /* CLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewCell.h; sourceTree = "<group>"; };
+		DBCD239B1F8E585300F6CB8F /* CLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewCell.m; sourceTree = "<group>"; };
+		DBCD239C1F8E585300F6CB8F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		DBCD239D1F8E585300F6CB8F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		DBCD23A11F8E58CD00F6CB8F /* PublicShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicShareViewController.h; sourceTree = "<group>"; };
+		DBCD23A21F8E58CD00F6CB8F /* PublicShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicShareViewController.m; sourceTree = "<group>"; };
+		DBCD23A41F8E5B1A00F6CB8F /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
 		DBCFCDB91F4C1B2000149112 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCFCDD01F4C25C600149112 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		DBCFCDD11F4C25C600149112 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
@@ -846,6 +860,15 @@
 		DBA0C7711F6BCAFD00A82D95 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				DBCD23A41F8E5B1A00F6CB8F /* Date.json */,
+				DBCD23981F8E585300F6CB8F /* CLModel.h */,
+				DBCD23991F8E585300F6CB8F /* CLModel.m */,
+				DBCD239A1F8E585300F6CB8F /* CLTableViewCell.h */,
+				DBCD239B1F8E585300F6CB8F /* CLTableViewCell.m */,
+				DBCD239C1F8E585300F6CB8F /* UIView+CLSetRect.h */,
+				DBCD239D1F8E585300F6CB8F /* UIView+CLSetRect.m */,
+				DBCD23A11F8E58CD00F6CB8F /* PublicShareViewController.h */,
+				DBCD23A21F8E58CD00F6CB8F /* PublicShareViewController.m */,
 				DBA0C7721F6BCB1800A82D95 /* ShareListViewController.h */,
 				DBA0C7731F6BCB1800A82D95 /* ShareListViewController.m */,
 				DBA0C7781F6C338E00A82D95 /* ShareListTableViewCell.h */,
@@ -1330,6 +1353,7 @@
 				DBCFCED71F4D25E900149112 /* SSLPickerView.xib in Resources */,
 				DBCFD0AC1F4D275900149112 /* play.png in Resources */,
 				DBCFD0AA1F4D275900149112 /* Mail.png in Resources */,
+				DBCD23A51F8E5B1A00F6CB8F /* Date.json in Resources */,
 				DBCFD0AB1F4D275900149112 /* multl_bg.jpg in Resources */,
 				DBCFD0A71F4D275900149112 /* loading_step1.png in Resources */,
 				DBCFCED51F4D25E900149112 /* PickerStyle.plist in Resources */,
@@ -1422,6 +1446,7 @@
 				DBA0C6F01F69663600A82D95 /* DownloadFinishedController.m in Sources */,
 				DBA0C6F41F69663600A82D95 /* DownloadUnfinishedController.m in Sources */,
 				DBA0C6EE1F69663600A82D95 /* DownloadController.m in Sources */,
+				DBCD239E1F8E585300F6CB8F /* CLModel.m in Sources */,
 				BCAED2E21F79FEB100A1A2ED /* FavoriteViewController.m in Sources */,
 				DBCFCE5E1F4D1E1B00149112 /* APIManager.m in Sources */,
 				BCB0C4851EA8EA1E004AB5FD /* AppDelegate.m in Sources */,
@@ -1434,6 +1459,7 @@
 				DB1BB6611F55361E00E8B1F8 /* ZJTitleView.m in Sources */,
 				DBCFCED31F4D25E900149112 /* NoteBookViewController.m in Sources */,
 				DBCFCE4B1F4C3A7500149112 /* TFHpple.m in Sources */,
+				DBCD23A31F8E58CD00F6CB8F /* PublicShareViewController.m in Sources */,
 				DBCFD0C31F4D289800149112 /* iToast.m in Sources */,
 				DBCFCE701F4D1EBF00149112 /* OSButton.m in Sources */,
 				DBCFCE4C1F4C3A7500149112 /* TFHppleElement.m in Sources */,
@@ -1441,6 +1467,7 @@
 				DBCFCEA61F4D242000149112 /* GLCoverFlowLayout.m in Sources */,
 				DBA0C7241F6967BB00A82D95 /* GCDWebServerFileResponse.m in Sources */,
 				DB575DB91F5112EE00EDADC2 /* ProfileUserTableViewCell.m in Sources */,
+				DBCD23A01F8E585300F6CB8F /* UIView+CLSetRect.m in Sources */,
 				DBE1DBD41F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m in Sources */,
 				DBCFD0CC1F4D2E1300149112 /* LoginTableViewCellModel.m in Sources */,
 				DBCFCE6E1F4D1EBF00149112 /* BaseTableViewController.m in Sources */,
@@ -1490,6 +1517,7 @@
 				DBCFCE5A1F4D1D0400149112 /* LoginViewController.m in Sources */,
 				DBCFCE6D1F4D1EBF00149112 /* BaseTableViewCell.m in Sources */,
 				DBDA76421F66812C00C46177 /* HistoryManager.m in Sources */,
+				DBCD239F1F8E585300F6CB8F /* CLTableViewCell.m in Sources */,
 				DBCFCE711F4D1EBF00149112 /* UIBaseTableViewCell.m in Sources */,
 				DB1BB6641F55373400E8B1F8 /* HomeSubPageViewController.m in Sources */,
 				DBCFCED21F4D25E900149112 /* NoteBookCell.m in Sources */,

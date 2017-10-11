@@ -114,8 +114,9 @@
 
 #pragma mark - ShareListTableViewCellDelegate
 - (void)playVideoForCell:(ShareListTableViewCell *)cell {
-    // [self getSourceForUuid:cell.cellModel.shareModel.uuid];
+    [cell startPlay];
     
+    /*
     ShareModel *shareModel = cell.cellModel.shareModel;
     ContentModel *contentModel = [ContentModel new];
     contentModel.title = shareModel.title;
@@ -123,6 +124,7 @@
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:contentModel];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
+     */
 }
 
 #pragma mark - VideoDetailViewControllerDelegate
@@ -187,40 +189,6 @@
     }];
 }
 
-/*
-- (void)getSourceForUuid:(NSString *)uuid {
-    [self.view showLoading];
-    [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
-        __weak typeof(self) weakSelf = self;
-        
-        // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
-        // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
-        NSString *cert = etag;
-        cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
-        NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
-        [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            if (!weakSelf) {
-                return;
-            }
-            [weakSelf.view hideLoading];
-            
-            if (!connectionError) {
-                NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                SourceResponseModel *responseModel = [[SourceResponseModel alloc] initWithString:responseString error:nil];
-                if (responseModel.errorCode != 0) {
-                    [weakSelf.view makeToast:responseModel.msg duration:kToastDuration position:kToastPositionCenter];
-                    return;
-                }
-                
-                SourceModel *sourceModel = responseModel.object;
-                [weakSelf play:sourceModel];
-            } else {
-                [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
-            }
-        }];
-    }];
-}
-*/
 
 #pragma mark - Empty page and Action
 - (void)emptyAction {
