@@ -63,6 +63,7 @@
     self.textField.frame = cellModel.inputFrame;
     self.textField.placeholder = cellModel.placeHolder;
     self.textField.text = cellModel.inputedContent;
+    self.textField.secureTextEntry = (cellModel.loginCellellType == LoginTableViewCellPassWord || cellModel.loginCellellType == LoginTableViewCellConfirmPassWord);
     // [self.textField borderRectForBounds:CGRectMake(5, 0, CGRectGetWidth(cellModel.inputFrame) - 5*2, CGRectGetHeight(cellModel.inputFrame))];
     
     if (LoginTableViewCellVerification == cellModel.loginCellellType) {
