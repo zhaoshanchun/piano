@@ -36,6 +36,7 @@
 		BCBB707F1EC05314001D25C2 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633F1EAC665100B14AC1 /* GoogleSymbolUtilities.framework */; };
 		BCBB70801EC05314001D25C2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A633E1EAC665100B14AC1 /* GoogleToolboxForMac.framework */; };
 		BCBB70951EC07AF7001D25C2 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */; };
+		BCE417361F8DB4F8002940CC /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BCE417351F8DB4F8002940CC /* welcome.jpg */; };
 		DB0E69D51F5AA3D800C5FE4C /* ContentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0E69D41F5AA3D800C5FE4C /* ContentListModel.m */; };
 		DB0EFC671F4D6BE300DE7B59 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC651F4D6BE300DE7B59 /* RegisterViewController.m */; };
 		DB0EFC8E1F4DDD6400DE7B59 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0EFC6B1F4DDD6400DE7B59 /* AFHTTPSessionManager.m */; };
@@ -153,7 +154,6 @@
 		DBCFCED51F4D25E900149112 /* PickerStyle.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCECA1F4D25E900149112 /* PickerStyle.plist */; };
 		DBCFCED61F4D25E900149112 /* SSLPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCFCECC1F4D25E900149112 /* SSLPickerView.m */; };
 		DBCFCED71F4D25E900149112 /* SSLPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCECD1F4D25E900149112 /* SSLPickerView.xib */; };
-		DBCFCFC51F4D275900149112 /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCEDA1F4D275800149112 /* welcome.jpg */; };
 		DBCFD0A71F4D275900149112 /* loading_step1.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCFBC1F4D275900149112 /* loading_step1.png */; };
 		DBCFD0A81F4D275900149112 /* loading_step2.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCFBD1F4D275900149112 /* loading_step2.png */; };
 		DBCFD0A91F4D275900149112 /* loading_step3.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCFCFBE1F4D275900149112 /* loading_step3.png */; };
@@ -259,6 +259,7 @@
 		BCB0C4971EA8EEE5004AB5FD /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		BCB0C4981EA8EEE5004AB5FD /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		BCBB70941EC07AF7001D25C2 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "admob sdk/GoogleMobileAds.framework"; sourceTree = "<group>"; };
+		BCE417351F8DB4F8002940CC /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.jpg; sourceTree = "<group>"; };
 		C706C9C5A0CAAF3C0E88C624 /* Pods-huazhuangjiaocheng.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huazhuangjiaocheng.release.xcconfig"; path = "Pods/Target Support Files/Pods-huazhuangjiaocheng/Pods-huazhuangjiaocheng.release.xcconfig"; sourceTree = "<group>"; };
 		C85E4DFA7855D226CE420889 /* libPods-xuechebaike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-xuechebaike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0E69D31F5AA3D800C5FE4C /* ContentListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentListModel.h; sourceTree = "<group>"; };
@@ -499,7 +500,6 @@
 		DBCFCECB1F4D25E900149112 /* SSLPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSLPickerView.h; sourceTree = "<group>"; };
 		DBCFCECC1F4D25E900149112 /* SSLPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSLPickerView.m; sourceTree = "<group>"; };
 		DBCFCECD1F4D25E900149112 /* SSLPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSLPickerView.xib; sourceTree = "<group>"; };
-		DBCFCEDA1F4D275800149112 /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.jpg; sourceTree = "<group>"; };
 		DBCFCFBC1F4D275900149112 /* loading_step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_step1.png; sourceTree = "<group>"; };
 		DBCFCFBD1F4D275900149112 /* loading_step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_step2.png; sourceTree = "<group>"; };
 		DBCFCFBE1F4D275900149112 /* loading_step3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_step3.png; sourceTree = "<group>"; };
@@ -1157,6 +1157,7 @@
 			children = (
 				DBCFCED91F4D275800149112 /* img */,
 				DBCFCFBC1F4D275900149112 /* loading_step1.png */,
+				BCE417351F8DB4F8002940CC /* welcome.jpg */,
 				DBCFCFBD1F4D275900149112 /* loading_step2.png */,
 				DBCFCFBE1F4D275900149112 /* loading_step3.png */,
 				DBCFCFBF1F4D275900149112 /* Mail.png */,
@@ -1172,7 +1173,6 @@
 		DBCFCED91F4D275800149112 /* img */ = {
 			isa = PBXGroup;
 			children = (
-				DBCFCEDA1F4D275800149112 /* welcome.jpg */,
 			);
 			path = img;
 			sourceTree = "<group>";
@@ -1323,7 +1323,6 @@
 				DBCFD0B81F4D27F400149112 /* Assets.xcassets in Resources */,
 				DBCFD0BC1F4D27F400149112 /* language-en.strings in Resources */,
 				DBCFD0BB1F4D27F400149112 /* language-cn.strings in Resources */,
-				DBCFCFC51F4D275900149112 /* welcome.jpg in Resources */,
 				DBCFD0AD1F4D275900149112 /* shuxue_title.png in Resources */,
 				DBCFD0B91F4D27F400149112 /* GoogleService-Info.plist in Resources */,
 				DBCFD0AE1F4D275900149112 /* Text.strings in Resources */,
@@ -1331,6 +1330,7 @@
 				DBCFD0AC1F4D275900149112 /* play.png in Resources */,
 				DBCFD0AA1F4D275900149112 /* Mail.png in Resources */,
 				DBCFD0AB1F4D275900149112 /* multl_bg.jpg in Resources */,
+				BCE417361F8DB4F8002940CC /* welcome.jpg in Resources */,
 				DBCFD0A71F4D275900149112 /* loading_step1.png in Resources */,
 				DBCFCED51F4D25E900149112 /* PickerStyle.plist in Resources */,
 				DBCFD0BA1F4D27F400149112 /* Info.plist in Resources */,
