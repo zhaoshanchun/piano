@@ -125,6 +125,8 @@
 #define kAPIContentDetail @"program_source"
 #define kAPIShareSubmit @"share_submit"
 #define kAPIShareList @"share_list"
+#define kAPIPraise @"praise"
+
 
 // TODO... appid 为什么叫这个？？？
 #define kAPPID @"yixuekaoshi"

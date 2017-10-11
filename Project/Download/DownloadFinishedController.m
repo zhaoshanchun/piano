@@ -190,11 +190,13 @@
     NSURL *url = [_dlManage get_play_url:task.uuid];
     NSLog(@"url: %@", url);
 
-    ContentModel *model = [ContentModel new];
+    SourceModel *model = [SourceModel new];
     model.uuid = task.uuid;
     model.title = task.title;
     model.preview = task.icon;
-    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:model];
+    model.score = @"96";
+    model.videoUri = [url absoluteString];
+    VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithSourceModel:model];
     
     BaseNavigationController *navigationController = [[BaseNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navigationController animated:NO completion:nil];

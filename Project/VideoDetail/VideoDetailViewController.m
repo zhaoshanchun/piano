@@ -428,7 +428,32 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (void)praiseAction {
-    MyLog(@"praiseAction");
+    //www.szappstore.com/app/praise?user=kunhuang&uuid=XMTc0MDc2NDIxMg==
+    // Login check
+    if (!self.userModel) {
+        [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                // Go to login page
+                self.actonType = ActionForShare;
+                LoginViewController *vc = [LoginViewController new];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        return;
+    }
+    
+    NSString *praiseApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@", kAPIPraise, self.userModel.userName, self.contentModel.uuid];
+    [APIManager requestWithApi:praiseApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+           // [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
+        } else {
+            //[weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
+        }
+    }];
+    
+    MyLog(@"praiseApi: %@", praiseApi);
+
 }
 
 
