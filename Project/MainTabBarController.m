@@ -55,8 +55,8 @@
                                  @{kClassKey  : @"DownloadController",
                                    kTextKey   : localizeString(@"tab_download"),
                                    kTitleKey  : localizeString(@"tab_download"),
-                                   kImgKey    : @"Book_open",
-                                   kSelImgKey : @"Book_open"},
+                                   kImgKey    : @"download",
+                                   kSelImgKey : @"download"},
                                  
                                  @{kClassKey  : @"ProfileViewController",
                                    kTitleKey  : localizeString(@"tab_profile"),
