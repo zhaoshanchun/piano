@@ -7,7 +7,7 @@
 //
 
 #import "UIBaseTableViewCell.h"
-#import "VideoDetailHeadwCellModel.h"
+#import "VideoDetailHeadCellModel.h"
 
 #define kVideoDetailHeadwCellIdentifier @"kVideoDetailHeadwCellIdentifier"
 
@@ -24,6 +24,6 @@
 
 @property (weak, nonatomic) id<VideoDetailHeadwCellDelegate> delegate;
 @property (strong, nonatomic) NSIndexPath *indexPath;
-@property (strong, nonatomic) VideoDetailHeadwCellModel *cellModel;
+@property (strong, nonatomic) VideoDetailHeadCellModel *cellModel;
 
 @end

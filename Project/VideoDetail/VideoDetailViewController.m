@@ -41,7 +41,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (strong, nonatomic) CLPlayerView *playerView;
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) VideoDetailHeadwCellModel *detailHeadCellModel;
+@property (strong, nonatomic) VideoDetailHeadCellModel *detailHeadCellModel;
 @property (strong, nonatomic) NSMutableArray *moreArray;
 @property (strong, nonatomic) NSArray *historyArray;
 
@@ -205,7 +205,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
     [self.playerView playVideo];
     
-    _detailHeadCellModel = [VideoDetailHeadwCellModel new];
+    _detailHeadCellModel = [VideoDetailHeadCellModel new];
     self.detailHeadCellModel.sourceModel = sourceModel;
     [self.tableView reloadData];
 }

@@ -1,9 +1,9 @@
 //
-//  ShareListTableViewCellModel.h
-//  gangqinjiaocheng
+//  PublicShareCellModel.h
+//  CLPlayerDemo
 //
-//  Created by zhaosc on 17/9/16.
-//  Copyright © 2017年 kun. All rights reserved.
+//  Created by JmoVxia on 2017/8/4.
+//  Copyright © 2017年 JmoVxia. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,9 +15,13 @@
 #define kShareListTableViewCellPlayViewWidth (kShareListTableViewCellWidth - kShareListTableViewCellLRPadding*2)
 #define kShareListTableViewCellPlayViewHeight (kShareListTableViewCellPlayViewWidth*9)/16
 
-@interface ShareListTableViewCellModel : NSObject
+#define PublicShareCellHeight (SCREEN_WIDTH*9)/16
+#define PublicShareCellImageHeight PublicShareCellHeight
+
+@interface PublicShareCellModel : NSObject
 
 @property (strong, nonatomic) ShareModel *shareModel;
+@property (assign, nonatomic) CGFloat cellHeight;
 
 @property (assign, nonatomic) CGRect contentFrame;
 @property (strong, nonatomic) NSAttributedString *contentAttribute;
@@ -27,6 +31,6 @@
 @property (assign, nonatomic) CGRect titleFrame;
 @property (strong, nonatomic) NSAttributedString *titleAttribute;
 
-@property (assign, nonatomic) CGFloat cellHeight;
+- (NSString *)iconUrl;
 
 @end

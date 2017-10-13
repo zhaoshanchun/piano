@@ -8,25 +8,22 @@
 
 #import "PublicShareViewController.h"
 #import "CLPlayerView.h"
-#import "CLTableViewCell.h"
-#import "CLModel.h"
+#import "PublicShareTableViewCell.h"
+#import "PublicShareCellModel.h"
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
 
 #import "ShareModel.h"
 
-static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
+static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCellIdentifier";
 
 
-@interface PublicShareViewController () <CLTableViewCellDelegate, UIScrollViewDelegate>
+@interface PublicShareViewController () <PublicShareTableViewCellDelegate, UIScrollViewDelegate>
 
-/**数据源*/
 @property (nonatomic, strong) NSMutableArray *dataArray;
-/**CLplayer*/
-@property (nonatomic, weak) CLPlayerView *playerView;
-/**记录Cell*/
-@property (nonatomic, assign) UITableViewCell *cell;
+@property (nonatomic, strong) CLPlayerView *playerView;
+@property (nonatomic, assign) PublicShareTableViewCell *playingCell;
 
 @end
 
@@ -49,8 +46,7 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
 }
 
 - (void)setTableView {
-    [self.tableView showBorder:[UIColor redColor]];
-    [self.tableView registerClass:[CLTableViewCell class] forCellReuseIdentifier:CLTableViewCellIdentifier];
+    [self.tableView registerClass:[PublicShareTableViewCell class] forCellReuseIdentifier:PublicShareTableViewCellIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,28 +55,46 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopPlaying];
+}
+
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CLTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CLTableViewCellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
-    return cell;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // return PublicShareCellHeight;
+    if (self.dataArray.count > indexPath.row) {
+        PublicShareCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
+        return cellModel.cellHeight;
+    }
+    return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 300;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    PublicShareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PublicShareTableViewCellIdentifier forIndexPath:indexPath];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
+    if (self.dataArray.count > indexPath.row) {
+        PublicShareCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
+        cell.cellModel = cellModel;
+    }
+    return cell;
 }
 
 //在willDisplayCell里面处理数据能优化tableview的滑动流畅性，cell将要出现的时候调用
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    CLTableViewCell * myCell = (CLTableViewCell *)cell;
-    myCell.model = self.dataArray[indexPath.row];
+    // PublicShareTableViewCell * myCell = (PublicShareTableViewCell *)cell;
+    // myCell.cellModel = self.dataArray[indexPath.row];
+    
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
-    [myCell cellOffset];
+    // [myCell cellOffset];
+    
+    /*
     //第一次加载动画
     [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:myCell.model.pictureUrl] completion:^(BOOL isInCache) {
         if (!isInCache) {
@@ -105,42 +119,53 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
             });
         }
     }];
+     */
 }
 
-//cell离开tableView时调用
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    //因为复用，同一个cell可能会走多次
-    if ([_cell isEqual:cell]) {
-        //区分是否是播放器所在cell,销毁时将指针置空
-        [_playerView destroyPlayer];
-        _cell = nil;
+    if ([self.playingCell isEqual:cell]) {
+        // 正在播放的cell离开屏幕，销毁播放
+        [self stopPlaying];
     }
 }
 
 #pragma mark - 点击播放代理
-- (void)cl_tableViewCellPlayVideoWithCell:(CLTableViewCell *)cell{
-    _cell = cell;
-    [_playerView destroyPlayer];
-    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
-    _playerView = playerView;
-    [cell.contentView addSubview:_playerView];
-    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
-    [_playerView playVideo];
-    [_playerView backButton:^(UIButton *button) {
+- (void)shouldPlayVideoForCell:(PublicShareTableViewCell *)cell {
+    [self stopPlaying];
+    self.playingCell = cell;
+    self.playerView = [[CLPlayerView alloc] initWithFrame:cell.cellModel.playViewFrame];
+    [self.playerView backButton:^(UIButton *button) {
         // TODO... 修改源代码，把返回按钮做成可在外部隐藏
     }];
-    [_playerView endPlay:^{
-        [_playerView destroyPlayer];
-        _playerView = nil;
-        _cell = nil;
+    [self.playerView endPlay:^{
+        [self.playerView destroyPlayer];
+        self.playerView = nil;
+        self.playingCell = nil;
     }];
+    [cell addPlayView:self.playerView];
+    
+    /*
+    [cell.contentView addSubview:self.playerView];
+    self.playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+    [self.playerView playVideo];
+    */
+}
+
+- (void)stopPlaying {
+    if (_playerView) {
+        [_playerView destroyPlayer];
+    }
+    if (_playingCell) {
+        [self.playingCell stopedPlay];
+        _playingCell = nil;
+    }
 }
 
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSArray<CLTableViewCell *> *array = [self.tableView visibleCells];
-    [array enumerateObjectsUsingBlock:^(CLTableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj cellOffset];
+    NSArray<PublicShareTableViewCell *> *array = [self.tableView visibleCells];
+    [array enumerateObjectsUsingBlock:^(PublicShareTableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        // [obj cellOffset];
     }];
 }
 
@@ -194,7 +219,7 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
                 return;
             }
         } else {
-            [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
+            [weakSelf handleError:0 errorMsg:@"网络异常，请稍后再试"];
         }
     }];
 }
@@ -208,20 +233,12 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
 
 #pragma mark - Helper
 - (void)addContentList:(NSArray *)contentList {
-    if (contentList.count == 0) {
-        return;
-    }
-    
     for (ShareModel *contentModel in contentList) {
-        CLModel *model = [CLModel new];
-        model.pictureUrl = [NSString stringWithFormat:@"%@/%@%@", kHTTPHomeAddress, kAPIGetImage, contentModel.icon];
-        model.videoUrl = contentModel.video_url;
-        [self.dataArray addObject:model];
+        PublicShareCellModel *cellModel = [PublicShareCellModel new];
+        cellModel.shareModel = contentModel;
+        [self.dataArray addObject:cellModel];
     }
-    
-    if (contentList.count > 0) {
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
 }
 
 - (void)handleError:(NSInteger )errorCode errorMsg:(NSString *)errorMsg {

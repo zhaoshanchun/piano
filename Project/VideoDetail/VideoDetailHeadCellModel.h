@@ -1,5 +1,5 @@
 //
-//  VideoDetailHeadwCellModel.h
+//  VideoDetailHeadCellModel.h
 //  gangqinjiaocheng
 //
 //  Created by zhaosc on 17/9/6.
@@ -18,7 +18,7 @@
 #define kVideoDetailHeadwCellIconMargin 30.f
 
 
-@interface VideoDetailHeadwCellModel : NSObject
+@interface VideoDetailHeadCellModel : NSObject
 
 @property (strong, nonatomic) SourceModel *sourceModel;
 

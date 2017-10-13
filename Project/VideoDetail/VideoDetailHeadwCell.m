@@ -65,7 +65,7 @@
     [self.contentView addSubview:self.bottomLine];
 }
 
-- (void)setCellModel:(VideoDetailHeadwCellModel *)cellModel {
+- (void)setCellModel:(VideoDetailHeadCellModel *)cellModel {
     if (cellModel == nil) {
         return;
     }

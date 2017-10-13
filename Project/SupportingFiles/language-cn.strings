@@ -57,9 +57,9 @@
 
 "more_contents" = "相关视频";
 "view_historys" = "历史记录";
-"view_play_times" = "%ld 次播放 ";
-"view_play_score" = "%@ 分 ";
-"view_play_praise" = "%ld 人点赞 ";
+"view_play_times" = "%ld 次播放";
+"view_play_score" = "%@ 分";
+"view_play_praise" = "%ld 人点赞";
 
 "error_alert_upload_abnormal_image" = "图片异常，上传失败！";
 "error_alert_upload_avatar" = "上传头像失败！";

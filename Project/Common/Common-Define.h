@@ -132,5 +132,8 @@
 #define kAPPID @"yixuekaoshi"
 
 
+#define kChineseDot @"●";
+
+
 
 #endif /* CommonDefine_h */

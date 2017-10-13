@@ -1,14 +1,14 @@
 //
-//  VideoDetailHeadwCellModel.m
+//  VideoDetailHeadCellModel.m
 //  gangqinjiaocheng
 //
 //  Created by zhaosc on 17/9/6.
 //  Copyright © 2017年 kun. All rights reserved.
 //
 
-#import "VideoDetailHeadwCellModel.h"
+#import "VideoDetailHeadCellModel.h"
 
-@implementation VideoDetailHeadwCellModel
+@implementation VideoDetailHeadCellModel
 
 - (void)setSourceModel:(SourceModel *)sourceModel {
     if (sourceModel == nil) {
@@ -26,7 +26,10 @@
     NSString *playsString = [NSString stringWithFormat:localizeString(@"view_play_times"), sourceModel.plays];
     NSString *scoreString = [NSString stringWithFormat:localizeString(@"view_play_score"), sourceModel.score];
     NSString *praiseString = [NSString stringWithFormat:localizeString(@"view_play_praise"), sourceModel.praise];
-    self.detailAttribute = formatAttributedStringByORFontGuide(@[playsString, @"DGY13N", scoreString, @"DGY13N", praiseString, @"DGY13N",], nil);
+    NSString *detailString = playsString;
+    detailString = [detailString stringByAppendingString:[NSString stringWithFormat:@"%@%@", (detailString.length > 0) ? @"，" : @"", scoreString]];
+    detailString = [detailString stringByAppendingString:[NSString stringWithFormat:@"%@%@", (detailString.length > 0) ? @"，" : @"", praiseString]];
+    self.detailAttribute = formatAttributedStringByORFontGuide(@[detailString, @"DGY13N"], nil);
     size = getSizeForAttributedString(self.detailAttribute, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, MAXFLOAT);
     self.detailFrame = CGRectMake(kVideoDetailHeadwCellLRPadding, CGRectGetMaxY(self.titleFrame) + 5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, size.height);
     
