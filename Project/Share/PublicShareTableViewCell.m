@@ -63,10 +63,14 @@
     }
     _cellModel = cellModel;
     
-    self.contentLabel.frame = cellModel.contentFrame;
-    self.contentLabel.attributedText = cellModel.contentAttribute;
+    if (cellModel.contentAttribute.length > 0) {
+        self.contentLabel.hidden = NO;
+        self.contentLabel.frame = cellModel.contentFrame;
+        self.contentLabel.attributedText = cellModel.contentAttribute;
+    }
     
     if (cellModel.detailAttribute.length > 0) {
+        self.detailLabel.hidden = NO;
         self.detailLabel.frame = cellModel.detailFrame;
         self.detailLabel.attributedText = cellModel.detailAttribute;
     }
@@ -85,8 +89,12 @@
         });
     }];
     
-    self.titleLabel.frame = cellModel.titleFrame;
-    self.titleLabel.attributedText = cellModel.titleAttribute;
+    if (cellModel.titleAttribute.length > 0) {
+        self.titleLabel.hidden = NO;
+        self.titleLabel.frame = cellModel.titleFrame;
+        self.titleLabel.attributedText = cellModel.titleAttribute;
+    }
+    
 }
 
 - (void)addPlayView:(CLPlayerView *)playView {
@@ -112,42 +120,13 @@
     self.playButton.hidden = NO;
 }
 
-- (UIImage *)getPictureWithName:(NSString *)name {
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
-    NSString *path = [bundle pathForResource:name ofType:@"png"];
-    return [UIImage imageWithContentsOfFile:path];
-}
-
-- (CGFloat)cellOffset{
-    /*
-     - (CGRect)convertRect:(CGRect)rect toView:(nullable UIView *)view;
-     将rect由rect所在视图转换到目标视图view中，返回在目标视图view中的rect
-     这里用来获取self在window上的位置
-     */
-    CGRect toWindow = [self convertRect:self.bounds toView:self.window];
-    CGPoint windowCenter = self.superview.center;                   //获取父视图的中心
-    CGFloat cellOffsetY = CGRectGetMidY(toWindow) - windowCenter.y; //cell在y轴上的位移
-    CGFloat offsetDig = 2 * cellOffsetY / self.superview.frame.size.height ; //位移比例
-    //要补偿的位移,self.superview.frame.origin.y是tableView的Y值，这里加上是为了让图片从最上面开始显示
-    CGFloat offset = - offsetDig * (PublicShareCellImageHeight - PublicShareCellHeight) / 2;
-    CGAffineTransform transY = CGAffineTransformMakeTranslation(0,offset);  //让placeHolderImageViewY轴方向位移offset
-    self.placeHolderImageView.transform   = transY;
-    return offset;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    // self.playButton.CLcenterX = self.CLwidth/2.0;
-    // self.playButton.CLcenterY = self.CLheight/2.0;
-    // self.placeHolderImageView.CLwidth = self.CLwidth;
-}
-
 
 #pragma mark - Factory method
 - (UILabel *)contentLabel {
     if (_contentLabel == nil) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _contentLabel.numberOfLines = 0;
+        _contentLabel.hidden = YES;
     }
     return _contentLabel;
 }
@@ -156,6 +135,7 @@
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _detailLabel.numberOfLines = 0;
+        _detailLabel.hidden = YES;
     }
     return _detailLabel;
 }
@@ -164,7 +144,6 @@
     if (_playButton == nil) {
         UIImage *playImage = [UIImage imageNamed:@"play"];
         _playButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, playImage.size.width, playImage.size.height)];
-        // [_playButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
         [_playButton setImage:playImage forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -183,6 +162,7 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.numberOfLines = 0;
+        _titleLabel.hidden = YES;
     }
     return _titleLabel;
 }

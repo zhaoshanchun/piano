@@ -146,7 +146,7 @@
         // TODO...  根据 error code 提示错误信息
         error = @"获取数据失败，请重试！";
     }
-    [self showEmptyTitle:error];
+    [self showEmptyTitle:error buttonTitle:localizeString(@"retry")];
 }
 
 

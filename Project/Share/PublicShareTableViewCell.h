@@ -24,7 +24,6 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) PublicShareCellModel *cellModel;
 
-- (CGFloat)cellOffset;
 - (void)addPlayView:(CLPlayerView *)playView;
 - (void)startedPlay;
 - (void)stopedPlay;

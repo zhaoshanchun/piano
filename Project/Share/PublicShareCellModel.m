@@ -18,7 +18,7 @@
     self.cellHeight = kShareListTableViewCellTBPadding;
     
     if (shareModel.content.length > 0) {
-        self.contentAttribute = formatAttributedStringByORFontGuide(@[shareModel.content, @"BR17N"], nil);
+        self.contentAttribute = formatAttributedStringByORFontGuide(@[shareModel.content, @"BR17B"], nil);
         CGSize size = getSizeForAttributedString(self.contentAttribute, kShareListTableViewCellPlayViewWidth, MAXFLOAT);
         self.contentFrame = CGRectMake(kShareListTableViewCellLRPadding, kShareListTableViewCellTBPadding, kShareListTableViewCellPlayViewWidth, size.height);
         self.cellHeight = CGRectGetMaxY(self.contentFrame) + kShareListTableViewCellTBPadding;
@@ -38,7 +38,7 @@
     if (shareModel.title.length > 0) {
         self.titleAttribute = formatAttributedStringByORFontGuide(@[shareModel.title, @"BR15N"], nil);
         CGSize size = getSizeForAttributedString(self.titleAttribute, kShareListTableViewCellPlayViewWidth - kShareListTableViewCellLRPadding*2, MAXFLOAT);
-        self.titleFrame = CGRectMake(kShareListTableViewCellLRPadding, CGRectGetMaxY(self.playViewFrame) + kShareListTableViewCellTBPadding, kShareListTableViewCellPlayViewWidth - kShareListTableViewCellLRPadding*2, size.height);
+        self.titleFrame = CGRectMake(kShareListTableViewCellLRPadding, self.cellHeight, kShareListTableViewCellPlayViewWidth - kShareListTableViewCellLRPadding*2, size.height);
         self.cellHeight = CGRectGetMaxY(self.titleFrame) + kShareListTableViewCellTBPadding;
     }
 }

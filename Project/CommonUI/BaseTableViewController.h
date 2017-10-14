@@ -15,6 +15,7 @@
 @property (assign, nonatomic) UITableViewStyle tableStyle;
 @property (strong, nonatomic) UITableView *tableView;
 
+// Please inherit if need
 - (void)setTableView;
 
 @end

@@ -47,8 +47,9 @@
 
 
 #pragma mark - Empty page and Action
-- (void)showEmptyTitle:(NSString *)emptyTitle;
+- (void)showEmptyTitle:(NSString *)emptyTitle buttonTitle:(NSString *)buttonTitle;
 - (void)hideEmptyParam;
+// Should be override in sub class
 - (void)emptyAction;
 
 @end

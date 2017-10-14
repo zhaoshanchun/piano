@@ -190,7 +190,7 @@
     }
     
     if (self.dataArray.count == 0) {
-        [self showEmptyTitle:error];
+        [self showEmptyTitle:error buttonTitle:localizeString(@"retry")];
     } else {
         [self.view makeToast:error duration:kToastDuration position:kToastPositionCenter];
     }

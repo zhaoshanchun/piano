@@ -109,6 +109,11 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
 }
 
+- (BOOL)interactivePopGestureShouldBegin {
+    // 这个页面不允许通过滑动方式返回上一级。 因为这样无法销毁播放器
+    return NO;
+}
+
 - (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ __nullable)(void))completion {
     [super onBtnBackTouchUpInside:btn completion:completion];
     
@@ -507,12 +512,11 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
         //返回按钮点击事件回调
         [_playerView backButton:^(UIButton *button) {
-            if (_playerView) {
-                [_playerView destroyPlayer];
-                _playerView = nil;
-            }
             [self onBtnBackTouchUpInside:nil completion:^{
-                
+                if (_playerView) {
+                    [_playerView destroyPlayer];
+                    _playerView = nil;
+                }
             }];
         }];
         //播放完成回调

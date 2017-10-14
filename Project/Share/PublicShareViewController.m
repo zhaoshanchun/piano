@@ -32,7 +32,7 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
 - (id)init {
     self = [super init];
     if (self) {
-        self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.hidesBottomBarWhenPushed = NO;
         self.hideNavigationBar = NO;
     }
     return self;
@@ -67,7 +67,6 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    // return PublicShareCellHeight;
     if (self.dataArray.count > indexPath.row) {
         PublicShareCellModel *cellModel = [self.dataArray objectAtIndex:indexPath.row];
         return cellModel.cellHeight;
@@ -84,42 +83,6 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
         cell.cellModel = cellModel;
     }
     return cell;
-}
-
-//在willDisplayCell里面处理数据能优化tableview的滑动流畅性，cell将要出现的时候调用
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    // PublicShareTableViewCell * myCell = (PublicShareTableViewCell *)cell;
-    // myCell.cellModel = self.dataArray[indexPath.row];
-    
-    //Cell开始出现的时候修正偏移量，让图片可以全部显示
-    // [myCell cellOffset];
-    
-    /*
-    //第一次加载动画
-    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:myCell.model.pictureUrl] completion:^(BOOL isInCache) {
-        if (!isInCache) {
-            //主线程
-            dispatch_async(dispatch_get_main_queue(), ^{
-                CATransform3D rotation;//3D旋转
-                rotation = CATransform3DMakeTranslation(0 ,50 ,20);
-                //逆时针旋转
-                rotation = CATransform3DScale(rotation, 0.8, 0.9, 1);
-                rotation.m34 = 1.0/ -600;
-                myCell.layer.shadowColor = [[UIColor blackColor]CGColor];
-                myCell.layer.shadowOffset = CGSizeMake(10, 10);
-                myCell.alpha = 0;
-                myCell.layer.transform = rotation;
-                [UIView beginAnimations:@"rotation" context:NULL];
-                //旋转时间
-                [UIView setAnimationDuration:0.6];
-                myCell.layer.transform = CATransform3DIdentity;
-                myCell.alpha = 1;
-                myCell.layer.shadowOffset = CGSizeMake(0, 0);
-                [UIView commitAnimations];
-            });
-        }
-    }];
-     */
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -143,12 +106,6 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
         self.playingCell = nil;
     }];
     [cell addPlayView:self.playerView];
-    
-    /*
-    [cell.contentView addSubview:self.playerView];
-    self.playerView.url = [NSURL URLWithString:cell.model.videoUrl];
-    [self.playerView playVideo];
-    */
 }
 
 - (void)stopPlaying {
@@ -159,14 +116,6 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
         [self.playingCell stopedPlay];
         _playingCell = nil;
     }
-}
-
-#pragma mark - 滑动代理
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSArray<PublicShareTableViewCell *> *array = [self.tableView visibleCells];
-    [array enumerateObjectsUsingBlock:^(PublicShareTableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        // [obj cellOffset];
-    }];
 }
 
 
@@ -246,12 +195,11 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
     if (errorMsg.length > 0) {
         error = errorMsg;
     } else if (errorCode > 0) {
-        // TODO...  根据 error code 提示错误信息
         error = localizeString(@"error_alert_network_fail_recall");
     }
     
     if (self.dataArray.count == 0) {
-        [self showEmptyTitle:error];
+        [self showEmptyTitle:error buttonTitle:localizeString(@"retry")];
     } else {
         [self.view makeToast:error duration:kToastDuration position:kToastPositionCenter];
     }
