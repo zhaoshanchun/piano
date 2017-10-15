@@ -23,12 +23,17 @@
 
 @implementation UserFeedbackViewController
 
+
+- (void)dealloc {
+    NSLog(@"--- --- ---  UserFeedbackViewController dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.title = @"用户反馈";
+    self.title = @"用户反馈";   // TODO... localizstring
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden=YES;
@@ -42,7 +47,7 @@
     contentTextView.font = [UIFont systemFontOfSize:15];
     contentTextView.returnKeyType = UIReturnKeyDone;
     contentTextView.delegate = self;
-    contentTextView.text = @"请输入您宝贵得意见！必须大于3个字符!";
+    contentTextView.text = @"请输入您宝贵得意见！必须大于3个字符!";  // TODO... localizstring
     MaxLen = 0;
     contentTextView.textColor = [UIColor lightGrayColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChangeText:) name:UITextViewTextDidChangeNotification object:contentTextView];
@@ -61,7 +66,7 @@
     button.backgroundColor = [UIColor colorWithRed:57/255.0 green:157/255.0 blue:229/255.0 alpha:1.0];;
     button.layer.masksToBounds = YES;
 
-    [button setTitle:@"提交" forState:UIControlStateNormal];
+    [button setTitle:@"提交" forState:UIControlStateNormal];  // TODO... localizstring
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateHighlighted];
 
@@ -121,7 +126,7 @@
     [button1 addSubview:image];
     UILabel *us = [UILabel new];
     us.frame = CGRectMake(58, 3, 100, 30);
-    us.text=@"联系我们";
+    us.text=@"联系我们";     // TODO... localizstring
     us.textColor = [UIColor blackColor];
     [button1 addSubview:us];
 }
@@ -161,7 +166,7 @@
     sender.backgroundColor = [UIColor colorWithRed:57/255.0 green:157/255.0 blue:229/255.0 alpha:1.0];
     if(MaxLen <= 3)
     {
-        [[[[iToast makeText:@"必须输入大于3个字符!"]setGravity:iToastGravityCenter] setDuration:iToastDurationShort*2] show];
+        [[[[iToast makeText:@"必须输入大于3个字符!"]setGravity:iToastGravityCenter] setDuration:iToastDurationShort*2] show];     // TODO... localizstring
         return;
     }
     [_loading startAnimating];
@@ -171,7 +176,7 @@
 - (void)timerFunc{
     NSLog(@"%s ",__func__);
    [[[[iToast makeText:@"提交成功!"]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];   // TODO... localizstring
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

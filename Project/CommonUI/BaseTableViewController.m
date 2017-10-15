@@ -88,7 +88,9 @@
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
-        _tableView.tableFooterView = [UIView new];
+        // _tableView.tableFooterView = [UIView new];
+        
+        // [_tableView showBorder:[UIColor redColor]];
     }
     return _tableView;
 }

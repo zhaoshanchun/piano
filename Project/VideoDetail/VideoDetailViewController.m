@@ -7,7 +7,6 @@
 //
 
 #import "VideoDetailViewController.h"
-#import "CLPlayerView.h"
 #import "UIBaseTableViewCell.h"
 #import "VideoDetailHeadwCell.h"
 #import "VideoDetailMoreVideoCell.h"
@@ -38,7 +37,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (strong, nonatomic) ContentModel *contentModel;
 @property (strong, nonatomic) SourceModel *sourceModel;
 
-@property (strong, nonatomic) CLPlayerView *playerView;
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) VideoDetailHeadCellModel *detailHeadCellModel;
@@ -109,10 +107,10 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
 }
 
-- (BOOL)interactivePopGestureShouldBegin {
-    // 这个页面不允许通过滑动方式返回上一级。 因为这样无法销毁播放器
-    return NO;
-}
+//- (BOOL)interactivePopGestureShouldBegin {
+//    // 这个页面不允许通过滑动方式返回上一级。 因为这样无法销毁播放器
+//    return NO;
+//}
 
 - (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ __nullable)(void))completion {
     [super onBtnBackTouchUpInside:btn completion:completion];
@@ -133,6 +131,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (void)dealloc {
+    NSLog(@"--- ---- --- VideoDetailViewController  dealloc");
     if (_playerView) {
         [_playerView destroyPlayer];
         _playerView = nil;
@@ -220,16 +219,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (void)getSourceForUuid:(NSString *)uuid {
     [self.view showLoading];
     [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
-        __weak typeof(self) weakSelf = self;
-        
         // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
         // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
         NSString *cert = etag;
         cert = [cert stringByReplacingOccurrencesOfString:@"+" withString:@""];
         NSString *postData = [NSString stringWithFormat:@"uuid=%@&cert=%@", uuid, cert];
+        // NSLog(@"postData: %@", postData);
         
-        NSLog(@"postData: %@", postData);
-        
+        __weak typeof(self) weakSelf = self;
         [APIManager requestWithApi:kAPIContentDetail httpMethod:kHTTPMethodPost httpBody:postData responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             if (!weakSelf) {
                 return;
@@ -247,6 +244,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
                 weakSelf.sourceModel = responseModel.object;
                 [weakSelf handleSourceModel:weakSelf.sourceModel];
             } else {
+                // TODO... local string
                 [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
             }
         }];
@@ -421,8 +419,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     } else if (self.sourceModel) {
         uuid = self.sourceModel.uuid;
         title = self.sourceModel.title;
-        // TODO... 需要在 SourceModel 中增加 preview
-        // preview = self.sourceModel.
     }
     
     ShareContentViewController *vc = [[ShareContentViewController alloc] initWithTitle:title];
@@ -436,7 +432,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (void)praiseAction {
-    //www.szappstore.com/app/praise?user=kunhuang&uuid=XMTc0MDc2NDIxMg==
+    // www.szappstore.com/app/praise?user=kunhuang&uuid=XMTc0MDc2NDIxMg==
     // Login check
     if (!self.userModel) {
         [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -511,8 +507,9 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     if (_playerView == nil) {
         _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
         //返回按钮点击事件回调
+        __weak typeof(self) weakSelf = self;
         [_playerView backButton:^(UIButton *button) {
-            [self onBtnBackTouchUpInside:nil completion:^{
+            [weakSelf onBtnBackTouchUpInside:nil completion:^{
                 if (_playerView) {
                     [_playerView destroyPlayer];
                     _playerView = nil;

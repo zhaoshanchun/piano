@@ -154,21 +154,19 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
                 self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getShareList)];
             }
             if (weakSelf.tableView.mj_footer) {
-                // End load. No more data
-                
-                // TODO... 在底部显示 : 没有更多数据了  .
-                
+                // End load. No more data  在底部显示 : 没有更多数据了  .
                 if (shareListModel.objects.count < kHTTPShareListLoadCount){
-                    weakSelf.tableView.mj_footer.hidden = YES;
+                    // weakSelf.tableView.mj_footer.hidden = YES;
+                    [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
             }
             
             if (self.dataArray.count == 0) {
-                [weakSelf handleError:0 errorMsg:@"暂时没有小伙伴分享，请稍后再试！"];
+                [weakSelf handleError:0 errorMsg:@"暂时没有小伙伴分享，请稍后再试！"];  // TODO... local string
                 return;
             }
         } else {
-            [weakSelf handleError:0 errorMsg:@"网络异常，请稍后再试"];
+            [weakSelf handleError:0 errorMsg:@"网络异常，请稍后再试"];  // TODO... local string
         }
     }];
 }

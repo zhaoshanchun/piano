@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "ContentListModel.h"
+#import "CLPlayerView.h"
 
 @protocol VideoDetailViewControllerDelegate <NSObject>
 
@@ -19,6 +20,8 @@
 
 @property (weak, nonatomic) id<VideoDetailViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSArray *allContentsArray;
+
+@property (strong, nonatomic) CLPlayerView *playerView;
 
 - (instancetype)initWithContentModel:(ContentModel *)contentModel NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithSourceModel:(SourceModel *)sourceModel NS_DESIGNATED_INITIALIZER;

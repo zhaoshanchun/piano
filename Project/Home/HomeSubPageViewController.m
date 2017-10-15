@@ -58,26 +58,22 @@
 // 使用系统的生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"viewWillAppear------%ld", self.zj_currentIndex);
-    
+    // NSLog(@"viewWillAppear------%ld", self.zj_currentIndex);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"viewDidAppear-----%ld", self.zj_currentIndex);
-    
+    // NSLog(@"viewDidAppear-----%ld", self.zj_currentIndex);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"viewWillDisappear-----%ld", self.zj_currentIndex);
-    
+    // NSLog(@"viewWillDisappear-----%ld", self.zj_currentIndex);
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    NSLog(@"viewDidDisappear--------%ld", self.zj_currentIndex);
-    
+    // NSLog(@"viewDidDisappear--------%ld", self.zj_currentIndex);
 }
 
 
@@ -92,7 +88,7 @@
         [self.collectionView reloadData];
     }
     
-    // TODO... 这里应该判断一下getContentList的api是否有正在执行，如果是，让它cancel。 那就需要修改APIManager
+    // TODO... 这里应该判断一下getContentList的api是否有正在执行，如果是，让它cancel。 APIManager
     
     [self getContentList];
 }
@@ -124,14 +120,13 @@
         }
         
         if (connectionError) {
-            // TODO... 断网或超时：The request time out。 如果改为提示中文？
+            // TODO... 断网或超时：The request time out。 如何改为提示中文？
             MyLog(@"error : %@", [connectionError localizedDescription]);
             [weakSelf handleError:0 errorMsg:[connectionError localizedDescription]];
         } else {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             ContentListModel *contentListModel = [[ContentListModel alloc] initWithString:responseString error:nil];
             if (contentListModel.errorCode != 0) {
-                // [weakSelf.view makeToast:contentListModel.msg duration:kToastDuration position:kToastPositionCenter];
                 [weakSelf handleError:contentListModel.errorCode errorMsg:@""];
                 return;
             }
@@ -155,7 +150,7 @@
             }
             
             if (self.dataArray.count == 0) {
-                [weakSelf handleError:0 errorMsg:@"暂时没有该类型视频，请稍后再试！"];
+                [weakSelf handleError:0 errorMsg:@"暂时没有该类型视频，请稍后再试！"];  // TODO...  local string
                 return;
             }
         }
@@ -166,7 +161,6 @@
     if (contentList.count == 0) {
         return;
     }
-    
     [self.contentList addObjectsFromArray:contentList];
     
     for (ContentModel *contentModel in contentList) {
@@ -186,7 +180,7 @@
         error = errorMsg;
     } else if (errorCode > 0) {
         // TODO...  根据 error code 提示错误信息
-        error = @"获取数据失败，请重试！";
+        error = @"获取数据失败，请重试！"; // TODO...  local string
     }
     
     if (self.dataArray.count == 0) {

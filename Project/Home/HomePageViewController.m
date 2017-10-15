@@ -119,7 +119,6 @@
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             weakSelf.homePageModel = [[ContentListModel alloc] initWithString:responseString error:nil];
             if (weakSelf.homePageModel.errorCode != 0) {
-                // [weakSelf.view makeToast:self.homePageModel.msg duration:kToastDuration position:kToastPositionCenter];
                 [weakSelf handleError:weakSelf.homePageModel.errorCode errorMsg:@""];
                 return;
             }
@@ -143,7 +142,7 @@
     if (errorMsg.length > 0) {
         error = errorMsg;
     } else if (errorCode > 0) {
-        // TODO...  根据 error code 提示错误信息
+        // TODO...  local string
         error = @"获取数据失败，请重试！";
     }
     [self showEmptyTitle:error buttonTitle:localizeString(@"retry")];

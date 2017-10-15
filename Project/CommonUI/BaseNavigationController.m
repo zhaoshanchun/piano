@@ -8,6 +8,7 @@
 
 #import "BaseNavigationController.h"
 #import "MainTabBarController.h"
+#import "VideoDetailViewController.h"
 
 @interface BaseNavigationController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -213,6 +214,36 @@
 }
 
 #pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    id<UIViewControllerTransitionCoordinator> tc = navigationController.topViewController.transitionCoordinator;
+    __weak BaseNavigationController *weakSelf = self;
+    [tc notifyWhenInteractionEndsUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        // It happens when it's interactivePopGesturing but it swipes less than 50%(?) of screen width, and release to go back to original page
+        if ([context isCancelled]) {
+            // 从屏幕左边缘右滑返回取消
+            UIViewController *fromViewController = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+            [weakSelf navigationController:navigationController willShowViewController:fromViewController animated:animated];
+            if([weakSelf respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {
+                NSTimeInterval animationCompletion = [context transitionDuration] * [context percentComplete];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (uint64_t)animationCompletion * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    [weakSelf navigationController:navigationController didShowViewController:fromViewController animated:animated];
+                });
+            }
+        } else {
+            // 从屏幕左边缘右滑返回完成
+            // Fix 从播放页面返回上一级后，播放器还在的问题。看不到画面，但是能听到声音
+            UIViewController *fromViewController = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+            if ([fromViewController isKindOfClass:[VideoDetailViewController class]]) {
+                VideoDetailViewController *vc = (VideoDetailViewController *)fromViewController;
+                if (vc.playerView) {
+                    [vc.playerView destroyPlayer];
+                    vc.playerView = nil;
+                }
+            }
+        }
+    }];
+}
+
 - (void)navigationController:(UINavigationController *)navigationController
        didShowViewController:(UIViewController *)viewController
                     animated:(BOOL)animated {
@@ -224,24 +255,6 @@
         [tabbarController setTabBarHidden:viewController.hidesBottomBarWhenPushed animated:animated];
         [self updateNavigationBar:(BaseViewController *)viewController];
     }
-}
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    id<UIViewControllerTransitionCoordinator> tc = navigationController.topViewController.transitionCoordinator;
-    __weak BaseNavigationController *weakSelf = self;
-    [tc notifyWhenInteractionEndsUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        // It happens when it's interactivePopGesturing but it swipes less than 50% of screen width, and release to go back to original page
-        if ([context isCancelled]) {
-            UIViewController *fromViewController = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
-            [weakSelf navigationController:navigationController willShowViewController:fromViewController animated:animated];
-            if([weakSelf respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {
-                NSTimeInterval animationCompletion = [context transitionDuration] * [context percentComplete];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (uint64_t)animationCompletion * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                    [weakSelf navigationController:navigationController didShowViewController:fromViewController animated:animated];
-                });
-            }
-        }
-    }];
 }
 
 
