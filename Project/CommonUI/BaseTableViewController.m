@@ -70,12 +70,13 @@
 #pragma mark - Factory Method
 - (UITableView *)tableView {
     if (_tableView==nil) {
-        _tableView = [[UITableView alloc] initWithFrame:(CGRect) { 0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)} style:self.tableStyle];
+        _tableView = [[UITableView alloc] initWithFrame:(CGRect) { 0, 0, CGRectGetWidth(self.view.frame), [self pageHeight]} style:self.tableStyle];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delaysContentTouches = NO;
         
+        /*
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             [_tableView setSeparatorInset:UIEdgeInsetsZero];
         }
@@ -88,6 +89,7 @@
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
+         */
         // _tableView.tableFooterView = [UIView new];
         
         // [_tableView showBorder:[UIColor redColor]];

@@ -130,6 +130,9 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
             return;
         }
         [weakSelf.view hideLoading];
+        if (weakSelf.tableView.mj_header) {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }
         if (weakSelf.tableView.mj_footer) {
             [weakSelf.tableView.mj_footer endRefreshing];
         }
@@ -138,12 +141,17 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             ShareListModel *shareListModel = [[ShareListModel alloc] initWithString:responseString error:nil];
             if (shareListModel.errorCode != 0) {
-                [weakSelf handleError:shareListModel.errorCode errorMsg:@""];
+                [weakSelf handleError:shareListModel.errorCode errorMsg:@""];   // TODO...
                 return;
             }
             
             if (shareListModel.objects.count > 0) {
                 [weakSelf addContentList:shareListModel.objects];
+                weakSelf.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                    [weakSelf.dataArray removeAllObjects];
+                    [weakSelf.tableView reloadData];
+                    [weakSelf getShareList];
+                }];
             }
             
             // Add Refreshing: when 1.do not have add Refreshing yet 2. load data == 20, means have more data can be loaded 2. first time load
@@ -151,17 +159,15 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
                 && shareListModel.objects.count == kHTTPShareListLoadCount
                 && (weakSelf.dataArray.count - shareListModel.objects.count) == 0) {
                 // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
-                self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getShareList)];
-            }
-            if (weakSelf.tableView.mj_footer) {
-                // End load. No more data  在底部显示 : 没有更多数据了  .
-                if (shareListModel.objects.count < kHTTPShareListLoadCount){
-                    // weakSelf.tableView.mj_footer.hidden = YES;
-                    [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-                }
+                weakSelf.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getShareList)];
             }
             
-            if (self.dataArray.count == 0) {
+            if (shareListModel.objects.count < kHTTPShareListLoadCount && weakSelf.tableView.mj_footer) {
+                // End load. No more data  在底部显示 : 没有更多数据了  .
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+            if (weakSelf.dataArray.count == 0) {
                 [weakSelf handleError:0 errorMsg:@"暂时没有小伙伴分享，请稍后再试！"];  // TODO... local string
                 return;
             }

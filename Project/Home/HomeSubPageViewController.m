@@ -140,13 +140,11 @@
                 && contentListModel.programs.count == kHTTPLoadCount
                 && (weakSelf.dataArray.count - contentListModel.programs.count) == 0) {
                 // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
-                self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getContentList)];
+                self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getContentList)];
             }
-            if (weakSelf.collectionView.mj_footer) {
-                // End load. No more data
-                if (contentListModel.programs.count < kHTTPLoadCount){
-                    weakSelf.collectionView.mj_footer.hidden = YES;
-                }
+            if (contentListModel.programs.count < kHTTPLoadCount && weakSelf.collectionView.mj_footer) {
+                // End load. No more data  在底部显示 : 没有更多数据了  .
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
             
             if (self.dataArray.count == 0) {
