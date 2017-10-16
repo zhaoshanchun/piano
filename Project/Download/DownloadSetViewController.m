@@ -53,7 +53,7 @@
     UIButton *button1 = [UIButton new];
     button1.tag = 1;
     button1.translatesAutoresizingMaskIntoConstraints = NO;
-    [button1 setImage:[UIImage imageNamed:@"Next"] forState:UIControlStateNormal];
+    [button1 setImage:[UIImage imageNamed:@"common_right_arrow"] forState:UIControlStateNormal];
     [button1 addTarget:self action:@selector(ClickClear:) forControlEvents:UIControlEventTouchUpInside];
     [evaluate addSubview:button1];
     

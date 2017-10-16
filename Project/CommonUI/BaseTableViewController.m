@@ -75,6 +75,7 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delaysContentTouches = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         /*
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {

@@ -194,7 +194,7 @@
     model.uuid = task.uuid;
     model.title = task.title;
     model.preview = task.icon;
-    model.score = @"96";
+    model.score = @"96";    // TODO...
     model.videoUri = [url absoluteString];
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithSourceModel:model];
     

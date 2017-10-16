@@ -12,13 +12,15 @@
 #import "UIImageView+WebCache.h"
 #import "VideoDetailViewController.h"
 #import "BaseNavigationController.h"
+#import "UIAlertView+Blocks.h"
 
 #define FavoriteCellIdentifier @"FavoriteCellIdentifier"
 
 
 @interface FavoriteViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic , strong) UITableView *tableView;
+// @property (nonatomic , strong) UITableView *tableView;
+// TODO...
 @property NSMutableArray *array;
 @property FavoritesManager *favoritesManager;
 
@@ -29,6 +31,7 @@
 - (void)initData{
     self.favoritesManager = [FavoritesManager sharedManager];
     
+    // TODO...
     [self.favoritesManager add:@"XMTc0MDgzODc1Ng==" title:@"XMTc0MDgzODc1Ng==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
     [self.favoritesManager add:@"XMTcwMTY0ODU4OA==" title:@"XMTcwMTY0ODU4OA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
     [self.favoritesManager add:@"XMTcwNDgwOTc4NA==" title:@"XMTcwNDgwOTc4NA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
@@ -38,6 +41,7 @@
 
 - (void)initView{
     
+    /*
     UIView *head = [UIView new];
     head.backgroundColor = [UIColor orThemeColor];
     head.frame = CGRectMake(0, 0, self.view.bounds.size.width, 60);
@@ -49,7 +53,10 @@
     [back setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(OnBack:) forControlEvents:UIControlEventTouchUpInside];    //back.image = [UIImage imageNamed:@"Back"];
     [head addSubview:back];
+     */
     
+    // TODO...
+    /*
     _tableView = [UITableView new];
     _tableView.rowHeight = 70;
     _tableView.delegate = self;
@@ -69,12 +76,15 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:-15]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+     */
 }
 
+/*
 - (void)OnBack:(id)bt
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+ */
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,10 +93,15 @@
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self];
     //self = nav;
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    // self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     [self initData];
-    [self initView];
+    
+    // [self initView];
+}
+
+- (void)setTableView {
+    [self.tableView registerClass:[FavoriteTableViewCell class] forCellReuseIdentifier:FavoriteCellIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,25 +109,40 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //return [downloadArray count];
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.array.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
+    [headerView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    return headerView;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kFavoriteTableViewCellHeight;
+}
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     long section = [indexPath section];
     FavoriteObject *obj = [self.array objectAtIndex:section];
     FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
     [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:obj.preview]];
    // cell.title.text = obj.title;
-    cell.title.text = @"标题标题标题标题标题标题标题标题标题标";
+    cell.title.text = @"标题标题标题标题标题标题标题标题标题标";   // TODO...
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     long section = [indexPath section];
     FavoriteObject *obj = [self.array objectAtIndex:section];
     ContentModel *model = [ContentModel new];
@@ -120,32 +150,13 @@
     model.title = obj.title;
     model.preview = obj.preview;
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithContentModel:model];
+    [self.navigationController pushViewController:vc animated:YES];
 
-    BaseNavigationController *navigationController = [[BaseNavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navigationController animated:NO completion:nil];
-
-    
-    NSLog(@"%s", __func__);
-
+    // BaseNavigationController *navigationController = [[BaseNavigationController alloc] initWithRootViewController:vc];
+    // [self presentViewController:navigationController animated:NO completion:nil];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.array.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
-
--(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 10)];
-    [headerView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-    return headerView;
-}
-
+/*
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.tableView)
     {
@@ -164,23 +175,25 @@
         }
     }
 }
+*/
 
-
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return   UITableViewCellEditingStyleDelete;
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
 }
+
 //先要设Cell可编辑
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
+
 //进入编辑模式，按下出现的编辑按钮后
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView setEditing:NO animated:YES];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
+        // TODO... local string
+        
+        /*
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该消息？" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -190,20 +203,33 @@
             //NSLog(@"delete section: %ld", [indexPath section]);
             //[self.array removeObjectAtIndex:indexPath.section];
             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-            
         }]];
-        
         [self presentViewController:alertController animated:YES completion:nil];
+        */
+        
+        [UIAlertView showWithTitle:nil message:localizeString(@"你确定删除该收藏？") cancelButtonTitle:@"cancel" otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                // TODO...  删除 源数据
+                
+                // TODO...  删除 tableView cell
+                // [tableView beginUpdates];
+                // [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                // [tableView endUpdates];
+                
+            }
+        }];
+         
     }
 }
+
 //修改编辑按钮文字
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO... local string
     return @"删除";
 }
+
 //设置进入编辑状态时，Cell不会缩进
-- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 

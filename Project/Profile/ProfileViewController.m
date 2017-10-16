@@ -139,7 +139,8 @@
         if (indexPath.row == 0) {
             if (self.userCellModel.userModel) {
                 // Logined, go to logout!
-                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:@"cancel取消" destructiveButtonTitle:nil otherButtonTitles:@[@"退出登陆"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                // TODO... local string
+                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[@"退出登陆"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                     if (buttonIndex == 0) {
                         // Logout
                         saveObjectToUserDefaults(kLoginedUser, nil);
@@ -157,7 +158,7 @@
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             NSString *str = [NSString stringWithFormat:
-                             @"https://itunes.apple.com/cn/app/id%@?mt=8", AppID];
+                             @"https://itunes.apple.com/cn/app/id%@?mt=8", AppID];  // TODO...
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
         } else {
             [self.navigationController pushViewController:[UserFeedbackViewController new] animated:YES];
@@ -166,7 +167,11 @@
         if (indexPath.row == 0) {
         } else {
             //[self.navigationController pushViewController:[FavoriteViewController new] animated:YES];
-            [ self presentViewController:[FavoriteViewController new] animated: YES completion:nil];
+            // [ self presentViewController:[FavoriteViewController new] animated: YES completion:nil];
+            
+            FavoriteViewController *vc = [FavoriteViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }
     }
 }
@@ -189,6 +194,9 @@
 }
 
 
+
+// TODO...  相机
+
 #pragma mark - ProfileUserTableViewCellDelegate  点击了头像
 - (void)tapedAvatar {
     /*
@@ -207,6 +215,7 @@
     }
      */
     
+    // TODO...
     NSInteger pickerType;
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {

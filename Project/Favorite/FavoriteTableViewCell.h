@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIBaseTableViewCell.h"
 
-@interface FavoriteTableViewCell : UITableViewCell
-@property (nonatomic, strong)   UIImageView       *iconImageView;
-@property (nonatomic, strong)   UILabel           *title;
+#define kFavoriteTableViewCellHeight 80.f
+#define kFavoriteTableViewCellLRPadding 10.f
+#define kFavoriteTableViewCellTBPadding 10.f
+#define kFavoriteTableViewCellMidMargin 10.f
+
+@interface FavoriteTableViewCell : UIBaseTableViewCell
+
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UILabel *title;
+
 @end
