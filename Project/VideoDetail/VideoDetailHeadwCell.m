@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *detailLabel;
+
+// TODO... 这几个按钮太小了，难点。做大点击范围
 //@property (strong, nonatomic) UIButton *commonButton;
 @property (strong, nonatomic) UIButton *shareButton;
 @property (strong, nonatomic) UIButton *downLoadButton;

@@ -33,7 +33,7 @@
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.title = @"用户反馈";   // TODO... localizstring
+    self.title = localizeString(@"profile_feedBack");
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden=YES;
@@ -47,7 +47,7 @@
     contentTextView.font = [UIFont systemFontOfSize:15];
     contentTextView.returnKeyType = UIReturnKeyDone;
     contentTextView.delegate = self;
-    contentTextView.text = @"请输入您宝贵得意见！必须大于3个字符!";  // TODO... localizstring
+    contentTextView.text = localizeString(@"feedback_notice_content_min");
     MaxLen = 0;
     contentTextView.textColor = [UIColor lightGrayColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChangeText:) name:UITextViewTextDidChangeNotification object:contentTextView];
@@ -66,7 +66,7 @@
     button.backgroundColor = [UIColor colorWithRed:57/255.0 green:157/255.0 blue:229/255.0 alpha:1.0];;
     button.layer.masksToBounds = YES;
 
-    [button setTitle:@"提交" forState:UIControlStateNormal];  // TODO... localizstring
+    [button setTitle:localizeString(@"commit") forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateHighlighted];
 
@@ -126,7 +126,7 @@
     [button1 addSubview:image];
     UILabel *us = [UILabel new];
     us.frame = CGRectMake(58, 3, 100, 30);
-    us.text=@"联系我们";     // TODO... localizstring
+    us.text = localizeString(@"feedback_title_contact");
     us.textColor = [UIColor blackColor];
     [button1 addSubview:us];
 }
@@ -140,7 +140,7 @@
     //创建可变的地址字符串对象
     NSMutableString *mailUrl = [[NSMutableString alloc] init];
     //添加收件人,如有多个收件人，可以使用componentsJoinedByString方法连接，连接符为","
-    NSString *recipients = @"hk520@qq.com";
+    NSString *recipients = @"hk520@qq.com"; // TODO...
     [mailUrl appendFormat:@"mailto:%@?", recipients];
     //添加抄送人
    // NSString *ccRecipients = @"1622849369@qq.com";
@@ -166,7 +166,7 @@
     sender.backgroundColor = [UIColor colorWithRed:57/255.0 green:157/255.0 blue:229/255.0 alpha:1.0];
     if(MaxLen <= 3)
     {
-        [[[[iToast makeText:@"必须输入大于3个字符!"]setGravity:iToastGravityCenter] setDuration:iToastDurationShort*2] show];     // TODO... localizstring
+        [[[[iToast makeText:localizeString(@"feedback_content_min")]setGravity:iToastGravityCenter] setDuration:iToastDurationShort*2] show];
         return;
     }
     [_loading startAnimating];
@@ -175,8 +175,8 @@
 
 - (void)timerFunc{
     NSLog(@"%s ",__func__);
-   [[[[iToast makeText:@"提交成功!"]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
-    [self.navigationController popViewControllerAnimated:YES];   // TODO... localizstring
+   [[[[iToast makeText:localizeString(@"feedback_notice_commit_success")]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

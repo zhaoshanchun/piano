@@ -32,11 +32,8 @@
 "tab_download" = "离线";
 
 
-// Page title
-"page_title_profile" = "我的";
-
-
 // Profile
+"page_title_profile" = "我的";
 "profile_login" = "登录";
 "profile_logout" = "退出登录";
 "profile_alert_login" = "您尚未登录，是否去登录？";
@@ -63,10 +60,17 @@
 "view_play_score" = "%@ 分";
 "view_play_praise" = "%ld 人点赞";
 
+
+// Home sub page
+"home_notice_empty" = "暂时没有该类型视频，请稍后再试！";
+
+
+// Error
 "error_alert_upload_abnormal_image" = "图片异常，上传失败！";
 "error_alert_upload_avatar" = "上传头像失败！";
 "error_alert_network_fail" = "网络异常，请稍后再试！";
 "error_alert_network_fail_recall" = "获取数据失败，请重试！";
+
 
 // Toast
 "toast_input_username" = "请填写用户名";
@@ -76,16 +80,37 @@
 "toast_input_virificacion_error" = "验证码错误！";
 "toast_input_password_unmatch" = "密码不匹配";
 
-// share
-"share_success" = "分享成功！";
 
-// download
+// Share
+"share_success" = "分享成功！";
+"share_notice_empty" = "暂时没有小伙伴分享，请稍后再试！";
+
+
+// Download
+"download_notice_to_download" = "已添加离线下载!";
 "download_title_loading" = "未完成缓存";
 "download_title_loaded" = "已完成缓存";
 "download_title_clean_all" = "清除所有缓存";
 "download_notice" = "提示: 缓存列表手势左划可单独删除对应项缓存数据。";
 "alert_clean_all_check" = "清除所有缓存数据？";
 
+
+// Favority
+"parise_notice_bookmark_success" = "点赞成功!";
+"favority_notice_bookmark_success" = "收藏成功!";
+"favority_notice_delete" = "你确定删除该收藏？";
+
+
+// Photo
+"photo_title_albem" = "相册";
+"photo_title_camera" = "相机";
+
+
+// Feed back
+"feedback_notice_content_min" = "请输入您宝贵得意见！大于3个字符!";
+"feedback_title_contact" = "联系我们";
+"feedback_content_min" = "请务必多于3个字符!";
+"feedback_notice_commit_success" = "提交成功!";
 
 
 

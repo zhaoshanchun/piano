@@ -169,11 +169,11 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
             }
             
             if (weakSelf.dataArray.count == 0) {
-                [weakSelf handleError:0 errorMsg:@"暂时没有小伙伴分享，请稍后再试！"];  // TODO... local string
+                [weakSelf handleError:0 errorMsg:localizeString(@"share_notice_empty")];
                 return;
             }
         } else {
-            [weakSelf handleError:0 errorMsg:@"网络异常，请稍后再试"];  // TODO... local string
+            [weakSelf handleError:0 errorMsg:localizeString(@"error_alert_network_fail")];
         }
     }];
 }

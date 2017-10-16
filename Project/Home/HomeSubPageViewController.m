@@ -148,7 +148,7 @@
             }
             
             if (self.dataArray.count == 0) {
-                [weakSelf handleError:0 errorMsg:@"暂时没有该类型视频，请稍后再试！"];  // TODO...  local string
+                [weakSelf handleError:0 errorMsg:localizeString(@"home_notice_empty")];
                 return;
             }
         }
@@ -178,7 +178,7 @@
         error = errorMsg;
     } else if (errorCode > 0) {
         // TODO...  根据 error code 提示错误信息
-        error = @"获取数据失败，请重试！"; // TODO...  local string
+        error = localizeString(@"error_alert_network_fail_recall");
     }
     
     if (self.dataArray.count == 0) {

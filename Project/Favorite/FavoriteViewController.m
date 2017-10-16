@@ -102,8 +102,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView setEditing:NO animated:YES];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // TODO... local string
-        [UIAlertView showWithTitle:nil message:localizeString(@"你确定删除该收藏？") cancelButtonTitle:@"cancel" otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [UIAlertView showWithTitle:nil message:localizeString(@"favority_notice_delete") cancelButtonTitle:@"cancel" otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 FavoriteObject *obj = [self.array objectAtIndex:indexPath.section];
                 [self.favoritesManager remove:obj.uuid];
@@ -120,8 +119,7 @@
 
 //修改编辑按钮文字
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO... local string
-    return @"删除";
+    return localizeString(@"delete");
 }
 
 //设置进入编辑状态时，Cell不会缩进

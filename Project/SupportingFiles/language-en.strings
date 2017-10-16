@@ -16,7 +16,6 @@
 "nitice" = "Notice";
 "retry" = "Retry";
 
-
 "search" = "Search";
 "more" = "More";
 "commit" = "Commit";
@@ -31,11 +30,8 @@
 "tab_download" = "Download";
 
 
-// Page title
-"page_title_profile" = "Me";
-
-
 // Profile
+"page_title_profile" = "Me";
 "profile_login" = "Login";
 "profile_logout" = "Logout";
 "profile_alert_login" = "Login now ?";
@@ -62,10 +58,17 @@
 "view_play_score" = "%@ Points";
 "view_play_praise" = "%ld Praise";
 
+
+// Home sub page
+"home_notice_empty" = "Do not have this kind of videos, please try again later!";
+
+
+// Error
 "error_alert_upload_abnormal_image" = "Abnormal image, upload fail!";
 "error_alert_upload_avatar" = "Upload Avatar fail!";
 "error_alert_network_fail" = "Network is unusual, please try again later!";
 "error_alert_network_fail_recall" = "Get data failed, please try again!";
+
 
 // Toast
 "toast_input_username" = "Please input user name";
@@ -75,14 +78,39 @@
 "toast_input_virificacion_error" = "Verification code error!";
 "toast_input_password_unmatch" = "Password does not match";
 
-// share
-"share_success" = "Share success!";
 
-// download
+// Share
+"share_success" = "Share success!";
+"share_notice_empty" = "No friend shared yet, please try again later！";
+
+
+// Download
+"download_notice_to_download" = "Have add to down queue!";
 "download_title_loading" = "Unfinished cache";
 "download_title_loaded" = "Finished cache";
 "download_title_clean_all" = "Clear all cache";
 "download_notice" = "Tip: the cache list gestures left can delete the corresponding item cache data independently.";
 "alert_clean_all_check" = "Clear all cache data?";
+
+
+// Favority
+"parise_notice_bookmark_success" = "Parise success!";
+"favority_notice_bookmark_success" = "Favorite success!";
+"favority_notice_delete" = "Do you want to delete this favority？";
+
+
+// Photo
+"photo_title_albem" = "Album";
+"photo_title_camera" = "Camera";
+
+
+// Feed back
+"feedback_notice_content_min" = "Please enjoy your opinos, more than 3 characters!";
+"feedback_title_contact" = "Please contact us";
+"feedback_content_min" = "Please more than 3 characters!";
+"feedback_notice_commit_success" = "Commit success";
+
+
+
 
 

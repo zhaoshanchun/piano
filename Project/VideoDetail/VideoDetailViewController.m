@@ -247,8 +247,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
                 weakSelf.sourceModel = responseModel.object;
                 [weakSelf handleSourceModel:weakSelf.sourceModel];
             } else {
-                // TODO... local string
-                [weakSelf.view makeToast:@"网络异常，请稍后再试" duration:kToastDuration position:kToastPositionCenter];
+                [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
             }
         }];
     }];
@@ -432,7 +431,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (void)downLoadAction {
     [self.dlManage add_download:self.contentModel.uuid url:@"" icon:self.contentModel.preview title:self.contentModel.title];
     [self.dlManage start_download:self.contentModel.uuid];
-    [self.view makeToast:@"已添加离线下载!" duration:kToastDuration position:kToastPositionCenter];
+    [self.view makeToast:localizeString(@"download_notice_to_download") duration:kToastDuration position:kToastPositionCenter];
 
 }
 
@@ -452,29 +451,28 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         return;
     }
     
+    __weak typeof(self) weakSelf = self;
     NSString *praiseApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@", kAPIPraise, self.userModel.userName, self.contentModel.uuid];
     [APIManager requestWithApi:praiseApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
-           // [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
+           [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
         } else {
-            //[weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
+            [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
     
     MyLog(@"praiseApi: %@", praiseApi);
-    [self.view makeToast:@"点赞成功!" duration:kToastDuration position:kToastPositionCenter];
+    [self.view makeToast:localizeString(@"parise_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
 
 
 }
 
-- (void)favoriteAction
-{
+- (void)favoriteAction {
     MyLog(@"favoriteAction");
     self.favoritesManager = [FavoritesManager sharedManager];
-    // TODO...
     [self.favoritesManager add:self.contentModel.uuid title:self.contentModel.title preview:self.contentModel.preview];
     
-    [self.view makeToast:@"收藏成功!" duration:kToastDuration position:kToastPositionCenter];
+    [self.view makeToast:localizeString(@"favority_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
 }
 
 #pragma mark - LoginViewControllerDelegate
@@ -500,8 +498,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     } else if (self.sourceModel) {
         uuid = self.sourceModel.uuid;
         title = self.sourceModel.title;
-        // TODO... 需要在 SourceModel 中增加 preview
-        // preview = self.sourceModel.
     }
     
     __weak typeof(self) weakSelf = self;

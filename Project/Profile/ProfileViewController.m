@@ -143,8 +143,7 @@
         if (indexPath.row == 0) {
             if (self.userCellModel.userModel) {
                 // Logined, go to logout!
-                // TODO... local string
-                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[@"退出登陆"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[@"profile_logout"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                     if (buttonIndex == 0) {
                         // Logout
                         saveObjectToUserDefaults(kLoginedUser, nil);
@@ -202,16 +201,15 @@
 #pragma mark - ProfileUserTableViewCellDelegate  点击了头像
 - (void)tapedAvatar {
     
-    // TODO... local string
     NSMutableArray *dictArray = [NSMutableArray new];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]){
         // 支持 所有相片列表
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"相册", kDictPhotoName, @(UIImagePickerControllerSourceTypeSavedPhotosAlbum), kDictPhotoType, nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:localizeString(@"photo_title_albem"), kDictPhotoName, @(UIImagePickerControllerSourceTypeSavedPhotosAlbum), kDictPhotoType, nil];
         [dictArray addObject:dict];
     }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         // 支持相机
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"相机", kDictPhotoName, @(UIImagePickerControllerSourceTypeCamera), kDictPhotoType, nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:localizeString(@"photo_title_camera"), kDictPhotoName, @(UIImagePickerControllerSourceTypeCamera), kDictPhotoType, nil];
         [dictArray addObject:dict];
     }
     /*
@@ -226,7 +224,7 @@
         [titleArray addObject:[dict objectForKey:kDictPhotoName]];
     }
     
-    [UIActionSheet showInView:self.view withTitle:localizeString(@"select_image") cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:titleArray tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:titleArray tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         if (buttonIndex == dictArray.count) {
             return;
         } else {

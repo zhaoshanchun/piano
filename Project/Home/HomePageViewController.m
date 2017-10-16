@@ -143,7 +143,7 @@
         error = errorMsg;
     } else if (errorCode > 0) {
         // TODO...  local string
-        error = @"获取数据失败，请重试！";
+        error = localizeString(@"error_alert_network_fail_recall");
     }
     [self showEmptyTitle:error buttonTitle:localizeString(@"retry")];
 }
