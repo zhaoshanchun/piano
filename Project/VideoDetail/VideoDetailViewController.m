@@ -503,7 +503,10 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     __weak typeof(self) weakSelf = self;
     // 要先播放，uuid被放到缓存中了，然后才能分享
     // http://119.23.174.22/app/share_submit?user=kunhuang&uuid=XMTgyMzY0NDQ0NA&content=方尽快答复
-    NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@&content=%@", kAPIShareSubmit, self.userModel.userName, uuid, shareContent];
+    NSString *shareSubmitApi = [NSString stringWithFormat:@"%@/%@?user=%@&uuid=%@&content=%@", kHTTPHomeAddress, kAPIShareSubmit, self.userModel.userName, uuid, shareContent];
+    
+    shareSubmitApi = [shareSubmitApi stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
             [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
