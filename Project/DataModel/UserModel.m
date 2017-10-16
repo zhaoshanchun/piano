@@ -76,3 +76,19 @@
 }
 
 @end
+
+
+@implementation UploadPhotoResponseModel
+
++(JSONKeyMapper*)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"error": @"errorCode",
+                                                       @"msg": @"message",
+                                                       }];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName {
+    return YES;
+}
+
+@end

@@ -41,3 +41,13 @@ typedef enum {
 @protocol LoginResponseModel <NSObject>
 @end
 
+
+@interface UploadPhotoResponseModel : JSONModel
+
+@property (strong, nonatomic) NSString *errorCode;
+@property (strong, nonatomic) NSString *message;
+
+@end
+@protocol UploadPhotoResponseModel <NSObject>
+@end
+
