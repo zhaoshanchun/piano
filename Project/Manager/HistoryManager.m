@@ -140,4 +140,20 @@ static HistoryManager *_sharedManager;
     return historyListArray;
 }
 
+- (void)DeleteHistory:(NSString *)uuid
+{
+    if (![self openHistoryDb]) {
+        return;
+    }
+    
+    NSString *cmd = @"DELETE FROM t_history WHERE uid==";
+    cmd = [cmd stringByAppendingString:@"'"];
+    cmd = [cmd stringByAppendingString:uuid];
+    cmd = [cmd stringByAppendingString:@"';"];
+    // NSLog(@"%s cmd: %@", __func__, cmd);   // DELETE FROM t_history WHERE uid=='XMTgyMzY0MjQ5Mg==';
+    
+    [self.db executeUpdate:cmd];
+    [self.db close];
+}
+
 @end

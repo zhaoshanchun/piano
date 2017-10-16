@@ -70,7 +70,7 @@
 #define LANG_SC     @"sc"   // Simplified Chinese
 
 
-#define AppID                   @"1230303508"
+#define AppID                   @"1295460632"
 #define AdmobApplicationID      @"ca-app-pub-8216990062470309~2518401071"
 //#define AdUnitID                @"ca-app-pub-8216990062470309/3995134275"
 //#define TestDevice              @"" ///admob test device

@@ -13,6 +13,7 @@
 #import "UIActionSheet+Blocks.h"
 #import "FavoriteViewController.h"
 #import "ELCImagePickerController.h"
+#import "HistoryRecordViewController.h"
 
 #define kSectionNumber 3
 
@@ -169,7 +170,9 @@
     } else {
         if (indexPath.row == 0) {
             
-            
+            HistoryRecordViewController *vc = [HistoryRecordViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+
             
         } else {
             FavoriteViewController *vc = [FavoriteViewController new];
