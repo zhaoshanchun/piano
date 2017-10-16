@@ -32,9 +32,6 @@
     self.favoritesManager = [FavoritesManager sharedManager];
     
     // TODO...
-    [self.favoritesManager add:@"XMTc0MDgzODc1Ng==" title:@"XMTc0MDgzODc1Ng==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
-    [self.favoritesManager add:@"XMTcwMTY0ODU4OA==" title:@"XMTcwMTY0ODU4OA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
-    [self.favoritesManager add:@"XMTcwNDgwOTc4NA==" title:@"XMTcwNDgwOTc4NA==" preview:@"https://vthumb.ykimg.com/05410408582989116A0A410476D5EF55"];
 
     self.array = [self.favoritesManager getFavoriteArray];
 }
@@ -137,8 +134,8 @@
     FavoriteObject *obj = [self.array objectAtIndex:section];
     FavoriteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FavoriteCellIdentifier forIndexPath:indexPath];
     [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:obj.preview]];
-   // cell.title.text = obj.title;
-    cell.title.text = @"标题标题标题标题标题标题标题标题标题标";   // TODO...
+    cell.title.text = obj.title;
+    //cell.title.text = @"标题标题标题标题标题标题标题标题标题标";   // TODO...
     return cell;
 }
 
@@ -212,9 +209,13 @@
                 // TODO...  删除 源数据
                 
                 // TODO...  删除 tableView cell
-                // [tableView beginUpdates];
-                // [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-                // [tableView endUpdates];
+                FavoriteObject *obj = [self.array objectAtIndex:indexPath.section];
+
+                [self.favoritesManager remove:obj.uuid];
+                [self.array removeObjectAtIndex:indexPath.section];
+                [tableView beginUpdates];
+                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [tableView endUpdates];
                 
             }
         }];

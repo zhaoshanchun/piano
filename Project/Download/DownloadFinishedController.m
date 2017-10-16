@@ -194,7 +194,7 @@
     model.uuid = task.uuid;
     model.title = task.title;
     model.preview = task.icon;
-    model.score = @"96";    // TODO...
+    //model.score = @"96";    // TODO...
     model.videoUri = [url absoluteString];
     VideoDetailViewController *vc = [[VideoDetailViewController alloc] initWithSourceModel:model];
     
@@ -256,7 +256,7 @@
     [tableView setEditing:NO animated:YES];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该消息？" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除？" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             //

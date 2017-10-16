@@ -169,6 +169,9 @@
         }
     } else {
         if (indexPath.row == 0) {
+            
+            
+            
         } else {
             FavoriteViewController *vc = [FavoriteViewController new];
             [self.navigationController pushViewController:vc animated:YES];
