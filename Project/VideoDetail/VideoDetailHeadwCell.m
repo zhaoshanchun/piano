@@ -58,6 +58,7 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.detailLabel];
     
+    // 评论的先不做
 //    [self.contentView addSubview:self.commonButton];
     [self.contentView addSubview:self.shareButton];
     [self.contentView addSubview:self.downLoadButton];
@@ -77,18 +78,17 @@
     
     self.detailLabel.frame = cellModel.detailFrame;
     self.detailLabel.attributedText = cellModel.detailAttribute;
-    
-//    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
 
-    // 点赞收藏
+    // 收藏
     self.favoriteButton.frame = CGRectMake(kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
-
-    // 点赞收藏
+    // 点赞
     self.praiseButton.frame = CGRectMake(CGRectGetMinX(self.favoriteButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 离线下载
     self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 分享推荐
     self.shareButton.frame = CGRectMake(CGRectGetMinX(self.downLoadButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    // 评论
+//    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     
     self.bottomLine.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - 0.5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, 0.5);
 }
@@ -130,7 +130,6 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.numberOfLines = 0;
-//        [_titleLabel showBorder:[UIColor blueColor]];
     }
     return _titleLabel;
 }
@@ -138,7 +137,6 @@
 - (UILabel *)detailLabel {
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] init];
-//        [_detailLabel showBorder:[UIColor blueColor]];
     }
     return _detailLabel;
 }
@@ -149,7 +147,6 @@
 //        [_commonButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
 //        [_commonButton setTitle:localizeString(@"") forState:UIControlStateNormal];
 //        [_commonButton addTarget:self action:@selector(commonButtonActon) forControlEvents:UIControlEventTouchUpInside];
-////        [_commonButton showBorder:[UIColor redColor]];
 //    }
 //    return _commonButton;
 //}
@@ -158,7 +155,6 @@
         _shareButton = [[UIButton alloc] init];
         [_shareButton setImage:[UIImage imageNamed:@"common_share"] forState:UIControlStateNormal];
         [_shareButton addTarget:self action:@selector(shareButtonActon) forControlEvents:UIControlEventTouchUpInside];
-//        [_shareButton showBorder:[UIColor redColor]];
     }
     return _shareButton;
 }
@@ -167,7 +163,6 @@
         _downLoadButton = [[UIButton alloc] init];
         [_downLoadButton setImage:[UIImage imageNamed:@"download"] forState:UIControlStateNormal];
         [_downLoadButton addTarget:self action:@selector(downLoadButtonActon) forControlEvents:UIControlEventTouchUpInside];
-//        [_downLoadButton showBorder:[UIColor redColor]];
     }
     return _downLoadButton;
 }
@@ -176,7 +171,6 @@
         _praiseButton = [[UIButton alloc] init];
         [_praiseButton setImage:[UIImage imageNamed:@"praise"] forState:UIControlStateNormal];
         [_praiseButton addTarget:self action:@selector(praiseButtonActon) forControlEvents:UIControlEventTouchUpInside];
-//        [_praiseButton showBorder:[UIColor redColor]];
     }
     return _praiseButton;
 }
@@ -186,7 +180,6 @@
         _favoriteButton = [[UIButton alloc] init];
         [_favoriteButton setImage:[UIImage imageNamed:@"sr2_sub_photo_like_off"] forState:UIControlStateNormal];
         [_favoriteButton addTarget:self action:@selector(favoriteButtonActon) forControlEvents:UIControlEventTouchUpInside];
-        //        [_praiseButton showBorder:[UIColor redColor]];
     }
     return _favoriteButton;
 }
