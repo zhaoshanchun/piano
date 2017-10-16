@@ -11,9 +11,13 @@
 
 #define kShareListTableViewCellWidth SCREEN_WIDTH
 #define kShareListTableViewCellTBPadding 10.f
-#define kShareListTableViewCellLRPadding 10.f
-#define kShareListTableViewCellPlayViewWidth (kShareListTableViewCellWidth - kShareListTableViewCellLRPadding*2)
+#define kShareListTableViewCellMidMargin 10.f
+#define kShareListTableViewCellLPadding 10.f
+#define kShareListTableViewCellRPadding 15.f
+#define kShareListTableViewCellPlayViewWidth (kShareListTableViewCellWidth - kShareListTableViewCellLPadding - kShareListTableViewCellRPadding)
 #define kShareListTableViewCellPlayViewHeight (kShareListTableViewCellPlayViewWidth*9)/16
+
+#define kPublicShareCellAvatarSize 44.f
 
 #define PublicShareCellHeight (SCREEN_WIDTH*9)/16
 #define PublicShareCellImageHeight PublicShareCellHeight
@@ -23,13 +27,22 @@
 @property (strong, nonatomic) ShareModel *shareModel;
 @property (assign, nonatomic) CGFloat cellHeight;
 
+@property (assign, nonatomic) CGRect avatarImageFrame;
+
+@property (assign, nonatomic) CGRect userNameTitleFrame;
+@property (strong, nonatomic) NSAttributedString *userNameAttribute;
+
 @property (assign, nonatomic) CGRect contentFrame;
 @property (strong, nonatomic) NSAttributedString *contentAttribute;
-@property (assign, nonatomic) CGRect detailFrame;
-@property (strong, nonatomic) NSAttributedString *detailAttribute;
-@property (assign, nonatomic) CGRect playViewFrame;
-@property (assign, nonatomic) CGRect titleFrame;
+
 @property (strong, nonatomic) NSAttributedString *titleAttribute;
+@property (assign, nonatomic) CGRect titleFrame;
+
+@property (strong, nonatomic) NSAttributedString *timeAttribute;
+@property (assign, nonatomic) CGRect timeFrame;
+
+@property (assign, nonatomic) CGRect playViewFrame;
+
 
 - (NSString *)iconUrl;
 

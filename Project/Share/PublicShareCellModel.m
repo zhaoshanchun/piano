@@ -17,30 +17,36 @@
     _shareModel = shareModel;
     self.cellHeight = kShareListTableViewCellTBPadding;
     
-    if (shareModel.content.length > 0) {
-        self.contentAttribute = formatAttributedStringByORFontGuide(@[shareModel.content, @"BR17B"], nil);
-        CGSize size = getSizeForAttributedString(self.contentAttribute, kShareListTableViewCellPlayViewWidth, MAXFLOAT);
-        self.contentFrame = CGRectMake(kShareListTableViewCellLRPadding, kShareListTableViewCellTBPadding, kShareListTableViewCellPlayViewWidth, size.height);
-        self.cellHeight = CGRectGetMaxY(self.contentFrame) + kShareListTableViewCellTBPadding;
-    }
+    // Avatar
+    self.avatarImageFrame = CGRectMake(kShareListTableViewCellLPadding, kShareListTableViewCellTBPadding, kPublicShareCellAvatarSize, kPublicShareCellAvatarSize);
     
-    if (shareModel.alias.length > 0 || shareModel.time.length > 0) {
-        NSString *detailString = [NSString stringWithFormat:@"%@%@%@", shareModel.alias, (shareModel.alias.length > 0) ? @" " : @"", shareModel.time];
-        self.detailAttribute = formatAttributedStringByORFontGuide(@[detailString, @"DGY13N"], nil);
-        CGSize size = getSizeForAttributedString(self.detailAttribute, kShareListTableViewCellPlayViewWidth, MAXFLOAT);
-        self.detailFrame = CGRectMake(kShareListTableViewCellLRPadding, CGRectGetMaxY(self.contentFrame), kShareListTableViewCellPlayViewWidth, size.height);
-        self.cellHeight = CGRectGetMaxY(self.detailFrame) + kShareListTableViewCellTBPadding;
-    }
+    // User Name
+    CGFloat titleWidth = kShareListTableViewCellPlayViewWidth - kPublicShareCellAvatarSize - kShareListTableViewCellMidMargin;
+    self.userNameAttribute = formatAttributedStringByORFontGuide(@[shareModel.alias, @"BR15B"], nil);
+    CGSize size = getSizeForAttributedString(self.userNameAttribute, titleWidth, MAXFLOAT);
+    self.userNameTitleFrame = CGRectMake(CGRectGetMaxX(self.avatarImageFrame) + kShareListTableViewCellMidMargin, kShareListTableViewCellTBPadding, titleWidth, size.height);
+    self.cellHeight = CGRectGetMaxY(self.userNameTitleFrame);
     
-    self.playViewFrame = CGRectMake(kShareListTableViewCellLRPadding, self.cellHeight, kShareListTableViewCellPlayViewWidth, kShareListTableViewCellPlayViewHeight);
-    self.cellHeight = CGRectGetMaxY(self.playViewFrame) + kShareListTableViewCellTBPadding;
+    // 分享的内容
+    self.contentAttribute = formatAttributedStringByORFontGuide(@[shareModel.content, @"DGY13N"], nil);
+    size = getSizeForAttributedString(self.contentAttribute, titleWidth, MAXFLOAT);
+    self.contentFrame = CGRectMake(CGRectGetMinX(self.userNameTitleFrame), CGRectGetMaxY(self.userNameTitleFrame) + 5, titleWidth, size.height);
+    self.cellHeight = CGRectGetMaxY(self.contentFrame);
     
-    if (shareModel.title.length > 0) {
-        self.titleAttribute = formatAttributedStringByORFontGuide(@[shareModel.title, @"BR15N"], nil);
-        CGSize size = getSizeForAttributedString(self.titleAttribute, kShareListTableViewCellPlayViewWidth - kShareListTableViewCellLRPadding*2, MAXFLOAT);
-        self.titleFrame = CGRectMake(kShareListTableViewCellLRPadding, self.cellHeight, kShareListTableViewCellPlayViewWidth - kShareListTableViewCellLRPadding*2, size.height);
-        self.cellHeight = CGRectGetMaxY(self.titleFrame) + kShareListTableViewCellTBPadding;
-    }
+    // 视频标题
+    self.titleAttribute = formatAttributedStringByORFontGuide(@[shareModel.title, @"DGY13N"], nil);
+    size = getSizeForAttributedString(self.titleAttribute, titleWidth, MAXFLOAT);
+    self.titleFrame = CGRectMake(CGRectGetMinX(self.userNameTitleFrame), CGRectGetMaxY(self.contentFrame) + 5, titleWidth, size.height);
+    self.cellHeight = CGRectGetMaxY(self.titleFrame);
+    
+    
+    self.playViewFrame = CGRectMake(CGRectGetMinX(self.userNameTitleFrame), self.cellHeight + kShareListTableViewCellMidMargin, titleWidth, kShareListTableViewCellPlayViewHeight);
+    self.cellHeight = CGRectGetMaxY(self.playViewFrame);
+    
+    self.timeAttribute = formatAttributedStringByORFontGuide(@[shareModel.time, @"DGY12N"], nil);
+    size = getSizeForAttributedString(self.timeAttribute, titleWidth, MAXFLOAT);
+    self.timeFrame = CGRectMake(CGRectGetMinX(self.userNameTitleFrame), self.cellHeight + kShareListTableViewCellMidMargin, titleWidth, size.height);
+    self.cellHeight = CGRectGetMaxY(self.timeFrame) + kShareListTableViewCellTBPadding;
 }
 
 - (NSString *)iconUrl {

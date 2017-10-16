@@ -501,11 +501,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
     
     __weak typeof(self) weakSelf = self;
-    
     NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?", kAPIShareSubmit];
-    
     shareSubmitApi = [shareSubmitApi stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
     NSString *param = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@", self.userModel.userName, uuid, shareContent];
 
     [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodPost httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {

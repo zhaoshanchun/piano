@@ -14,11 +14,13 @@
 @interface PublicShareTableViewCell ()
 
 @property (strong, nonatomic) UIView *topGapLine;
+@property (strong, nonatomic) UIImageView *avatarImageView;
+@property (strong, nonatomic) UILabel *useNameLabel;
 @property (strong, nonatomic) UILabel *contentLabel;
-@property (strong, nonatomic) UILabel *detailLabel;
+@property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIImageView *placeHolderImageView;
 @property (strong, nonatomic) UIButton *playButton;
-@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *timeLabel;
 
 @end
 
@@ -38,11 +40,13 @@
 
 - (void)addContent {
     [self.contentView addSubview:self.topGapLine];
+    [self.contentView addSubview:self.avatarImageView];
+    [self.contentView addSubview:self.useNameLabel];
     [self.contentView addSubview:self.contentLabel];
-    [self.contentView addSubview:self.detailLabel];
+    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.placeHolderImageView];
     [self.contentView addSubview:self.playButton];
-    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.timeLabel];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -70,38 +74,47 @@
     }
     _cellModel = cellModel;
     
-    if (cellModel.contentAttribute.length > 0) {
-        self.contentLabel.hidden = NO;
-        self.contentLabel.frame = cellModel.contentFrame;
-        self.contentLabel.attributedText = cellModel.contentAttribute;
+    
+    self.avatarImageView.frame = cellModel.avatarImageFrame;
+    if (cellModel.iconUrl.length > 0) {
+        [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.iconUrl]
+                                placeholderImage:[UIImage imageNamed:@"avatar"]
+                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                           if (error) {
+                                               [self.avatarImageView setImage:[UIImage imageNamed:@"avatar"]];
+                                           }
+                                       }];
+    } else {
+        self.avatarImageView.image = [UIImage imageNamed:@"avatar"];
     }
     
-    if (cellModel.detailAttribute.length > 0) {
-        self.detailLabel.hidden = NO;
-        self.detailLabel.frame = cellModel.detailFrame;
-        self.detailLabel.attributedText = cellModel.detailAttribute;
-    }
+    
+    self.useNameLabel.frame = cellModel.userNameTitleFrame;
+    self.useNameLabel.attributedText = cellModel.userNameAttribute;
+    
+    self.contentLabel.frame = cellModel.contentFrame;
+    self.contentLabel.attributedText = cellModel.contentAttribute;
+    
+    self.titleLabel.frame = cellModel.titleFrame;
+    self.titleLabel.attributedText = cellModel.titleAttribute;
+    
     
     [self stopedPlay];
     self.placeHolderImageView.frame = cellModel.playViewFrame;
     self.playButton.center = self.placeHolderImageView.center;
     __block UIImage *placeholderImage = [UIImage imageNamed:@"Placeholder"];
-    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:self.cellModel.iconUrl] completion:^(BOOL isInCache) {
+    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:self.cellModel.shareModel.preview] completion:^(BOOL isInCache) {
         if (isInCache) {
             // 本地存在图片, 替换占位图片
-            placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cellModel.iconUrl];
+            placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cellModel.shareModel.preview];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.placeHolderImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.iconUrl] placeholderImage:placeholderImage];
+            [self.placeHolderImageView sd_setImageWithURL:[NSURL URLWithString:cellModel.shareModel.preview] placeholderImage:placeholderImage];
         });
     }];
     
-    if (cellModel.titleAttribute.length > 0) {
-        self.titleLabel.hidden = NO;
-        self.titleLabel.frame = cellModel.titleFrame;
-        self.titleLabel.attributedText = cellModel.titleAttribute;
-    }
-    
+    self.timeLabel.frame = cellModel.timeFrame;
+    self.timeLabel.attributedText = cellModel.timeAttribute;
 }
 
 - (void)addPlayView:(CLPlayerView *)playView {
@@ -137,22 +150,29 @@
     return _topGapLine;
 }
 
+- (UIImageView *)avatarImageView {
+    if (_avatarImageView == nil) {
+        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, kPublicShareCellAvatarSize, kPublicShareCellAvatarSize)];
+        _avatarImageView.layer.cornerRadius = kPublicShareCellAvatarSize/2;
+        _avatarImageView.layer.masksToBounds = YES;
+    }
+    return _avatarImageView;
+}
+
 - (UILabel *)contentLabel {
     if (_contentLabel == nil) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.hidden = YES;
     }
     return _contentLabel;
 }
 
-- (UILabel *)detailLabel {
-    if (_detailLabel == nil) {
-        _detailLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _detailLabel.numberOfLines = 0;
-        _detailLabel.hidden = YES;
+- (UILabel *)useNameLabel {
+    if (_useNameLabel == nil) {
+        _useNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _useNameLabel.numberOfLines = 0;
     }
-    return _detailLabel;
+    return _useNameLabel;
 }
 
 - (UIButton *)playButton {
@@ -177,9 +197,17 @@
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.numberOfLines = 0;
-        _titleLabel.hidden = YES;
     }
     return _titleLabel;
 }
+
+- (UILabel *)timeLabel {
+    if (_timeLabel == nil) {
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _timeLabel.numberOfLines = 0;
+    }
+    return _timeLabel;
+}
+
 
 @end
