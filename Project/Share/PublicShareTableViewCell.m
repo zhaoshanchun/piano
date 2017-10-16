@@ -13,6 +13,7 @@
 
 @interface PublicShareTableViewCell ()
 
+@property (strong, nonatomic) UIView *topGapLine;
 @property (strong, nonatomic) UILabel *contentLabel;
 @property (strong, nonatomic) UILabel *detailLabel;
 @property (strong, nonatomic) UIImageView *placeHolderImageView;
@@ -36,6 +37,7 @@
 }
 
 - (void)addContent {
+    [self.contentView addSubview:self.topGapLine];
     [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.detailLabel];
     [self.contentView addSubview:self.placeHolderImageView];
@@ -55,6 +57,11 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.topGapLine.hidden = (self.indexPath.row == 0);
 }
 
 - (void)setCellModel:(PublicShareCellModel *)cellModel {
@@ -122,6 +129,14 @@
 
 
 #pragma mark - Factory method
+- (UIView *)topGapLine {
+    if (_topGapLine == nil) {
+        _topGapLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kShareListTableViewCellWidth, 0.5f)];
+        _topGapLine.backgroundColor = [UIColor orLineColor];
+    }
+    return _topGapLine;
+}
+
 - (UILabel *)contentLabel {
     if (_contentLabel == nil) {
         _contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
