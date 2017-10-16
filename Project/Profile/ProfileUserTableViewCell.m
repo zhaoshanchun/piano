@@ -42,7 +42,6 @@
     _cellModel = cellModel;
     
     self.avatarImageView.hidden = YES;
-    
     if (cellModel.userModel) {
         // Logined
         self.avatarImageView.hidden = NO;
@@ -53,7 +52,7 @@
             // 返回 01a1aaa5514546c0ed7d9bdad8374487 ，拼成 http://119.23.174.22/app/get_image?file=76f6071b946309b82cad9f6b1372ffb3 来用
             NSString *iconUrl = [NSString stringWithFormat:@"%@/%@%@", kHTTPHomeAddress, kAPIGetImage, cellModel.userModel.icon];
             [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:iconUrl]
-                                    placeholderImage:nil
+                                    placeholderImage:[UIImage imageNamed:@"avatar"]
                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                if (error) {
                                                    [self.avatarImageView setImage:[UIImage imageNamed:@"avatar"]];

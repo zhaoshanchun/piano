@@ -12,10 +12,14 @@
 #import "ProfileUserTableViewCell.h"
 #import "UIActionSheet+Blocks.h"
 #import "FavoriteViewController.h"
+#import "ELCImagePickerController.h"
 
 #define kSectionNumber 3
 
-@interface ProfileViewController () <LoginViewControllerDelegate, RegisterViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, ProfileUserTableViewCellDelegate>
+#define kDictPhotoName @"kDictPhotoName" 
+#define kDictPhotoType @"kDictPhotoType"
+
+@interface ProfileViewController () <LoginViewControllerDelegate, RegisterViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, ProfileUserTableViewCellDelegate, ELCImagePickerControllerDelegate>
 
 @property (strong, nonatomic) ProfileUserTableViewCellModel *userCellModel;
 
@@ -166,9 +170,6 @@
     } else {
         if (indexPath.row == 0) {
         } else {
-            //[self.navigationController pushViewController:[FavoriteViewController new] animated:YES];
-            // [ self presentViewController:[FavoriteViewController new] animated: YES completion:nil];
-            
             FavoriteViewController *vc = [FavoriteViewController new];
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -195,102 +196,50 @@
 
 
 
-// TODO...  相机
-
 #pragma mark - ProfileUserTableViewCellDelegate  点击了头像
 - (void)tapedAvatar {
-    /*
-    UIActionSheet *actionSheet;
-    NSString *actionSheetTitle = @"添加图片";
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        actionSheet=[[UIActionSheet alloc] initWithTitle:(actionSheetTitle) delegate:self cancelButtonTitle:(@"取消") destructiveButtonTitle:(nil) otherButtonTitles:(@"相册"),@"拍照", nil];
-    } else {
-        actionSheet=[[UIActionSheet alloc] initWithTitle:(actionSheetTitle) delegate:self cancelButtonTitle:(@"取消") destructiveButtonTitle:(nil) otherButtonTitles:@"相册", nil];
-    }
     
-    if (!([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
-        [actionSheet showInView:self.view];
-    } else {
-        [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    // TODO... local string
+    NSMutableArray *dictArray = [NSMutableArray new];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]){
+        // 支持 所有相片列表
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"相册", kDictPhotoName, @(UIImagePickerControllerSourceTypeSavedPhotosAlbum), kDictPhotoType, nil];
+        [dictArray addObject:dict];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        // 支持相机
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"相机", kDictPhotoName, @(UIImagePickerControllerSourceTypeCamera), kDictPhotoType, nil];
+        [dictArray addObject:dict];
+    }
+    /*
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        // 支持 所有相册列表
+        pickerType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
      */
     
-    // TODO...
-    NSInteger pickerType;
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        NSLog(@"支持相机");
-        pickerType = UIImagePickerControllerSourceTypeCamera;
-    }
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-    {
-        NSLog(@"支持图库");
-        pickerType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-    {
-        NSLog(@"支持相片库");
-        pickerType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    NSMutableArray *titleArray = [NSMutableArray new];
+    for (NSDictionary *dict in dictArray) {
+        [titleArray addObject:[dict objectForKey:kDictPhotoName]];
     }
     
-    
-    [UIActionSheet showInView:self.view withTitle:localizeString(@"select_image") cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[localizeString(@"photo_album")] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        if (buttonIndex == 0) {
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-            imagePickerController.delegate = self;
-            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:imagePickerController animated:YES completion:nil];
+    [UIActionSheet showInView:self.view withTitle:localizeString(@"select_image") cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:titleArray tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == dictArray.count) {
+            return;
+        } else {
+            UIImagePickerControllerSourceType type = [[[dictArray objectAtIndex:buttonIndex] objectForKey:kDictPhotoType] integerValue];
+            if (UIImagePickerControllerSourceTypeSavedPhotosAlbum == type) {
+                [self startElcImagePickerControl];
+            } else {
+                UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+                imagePickerController.delegate = self;
+                imagePickerController.sourceType = type;
+                [self presentViewController:imagePickerController animated:YES completion:nil];
+            }
         }
     }];
 }
 
-/*
-#pragma mark UIActionSheetDelegate - 选择相机还是相册
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSUInteger sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        // 支持相机拍照的情况:  0:相册   1:相机   2:取消
-        switch (buttonIndex) {
-            case 0: {
-                [self startElcImagePickerControl];
-                return;
-                break;
-            }
-            case 1: {
-                sourceType = UIImagePickerControllerSourceTypeCamera;
-                break;
-            }
-            case 2:
-            default:
-                return;
-        }
-    } else {
-        // 仅支持相册选择的情况
-        if (buttonIndex == 1) {
-            return;
-        } else {
-            [self startElcImagePickerControl];
-            return;
-        }
-    }
-    
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = sourceType;
-    
-    if (!([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self presentViewController:imagePickerController animated:YES completion:^{}];
-            }];
-        } else {
-            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
-            [popover presentPopoverFromRect:self.tableView.tableHeaderView.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        }
-    } else {
-        [self presentViewController:imagePickerController animated:YES completion:^{}];
-    }
-}
 
 #pragma mark 打开照片浏览器
 - (void)startElcImagePickerControl {
@@ -301,7 +250,6 @@
     elcPicker.onOrder = YES; //For multiple image selection, display and return order of selected images
     // elcPicker.mediaTypes = @[kUTTypeImage];
     elcPicker.imagePickerDelegate = self;
-    
     [self presentViewController:elcPicker animated:YES completion:nil];
 }
 
@@ -309,20 +257,13 @@
 #pragma mark ELCImagePickerControllerDelegate - 选择相册照片回调
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
     for (NSDictionary *dict in info) {
-        if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
-            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
-                UIImage* image=[dict objectForKey:UIImagePickerControllerOriginalImage];
-                // 上传 image
-                [self uploadAvatar:image];
-            } else {
-                MyLog(@"UIImagePickerControllerReferenceURL = %@", dict);
-            }
-        } else if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypeVideo){
-            
+        if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+            UIImage* image=[dict objectForKey:UIImagePickerControllerOriginalImage];
+            // 上传 image
+            [self uploadAvatar:image];
         } else {
-            MyLog(@"Uknown asset type");
+            MyLog(@"UIImagePickerControllerReferenceURL = %@", dict);
         }
     }
 }
@@ -330,23 +271,21 @@
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+
 
 #pragma mark UIImagePickerControllerDelegate 拍照回调
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
     if (image) {
         image = [image scaledToSize:CGSizeMake(100, 100)];
         [self uploadAvatar:image];
     }
-    
     [picker dismissViewControllerAnimated:YES completion:^{
     }];
 }
 
--(void) uploadAvatar:(UIImage *)image {
+- (void)uploadAvatar:(UIImage *)image {
     if (!image) {
         [self.view makeToast:localizeString(@"error_alert_upload_abnormal_image") duration:kToastDuration position:kToastPositionCenter];
         return;
@@ -361,6 +300,19 @@
     [APIManager postImageWithApI:kAPISetAvatar image:image responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError) {
             [weakSelf.view makeToast:localizeString(@"error_alert_upload_avatar") duration:kToastDuration position:kToastPositionCenter];
+        } else {
+            // 图片上传完成后，返回图片id更新到UserDefault中
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            UploadPhotoResponseModel *uploadResponseModel = [[UploadPhotoResponseModel alloc] initWithString:responseString error:nil];
+            if (uploadResponseModel.message.length > 0) {
+                NSData *userModelData = (NSData *)getObjectFromUserDefaults(kLoginedUser);
+                if (userModelData) {
+                    UserModel *userModel = [NSKeyedUnarchiver unarchiveObjectWithData:userModelData];
+                    userModel.icon = uploadResponseModel.message;
+                    NSData *userModelData = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+                    saveObjectToUserDefaults(kLoginedUser, userModelData);
+                }
+            }
         }
     }];
 }
