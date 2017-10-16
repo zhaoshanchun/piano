@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "VideoDetailViewController.h"
 #import "BaseNavigationController.h"
+#import "UIAlertView+Blocks.h"
 
 #define FinishedCellIdentifier @"DownloadFinishedController"
 
@@ -266,34 +267,26 @@
 {
     [tableView setEditing:NO animated:YES];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除？" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            //
-            //            [_classArray removeObjectAtIndex:indexPath.row];
-            ///[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            //NSLog(@"delete section: %ld", [indexPath section]);
-            DLTASK *task = _array[indexPath.section];
-            [_dlManage remove_download:task.uuid];
-            [self.array removeObjectAtIndex:indexPath.section];
-            [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            if (self.array.count == 0) {
-                [self showEmptyTitle:localizeString(@"download_notice_downloaded_empty") buttonTitle:nil];
-            } else {
-                [self hideEmptyView];
+        [UIAlertView showWithTitle:nil message:localizeString(@"download_notice_delete") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                DLTASK *task = _array[indexPath.section];
+                [_dlManage remove_download:task.uuid];
+                [self.array removeObjectAtIndex:indexPath.section];
+                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+                if (self.array.count == 0) {
+                    [self showEmptyTitle:localizeString(@"download_notice_downloaded_empty") buttonTitle:nil];
+                } else {
+                    [self hideEmptyView];
+                }
             }
-            
-        }]];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
+        }];
     }
 }
 //修改编辑按钮文字
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return @"删除";
+    return localizeString(@"delete");
 }
 //设置进入编辑状态时，Cell不会缩进
 - (BOOL)tableView: (UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath

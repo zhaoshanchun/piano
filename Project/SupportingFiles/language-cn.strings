@@ -92,6 +92,7 @@
 "download_title_loaded" = "已完成缓存";
 "download_title_clean_all" = "清除所有缓存";
 "download_notice" = "提示: 缓存列表手势左划可单独删除对应项缓存数据。";
+"download_notice_delete" = "是否删除当前下载？";
 "alert_clean_all_check" = "清除所有缓存数据？";
 "download_notice_downloading_empty" = "暂时没有正在缓存的视频";
 "download_notice_downloaded_empty" = "暂时没有缓存完成的视频";
