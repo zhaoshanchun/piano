@@ -455,14 +455,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     NSString *praiseApi = [NSString stringWithFormat:@"%@?user=%@&uuid=%@", kAPIPraise, self.userModel.userName, self.contentModel.uuid];
     [APIManager requestWithApi:praiseApi httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
-           [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
+           [weakSelf.view makeToast:localizeString(@"parise_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
         } else {
             [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
     
-    MyLog(@"praiseApi: %@", praiseApi);
-    [self.view makeToast:localizeString(@"parise_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
+    //MyLog(@"praiseApi: %@", praiseApi);
+    //[self.view makeToast:localizeString(@"parise_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
 
 
 }
