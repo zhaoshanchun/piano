@@ -91,6 +91,8 @@
 "download_title_clean_all" = "Clear all cache";
 "download_notice" = "Tip: the cache list gestures left can delete the corresponding item cache data independently.";
 "alert_clean_all_check" = "Clear all cache data?";
+"download_notice_downloading_empty" = "No downloading videos yet";
+"download_notice_downloaded_empty" = "No downloaded videos yet";
 
 
 // Favority

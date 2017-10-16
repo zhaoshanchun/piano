@@ -88,6 +88,12 @@
             task.progress = (float)task.completed/(float)task.total;
     }
     [_tableView reloadData];
+    
+    if (self.array.count == 0) {
+        [self showEmptyTitle:localizeString(@"download_notice_downloaded_empty") buttonTitle:nil];
+    } else {
+        [self hideEmptyView];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -143,6 +149,12 @@
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:task.section]; //你需要更新的组数
     
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];  //collection 相同
+    
+    if (self.array.count == 0) {
+        [self showEmptyTitle:localizeString(@"download_notice_downloaded_empty") buttonTitle:nil];
+    } else {
+        [self hideEmptyView];
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -266,6 +278,12 @@
             [_dlManage remove_download:task.uuid];
             [self.array removeObjectAtIndex:indexPath.section];
             [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            if (self.array.count == 0) {
+                [self showEmptyTitle:localizeString(@"download_notice_downloaded_empty") buttonTitle:nil];
+            } else {
+                [self hideEmptyView];
+            }
             
         }]];
         

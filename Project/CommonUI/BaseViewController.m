@@ -105,20 +105,23 @@
     self.emptyView.hidden = NO;
     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
     style.alignment = NSTextAlignmentCenter;
-    self.emptyLabel.attributedText = formatAttributedStringByORFontGuide(@[emptyTitle, @"BR16N"], @[style]);
+    self.emptyLabel.attributedText = formatAttributedStringByORFontGuide(@[emptyTitle, @"DGY16N"], @[style]);
     CGSize size = getSizeForAttributedString(self.emptyLabel.attributedText, CGRectGetWidth(self.emptyView.frame), MAXFLOAT);
     self.emptyLabel.frame = CGRectMake(0, 0, CGRectGetWidth(self.emptyView.frame), size.height);
     self.emptyView.frame = CGRectMake(20, ([self pageHeight] - CGRectGetMaxY(self.emptyLabel.frame))/2, [self pageWidth] - 20*2, CGRectGetMaxY(self.emptyLabel.frame));
     
     if (buttonTitle.length > 0) {
+        self.emptyButton.hidden = NO;
         [self.emptyButton setTitle:buttonTitle forState:UIControlStateNormal];
         [self.emptyButton addTarget:self action:@selector(emptyAction) forControlEvents:UIControlEventTouchUpInside];
         self.emptyButton.frame = CGRectMake(30, CGRectGetMaxY(self.emptyLabel.frame) + 20, CGRectGetWidth(self.emptyView.frame) - 30*2, 45);
         self.emptyView.frame = CGRectMake(20, ([self pageHeight] - CGRectGetMaxY(self.emptyButton.frame))/2, [self pageWidth] - 20*2, CGRectGetMaxY(self.emptyButton.frame));
+    } else {
+        self.emptyButton.hidden = YES;
     }
 }
 
-- (void)hideEmptyParam {
+- (void)hideEmptyView {
     self.emptyView.hidden = YES;
 }
 
@@ -132,7 +135,6 @@
 - (UIView *)emptyView {
     if (_emptyView == nil) {
         _emptyView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, [self pageWidth] - 20*2, 0)];
-        // _emptyView.backgroundColor = rgb(@"FFFFFF", 0.9f);
         _emptyView.backgroundColor = [UIColor clearColor];
         _emptyView.hidden = YES;
     }

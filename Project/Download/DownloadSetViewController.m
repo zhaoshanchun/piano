@@ -8,6 +8,7 @@
 
 #import "DownloadSetViewController.h"
 #import "DownloadManage.h"
+#import "UIAlertView+Blocks.h"
 
 @interface DownloadSetViewController ()
 @property DownloadManage *dlManage;
@@ -88,13 +89,11 @@
 
 -(void)ClickClear:(UIButton *)bt
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:localizeString(@"notice") message:localizeString(@"alert_clean_all_check") preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:localizeString(@"cancel") style:UIAlertActionStyleCancel handler:nil]];
-    [alertController addAction:[UIAlertAction actionWithTitle:localizeString(@"confirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self.dlManage remove_all];
-    }]];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    [UIAlertView showWithTitle:nil message:localizeString(@"alert_clean_all_check") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"confirm")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            [self.dlManage remove_all];
+        }
+    }];
 }
 
 /*
