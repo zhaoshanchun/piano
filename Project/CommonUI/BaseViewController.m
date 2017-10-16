@@ -37,6 +37,7 @@
     self.hideNavigationBar = NO;            // 默认当前页面需要 Navigation Bar
     self.hidesBottomBarWhenPushed = YES;    // 默认当前页面不需要 Bottom Bar
     self.navigationController.navigationBar.barTintColor = [UIColor orThemeColor];
+    self.automaticallyAdjustsScrollViewInsets = NO; // 解决table顶部或底部出现一片空白的问题
 }
 
 - (void)viewDidLoad {

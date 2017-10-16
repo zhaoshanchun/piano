@@ -47,7 +47,7 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
 
 - (void)setTableView {
     [self.tableView registerClass:[PublicShareTableViewCell class] forCellReuseIdentifier:PublicShareTableViewCellIdentifier];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    // self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

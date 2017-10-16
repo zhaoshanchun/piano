@@ -91,7 +91,7 @@
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
          */
-        // _tableView.tableFooterView = [UIView new];
+        _tableView.tableFooterView = [UIView new];
         
         // [_tableView showBorder:[UIColor redColor]];
     }
