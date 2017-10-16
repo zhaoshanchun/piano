@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIButton *shareButton;
 @property (strong, nonatomic) UIButton *downLoadButton;
 @property (strong, nonatomic) UIButton *praiseButton;
+@property (strong, nonatomic) UIButton *favoriteButton;
 
 @property (strong, nonatomic) UIView *bottomLine;
 
@@ -61,7 +62,7 @@
     [self.contentView addSubview:self.shareButton];
     [self.contentView addSubview:self.downLoadButton];
     [self.contentView addSubview:self.praiseButton];
-    
+    [self.contentView addSubview:self.favoriteButton];
     [self.contentView addSubview:self.bottomLine];
 }
 
@@ -78,9 +79,12 @@
     self.detailLabel.attributedText = cellModel.detailAttribute;
     
 //    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
-    
+
     // 点赞收藏
-    self.praiseButton.frame = CGRectMake(kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.favoriteButton.frame = CGRectMake(kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+
+    // 点赞收藏
+    self.praiseButton.frame = CGRectMake(CGRectGetMinX(self.favoriteButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 离线下载
     self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 分享推荐
@@ -101,6 +105,7 @@
         [self.delegate shareAction];
     }
 }
+
 - (void)downLoadButtonActon {
     if (self.delegate && [self.delegate respondsToSelector:@selector(downLoadAction)]) {
         [self.delegate downLoadAction];
@@ -109,9 +114,16 @@
 - (void)praiseButtonActon {
     if (self.delegate && [self.delegate respondsToSelector:@selector(praiseAction)]) {
         [self.delegate praiseAction];
+        [_praiseButton setImage:[UIImage imageNamed:@"praiseed"] forState:UIControlStateNormal];
     }
 }
 
+- (void)favoriteButtonActon {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(favoriteAction)]) {
+        [self.delegate favoriteAction];
+        [_favoriteButton setImage:[UIImage imageNamed:@"sr2_sub_photo_like_on"] forState:UIControlStateNormal];
+    }
+}
 
 #pragma mark - Factory method
 - (UILabel *)titleLabel {
@@ -153,7 +165,7 @@
 - (UIButton *)downLoadButton {
     if (_downLoadButton == nil) {
         _downLoadButton = [[UIButton alloc] init];
-        [_downLoadButton setImage:[UIImage imageNamed:@"common_down_arrow"] forState:UIControlStateNormal];
+        [_downLoadButton setImage:[UIImage imageNamed:@"download"] forState:UIControlStateNormal];
         [_downLoadButton addTarget:self action:@selector(downLoadButtonActon) forControlEvents:UIControlEventTouchUpInside];
 //        [_downLoadButton showBorder:[UIColor redColor]];
     }
@@ -167,6 +179,16 @@
 //        [_praiseButton showBorder:[UIColor redColor]];
     }
     return _praiseButton;
+}
+
+- (UIButton *)favoriteButton {
+    if (_favoriteButton == nil) {
+        _favoriteButton = [[UIButton alloc] init];
+        [_favoriteButton setImage:[UIImage imageNamed:@"sr2_sub_photo_like_off"] forState:UIControlStateNormal];
+        [_favoriteButton addTarget:self action:@selector(favoriteButtonActon) forControlEvents:UIControlEventTouchUpInside];
+        //        [_praiseButton showBorder:[UIColor redColor]];
+    }
+    return _favoriteButton;
 }
 
 - (UIView *)bottomLine {

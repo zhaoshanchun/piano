@@ -17,6 +17,7 @@
 - (void)shareAction;
 - (void)downLoadAction;
 - (void)praiseAction;
+- (void)favoriteAction;
 
 @end
 

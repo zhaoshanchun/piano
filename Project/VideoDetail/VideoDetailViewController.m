@@ -16,6 +16,7 @@
 #import "DownloadManage.h"
 #import "LoginViewController.h"
 #import "ShareContentViewController.h"
+#import "FavoritesManager.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
@@ -47,6 +48,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 @property (assign, nonatomic) ActionType actonType;
 @property (assign, nonatomic) BOOL shouldPausePlay;
+
+@property FavoritesManager *favoritesManager;
 
 @end
 
@@ -429,6 +432,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (void)downLoadAction {
     [self.dlManage add_download:self.contentModel.uuid url:@"" icon:self.contentModel.preview title:self.contentModel.title];
     [self.dlManage start_download:self.contentModel.uuid];
+    [self.view makeToast:@"已添加离线下载!" duration:kToastDuration position:kToastPositionCenter];
+
 }
 
 - (void)praiseAction {
@@ -457,9 +462,20 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }];
     
     MyLog(@"praiseApi: %@", praiseApi);
+    [self.view makeToast:@"点赞成功!" duration:kToastDuration position:kToastPositionCenter];
+
 
 }
 
+- (void)favoriteAction
+{
+    MyLog(@"favoriteAction");
+    self.favoritesManager = [FavoritesManager sharedManager];
+    // TODO...
+    [self.favoritesManager add:self.contentModel.uuid title:self.contentModel.title preview:self.contentModel.preview];
+    
+    [self.view makeToast:@"收藏成功!" duration:kToastDuration position:kToastPositionCenter];
+}
 
 #pragma mark - LoginViewControllerDelegate
 - (void)loginSuccess {
