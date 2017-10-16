@@ -25,7 +25,7 @@
 
 
 - (void)dealloc {
-    NSLog(@"--- --- ---  UserFeedbackViewController dealloc");
+    //NSLog(@"--- --- ---  UserFeedbackViewController dealloc");
 }
 
 - (void)viewDidLoad {

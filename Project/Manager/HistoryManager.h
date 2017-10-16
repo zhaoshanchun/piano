@@ -16,5 +16,6 @@
 //- (void)saveToHistoryBy:(NSString *)uid;
 - (void)saveContentToHistory:(ContentModel *)contentModel;
 - (NSMutableArray *)getAllHistoryList;
+- (void)DeleteHistory:(NSString *)uuid;
 
 @end
