@@ -181,7 +181,7 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
 
 #pragma mark - Empty page and Action
 - (void)emptyAction {
-    [self hideEmptyParam];
+    [self hideEmptyView];
     [self getShareList];
 }
 
