@@ -76,6 +76,13 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delaysContentTouches = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [UIView new];
+        
+        if (IS_IPHONE_X) {
+            // 解决 iphone x 的 section headView 显示不出来的问题
+            _tableView.estimatedSectionHeaderHeight=0;
+            _tableView.estimatedSectionFooterHeight=0;
+        }
         
         /*
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -91,7 +98,7 @@
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
          */
-        _tableView.tableFooterView = [UIView new];
+        
         
         // [_tableView showBorder:[UIColor redColor]];
     }
