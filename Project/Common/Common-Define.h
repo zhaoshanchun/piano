@@ -128,7 +128,6 @@
 #define kAPIPraise @"praise"
 
 
-// TODO... appid 为什么叫这个？？？
 #define kAPPID @"yixuekaoshi"
 
 

@@ -39,6 +39,8 @@
 // set Snap logo
 - (void)showSnapLogoNavigationBar;
 // set back button
+- (UIButton *)setLeftBackButtonWithImageKey:(NSString *)key;
+// set back button
 - (UIButton *)setLeftBackButton;
 // set white color back button
 - (UIButton *)setWtLeftBackButton;

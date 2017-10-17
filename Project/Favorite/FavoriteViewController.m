@@ -33,7 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self setLeftBackButtonWithImageKey:@"common_back"];
+    [self setNavigationBarTitle:localizeString(@"profile_history")];
     [self initData];
 }
 

@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setLeftBackButtonWithImageKey:@"common_back"];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = localizeString(@"profile_feedBack");

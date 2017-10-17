@@ -110,11 +110,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }
 }
 
-//- (BOOL)interactivePopGestureShouldBegin {
-//    // 这个页面不允许通过滑动方式返回上一级。 因为这样无法销毁播放器
-//    return NO;
-//}
-
 - (void)onBtnBackTouchUpInside:(UIButton *)btn completion:(void (^ __nullable)(void))completion {
     [super onBtnBackTouchUpInside:btn completion:completion];
     
@@ -486,8 +481,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 #pragma mark - ShareContentViewControllerDelegate
 - (void)shareWithContent:(NSString *)shareContent {
-    self.shouldPausePlay = NO;
-    
     NSString *uuid = @"";
     NSString *preview = @"";
     NSString *title = @"";

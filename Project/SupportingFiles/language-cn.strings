@@ -16,6 +16,7 @@
 "delete" = "删除";
 "nitice" = "提示";
 "retry" = "重试";
+"done" = "完成";
 
 
 "search" = "搜索";
@@ -102,6 +103,10 @@
 "parise_notice_bookmark_success" = "点赞成功!";
 "favority_notice_bookmark_success" = "收藏成功!";
 "favority_notice_delete" = "你确定删除该收藏？";
+
+
+// History
+"history_notice_delete" = "你确定删除该历史记录？";
 
 
 // Photo

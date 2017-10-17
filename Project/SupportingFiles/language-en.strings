@@ -15,6 +15,7 @@
 "delete" = "Delete";
 "nitice" = "Notice";
 "retry" = "Retry";
+"done" = "Done";
 
 "search" = "Search";
 "more" = "More";
@@ -100,6 +101,10 @@
 "parise_notice_bookmark_success" = "Parise success!";
 "favority_notice_bookmark_success" = "Favorite success!";
 "favority_notice_delete" = "Do you want to delete this favority？";
+
+
+// History
+"history_notice_delete" = "Do you want to delete this history record";
 
 
 // Photo

@@ -79,7 +79,6 @@
         [self addChildViewController:nav];
     }];
     
-    // TODO...
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     // float udAppVersion = [[userDefaults objectForKey:@"appVersion"] intValue];
     [userDefaults setObject:@"0" forKey:@"appOnline"];

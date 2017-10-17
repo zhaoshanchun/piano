@@ -29,8 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setLeftBackButtonWithImageKey:@"common_back"];
     [self setNavigationBarTitle:localizeString(@"register")];
-    [self setLeftBackButton];
     
     self.dropDownListArry = [NSArray arrayWithObjects:@"@qq.com", @"@163.com", @"@gmail.com", nil];
     [self presetData];

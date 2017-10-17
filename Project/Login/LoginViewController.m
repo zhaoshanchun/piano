@@ -27,8 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setLeftBackButtonWithImageKey:@"common_back"];
     [self setNavigationBarTitle:localizeString(@"login")];
-    [self setLeftBackButton];
     [self presetData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
