@@ -42,7 +42,7 @@
 #define IS_IOS_8_OR_BELOW ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0)
 #define IS_IOS_8 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) && ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0))
 #define IS_IOS_9_OR_ABOVE ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
-
+#define IS_IOS_11_OR_ABOVE ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
 
 // iOS Device Checking
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
