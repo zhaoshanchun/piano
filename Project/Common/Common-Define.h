@@ -56,14 +56,17 @@
 #define IS_IPHONE_6_PLUS (IS_IPHONE && SCREEN_HEIGHT == 736.0)
 #define IS_IPHONE_6_PLUS_OR_ABOVE (IS_IPHONE && SCREEN_HEIGHT >= 736.0)
 #define IS_IPHONE_6_OR_ABOVE (IS_IPHONE && SCREEN_WIDTH > 320.0)
+#define IS_IPHONE_X (IS_IPHONE && SCREEN_HEIGHT == 812.f)
 
 #define STATUS_BAR_HEIGHT CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)
 // Hardcoded first unless there is better choice
 #define NAVIGATION_BAR_HEIGHT 44.f
 // Custom Tab Bar with 1px line at the top
-#define TAB_BAR_HEIGHT  50.f
-#define SR2_TOOL_BAR_HEIGHT  60.f
-#define KEYBOARD_HEIGHT  216.f
+#define TAB_BAR_HEIGHT  (50.f + BOTTOM_HOME_INDICATOR_MARGIN)
+// For iPhone X, there is a bottom margin of 34.f which we should not place a fixed content on it
+#define BOTTOM_HOME_INDICATOR_MARGIN  (IS_IPHONE_X ? 34.f : 0.f)
+
+
 
 
 #define LANG_EN     @"en"   // English
