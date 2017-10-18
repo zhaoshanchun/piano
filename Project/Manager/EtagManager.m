@@ -31,20 +31,30 @@ static EtagManager *_sharedManager;
 
 - (void)getEtagWithHandler:(EtagBackHndler)handler {
     self.etagBackHandler = handler;
+    NSLog(@"%s", __func__);
+
+    
     if (getObjectFromUserDefaults(kSourceEtagCacheTime)) {
         NSDate *cacheDate = (NSDate *)getObjectFromUserDefaults(kSourceEtagCacheTime);
         NSTimeInterval timeIntervalPassed = [[NSDate new] timeIntervalSince1970] - [cacheDate timeIntervalSince1970];
-        if (timeIntervalPassed < 15*24*60*60) {
+        if (timeIntervalPassed < 5*24*60*60) {
             // Etag 十五天更新一次
             if (getObjectFromUserDefaults(kSourceEtag)) {
                 NSString *etag = (NSString *)getObjectFromUserDefaults(kSourceEtag);
+                etag = [etag stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 self.etagBackHandler(etag, nil);
+                //NSLog(@"etagBackHandler: %@", et);
                 return;
             }
         }
     }
     
     [self analysisCookie];
+}
+- (NSString *)base64EncodedString:(NSString *)src
+{
+    NSData *data = [src dataUsingEncoding:NSUTF8StringEncoding];
+    return [data base64EncodedStringWithOptions:0];
 }
 
 - (void)analysisCookie {
@@ -56,7 +66,8 @@ static EtagManager *_sharedManager;
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                 NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
                                                 NSString *etag = headers[@"Etag"];
-                                                etag = [etag stringByReplacingOccurrencesOfString:@"/" withString:@""];
+                                                etag = [etag stringByReplacingOccurrencesOfString:@"+" withString:@"="];
+                                                NSLog(@"%s etag: %@", __func__, etag);
                                                 
                                                 if (error == nil && etag.length > 0) {
                                                     saveObjectToUserDefaults(kSourceEtag, etag);

@@ -13,6 +13,7 @@
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
+#import "EtagManager.h"
 
 #import "ShareModel.h"
 
@@ -125,56 +126,64 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
     [self.view showLoading];
     __weak typeof(self) weakSelf = self;
     // http://www.appshopping.store/app/share_list?from=0&to=100
-    NSString *apiName = [NSString stringWithFormat:@"%@?from=%ld&to=%d", kAPIShareList, self.dataArray.count, kHTTPShareListLoadCount];
-    [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!weakSelf) {
-            return;
-        }
-        [weakSelf.view hideLoading];
-        if (weakSelf.tableView.mj_header) {
-            [weakSelf.tableView.mj_header endRefreshing];
-        }
-        if (weakSelf.tableView.mj_footer) {
-            [weakSelf.tableView.mj_footer endRefreshing];
-        }
+    [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
+        // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
+        // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
+        NSString *cert = etag;
         
-        if (!connectionError) {
-            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            ShareListModel *shareListModel = [[ShareListModel alloc] initWithString:responseString error:nil];
-            if (shareListModel.errorCode != 0) {
-                [weakSelf handleError:shareListModel.errorCode errorMsg:@""];   // TODO...
+        NSString *apiName = [NSString stringWithFormat:@"%@?cert=%@&from=%ld&to=%d", kAPIShareList, cert, self.dataArray.count, kHTTPShareListLoadCount];
+        NSLog(@"%s %@", __func__, apiName);
+        [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!weakSelf) {
                 return;
             }
-            
-            if (shareListModel.objects.count > 0) {
-                [weakSelf addContentList:shareListModel.objects];
-                weakSelf.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-                    [weakSelf.dataArray removeAllObjects];
-                    [weakSelf.tableView reloadData];
-                    [weakSelf getShareList];
-                }];
+            [weakSelf.view hideLoading];
+            if (weakSelf.tableView.mj_header) {
+                [weakSelf.tableView.mj_header endRefreshing];
+            }
+            if (weakSelf.tableView.mj_footer) {
+                [weakSelf.tableView.mj_footer endRefreshing];
             }
             
-            // Add Refreshing: when 1.do not have add Refreshing yet 2. load data == 20, means have more data can be loaded 2. first time load
-            if (!weakSelf.tableView.mj_footer
-                && shareListModel.objects.count == kHTTPShareListLoadCount
-                && (weakSelf.dataArray.count - shareListModel.objects.count) == 0) {
-                // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
-                weakSelf.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getShareList)];
+            if (!connectionError) {
+                NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                ShareListModel *shareListModel = [[ShareListModel alloc] initWithString:responseString error:nil];
+                if (shareListModel.errorCode != 0) {
+                    [weakSelf handleError:shareListModel.errorCode errorMsg:@""];   // TODO...
+                    return;
+                }
+                
+                if (shareListModel.objects.count > 0) {
+                    [weakSelf addContentList:shareListModel.objects];
+                    weakSelf.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                        [weakSelf.dataArray removeAllObjects];
+                        [weakSelf.tableView reloadData];
+                        [weakSelf getShareList];
+                    }];
+                }
+                
+                // Add Refreshing: when 1.do not have add Refreshing yet 2. load data == 20, means have more data can be loaded 2. first time load
+                if (!weakSelf.tableView.mj_footer
+                    && shareListModel.objects.count == kHTTPShareListLoadCount
+                    && (weakSelf.dataArray.count - shareListModel.objects.count) == 0) {
+                    // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
+                    weakSelf.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getShareList)];
+                }
+                
+                if (shareListModel.objects.count < kHTTPShareListLoadCount && weakSelf.tableView.mj_footer) {
+                    // End load. No more data  在底部显示 : 没有更多数据了  .
+                    [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+                }
+                
+                if (weakSelf.dataArray.count == 0) {
+                    [weakSelf handleError:0 errorMsg:localizeString(@"share_notice_empty")];
+                    return;
+                }
+            } else {
+                [weakSelf handleError:0 errorMsg:localizeString(@"error_alert_network_fail")];
             }
-            
-            if (shareListModel.objects.count < kHTTPShareListLoadCount && weakSelf.tableView.mj_footer) {
-                // End load. No more data  在底部显示 : 没有更多数据了  .
-                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-            }
-            
-            if (weakSelf.dataArray.count == 0) {
-                [weakSelf handleError:0 errorMsg:localizeString(@"share_notice_empty")];
-                return;
-            }
-        } else {
-            [weakSelf handleError:0 errorMsg:localizeString(@"error_alert_network_fail")];
-        }
+        }];
+        
     }];
 }
 
