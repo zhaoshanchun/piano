@@ -10,6 +10,7 @@
 #import "GCDWebDAVServer.h"
 #import "DownloadFile.h"
 #import <sqlite3.h>
+#import "EtagManager.h"
 
 #define DownloadDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"download"]
 
@@ -560,31 +561,39 @@ static DownloadManage *_downloadManage;
 
 -(BOOL *)get_m3u8_url:(NSString *)uuid
 {
-    NSURLSession *session = [NSURLSession sharedSession];
-    //NSString *format = [NSString stringWithFormat:@"http://www.appshopping.store/app/program_source?uuid=%@&cert=12345", uuid];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.appshopping.store/app/program_source?uuid=%@&cert=12345", uuid]];
-    // 通过URL初始化task,在block内部可以直接对返回的数据进行处理
-    NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError* error) {
-        if(error)
-        {
-            if(self.delegate)
+    [[EtagManager sharedManager] getEtagWithHandler:^(NSString *etag, NSString *msg) {
+        // http://www.appshopping.store/app/program_source?uuid=XMTc0MDc2NDIxMg==&cert=12345
+        // NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&cert=%@", kAPIContentDetail, uuid, @"KRAgEpA\+sWECAduFZDEk\+TbE"];
+        NSString *cert = etag;
+        cert = [cert stringByReplacingOccurrencesOfString:@"=" withString:@"+"];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *format = [NSString stringWithFormat:@"http://www.szappstore.com:8080/app/program_source?uuid=%@&cert=%@", uuid, cert];
+        NSURL *url = [NSURL URLWithString:format];
+        
+        NSLog(@"url: %@", format);
+        // 通过URL初始化task,在block内部可以直接对返回的数据进行处理
+        NSURLSessionTask *task = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError* error) {
+            if(error)
             {
-                [self.delegate event:uuid event:-1 error:0];
+                if(self.delegate)
+                {
+                    [self.delegate event:uuid event:-1 error:0];
+                }
             }
-        }
-        else
-        {
-            //NSString *dataStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            NSString *dstUrl = dict[@"object"][@"video_uri"];
-            dstUrl = [dstUrl stringByReplacingOccurrencesOfString:@"%3D%3D" withString:@""];
-            //NSLog(@"dstUrl: %@", dstUrl);
-            [self download_m3u8_file:uuid url:dstUrl];
-        }
+            else
+            {
+                //NSString *dataStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                NSString *dstUrl = dict[@"object"][@"video_uri"];
+                dstUrl = [dstUrl stringByReplacingOccurrencesOfString:@"%3D%3D" withString:@""];
+                //NSLog(@"dstUrl: %@", dstUrl);
+                [self download_m3u8_file:uuid url:dstUrl];
+            }
+        }];
+        
+        // 启动任务
+        [task resume];
     }];
-    
-    // 启动任务
-    [task resume];
     return true;
 }
 
