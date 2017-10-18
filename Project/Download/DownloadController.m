@@ -34,18 +34,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    //CGRect rectNav = self.navigationController.navigationBar.frame;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
    
-    self.navigationItem.titleView = [self initTitleView];
+    // Navigation title view
+    NSArray *items = @[@"1", @"2"];
+    UISegmentedControl *sgc = [[UISegmentedControl alloc] initWithItems:items];
+    sgc.translatesAutoresizingMaskIntoConstraints = NO;
+    sgc.selectedSegmentIndex = 0;
+    // 设置segment的文字
+    [sgc setTitle:localizeString(@"download_title_loading") forSegmentAtIndex:0];
+    [sgc setTitle:localizeString(@"download_title_loaded") forSegmentAtIndex:1];
+    // 监听点击
+    [sgc addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
+    sgc.frame = CGRectMake((self.view.bounds.size.width-sgc.frame.size.width)/2, (self.navigationController.navigationBar.frame.size.height-sgc.frame.size.height)/2, sgc.frame.size.width, sgc.frame.size.height);
+    self.navigationItem.titleView = sgc;
     
+    // Navigation righr item
+    UIButton *setBt = [UIButton new];
+    setBt.translatesAutoresizingMaskIntoConstraints = NO;
+    [setBt setImage:[UIImage imageNamed:@"set_active.png"] forState:UIControlStateNormal];
+    [setBt setImage:[UIImage imageNamed:@"set.png"] forState:UIControlStateSelected];
+    [setBt addTarget:self action:@selector(ButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:setBt];
+    [self setRightBarItem:@[rightItem]];
+    
+    
+    // Left controller
     self.unfinishedController = [[DownloadUnfinishedController alloc] init];
     [self addChildViewController:_unfinishedController];
     
+    // Right controller
     self.finishedController = [[DownloadFinishedController alloc] init];
     [self addChildViewController:_finishedController];
-    //设置默认控制器为fristVc
+    
+    // Current controller 设置默认控制器为fristVc
     self.currentVC = self.unfinishedController;
     [self.view addSubview:self.unfinishedController.view];
 }
@@ -53,46 +75,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (id)initTitleView
-{
-    UIView *view = [UIView new];
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-    view.frame = rectNav;
-
-    NSArray *items = @[@"1", @"2"];
-    UISegmentedControl *sgc = [[UISegmentedControl alloc] initWithItems:items];
-    sgc.translatesAutoresizingMaskIntoConstraints = NO;
-    sgc.selectedSegmentIndex = 0;
-    //设置segment的文字
-    [sgc setTitle:localizeString(@"download_title_loading") forSegmentAtIndex:0];
-    [sgc setTitle:localizeString(@"download_title_loaded") forSegmentAtIndex:1];
-    //监听点击
-    [sgc addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
-    
-    [view addSubview:sgc];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:sgc attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:sgc attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-
-    UIButton *setBt = [UIButton new];
-    setBt.translatesAutoresizingMaskIntoConstraints = NO;
-    [setBt setImage:[UIImage imageNamed:@"set_active.png"] forState:UIControlStateNormal];
-    [setBt setImage:[UIImage imageNamed:@"set.png"] forState:UIControlStateSelected];
-    [setBt addTarget:self action:@selector(ButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:setBt];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:setBt attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:33]];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:setBt attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1 constant:33]];
-
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:setBt attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
-    
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:setBt attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-
-    return view;
 }
 
 -(void)ButtonAciton:(UIButton *)bt
