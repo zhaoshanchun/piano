@@ -37,21 +37,14 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
    
     // Navigation title view
-    NSArray *items = @[@"1", @"2"];
+    NSArray *items = @[localizeString(@"download_title_loading"), localizeString(@"download_title_loaded")];
     UISegmentedControl *sgc = [[UISegmentedControl alloc] initWithItems:items];
-    sgc.translatesAutoresizingMaskIntoConstraints = NO;
-    sgc.selectedSegmentIndex = 0;
-    // 设置segment的文字
-    [sgc setTitle:localizeString(@"download_title_loading") forSegmentAtIndex:0];
-    [sgc setTitle:localizeString(@"download_title_loaded") forSegmentAtIndex:1];
-    // 监听点击
     [sgc addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
-    sgc.frame = CGRectMake((self.view.bounds.size.width-sgc.frame.size.width)/2, (self.navigationController.navigationBar.frame.size.height-sgc.frame.size.height)/2, sgc.frame.size.width, sgc.frame.size.height);
+    sgc.frame = CGRectMake((self.view.bounds.size.width - sgc.frame.size.width)/2, (self.navigationController.navigationBar.frame.size.height-sgc.frame.size.height)/2, sgc.frame.size.width, sgc.frame.size.height);
     self.navigationItem.titleView = sgc;
     
     // Navigation righr item
     [self setRightButtonWithImage:[UIImage imageNamed:@"set_active.png"] target:self action:@selector(ButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     // Left controller
     self.unfinishedController = [[DownloadUnfinishedController alloc] init];
