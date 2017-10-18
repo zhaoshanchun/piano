@@ -154,6 +154,7 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
                 }
                 
                 if (shareListModel.objects.count > 0) {
+                    [self hideEmptyView];
                     [weakSelf addContentList:shareListModel.objects];
                     weakSelf.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                         [weakSelf.dataArray removeAllObjects];

@@ -121,7 +121,9 @@
 }
 
 - (void)hideEmptyView {
-    self.emptyView.hidden = YES;
+    if (_emptyView) {
+        self.emptyView.hidden = YES;
+    }
 }
 
 - (void)emptyAction {
