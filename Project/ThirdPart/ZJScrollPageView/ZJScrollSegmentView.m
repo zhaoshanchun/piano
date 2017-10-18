@@ -78,7 +78,6 @@ static CGFloat const contentSizeXOff = 20.0;
     return self;
 }
 - (void)setupSubviews {
-    
     [self addSubview:self.scrollView];
     [self addScrollLineOrCoverOrExtraBtn];
     [self setupTitles];
@@ -146,7 +145,6 @@ static CGFloat const contentSizeXOff = 20.0;
         titleView.text = title;
         titleView.textColor = self.segmentStyle.normalTitleColor;
         titleView.imagePosition = self.segmentStyle.imagePosition;
-
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(setUpTitleView:forIndex:)]) {
             [self.delegate setUpTitleView:titleView forIndex:index];
@@ -203,7 +201,7 @@ static CGFloat const contentSizeXOff = 20.0;
 
 - (void)setUpTitleViewsPosition {
     CGFloat titleX = 0.0;
-    CGFloat titleY = 20.0;  // Mark:Change by ken
+    CGFloat titleY = STATUS_BAR_HEIGHT;  // Mark:Change by ken
     CGFloat titleW = 0.0;
     CGFloat titleH = self.zj_height - self.segmentStyle.scrollLineHeight - titleY;  // Mark:Change by ken
     

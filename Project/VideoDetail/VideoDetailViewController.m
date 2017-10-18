@@ -84,6 +84,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
+    // 解决table顶部或底部出现一片空白的问题
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
     if (self.sourceModel) {
         [self presetMoreContentsForUuid:self.sourceModel.uuid];
         [self handleSourceModel:self.sourceModel];
@@ -512,7 +520,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 #pragma mark - Factory method
 - (CLPlayerView *)playerView {
     if (_playerView == nil) {
-        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageWidth]*9/16)];
+        _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageWidth]*9/16)];
         //返回按钮点击事件回调
         __weak typeof(self) weakSelf = self;
         [_playerView backButton:^(UIButton *button) {
@@ -539,6 +547,12 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.separatorColor = [UIColor grayColor];
         _tableView.delaysContentTouches = NO;
+        
+        if (IS_IPHONE_X) {
+            // 解决 iphone x 的 section headView 显示不出来的问题
+            _tableView.estimatedSectionHeaderHeight=0;
+            _tableView.estimatedSectionFooterHeight=0;
+        }
         
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             [_tableView setSeparatorInset:UIEdgeInsetsZero];

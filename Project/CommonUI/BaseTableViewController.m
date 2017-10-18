@@ -25,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    
+    // 解决table顶部或底部出现一片空白的问题
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self setTableView];
 }
 
@@ -84,7 +91,6 @@
             _tableView.estimatedSectionFooterHeight=0;
         }
         
-        /*
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             [_tableView setSeparatorInset:UIEdgeInsetsZero];
         }
@@ -97,10 +103,6 @@
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
-         */
-        
-        
-        // [_tableView showBorder:[UIColor redColor]];
     }
     return _tableView;
 }

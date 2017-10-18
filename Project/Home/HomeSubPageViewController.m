@@ -44,6 +44,9 @@
 - (void)zj_viewDidLoadForIndex:(NSInteger)index {
     // 在这里加content view, 不要在 viewDidLoad 中加
     [self.view addSubview:self.collectionView];
+    if (@available(iOS 11.0, *)) {
+        self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 }
 
 - (void)dealloc {
