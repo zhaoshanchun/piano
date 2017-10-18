@@ -47,7 +47,7 @@
     ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
     style.showLine = YES;   //显示滚动条
     style.gradualChangeTitleColor = YES;    // 颜色渐变
-    style.segmentHeight = 64.0f;
+    style.segmentHeight = STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT;
     
     _scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], [self pageHeight]) segmentStyle:style titles:@[localizeString(@"tab_home")] parentViewController:self delegate:self];
     [self.view addSubview:_scrollPageView];

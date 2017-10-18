@@ -25,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    
+    // 解决table顶部或底部出现一片空白的问题
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     [self setTableView];
 }
 
@@ -76,8 +83,14 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delaysContentTouches = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [UIView new];
         
-        /*
+        if (IS_IPHONE_X) {
+            // 解决 iphone x 的 section headView 显示不出来的问题
+            _tableView.estimatedSectionHeaderHeight=0;
+            _tableView.estimatedSectionFooterHeight=0;
+        }
+        
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             [_tableView setSeparatorInset:UIEdgeInsetsZero];
         }
@@ -90,10 +103,6 @@
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
-         */
-        _tableView.tableFooterView = [UIView new];
-        
-        // [_tableView showBorder:[UIColor redColor]];
     }
     return _tableView;
 }
