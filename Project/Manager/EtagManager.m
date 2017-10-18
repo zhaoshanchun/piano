@@ -67,6 +67,7 @@ static EtagManager *_sharedManager;
                                                 NSDictionary* headers = [(NSHTTPURLResponse *)response allHeaderFields];
                                                 NSString *etag = headers[@"Etag"];
                                                 etag = [etag stringByReplacingOccurrencesOfString:@"+" withString:@"="];
+                                                etag = [etag stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                                                 NSLog(@"%s etag: %@", __func__, etag);
                                                 
                                                 if (error == nil && etag.length > 0) {
