@@ -29,12 +29,17 @@
     self.historyArray = [[HistoryManager sharedManager] getAllHistoryList];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBackButtonWithImageKey:@"common_back"];
     [self setNavigationBarTitle:localizeString(@"profile_history")];
     [self initData];
+    
+    if (self.historyArray.count > 0) {
+        [self.tableView reloadData];
+    } else {
+        [self showEmptyTitle:localizeString(@"history_notice_empty") buttonTitle:nil];
+    }
 }
 
 - (void)setTableView {
@@ -112,6 +117,9 @@
                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [tableView endUpdates];
                 
+                if (self.historyArray.count == 0) {
+                    [self showEmptyTitle:localizeString(@"history_notice_empty") buttonTitle:nil];
+                }
             }
         }];
         

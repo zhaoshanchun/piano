@@ -34,8 +34,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setLeftBackButtonWithImageKey:@"common_back"];
-    [self setNavigationBarTitle:localizeString(@"profile_history")];
+    [self setNavigationBarTitle:localizeString(@"profile_bookmark")];
     [self initData];
+    
+    if (self.array.count > 0) {
+        [self.tableView reloadData];
+    } else {
+        [self showEmptyTitle:localizeString(@"favority_notice_empty") buttonTitle:nil];
+    }
 }
 
 - (void)setTableView {
@@ -112,6 +118,9 @@
                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [tableView endUpdates];
                 
+                if (self.array.count == 0) {
+                    [self showEmptyTitle:localizeString(@"favority_notice_empty") buttonTitle:nil];
+                }
             }
         }];
          

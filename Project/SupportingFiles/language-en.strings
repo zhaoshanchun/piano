@@ -101,10 +101,12 @@
 "parise_notice_bookmark_success" = "Parise success!";
 "favority_notice_bookmark_success" = "Favorite success!";
 "favority_notice_delete" = "Do you want to delete this favority？";
+"favority_notice_empty" = "No favority video yet";
 
 
 // History
 "history_notice_delete" = "Do you want to delete this history record";
+"history_notice_empty" = "No view history yet";
 
 
 // Photo

@@ -103,10 +103,12 @@
 "parise_notice_bookmark_success" = "点赞成功!";
 "favority_notice_bookmark_success" = "收藏成功!";
 "favority_notice_delete" = "你确定删除该收藏？";
+"favority_notice_empty" = "暂时没有收藏记录";
 
 
 // History
 "history_notice_delete" = "你确定删除该历史记录？";
+"history_notice_empty" = "暂时没有观看记录";
 
 
 // Photo
