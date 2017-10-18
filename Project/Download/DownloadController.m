@@ -50,13 +50,7 @@
     self.navigationItem.titleView = sgc;
     
     // Navigation righr item
-    UIButton *setBt = [UIButton new];
-    setBt.translatesAutoresizingMaskIntoConstraints = NO;
-    [setBt setImage:[UIImage imageNamed:@"set_active.png"] forState:UIControlStateNormal];
-    [setBt setImage:[UIImage imageNamed:@"set.png"] forState:UIControlStateSelected];
-    [setBt addTarget:self action:@selector(ButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:setBt];
-    [self setRightBarItem:@[rightItem]];
+    [self setRightButtonWithImage:[UIImage imageNamed:@"set_active.png"] target:self action:@selector(ButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
     
     
     // Left controller
