@@ -135,6 +135,7 @@
             }
             
             if (contentListModel.programs.count > 0) {
+                [self hideEmptyView];
                 [weakSelf addContentList:contentListModel.programs];
             }
             
