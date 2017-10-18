@@ -117,7 +117,7 @@
 }
 
 - (void)segmentChange:(UISegmentedControl *)sgc{
-    //NSLog(@"%ld", sgc.selectedSegmentIndex);
+    NSLog(@"segmentChange: %ld", sgc.selectedSegmentIndex);
     switch (sgc.selectedSegmentIndex) {
         case 0:
             [self replaceFromOldViewController:self.finishedController toNewViewController:self.unfinishedController];

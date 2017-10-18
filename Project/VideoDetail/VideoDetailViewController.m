@@ -215,6 +215,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
     [self.playerView playVideo];
     
+    NSLog(@"videoUri: %@", sourceModel.videoUri);
+    
     _detailHeadCellModel = [VideoDetailHeadCellModel new];
     self.detailHeadCellModel.sourceModel = sourceModel;
     [self.tableView reloadData];
