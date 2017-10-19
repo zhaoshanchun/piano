@@ -60,6 +60,7 @@
 "view_play_times" = "%ld 次播放";
 "view_play_score" = "%@ 分";
 "view_play_praise" = "%ld 人点赞";
+"view_play_notice_viawwan" = "是否使用移动数据网络自动播放？";
 
 
 // Home sub page

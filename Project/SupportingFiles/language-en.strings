@@ -58,6 +58,7 @@
 "view_play_times" = "Play %ld times";
 "view_play_score" = "%@ Points";
 "view_play_praise" = "%ld Praise";
+"view_play_notice_viawwan" = "Do you want to use Mobile Network play?";
 
 
 // Home sub page

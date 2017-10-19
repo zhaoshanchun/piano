@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "ShareContentViewController.h"
 #import "FavoritesManager.h"
+#import "AFNetworkReachabilityManager.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
@@ -212,10 +213,25 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 
 - (void)handleSourceModel:(SourceModel *)sourceModel {
+    // NSLog(@"videoUri: %@", sourceModel.videoUri);
+    // NSLog(@"status = %d", [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
     [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
-    [self.playerView playVideo];
-    
-    NSLog(@"videoUri: %@", sourceModel.videoUri);
+    if (AFNetworkReachabilityStatusReachableViaWWAN == [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus) {
+        if (getObjectFromUserDefaults(kMobileNetworkPlayUsable)) {
+            [self.playerView playVideo];
+        } else {
+            [UIAlertView showWithTitle:nil message:localizeString(@"view_play_notice_viawwan") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    saveObjectToUserDefaults(kMobileNetworkPlayUsable, @(YES));
+                    [self.playerView playVideo];
+                } else {
+                    saveObjectToUserDefaults(kMobileNetworkPlayUsable, nil);
+                }
+            }];
+        }
+    } else {
+        [self.playerView playVideo];
+    }
     
     _detailHeadCellModel = [VideoDetailHeadCellModel new];
     self.detailHeadCellModel.sourceModel = sourceModel;
@@ -550,7 +566,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         _tableView.separatorColor = [UIColor grayColor];
         _tableView.delaysContentTouches = NO;
         
-        if (IS_IPHONE_X) {
+        if (IS_IPHONE_X || IS_IOS_11_OR_ABOVE) {
             // 解决 iphone x 的 section headView 显示不出来的问题
             _tableView.estimatedSectionHeaderHeight=0;
             _tableView.estimatedSectionFooterHeight=0;

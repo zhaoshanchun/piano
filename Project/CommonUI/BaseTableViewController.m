@@ -85,7 +85,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableFooterView = [UIView new];
         
-        if (IS_IPHONE_X) {
+        if (IS_IPHONE_X || IS_IOS_11_OR_ABOVE) {
             // 解决 iphone x 的 section headView 显示不出来的问题
             _tableView.estimatedSectionHeaderHeight=0;
             _tableView.estimatedSectionFooterHeight=0;

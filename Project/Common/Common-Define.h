@@ -85,6 +85,7 @@
 #define kSourceEtag             @"kSourceEtag"
 #define kSourceEtagCacheTime    @"kSourceEtagCacheTime"
 #define kLoginedUser            @"kLoginedUser"
+#define kMobileNetworkPlayUsable    @"kMobileNetworkPlayUsable"
 
 
 // Toast

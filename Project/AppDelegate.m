@@ -14,6 +14,8 @@
 
 #import "APIManager.h"
 
+#import "AFNetworkReachabilityManager.h"
+
 @interface AppDelegate ()
 
 @property (strong, nonatomic) DownloadManage *downladManage;
@@ -51,6 +53,31 @@
     
     saveObjectToUserDefaults(kSourceEtag, nil);
     saveObjectToUserDefaults(kSourceEtagCacheTime, nil);
+    
+    
+    /*
+    // 监控网络状态
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"未知网络");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"移动数据网络");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"WIFI");
+                break;
+        }
+    }];
+    [manager startMonitoring];
+    */
+    saveObjectToUserDefaults(kMobileNetworkPlayUsable, nil);
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;
 }
