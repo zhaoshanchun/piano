@@ -107,7 +107,25 @@ static NSString *PublicShareTableViewCellIdentifier = @"PublicShareTableViewCell
         self.playerView = nil;
         self.playingCell = nil;
     }];
-    [cell addPlayView:self.playerView];
+    
+    // NSLog(@"Play video url: %@", cell.cellModel.shareModel.video_url);
+    // NSLog(@"status = %d", [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
+    if (AFNetworkReachabilityStatusReachableViaWWAN == [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus) {
+        if (getObjectFromUserDefaults(kMobileNetworkPlayUsable)) {
+            [cell addPlayView:self.playerView];
+        } else {
+            [UIAlertView showWithTitle:nil message:localizeString(@"view_play_notice_viawwan") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"play")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    saveObjectToUserDefaults(kMobileNetworkPlayUsable, @(YES));
+                    [cell addPlayView:self.playerView];
+                } else {
+                    saveObjectToUserDefaults(kMobileNetworkPlayUsable, nil);
+                }
+            }];
+        }
+    } else {
+        [cell addPlayView:self.playerView];
+    }
 }
 
 - (void)stopPlaying {

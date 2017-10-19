@@ -13,6 +13,7 @@
 #import "UIView+Toast.h"
 #import "UIAlertView+Blocks.h"
 #import "UserModel.h"
+#import "AFNetworkReachabilityManager.h"
 
 @interface BaseViewController : UIViewController
 

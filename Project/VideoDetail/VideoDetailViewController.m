@@ -17,7 +17,6 @@
 #import "LoginViewController.h"
 #import "ShareContentViewController.h"
 #import "FavoritesManager.h"
-#import "AFNetworkReachabilityManager.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
@@ -213,14 +212,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 
 - (void)handleSourceModel:(SourceModel *)sourceModel {
-    // NSLog(@"videoUri: %@", sourceModel.videoUri);
+    // NSLog(@"Play video url: %@", sourceModel.videoUri);
     // NSLog(@"status = %d", [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus);
     [self.playerView setUrl:[NSURL URLWithString:sourceModel.videoUri]];
     if (AFNetworkReachabilityStatusReachableViaWWAN == [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus) {
         if (getObjectFromUserDefaults(kMobileNetworkPlayUsable)) {
             [self.playerView playVideo];
         } else {
-            [UIAlertView showWithTitle:nil message:localizeString(@"view_play_notice_viawwan") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"yes")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [UIAlertView showWithTitle:nil message:localizeString(@"view_play_notice_viawwan") cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"play")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     saveObjectToUserDefaults(kMobileNetworkPlayUsable, @(YES));
                     [self.playerView playVideo];
