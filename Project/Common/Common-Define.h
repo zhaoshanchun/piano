@@ -109,6 +109,7 @@
 
 // API Manager
 #define kHTTPLoadCount 20
+#define kHTTPCommentListLoadCount 5
 #define kHTTPShareListLoadCount 5
 #define kHTTPTimeoutInterval 10.0f
 #define kHTTPPostTimeoutInterval 120.0f
@@ -129,6 +130,8 @@
 #define kAPIContentDetail @"program_source"
 #define kAPIShareSubmit @"share_submit"
 #define kAPIShareList @"share_list"
+#define kAPICommentList @"get_review"
+#define kAPICommentSubmit @"review"
 #define kAPIPraise @"praise"
 
 

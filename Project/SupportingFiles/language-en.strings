@@ -88,6 +88,12 @@
 "share_notice_empty" = "No friend shared yet, please try again later！";
 
 
+// Comment
+"comment_submit_success" = "Comment success!";
+"comment_title" = "Comments";
+"comment_action_title" = "Add Comment";
+
+
 // Download
 "download_notice_to_download" = "Have add to down queue!";
 "download_title_loading" = "Unfinished cache";

@@ -32,7 +32,7 @@
 - (void)addContent {
     [self.contentView addSubview:self.mainImageView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.bottomView];
+    // [self.contentView addSubview:self.bottomView];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {

@@ -81,3 +81,34 @@
 @end
 
 
+
+@implementation CommentModel
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName {
+    return YES;
+}
+
+- (NSString *)iconUrl {
+    if (self.icon.length > 0) {
+        return [NSString stringWithFormat:@"%@/%@%@", kHTTPHomeAddress, kAPIGetImage, self.icon];
+    }
+    return @"";
+}
+
+@end
+
+
+@implementation CommentListModel
+
++(JSONKeyMapper*)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"error": @"errorCode",
+                                                       }];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName {
+    return YES;
+}
+
+@end
+

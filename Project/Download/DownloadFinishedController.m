@@ -44,9 +44,7 @@
     
     self.array = [NSMutableArray array];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    CGRect rectNav = self.navigationController.navigationBar.frame;
-    // float topHight = rectNav.size.height + rectStatus.size.height;
+    
     float topHight = 0;
     _tableView = [UITableView new];
     _tableView.rowHeight = 70;

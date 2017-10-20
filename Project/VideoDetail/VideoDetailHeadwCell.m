@@ -16,7 +16,6 @@
 @property (strong, nonatomic) UILabel *detailLabel;
 
 // TODO... 这几个按钮太小了，难点。做大点击范围
-//@property (strong, nonatomic) UIButton *commonButton;
 @property (strong, nonatomic) UIButton *shareButton;
 @property (strong, nonatomic) UIButton *downLoadButton;
 @property (strong, nonatomic) UIButton *praiseButton;
@@ -43,7 +42,8 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
-        self.backgroundColor = [UIColor orTableViewCellHighlightedColor];
+        // self.backgroundColor = [UIColor orTableViewCellHighlightedColor];
+        self.backgroundColor = [UIColor whiteColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -60,13 +60,11 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.detailLabel];
     
-    // 评论的先不做
-//    [self.contentView addSubview:self.commonButton];
     [self.contentView addSubview:self.shareButton];
     [self.contentView addSubview:self.downLoadButton];
     [self.contentView addSubview:self.praiseButton];
     [self.contentView addSubview:self.favoriteButton];
-    [self.contentView addSubview:self.bottomLine];
+    // [self.contentView addSubview:self.bottomLine];
 }
 
 - (void)setCellModel:(VideoDetailHeadCellModel *)cellModel {
@@ -89,19 +87,12 @@
     self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 分享推荐
     self.shareButton.frame = CGRectMake(CGRectGetMinX(self.downLoadButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
-    // 评论
-//    self.commonButton.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     
     self.bottomLine.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - 0.5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, 0.5);
 }
 
 
 #pragma mark - Button Action
-//- (void)commonButtonActon {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(commonAction)]) {
-//        [self.delegate commonAction];
-//    }
-//}
 - (void)shareButtonActon {
     if (self.delegate && [self.delegate respondsToSelector:@selector(shareAction)]) {
         [self.delegate shareAction];
@@ -143,15 +134,6 @@
     return _detailLabel;
 }
 
-//- (UIButton *)commonButton {
-//    if (_commonButton == nil) {
-//        _commonButton = [[UIButton alloc] init];
-//        [_commonButton setImage:[UIImage imageNamed:@"write_review_star_gy"] forState:UIControlStateNormal];
-//        [_commonButton setTitle:localizeString(@"") forState:UIControlStateNormal];
-//        [_commonButton addTarget:self action:@selector(commonButtonActon) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    return _commonButton;
-//}
 - (UIButton *)shareButton {
     if (_shareButton == nil) {
         _shareButton = [[UIButton alloc] init];

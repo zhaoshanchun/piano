@@ -21,7 +21,6 @@
 @interface PublicShareTableViewCell : UIBaseTableViewCell
 
 @property (nonatomic, weak) id <PublicShareTableViewCellDelegate> delegate;
-@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) PublicShareCellModel *cellModel;
 
 - (void)addPlayView:(CLPlayerView *)playView;

@@ -21,7 +21,7 @@
     sytle.lineBreakMode = NSLineBreakByTruncatingTail;
     self.titleAttribute = formatAttributedStringByORFontGuide(@[sourceModel.title, @"BR16B"], nil);
     CGSize size = getSizeForAttributedString(self.titleAttribute, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, MAXFLOAT);
-    self.titleFrame = CGRectMake(kVideoDetailHeadwCellLRPadding, kVideoDetailHeadwCellTBPadding, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, size.height);
+    self.titleFrame = CGRectMake(kVideoDetailHeadwCellLRPadding, 15, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, size.height);
     
     NSString *playsString = [NSString stringWithFormat:localizeString(@"view_play_times"), sourceModel.plays];
     NSString *scoreString = [NSString stringWithFormat:localizeString(@"view_play_score"), sourceModel.score];

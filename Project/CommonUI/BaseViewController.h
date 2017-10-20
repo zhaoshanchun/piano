@@ -11,6 +11,7 @@
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "UIView+Toast.h"
+#import "UIView+Borders.h"
 #import "UIAlertView+Blocks.h"
 #import "UserModel.h"
 #import "AFNetworkReachabilityManager.h"
