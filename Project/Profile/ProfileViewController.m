@@ -144,7 +144,7 @@
         if (indexPath.row == 0) {
             if (self.userCellModel.userModel) {
                 // Logined, go to logout!
-                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[@"profile_logout"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                [UIActionSheet showInView:self.view withTitle:nil cancelButtonTitle:localizeString(@"cancel") destructiveButtonTitle:nil otherButtonTitles:@[localizeString(@"profile_logout")] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                     if (buttonIndex == 0) {
                         // Logout
                         saveObjectToUserDefaults(kLoginedUser, nil);
