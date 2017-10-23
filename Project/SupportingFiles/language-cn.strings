@@ -55,6 +55,8 @@
 "profile_feedBack_placeHolder" = "请输入您的宝贵意见!必须大于3个字符!";
 "profile_history" = "观看历史";
 "profile_bookmark" = "我的收藏";
+"profile_cache" = "我的缓存";
+
 
 "more_contents" = "相关视频";
 "view_historys" = "历史记录";

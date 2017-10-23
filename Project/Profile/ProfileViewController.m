@@ -134,7 +134,7 @@
             cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_bookmark"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
         } else {
-            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"我的缓存"), @"BR15N"], nil);
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_cache"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
         }
         return cell;

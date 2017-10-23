@@ -54,6 +54,7 @@
 "profile_feedBack_placeHolder" = "Please feed back, min 3 character!";
 "profile_history" = "View history";
 "profile_bookmark" = "My bookmark";
+"profile_cache" = "My cache";
 
 "more_contents" = "Related videos";
 "view_historys" = "Play history";
@@ -95,7 +96,7 @@
 
 
 // Download
-"download_notice_to_download" = "Have add to down queue!";
+"download_notice_to_download" = "Have add to cache queue!";
 "download_title_loading" = "Unfinished cache";
 "download_title_loaded" = "Finished cache";
 "download_title_clean_all" = "Clear all cache";
