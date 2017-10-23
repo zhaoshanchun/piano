@@ -95,6 +95,8 @@
 		DB9B5ADE1F99C8E1008C0B03 /* VideoDetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B5ADD1F99C8E1008C0B03 /* VideoDetailCommentCell.m */; };
 		DB9B5AE11F99C8F4008C0B03 /* VideoDetailCommentCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B5AE01F99C8F4008C0B03 /* VideoDetailCommentCellModel.m */; };
 		DB9B5AE41F9A371B008C0B03 /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B5AE31F9A371B008C0B03 /* UIView+Borders.m */; };
+		DB9B5AEC1F9D8869008C0B03 /* PracticeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B5AEB1F9D8869008C0B03 /* PracticeListViewController.m */; };
+		DB9B5AEF1F9D8D1A008C0B03 /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9B5AEE1F9D8D1A008C0B03 /* PracticeViewController.m */; };
 		DBA0C6EE1F69663600A82D95 /* DownloadController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E11F69663600A82D95 /* DownloadController.m */; };
 		DBA0C6EF1F69663600A82D95 /* DownloadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E31F69663600A82D95 /* DownloadFile.m */; };
 		DBA0C6F01F69663600A82D95 /* DownloadFinishedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA0C6E51F69663600A82D95 /* DownloadFinishedController.m */; };
@@ -201,6 +203,68 @@
 		DBE1DBD11F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD01F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m */; };
 		DBE1DBD41F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD31F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m */; };
 		DBE1DBD71F66DDC7009A8DF8 /* VideoDetailHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE1DBD61F66DDC7009A8DF8 /* VideoDetailHistoryCell.m */; };
+		DBF381061F9DA66E00C328DC /* DocumentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF381051F9DA66E00C328DC /* DocumentManager.m */; };
+		DBF381091F9DC35900C328DC /* PracticeListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF381081F9DC35900C328DC /* PracticeListCellModel.m */; };
+		DBF381471F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题8.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3810B1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题8.docx */; };
+		DBF381481F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(3).docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3810C1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(3).docx */; };
+		DBF381491F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3810D1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题多选题.docx */; };
+		DBF3814A1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题5.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3810E1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题5.docx */; };
+		DBF3814B1F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十套3.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3810F1F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十套3.docx */; };
+		DBF3814C1F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381101F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题单选题.docx */; };
+		DBF3814D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题4.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381111F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题4.docx */; };
+		DBF3814E1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381121F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题2.docx */; };
+		DBF3814F1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题四.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381131F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题四.docx */; };
+		DBF381501F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(5).docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381141F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(5).docx */; };
+		DBF381511F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381151F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题2.docx */; };
+		DBF381521F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题3.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381161F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题3.docx */; };
+		DBF381531F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题5.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381171F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题5.docx */; };
+		DBF381541F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381181F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题单选题.docx */; };
+		DBF381551F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(1).docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381191F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(1).docx */; };
+		DBF381561F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题4.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811A1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题4.docx */; };
+		DBF381571F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A2型题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811B1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A2型题.docx */; };
+		DBF381581F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题9.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811C1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题9.docx */; };
+		DBF381591F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题2.docx */; };
+		DBF3815A1F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811E1F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题多选题.docx */; };
+		DBF3815B1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题4.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3811F1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题4.docx */; };
+		DBF3815C1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题二.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381201F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题二.docx */; };
+		DBF3815D1F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381211F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题单选题.docx */; };
+		DBF3815E1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题三.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381221F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题三.docx */; };
+		DBF3815F1F9DD44800C328DC /* 2018年护士资格考试试题A3A4型题1.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381231F9DD44800C328DC /* 2018年护士资格考试试题A3A4型题1.docx */; };
+		DBF381601F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381241F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题单选题.docx */; };
+		DBF381611F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题3.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381251F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题3.docx */; };
+		DBF381621F9DD44800C328DC /* 护士执业资格考试专业实务备考指导试题1.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381261F9DD44800C328DC /* 护士执业资格考试专业实务备考指导试题1.docx */; };
+		DBF381631F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A3:4型题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381271F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A3:4型题.docx */; };
+		DBF381641F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381281F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题2.docx */; };
+		DBF381651F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题五.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381291F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题五.docx */; };
+		DBF381661F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(4).docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812A1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(4).docx */; };
+		DBF381671F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812B1F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题单选题.docx */; };
+		DBF381681F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812C1F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题单选题.docx */; };
+		DBF381691F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题5.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812D1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题5.docx */; };
+		DBF3816A1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(2).docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812E1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(2).docx */; };
+		DBF3816B1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题3.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3812F1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题3.docx */; };
+		DBF3816C1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（3）.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381301F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（3）.docx */; };
+		DBF3816D1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题6.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381311F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题6.docx */; };
+		DBF3816E1F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381321F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题多选题.docx */; };
+		DBF3816F1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（1）.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381331F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（1）.docx */; };
+		DBF381701F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381341F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题多选题.docx */; };
+		DBF381711F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381351F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题单选题.docx */; };
+		DBF381721F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十一套2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381361F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十一套2.docx */; };
+		DBF381731F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381371F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题多选题.docx */; };
+		DBF381741F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题1.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381381F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题1.docx */; };
+		DBF381751F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381391F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题多选题.docx */; };
+		DBF381761F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（2）.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813A1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（2）.docx */; };
+		DBF381771F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813B1F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题多选题.docx */; };
+		DBF381781F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题1.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813C1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题1.docx */; };
+		DBF381791F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题6.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题6.docx */; };
+		DBF3817A1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题7.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813E1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题7.docx */; };
+		DBF3817B1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题单选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF3813F1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题单选题.docx */; };
+		DBF3817C1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题1.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381401F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题1.docx */; };
+		DBF3817D1F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题多选题.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381411F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题多选题.docx */; };
+		DBF3817E1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题10.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381421F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题10.docx */; };
+		DBF3817F1F9DD44800C328DC /* 护士执业考试专业实务备考指导试题2.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381431F9DD44800C328DC /* 护士执业考试专业实务备考指导试题2.docx */; };
+		DBF381801F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（4）.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381441F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（4）.docx */; };
+		DBF381811F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题一.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381451F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题一.docx */; };
+		DBF381821F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题4.docx in Resources */ = {isa = PBXBuildFile; fileRef = DBF381461F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题4.docx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,6 +461,10 @@
 		DB9B5AE01F99C8F4008C0B03 /* VideoDetailCommentCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailCommentCellModel.m; sourceTree = "<group>"; };
 		DB9B5AE21F9A371A008C0B03 /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
 		DB9B5AE31F9A371B008C0B03 /* UIView+Borders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
+		DB9B5AEA1F9D8869008C0B03 /* PracticeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeListViewController.h; sourceTree = "<group>"; };
+		DB9B5AEB1F9D8869008C0B03 /* PracticeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeListViewController.m; sourceTree = "<group>"; };
+		DB9B5AED1F9D8D1A008C0B03 /* PracticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PracticeViewController.h; sourceTree = "<group>"; };
+		DB9B5AEE1F9D8D1A008C0B03 /* PracticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PracticeViewController.m; sourceTree = "<group>"; };
 		DBA0C6E01F69663600A82D95 /* DownloadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadController.h; sourceTree = "<group>"; };
 		DBA0C6E11F69663600A82D95 /* DownloadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadController.m; sourceTree = "<group>"; };
 		DBA0C6E21F69663600A82D95 /* DownloadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFile.h; sourceTree = "<group>"; };
@@ -597,6 +665,70 @@
 		DBE1DBD31F66CFCA009A8DF8 /* HistoryListCollectionViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryListCollectionViewCellModel.m; sourceTree = "<group>"; };
 		DBE1DBD51F66DDC7009A8DF8 /* VideoDetailHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailHistoryCell.h; sourceTree = "<group>"; };
 		DBE1DBD61F66DDC7009A8DF8 /* VideoDetailHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailHistoryCell.m; sourceTree = "<group>"; };
+		DBF381041F9DA66E00C328DC /* DocumentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentManager.h; sourceTree = "<group>"; };
+		DBF381051F9DA66E00C328DC /* DocumentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentManager.m; sourceTree = "<group>"; };
+		DBF381071F9DC35800C328DC /* PracticeListCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PracticeListCellModel.h; sourceTree = "<group>"; };
+		DBF381081F9DC35900C328DC /* PracticeListCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PracticeListCellModel.m; sourceTree = "<group>"; };
+		DBF3810B1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题8.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题8.docx"; sourceTree = "<group>"; };
+		DBF3810C1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(3).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证考试《儿科护理学》精选题(3).docx"; sourceTree = "<group>"; };
+		DBF3810D1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第四套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF3810E1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题5.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试试题A3／A4型题5.docx"; sourceTree = "<group>"; };
+		DBF3810F1F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十套3.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证《实践能力》试题及答案第十套3.docx"; sourceTree = "<group>"; };
+		DBF381101F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第五套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381111F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题4.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题4.docx"; sourceTree = "<group>"; };
+		DBF381121F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题2.docx"; sourceTree = "<group>"; };
+		DBF381131F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题四.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试妇产科护理学模拟试题四.docx"; sourceTree = "<group>"; };
+		DBF381141F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(5).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证考试《儿科护理学》精选题(5).docx"; sourceTree = "<group>"; };
+		DBF381151F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题心脏骤停试题3A1型题2.docx"; sourceTree = "<group>"; };
+		DBF381161F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题3.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题3.docx"; sourceTree = "<group>"; };
+		DBF381171F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题5.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题5.docx"; sourceTree = "<group>"; };
+		DBF381181F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第三套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381191F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(1).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证考试《儿科护理学》精选试题(1).docx"; sourceTree = "<group>"; };
+		DBF3811A1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题4.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试试题A3／A4型题4.docx"; sourceTree = "<group>"; };
+		DBF3811B1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A2型题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题心脏骤停试题3A2型题.docx"; sourceTree = "<group>"; };
+		DBF3811C1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题9.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题9.docx"; sourceTree = "<group>"; };
+		DBF3811D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题2.docx"; sourceTree = "<group>"; };
+		DBF3811E1F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第六套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF3811F1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题4.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题4.docx"; sourceTree = "<group>"; };
+		DBF381201F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题二.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试妇产科护理学模拟试题二.docx"; sourceTree = "<group>"; };
+		DBF381211F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第七套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381221F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题三.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试妇产科护理学模拟试题三.docx"; sourceTree = "<group>"; };
+		DBF381231F9DD44800C328DC /* 2018年护士资格考试试题A3A4型题1.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试试题A3A4型题1.docx"; sourceTree = "<group>"; };
+		DBF381241F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第二套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381251F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题3.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试试题A3／A4型题3.docx"; sourceTree = "<group>"; };
+		DBF381261F9DD44800C328DC /* 护士执业资格考试专业实务备考指导试题1.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "护士执业资格考试专业实务备考指导试题1.docx"; sourceTree = "<group>"; };
+		DBF381271F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A3:4型题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题心脏骤停试题3A3:4型题.docx"; sourceTree = "<group>"; };
+		DBF381281F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试试题A3／A4型题2.docx"; sourceTree = "<group>"; };
+		DBF381291F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题五.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试妇产科护理学模拟试题五.docx"; sourceTree = "<group>"; };
+		DBF3812A1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(4).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证考试《儿科护理学》精选题(4).docx"; sourceTree = "<group>"; };
+		DBF3812B1F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第八套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF3812C1F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第一套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF3812D1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题5.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题5.docx"; sourceTree = "<group>"; };
+		DBF3812E1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(2).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证考试《儿科护理学》精选试题(2).docx"; sourceTree = "<group>"; };
+		DBF3812F1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题3.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题3.docx"; sourceTree = "<group>"; };
+		DBF381301F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（3）.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题：心律失常答案（3）.docx"; sourceTree = "<group>"; };
+		DBF381311F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题6.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题6.docx"; sourceTree = "<group>"; };
+		DBF381321F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第八套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF381331F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（1）.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题：心律失常答案（1）.docx"; sourceTree = "<group>"; };
+		DBF381341F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第一套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF381351F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第六套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381361F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十一套2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格证《实践能力》试题及答案第十一套2.docx"; sourceTree = "<group>"; };
+		DBF381371F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第七套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF381381F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题1.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题1.docx"; sourceTree = "<group>"; };
+		DBF381391F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第二套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF3813A1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（2）.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题：心律失常答案（2）.docx"; sourceTree = "<group>"; };
+		DBF3813B1F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第三套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF3813C1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题1.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题心脏骤停试题3A1型题1.docx"; sourceTree = "<group>"; };
+		DBF3813D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题6.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题6.docx"; sourceTree = "<group>"; };
+		DBF3813E1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题7.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题7.docx"; sourceTree = "<group>"; };
+		DBF3813F1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题单选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第四套全真模拟题单选题.docx"; sourceTree = "<group>"; };
+		DBF381401F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题1.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业资格考试《基础知识》测试题1.docx"; sourceTree = "<group>"; };
+		DBF381411F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题多选题.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试第五套全真模拟题多选题.docx"; sourceTree = "<group>"; };
+		DBF381421F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题10.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士执业考试外科护理考试测试题10.docx"; sourceTree = "<group>"; };
+		DBF381431F9DD44800C328DC /* 护士执业考试专业实务备考指导试题2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "护士执业考试专业实务备考指导试题2.docx"; sourceTree = "<group>"; };
+		DBF381441F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（4）.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题：心律失常答案（4）.docx"; sourceTree = "<group>"; };
+		DBF381451F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题一.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018年护士资格考试妇产科护理学模拟试题一.docx"; sourceTree = "<group>"; };
+		DBF381461F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题4.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2018护士资格证考试试题心脏骤停试题4.docx"; sourceTree = "<group>"; };
 		E4EDCA98BB10EA18B772D4A8 /* libPods-taiqiujiaoxue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-taiqiujiaoxue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61E394F547F52633ABB7E60 /* Pods-apps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-apps/Pods-apps.debug.xcconfig"; sourceTree = "<group>"; };
 		F10B0B782C211CE05D61A087 /* Pods-sifakaoshi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sifakaoshi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sifakaoshi/Pods-sifakaoshi.debug.xcconfig"; sourceTree = "<group>"; };
@@ -724,6 +856,7 @@
 				DBCFCE5F1F4D1EBF00149112 /* CommonUI */,
 				DBCFCE7D1F4D200B00149112 /* DataModel */,
 				DBA0C6DF1F69663500A82D95 /* Download */,
+				DB9B5AE91F9D881E008C0B03 /* Practice */,
 				BCAED2DF1F79FE6200A1A2ED /* Favorite */,
 				BC922D1C1F9489F700136473 /* History */,
 				DBCFCE921F4D242000149112 /* Home */,
@@ -859,6 +992,35 @@
 				DB2380161F9454C80072FB34 /* Overlay@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DB9B5AE51F9D873A008C0B03 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DBCFCFBC1F4D275900149112 /* loading_step1.png */,
+				BCE417351F8DB4F8002940CC /* welcome.jpg */,
+				DBCFCFBD1F4D275900149112 /* loading_step2.png */,
+				DBCFCFBE1F4D275900149112 /* loading_step3.png */,
+				DBCFCFBF1F4D275900149112 /* Mail.png */,
+				DBCFCFC01F4D275900149112 /* multl_bg.jpg */,
+				DBCFCFC11F4D275900149112 /* play.png */,
+				DBCFCFC21F4D275900149112 /* shuxue_title.png */,
+				DBCFCFC41F4D275900149112 /* word.doc */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		DB9B5AE91F9D881E008C0B03 /* Practice */ = {
+			isa = PBXGroup;
+			children = (
+				DB9B5AEA1F9D8869008C0B03 /* PracticeListViewController.h */,
+				DB9B5AEB1F9D8869008C0B03 /* PracticeListViewController.m */,
+				DBF381071F9DC35800C328DC /* PracticeListCellModel.h */,
+				DBF381081F9DC35900C328DC /* PracticeListCellModel.m */,
+				DB9B5AED1F9D8D1A008C0B03 /* PracticeViewController.h */,
+				DB9B5AEE1F9D8D1A008C0B03 /* PracticeViewController.m */,
+			);
+			path = Practice;
 			sourceTree = "<group>";
 		};
 		DBA0C6DF1F69663500A82D95 /* Download */ = {
@@ -1069,6 +1231,8 @@
 				DBDA76411F66812C00C46177 /* HistoryManager.m */,
 				BCAED2DC1F79E71300A1A2ED /* FavoritesManager.h */,
 				BCAED2DD1F79E71300A1A2ED /* FavoritesManager.m */,
+				DBF381041F9DA66E00C328DC /* DocumentManager.h */,
+				DBF381051F9DA66E00C328DC /* DocumentManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1271,16 +1435,9 @@
 		DBCFCED81F4D275800149112 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DBCFCFBC1F4D275900149112 /* loading_step1.png */,
-				BCE417351F8DB4F8002940CC /* welcome.jpg */,
-				DBCFCFBD1F4D275900149112 /* loading_step2.png */,
-				DBCFCFBE1F4D275900149112 /* loading_step3.png */,
-				DBCFCFBF1F4D275900149112 /* Mail.png */,
-				DBCFCFC01F4D275900149112 /* multl_bg.jpg */,
-				DBCFCFC11F4D275900149112 /* play.png */,
-				DBCFCFC21F4D275900149112 /* shuxue_title.png */,
+				DBF3810A1F9DD44800C328DC /* Exercise */,
+				DB9B5AE51F9D873A008C0B03 /* Images */,
 				DBCFCFC31F4D275900149112 /* Text.strings */,
-				DBCFCFC41F4D275900149112 /* word.doc */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1310,6 +1467,73 @@
 				DBE1DBD01F66CFA9009A8DF8 /* HistoryListCollectionViewCell.m */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		DBF3810A1F9DD44800C328DC /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				DBF3810B1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题8.docx */,
+				DBF3810C1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(3).docx */,
+				DBF3810D1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题多选题.docx */,
+				DBF3810E1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题5.docx */,
+				DBF3810F1F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十套3.docx */,
+				DBF381101F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题单选题.docx */,
+				DBF381111F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题4.docx */,
+				DBF381121F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题2.docx */,
+				DBF381131F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题四.docx */,
+				DBF381141F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(5).docx */,
+				DBF381151F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题2.docx */,
+				DBF381161F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题3.docx */,
+				DBF381171F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题5.docx */,
+				DBF381181F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题单选题.docx */,
+				DBF381191F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(1).docx */,
+				DBF3811A1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题4.docx */,
+				DBF3811B1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A2型题.docx */,
+				DBF3811C1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题9.docx */,
+				DBF3811D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题2.docx */,
+				DBF3811E1F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题多选题.docx */,
+				DBF3811F1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题4.docx */,
+				DBF381201F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题二.docx */,
+				DBF381211F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题单选题.docx */,
+				DBF381221F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题三.docx */,
+				DBF381231F9DD44800C328DC /* 2018年护士资格考试试题A3A4型题1.docx */,
+				DBF381241F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题单选题.docx */,
+				DBF381251F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题3.docx */,
+				DBF381261F9DD44800C328DC /* 护士执业资格考试专业实务备考指导试题1.docx */,
+				DBF381271F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A3:4型题.docx */,
+				DBF381281F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题2.docx */,
+				DBF381291F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题五.docx */,
+				DBF3812A1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(4).docx */,
+				DBF3812B1F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题单选题.docx */,
+				DBF3812C1F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题单选题.docx */,
+				DBF3812D1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题5.docx */,
+				DBF3812E1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(2).docx */,
+				DBF3812F1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题3.docx */,
+				DBF381301F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（3）.docx */,
+				DBF381311F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题6.docx */,
+				DBF381321F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题多选题.docx */,
+				DBF381331F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（1）.docx */,
+				DBF381341F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题多选题.docx */,
+				DBF381351F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题单选题.docx */,
+				DBF381361F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十一套2.docx */,
+				DBF381371F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题多选题.docx */,
+				DBF381381F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题1.docx */,
+				DBF381391F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题多选题.docx */,
+				DBF3813A1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（2）.docx */,
+				DBF3813B1F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题多选题.docx */,
+				DBF3813C1F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题1.docx */,
+				DBF3813D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题6.docx */,
+				DBF3813E1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题7.docx */,
+				DBF3813F1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题单选题.docx */,
+				DBF381401F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题1.docx */,
+				DBF381411F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题多选题.docx */,
+				DBF381421F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题10.docx */,
+				DBF381431F9DD44800C328DC /* 护士执业考试专业实务备考指导试题2.docx */,
+				DBF381441F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（4）.docx */,
+				DBF381451F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题一.docx */,
+				DBF381461F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题4.docx */,
+			);
+			path = Exercise;
 			sourceTree = "<group>";
 		};
 		E9FFCFCBF5222906E582A159 /* Frameworks */ = {
@@ -1424,30 +1648,90 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF3817E1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题10.docx in Resources */,
 				DB23801E1F9454C80072FB34 /* ELCAlbumPickerController.xib in Resources */,
+				DBF381551F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(1).docx in Resources */,
+				DBF3817F1F9DD44800C328DC /* 护士执业考试专业实务备考指导试题2.docx in Resources */,
+				DBF3815E1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题三.docx in Resources */,
+				DBF3816D1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题6.docx in Resources */,
 				DBCFD0AF1F4D275900149112 /* word.doc in Resources */,
+				DBF3815B1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题4.docx in Resources */,
 				DBCFD0A81F4D275900149112 /* loading_step2.png in Resources */,
+				DBF3814E1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题2.docx in Resources */,
+				DBF381621F9DD44800C328DC /* 护士执业资格考试专业实务备考指导试题1.docx in Resources */,
+				DBF3814D1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题4.docx in Resources */,
+				DBF3817C1F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题1.docx in Resources */,
+				DBF381541F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题单选题.docx in Resources */,
+				DBF381471F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题8.docx in Resources */,
 				DB0EFC941F4DDD6400DE7B59 /* LICENSE in Resources */,
+				DBF381651F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题五.docx in Resources */,
+				DBF381731F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题多选题.docx in Resources */,
+				DBF381711F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题单选题.docx in Resources */,
+				DBF381761F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（2）.docx in Resources */,
+				DBF381481F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(3).docx in Resources */,
+				DBF381691F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题5.docx in Resources */,
+				DBF381771F9DD44800C328DC /* 2018护士资格证考试第三套全真模拟题多选题.docx in Resources */,
+				DBF3815F1F9DD44800C328DC /* 2018年护士资格考试试题A3A4型题1.docx in Resources */,
+				DBF3817A1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题7.docx in Resources */,
+				DBF3817D1F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题多选题.docx in Resources */,
+				DBF381591F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题2.docx in Resources */,
 				DBCFD0A91F4D275900149112 /* loading_step3.png in Resources */,
+				DBF381631F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A3:4型题.docx in Resources */,
+				DBF381501F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(5).docx in Resources */,
 				DB2380221F9454C80072FB34 /* Overlay@2x.png in Resources */,
+				DBF3814C1F9DD44800C328DC /* 2018护士资格证考试第五套全真模拟题单选题.docx in Resources */,
+				DBF381801F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（4）.docx in Resources */,
+				DBF381701F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题多选题.docx in Resources */,
 				DBCFCDBA1F4C1B2000149112 /* LaunchScreen.storyboard in Resources */,
+				DBF3815A1F9DD44800C328DC /* 2018护士资格证考试第六套全真模拟题多选题.docx in Resources */,
 				DBCFD0B81F4D27F400149112 /* Assets.xcassets in Resources */,
+				DBF381561F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题4.docx in Resources */,
+				DBF381751F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题多选题.docx in Resources */,
+				DBF381491F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题多选题.docx in Resources */,
 				DBCFD0BC1F4D27F400149112 /* language-en.strings in Resources */,
+				DBF3816F1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（1）.docx in Resources */,
+				DBF3814F1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题四.docx in Resources */,
 				DBCFD0BB1F4D27F400149112 /* language-cn.strings in Resources */,
 				DBCFD0AD1F4D275900149112 /* shuxue_title.png in Resources */,
 				DBCFD0B91F4D27F400149112 /* GoogleService-Info.plist in Resources */,
 				DBCFD0AE1F4D275900149112 /* Text.strings in Resources */,
 				DB2380201F9454C80072FB34 /* ELCAssetTablePicker.xib in Resources */,
+				DBF381571F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A2型题.docx in Resources */,
+				DBF3815C1F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题二.docx in Resources */,
+				DBF381781F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题1.docx in Resources */,
+				DBF381741F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题1.docx in Resources */,
+				DBF381611F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题3.docx in Resources */,
+				DBF3815D1F9DD44800C328DC /* 2018护士资格证考试第七套全真模拟题单选题.docx in Resources */,
 				DBCFCED71F4D25E900149112 /* SSLPickerView.xib in Resources */,
+				DBF381671F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题单选题.docx in Resources */,
+				DBF381511F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题3A1型题2.docx in Resources */,
+				DBF381641F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题2.docx in Resources */,
+				DBF3816A1F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选试题(2).docx in Resources */,
 				DBCFD0AC1F4D275900149112 /* play.png in Resources */,
+				DBF381811F9DD44800C328DC /* 2018年护士资格考试妇产科护理学模拟试题一.docx in Resources */,
 				DBCFD0AA1F4D275900149112 /* Mail.png in Resources */,
 				DB23801F1F9454C80072FB34 /* ELCAssetPicker.xib in Resources */,
 				DBCFD0AB1F4D275900149112 /* multl_bg.jpg in Resources */,
+				DBF381721F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十一套2.docx in Resources */,
+				DBF381521F9DD44800C328DC /* 2018年护士执业资格考试《基础知识》测试题3.docx in Resources */,
+				DBF3816B1F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题3.docx in Resources */,
+				DBF3816E1F9DD44800C328DC /* 2018护士资格证考试第八套全真模拟题多选题.docx in Resources */,
+				DBF3814B1F9DD44800C328DC /* 2018年护士资格证《实践能力》试题及答案第十套3.docx in Resources */,
 				BCE417361F8DB4F8002940CC /* welcome.jpg in Resources */,
 				DB2380211F9454C80072FB34 /* Overlay.png in Resources */,
+				DBF3817B1F9DD44800C328DC /* 2018护士资格证考试第四套全真模拟题单选题.docx in Resources */,
+				DBF381531F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题5.docx in Resources */,
+				DBF3816C1F9DD44800C328DC /* 2018护士资格证考试试题：心律失常答案（3）.docx in Resources */,
+				DBF381601F9DD44800C328DC /* 2018护士资格证考试第二套全真模拟题单选题.docx in Resources */,
+				DBF381661F9DD44800C328DC /* 2018年护士资格证考试《儿科护理学》精选题(4).docx in Resources */,
+				DBF381821F9DD44800C328DC /* 2018护士资格证考试试题心脏骤停试题4.docx in Resources */,
 				DBCFD0A71F4D275900149112 /* loading_step1.png in Resources */,
+				DBF3814A1F9DD44800C328DC /* 2018年护士资格考试试题A3／A4型题5.docx in Resources */,
+				DBF381681F9DD44800C328DC /* 2018护士资格证考试第一套全真模拟题单选题.docx in Resources */,
+				DBF381791F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题6.docx in Resources */,
 				DBCFCED51F4D25E900149112 /* PickerStyle.plist in Resources */,
 				DBCFD0BA1F4D27F400149112 /* Info.plist in Resources */,
+				DBF381581F9DD44800C328DC /* 2018年护士执业考试外科护理考试测试题9.docx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,6 +1796,7 @@
 				DB0EFC9B1F4DDD6400DE7B59 /* UIImageView+AFNetworking.m in Sources */,
 				DB0EFC9D1F4DDD6400DE7B59 /* UIRefreshControl+AFNetworking.m in Sources */,
 				DB1A87351F53EB26000F160A /* UIView+Loading.m in Sources */,
+				DBF381061F9DA66E00C328DC /* DocumentManager.m in Sources */,
 				DB0EFC961F4DDD6400DE7B59 /* AFAutoPurgingImageCache.m in Sources */,
 				DB2163881F5947BA00B6032E /* ContentListCollectionReusableView.m in Sources */,
 				DB2163821F59065B00B6032E /* ContentListCollectionViewCell.m in Sources */,
@@ -1531,6 +1816,7 @@
 				DBCFCDDD1F4C25C600149112 /* UIView+Helper.m in Sources */,
 				BCAED2DE1F79E71300A1A2ED /* FavoritesManager.m in Sources */,
 				DBCFCE8C1F4D20EA00149112 /* SearchView.m in Sources */,
+				DB9B5AEC1F9D8869008C0B03 /* PracticeListViewController.m in Sources */,
 				DBDA76461F668A1A00C46177 /* HistoryListView.m in Sources */,
 				DBCFCEA91F4D242000149112 /* ShowMoreItemH.m in Sources */,
 				DBA0C71B1F6967BB00A82D95 /* GCDWebServerFunctions.m in Sources */,
@@ -1583,6 +1869,7 @@
 				DB0EFC9E1F4DDD6400DE7B59 /* UIWebView+AFNetworking.m in Sources */,
 				DBCFCEB51F4D24E000149112 /* ProfileViewController.m in Sources */,
 				DB9B5AE11F99C8F4008C0B03 /* VideoDetailCommentCellModel.m in Sources */,
+				DB9B5AEF1F9D8D1A008C0B03 /* PracticeViewController.m in Sources */,
 				DBCFCE6F1F4D1EBF00149112 /* BaseViewController.m in Sources */,
 				DBCFCDDE1F4C25C600149112 /* UIViewController+AppBar.m in Sources */,
 				DBCFD0C91F4D2DFF00149112 /* LoginTableViewCell.m in Sources */,
@@ -1596,6 +1883,7 @@
 				DBCFCE8D1F4D20EA00149112 /* SearchViewController.m in Sources */,
 				DBCFCE4D1F4C3A7500149112 /* XPathQuery.m in Sources */,
 				DBCFCE491F4C3A7500149112 /* FMDatabaseQueue.m in Sources */,
+				DBF381091F9DC35900C328DC /* PracticeListCellModel.m in Sources */,
 				DBA0C6F21F69663600A82D95 /* DownloadSetViewController.m in Sources */,
 				DB1BB65E1F55361E00E8B1F8 /* ZJScrollPageView.m in Sources */,
 				DBE1DBD71F66DDC7009A8DF8 /* VideoDetailHistoryCell.m in Sources */,

@@ -99,7 +99,7 @@
 "download_notice_to_download" = "已添加离线缓存!";
 "download_title_loading" = "正在缓存";
 "download_title_loaded" = "已完成缓存";
-"download_title_clean_all" = "清除所有缓存";
+"download_title_clean_all" = "清空所有缓存";
 "download_notice" = "提示: 缓存列表手势左划可单独删除对应项缓存数据。";
 "download_notice_delete" = "是否删除当前缓存？";
 "alert_clean_all_check" = "清除所有缓存数据？";
@@ -130,5 +130,8 @@
 "feedback_content_min" = "请务必多于3个字符!";
 "feedback_notice_commit_success" = "提交成功!";
 
+
+// Exerise
+"exerise_title" = "真题练习";
 
 
