@@ -53,8 +53,8 @@
                                  @{kClassKey  : @"PracticeListViewController",
                                    kTextKey   : localizeString(@"exerise_title"),
                                    kTitleKey  : localizeString(@"exerise_title"),
-                                   kImgKey    : @"download",
-                                   kSelImgKey : @"download"},
+                                   kImgKey    : @"Book_open",
+                                   kSelImgKey : @"Book_open"},
                                  
                                  @{kClassKey  : @"ProfileViewController",
                                    kTitleKey  : localizeString(@"tab_profile"),
