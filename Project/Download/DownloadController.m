@@ -24,7 +24,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.hidesBottomBarWhenPushed = NO; // 当前页面需要 Bottom Bar
+        self.hidesBottomBarWhenPushed = YES;
         self.hideNavigationBar = NO;
     }
     return self;
@@ -34,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self setLeftBackButtonWithImageKey:@"common_back"];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
    
     // Navigation title view

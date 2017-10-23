@@ -137,6 +137,11 @@
 
 #define kAPPID @"yixuekaoshi"
 
+// Document 真题练习
+#define kAPPTarget @"apps"
+#define kDocumentType @".docx"
+#define kDocumentLoadCount 20
+
 
 #define kChineseDot @"●";
 

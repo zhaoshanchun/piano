@@ -12,7 +12,7 @@
 
 #import "HomePageViewController.h"
 #import "PublicShareViewController.h"
-#import "DownloadController.h"
+#import "PracticeListViewController.h"
 #import "ProfileViewController.h"
 
 @interface MainTabBarController ()
@@ -50,9 +50,9 @@
                                    kImgKey    : @"Message",
                                    kSelImgKey : @"Message"},
                                  
-                                 @{kClassKey  : @"DownloadController",
-                                   kTextKey   : localizeString(@"tab_download"),
-                                   kTitleKey  : localizeString(@"tab_download"),
+                                 @{kClassKey  : @"PracticeListViewController",
+                                   kTextKey   : localizeString(@"exerise_title"),
+                                   kTitleKey  : localizeString(@"exerise_title"),
                                    kImgKey    : @"download",
                                    kSelImgKey : @"download"},
                                  

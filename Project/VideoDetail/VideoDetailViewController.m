@@ -742,7 +742,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (UIView *)footView {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0)];
     [footView addSubview:self.commentButton];
-    footView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.commentButton.frame) + BOTTOM_HOME_INDICATOR_MARGIN);
+    footView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.commentButton.frame) + (IS_IPHONE_X ? 34.f : 20.f));
     return footView;
 }
 

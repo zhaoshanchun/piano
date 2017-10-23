@@ -123,9 +123,9 @@
         }
         
         if (connectionError) {
-            // TODO... 断网或超时：The request time out。 如何改为提示中文？
+            // 断网或超时：The request time out。 如何改为提示中文？
             MyLog(@"error : %@", [connectionError localizedDescription]);
-            [weakSelf handleError:0 errorMsg:[connectionError localizedDescription]];
+            [weakSelf handleError:0 errorMsg:localizeString(@"error_alert_network_fail_recall")];
         } else {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             ContentListModel *contentListModel = [[ContentListModel alloc] initWithString:responseString error:nil];

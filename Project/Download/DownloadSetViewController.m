@@ -42,7 +42,7 @@
     
     UILabel *label1 = [UILabel new];
     label1.font = [UIFont systemFontOfSize:16];
-    label1.text = localizeString(@"download_title_loaded");
+    label1.text = localizeString(@"download_title_clean_all");
     label1.translatesAutoresizingMaskIntoConstraints = NO;
     label1.textColor = [UIColor blackColor];
     label1.numberOfLines = 0;

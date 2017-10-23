@@ -14,6 +14,7 @@
 #import "FavoriteViewController.h"
 #import "ELCImagePickerController.h"
 #import "HistoryRecordViewController.h"
+#import "DownloadController.h"
 
 #define kSectionNumber 3
 
@@ -94,8 +95,8 @@
         // 评价+反馈
         return 2;
     } else {
-        // 历史记录+收藏
-        return 2;
+        // 历史记录+收藏+缓存
+        return 3;
     }
 }
 
@@ -129,8 +130,11 @@
         if (indexPath.row == 0) {
             cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_history"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
-        } else {
+        } else if (indexPath.row == 1) {
             cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"profile_bookmark"), @"BR15N"], nil);
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
+        } else {
+            cell.textLabel.attributedText = formatAttributedStringByORFontGuide(@[localizeString(@"我的缓存"), @"BR15N"], nil);
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_right_arrow"]];
         }
         return cell;
@@ -169,15 +173,14 @@
         }
     } else {
         if (indexPath.row == 0) {
-            
             HistoryRecordViewController *vc = [HistoryRecordViewController new];
             [self.navigationController pushViewController:vc animated:YES];
-
-            
-        } else {
+        } else if (indexPath.row == 1) {
             FavoriteViewController *vc = [FavoriteViewController new];
             [self.navigationController pushViewController:vc animated:YES];
-            
+        } else {
+            DownloadController *vc = [DownloadController new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
