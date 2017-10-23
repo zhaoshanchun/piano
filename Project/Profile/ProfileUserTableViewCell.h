@@ -21,6 +21,5 @@
 
 @property (weak, nonatomic) id<ProfileUserTableViewCellDelegate> delegate;
 @property (strong, nonatomic) ProfileUserTableViewCellModel *cellModel;
-@property (strong, nonatomic) NSIndexPath *indexPath;
 
 @end

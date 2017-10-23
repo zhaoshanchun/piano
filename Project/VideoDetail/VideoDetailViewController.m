@@ -11,29 +11,34 @@
 #import "VideoDetailHeadwCell.h"
 #import "VideoDetailMoreVideoCell.h"
 #import "VideoDetailHistoryCell.h"
+#import "VideoDetailCommentCell.h"
+
 #import "EtagManager.h"
 #import "HistoryManager.h"
 #import "DownloadManage.h"
 #import "LoginViewController.h"
-#import "ShareContentViewController.h"
+#import "InputContentViewController.h"
 #import "FavoritesManager.h"
 
 #define kDefaultMoreContentNumber 3
 #define kSectionHeadHeight 40.f
-#define kSections 3
+#define kSections 4
 /*
  0: Detail head
  1: More content list
  2: History view
+ 3: Comment section
  */
 
 
 typedef  NS_ENUM(NSInteger, ActionType) {
     ActionForNone,
     ActionForShare,
+    ActionForParise,
+    ActionForComment,
 };
 
-@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate, LoginViewControllerDelegate, ShareContentViewControllerDelegate>
+@interface VideoDetailViewController () <UITableViewDelegate, UITableViewDataSource, VideoDetailHeadwCellDelegate, HistoryListViewDelegate, LoginViewControllerDelegate, InputContentViewControllerDelegate>
 
 @property (strong, nonatomic) ContentModel *contentModel;
 @property (strong, nonatomic) SourceModel *sourceModel;
@@ -43,6 +48,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (strong, nonatomic) VideoDetailHeadCellModel *detailHeadCellModel;
 @property (strong, nonatomic) NSMutableArray *moreArray;
 @property (strong, nonatomic) NSArray *historyArray;
+@property (strong, nonatomic) NSMutableArray *commentArray;
 
 @property (strong, nonatomic) DownloadManage *dlManage;
 
@@ -50,6 +56,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 @property (assign, nonatomic) BOOL shouldPausePlay;
 
 @property FavoritesManager *favoritesManager;
+
+@property (strong, nonatomic) UIButton *commentButton;
 
 @end
 
@@ -60,6 +68,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     if (self) {
         self.contentModel = contentModel;
         self.moreArray = [NSMutableArray new];
+        self.historyArray = [NSMutableArray new];
+        self.commentArray = [NSMutableArray new];
         self.hideNavigationBar = YES;
     }
     return self;
@@ -70,6 +80,8 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     if (self) {
         self.sourceModel = sourceModel;
         self.moreArray = [NSMutableArray new];
+        self.historyArray = [NSMutableArray new];
+        self.commentArray = [NSMutableArray new];
         self.hideNavigationBar = YES;
     }
     return self;
@@ -138,6 +150,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 - (void)dealloc {
     NSLog(@"--- ---- --- VideoDetailViewController  dealloc");
+    // 在屏幕左边缘往右滑，没有调这个，可能是某些引用没有释放导致
     if (_playerView) {
         [_playerView destroyPlayer];
         _playerView = nil;
@@ -235,8 +248,35 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     _detailHeadCellModel = [VideoDetailHeadCellModel new];
     self.detailHeadCellModel.sourceModel = sourceModel;
     [self.tableView reloadData];
+    
+    // 在这里开始加载评论的内容
+    [self getCommentList];
 }
 
+- (void)addComments:(NSArray *)array {
+    if (array.count == 0) {
+        return;
+    }
+    
+    for (CommentModel *commentModel in array) {
+        VideoDetailCommentCellModel *cellModel = [VideoDetailCommentCellModel new];
+        cellModel.commentModel = commentModel;
+        [self.commentArray addObject:cellModel];
+    }
+    VideoDetailCommentCellModel *lastCellModel = [self.commentArray lastObject];
+    lastCellModel.isLastOne = YES;
+    [self.tableView reloadData];
+}
+
+- (void)handleError:(NSInteger )errorCode errorMsg:(NSString *)errorMsg {
+    NSString *error = @"";
+    if (errorMsg.length > 0) {
+        error = errorMsg;
+    } else if (errorCode > 0) {
+        error = localizeString(@"error_alert_network_fail_recall");
+    }
+    [self.view makeToast:error duration:kToastDuration position:kToastPositionCenter];
+}
 
 #pragma mark - API Action
 - (void)getSourceForUuid:(NSString *)uuid {
@@ -273,6 +313,63 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     }];
 }
 
+- (void)getCommentList {
+    
+    NSString *uuid = @"";
+    if (self.sourceModel) {
+        uuid = self.sourceModel.uuid;
+    } else if (self.contentModel) {
+        uuid = self.contentModel.uuid;
+    }
+    if (uuid.length == 0) {
+        return;
+    }
+    
+    // http://www.szappstore.com:8080/app/get_review?uuid=XMTgyMTc3MjE2MA==
+    __weak typeof(self) weakSelf = self;
+    NSString *apiName = [NSString stringWithFormat:@"%@?uuid=%@&from=%ld&to=%d", kAPICommentList, uuid, self.commentArray.count, kHTTPCommentListLoadCount];
+    NSLog(@"%s %@", __func__, apiName);
+    [APIManager requestWithApi:apiName httpMethod:kHTTPMethodGet httpBody:nil responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!weakSelf) {
+            return;
+        }
+        
+        if (!connectionError) {
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            CommentListModel *commentListModel = [[CommentListModel alloc] initWithString:responseString error:nil];
+            if (commentListModel.errorCode != 0) {
+                return;
+            }
+            if (weakSelf.tableView.mj_footer) {
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }
+            if (commentListModel.objects.count > 0) {
+                [weakSelf addComments:commentListModel.objects];
+            }
+            
+            // Add Refreshing: when 1.do not have add Refreshing yet 2. load data == 20, means have more data can be loaded 2. first time load
+            if (!weakSelf.tableView.mj_footer
+                && commentListModel.objects.count == kHTTPCommentListLoadCount
+                && (weakSelf.commentArray.count - commentListModel.objects.count) == 0) {
+                // Set the callback（Once you enter the refresh status，then call the action of target，that is call [self loadMoreData]）
+                weakSelf.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:weakSelf refreshingAction:@selector(getCommentList)];
+            }
+            
+            if (commentListModel.objects.count < kHTTPCommentListLoadCount && weakSelf.tableView.mj_footer) {
+                // End load. No more data  在底部显示 : 没有更多数据了  .
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+            if (weakSelf.commentArray.count == 0) {
+                // do nothing?
+                return;
+            }
+        } else {
+            // do nothing?
+        }
+    }];
+}
+
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -294,24 +391,26 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 1 && self.moreArray.count > 0) {
         return kSectionHeadHeight;
-    } else if (section == 2) {
+    } else if (section == 2 && self.historyArray.count > 0) {
+        return kSectionHeadHeight;
+    } else if (section == 3 && self.commentArray.count > 0) {
         return kSectionHeadHeight;
     }
     return 0;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1 && self.moreArray.count > 0) {
+    if ((section == 1 && self.moreArray.count > 0)
+        || (section == 2 && self.historyArray.count > 0)
+        || (section == 3 && self.commentArray.count > 0)) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
+        view.backgroundColor = [UIColor whiteColor];
+        [view addBottomShadow];
+//        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, kSectionHeadHeight - 0.5, CGRectGetWidth(view.frame) - kVideoDetailMoreVideoCellLRPadding*2, 0.5)];
+//        line.backgroundColor = [UIColor orLineColor];
+//        [view addSubview:line];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
-        NSString *sectionTitle = (section == 1) ? localizeString(@"more_contents") : localizeString(@"view_historys");
-        label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
-        [view addSubview:label];
-        return view;
-    }  else if (section == 2) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], kSectionHeadHeight)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kVideoDetailMoreVideoCellLRPadding, 10, [self pageWidth] - kVideoDetailMoreVideoCellLRPadding*2, 20)];
-        NSString *sectionTitle = (section == 1) ? localizeString(@"more_contents") : localizeString(@"view_historys");
+            NSString *sectionTitle = (section == 1) ? localizeString(@"more_contents") : (section == 2 ? localizeString(@"view_historys") : localizeString(@"comment_title"));
         label.attributedText = formatAttributedStringByORFontGuide(@[sectionTitle, @"BR16B"], nil);
         [view addSubview:label];
         return view;
@@ -320,12 +419,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return (self.detailHeadCellModel ? 1 : 0);
-    } else if (section == 1) {
+    if (section == 0 && self.detailHeadCellModel) {
+        return 1;
+    } else if (section == 1 && self.moreArray.count > 0) {
         return self.moreArray.count;
     } else if (section == 2 && self.historyArray.count > 0) {
         return 1;
+    } else if (section == 3 && self.commentArray.count > 0) {
+        return self.commentArray.count;
     }
     return 0;
 }
@@ -343,7 +444,12 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         }
     } else if (indexPath.section == 2) {
         if (self.historyArray.count > 0) {
-            return kHistoryListItemHeight;
+            return 10 + kHistoryListItemHeight;
+        }
+    } else if (indexPath.section == 3) {
+        if ([self.commentArray count] > indexPath.row) {
+            VideoDetailCommentCellModel *cellModel = [self.commentArray objectAtIndex:indexPath.row];
+            return cellModel.cellHeight;
         }
     }
     return 0;
@@ -367,6 +473,12 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         VideoDetailHistoryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailHistoryCellIdentifier forIndexPath:indexPath];
         cell.historyView.delegate = self;
         cell.historyView.historyList = [self.historyArray copy];
+        return cell;
+    } else if (indexPath.section == 3 && [self.commentArray count] > indexPath.row) {
+        VideoDetailCommentCellModel *cellModel = [self.commentArray objectAtIndex:indexPath.row];
+        VideoDetailCommentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kVideoDetailCommentCellIdentifier forIndexPath:indexPath];
+        cell.indexPath = indexPath;
+        cell.cellModel = cellModel;
         return cell;
     }
     
@@ -407,20 +519,16 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 
 #pragma mark - VideoDetailHeadwCellDelegate
-//- (void)commonAction {
-//    MyLog(@"commonAction");
-//}
-
 - (void)shareAction {
     MyLog(@"shareAction");
+    self.shouldPausePlay = YES;
+    self.actonType = ActionForShare;
     
     // Login check
     if (!self.userModel) {
         [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 // Go to login page
-                self.actonType = ActionForShare;
-                self.shouldPausePlay = YES;
                 LoginViewController *vc = [LoginViewController new];
                 vc.delegate = self;
                 [self.navigationController pushViewController:vc animated:YES];
@@ -429,21 +537,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         return;
     }
     
-    self.shouldPausePlay = YES;
-    
-    NSString *uuid = @"";
-    NSString *preview = @"";
-    NSString *title = @"";
-    if (self.contentModel) {
-        uuid = self.contentModel.uuid;
-        preview = self.contentModel.preview;
-        title = self.contentModel.title;
-    } else if (self.sourceModel) {
-        uuid = self.sourceModel.uuid;
-        title = self.sourceModel.title;
-    }
-    
-    ShareContentViewController *vc = [[ShareContentViewController alloc] initWithTitle:title];
+    InputContentViewController *vc = [[InputContentViewController alloc] initWithTitle:@""];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -456,13 +550,15 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 }
 
 - (void)praiseAction {
-    // www.szappstore.com/app/praise?user=kunhuang&uuid=XMTc0MDc2NDIxMg==
+    self.shouldPausePlay = YES;
+    self.actonType = ActionForNone;
+    
     // Login check
     if (!self.userModel) {
         [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 // Go to login page
-                self.actonType = ActionForShare;
+                self.actonType = ActionForParise;
                 LoginViewController *vc = [LoginViewController new];
                 vc.delegate = self;
                 [self.navigationController pushViewController:vc animated:YES];
@@ -480,11 +576,6 @@ typedef  NS_ENUM(NSInteger, ActionType) {
             [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
         }
     }];
-    
-    //MyLog(@"praiseApi: %@", praiseApi);
-    //[self.view makeToast:localizeString(@"parise_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
-
-
 }
 
 - (void)favoriteAction {
@@ -495,42 +586,94 @@ typedef  NS_ENUM(NSInteger, ActionType) {
     [self.view makeToast:localizeString(@"favority_notice_bookmark_success") duration:kToastDuration position:kToastPositionCenter];
 }
 
+- (void)commentAction {
+    self.shouldPausePlay = YES;
+    self.actonType = ActionForComment;
+    
+    // Login check
+    if (!self.userModel) {
+        [UIAlertView showWithTitle:localizeString(@"profile_alert_login") message:nil cancelButtonTitle:localizeString(@"cancel") otherButtonTitles:@[localizeString(@"login")] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                // Go to login page
+                LoginViewController *vc = [LoginViewController new];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        return;
+    }
+    
+    InputContentViewController *vc = [[InputContentViewController alloc] initWithTitle:@""];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 #pragma mark - LoginViewControllerDelegate
 - (void)loginSuccess {
     if (ActionForShare == self.actonType) {
-        self.shouldPausePlay = NO;
         [self shareAction];
+    } else if (ActionForParise == self.actonType) {
+        [self praiseAction];
+        self.actonType = ActionForNone;
+    } else if (ActionForComment == self.actonType) {
+        [self commentAction];
     }
-    self.actonType = ActionForNone;
 }
 
-#pragma mark - ShareContentViewControllerDelegate
-- (void)shareWithContent:(NSString *)shareContent {
-    NSString *uuid = @"";
-    NSString *preview = @"";
-    NSString *title = @"";
-    if (self.contentModel) {
-        uuid = self.contentModel.uuid;
-        preview = self.contentModel.preview;
-        title = self.contentModel.title;
-    } else if (self.sourceModel) {
-        uuid = self.sourceModel.uuid;
-        title = self.sourceModel.title;
+#pragma mark - InputContentViewControllerDelegate
+- (void)backWithContent:(NSString *)shareContent {
+    if (shareContent.length == 0) {
+        return;
     }
     
+    NSString *uuid = @"";
+    if (self.contentModel) {
+        uuid = self.contentModel.uuid;
+    } else if (self.sourceModel) {
+        uuid = self.sourceModel.uuid;
+    }
     __weak typeof(self) weakSelf = self;
-    NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?", kAPIShareSubmit];
-    shareSubmitApi = [shareSubmitApi stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *param = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@", self.userModel.userName, uuid, shareContent];
-
-    [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodPost httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!connectionError) {
-            [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
-        } else {
-            NSLog(@"connectionError: %@", connectionError);
-            [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
-        }
-    }];
+    
+    if (ActionForShare == self.actonType) {
+        // Share 分享
+        NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?", kAPIShareSubmit];
+        shareSubmitApi = [shareSubmitApi stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *param = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@", self.userModel.userName, uuid, shareContent];
+        
+        [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodPost httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!connectionError) {
+                [weakSelf.view makeToast:localizeString(@"share_success") duration:kToastDuration position:kToastPositionCenter];
+            } else {
+                NSLog(@"connectionError: %@", connectionError);
+                [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
+            }
+        }];
+        
+    } else if (ActionForComment == self.actonType) {
+        // Comment 评论
+        // http://www.szappstore.com:8080/app/review?user=kunhuang&uuid=XMTc0MDc2NDIxMg==&content=asddsfsdfsdfsdf
+        NSString *shareSubmitApi = [NSString stringWithFormat:@"%@?", kAPICommentSubmit];
+        shareSubmitApi = [shareSubmitApi stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *param = [NSString stringWithFormat:@"user=%@&uuid=%@&content=%@", self.userModel.userName, uuid, shareContent];
+        
+        [APIManager requestWithApi:shareSubmitApi httpMethod:kHTTPMethodPost httpBody:param responseHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!connectionError) {
+                [weakSelf.view makeToast:localizeString(@"comment_submit_success") duration:kToastDuration position:kToastPositionCenter];
+                
+                // Reload comments
+                if (self.commentArray.count > 0) {
+                    [self.commentArray removeAllObjects];
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                [self getCommentList];
+                
+            } else {
+                NSLog(@"connectionError: %@", connectionError);
+                [weakSelf.view makeToast:localizeString(@"error_alert_network_fail") duration:kToastDuration position:kToastPositionCenter];
+            }
+        }];
+    }
 }
 
 
@@ -538,6 +681,7 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 - (CLPlayerView *)playerView {
     if (_playerView == nil) {
         _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, [self pageWidth], [self pageWidth]*9/16)];
+        [_playerView addBarBottomShadow];
         //返回按钮点击事件回调
         __weak typeof(self) weakSelf = self;
         [_playerView backButton:^(UIButton *button) {
@@ -558,12 +702,14 @@ typedef  NS_ENUM(NSInteger, ActionType) {
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.playerView.frame), [self pageWidth], [self pageHeight] - CGRectGetMaxY(self.playerView.frame))];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.playerView.frame), CGRectGetWidth(self.view.frame), [self pageHeight] - CGRectGetMaxY(self.playerView.frame))];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.separatorColor = [UIColor grayColor];
         _tableView.delaysContentTouches = NO;
+        _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.tableFooterView = [self footView];
         
         if (IS_IPHONE_X || IS_IOS_11_OR_ABOVE) {
             // 解决 iphone x 的 section headView 显示不出来的问题
@@ -583,14 +729,36 @@ typedef  NS_ENUM(NSInteger, ActionType) {
         if ([_tableView respondsToSelector:@selector(setKeyboardDismissMode:)]) {
             [_tableView setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
         }
-        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self pageWidth], 50)];
         
         [_tableView registerClass:[UIBaseTableViewCell class] forCellReuseIdentifier:kUIBaseTableViewCellIndentifier];
         [_tableView registerClass:[VideoDetailHeadwCell class] forCellReuseIdentifier:kVideoDetailHeadwCellIdentifier];
         [_tableView registerClass:[VideoDetailMoreVideoCell class] forCellReuseIdentifier:kVideoDetailMoreVideoCellIdentifier];
         [_tableView registerClass:[VideoDetailHistoryCell class] forCellReuseIdentifier:kVideoDetailHistoryCellIdentifier];
+        [_tableView registerClass:[VideoDetailCommentCell class] forCellReuseIdentifier:kVideoDetailCommentCellIdentifier];
     }
     return _tableView;
+}
+
+- (UIView *)footView {
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0)];
+    [footView addSubview:self.commentButton];
+    footView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMaxY(self.commentButton.frame) + BOTTOM_HOME_INDICATOR_MARGIN);
+    return footView;
+}
+
+- (UIButton *)commentButton {
+    if (_commentButton == nil) {
+        NSString *fontKey = @"DGY15N";
+        UIFont *font = getFontByKey(fontKey);
+        _commentButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 10, [self pageWidth] - 50*2, font.lineHeight + 5*2)];
+        [_commentButton addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+        [_commentButton setTitle:localizeString(@"comment_action_title") forState:UIControlStateNormal];
+        [_commentButton setFontAndTextColorByKey:fontKey forState:UIControlStateNormal];
+        [_commentButton showBorder:[UIColor orLineColor]];
+        _commentButton.layer.masksToBounds = YES;
+        _commentButton.layer.cornerRadius = 4.f;
+    }
+    return _commentButton;
 }
 
 

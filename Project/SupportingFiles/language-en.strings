@@ -30,7 +30,7 @@
 "tab_home" = "Home";
 "tab_profile" = "Me";
 "tab_share" = "Public share";
-"tab_download" = "Download";
+"tab_download" = "Cache";
 
 
 // Profile
@@ -88,16 +88,22 @@
 "share_notice_empty" = "No friend shared yet, please try again later！";
 
 
+// Comment
+"comment_submit_success" = "Comment success!";
+"comment_title" = "Comments";
+"comment_action_title" = "Add Comment";
+
+
 // Download
 "download_notice_to_download" = "Have add to down queue!";
 "download_title_loading" = "Unfinished cache";
 "download_title_loaded" = "Finished cache";
 "download_title_clean_all" = "Clear all cache";
 "download_notice" = "Tip: the cache list gestures left can delete the corresponding item cache data independently.";
-"download_notice_delete" = "Are you sure delete this download?";
-"alert_clean_all_check" = "Clear all cache data?";
-"download_notice_downloading_empty" = "No downloading videos yet";
-"download_notice_downloaded_empty" = "No downloaded videos yet";
+"download_notice_delete" = "Are you sure delete this cache?";
+"alert_clean_all_check" = "Clear all caches?";
+"download_notice_downloading_empty" = "No executing cache";
+"download_notice_downloaded_empty" = "No cached yet";
 
 
 // Favority

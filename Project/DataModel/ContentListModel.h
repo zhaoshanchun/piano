@@ -87,3 +87,34 @@ praise	Integer	58          点赞
 @end
 
 
+
+/*
+ Comments 评论
+ {"objects":[{"time":"2017-10-16 17:39:51","alias":"test","uuid":"XMTgyMTc3MjE2MA==","icon":"3d79e01c2a02ac325d95a9a140f957e3"},{"time":"2017-10-16 15:38:33","alias":"zhao","uuid":"XMTgyMTc3MjE2MA==","icon":""}],"msg":"successful","error":0}
+ */
+@interface CommentModel : JSONModel
+
+@property (strong, nonatomic) NSString *time;
+@property (strong, nonatomic) NSString *alias;
+@property (strong, nonatomic) NSString *uuid;
+@property (strong, nonatomic) NSString *icon;
+@property (strong, nonatomic) NSString *content;
+
+@property (strong, nonatomic) NSString *iconUrl;
+
+@end
+@protocol CommentModel <NSObject>
+@end
+
+
+@interface CommentListModel : JSONModel
+
+@property (strong, nonatomic) NSArray <CommentModel>*objects;
+@property (strong, nonatomic) NSString *msg;
+@property (assign, nonatomic) NSInteger errorCode;
+
+@end
+@protocol CommentListModel <NSObject>
+@end
+
+

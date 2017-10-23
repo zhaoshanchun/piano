@@ -1,5 +1,5 @@
 //
-//  ShareContentViewController.h
+//  InputContentViewController.h
 //  gangqinjiaocheng
 //
 //  Created by zhaosc on 17/9/18.
@@ -8,15 +8,15 @@
 
 #import "BaseViewController.h"
 
-@protocol ShareContentViewControllerDelegate <NSObject>
+@protocol InputContentViewControllerDelegate <NSObject>
 
-- (void)shareWithContent:(NSString *)shareContent;
+- (void)backWithContent:(NSString *)shareContent;
 
 @end
 
-@interface ShareContentViewController : BaseViewController
+@interface InputContentViewController : BaseViewController
 
-@property (weak, nonatomic) id<ShareContentViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<InputContentViewControllerDelegate> delegate;
 
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;

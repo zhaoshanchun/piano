@@ -13,7 +13,6 @@
 
 @interface VideoDetailMoreVideoCell : UIBaseTableViewCell
 
-@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) VideoDetailMoreVideoCellModel *cellModel;
 
 @end

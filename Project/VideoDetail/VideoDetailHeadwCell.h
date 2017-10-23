@@ -13,7 +13,6 @@
 
 @protocol VideoDetailHeadwCellDelegate <NSObject>
 
-//- (void)commonAction;
 - (void)shareAction;
 - (void)downLoadAction;
 - (void)praiseAction;
@@ -24,7 +23,6 @@
 @interface VideoDetailHeadwCell : UIBaseTableViewCell
 
 @property (weak, nonatomic) id<VideoDetailHeadwCellDelegate> delegate;
-@property (strong, nonatomic) NSIndexPath *indexPath;
 @property (strong, nonatomic) VideoDetailHeadCellModel *cellModel;
 
 @end
