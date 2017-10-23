@@ -33,7 +33,6 @@ static EtagManager *_sharedManager;
     self.etagBackHandler = handler;
     NSLog(@"%s", __func__);
 
-    
     if (getObjectFromUserDefaults(kSourceEtagCacheTime)) {
         NSDate *cacheDate = (NSDate *)getObjectFromUserDefaults(kSourceEtagCacheTime);
         NSTimeInterval timeIntervalPassed = [[NSDate new] timeIntervalSince1970] - [cacheDate timeIntervalSince1970];
