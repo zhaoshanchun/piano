@@ -96,7 +96,7 @@
         return 2;
     } else {
         // 历史记录+收藏+缓存
-        return 3;
+        return 2;
     }
 }
 

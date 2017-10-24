@@ -85,8 +85,9 @@
     self.praiseButton.frame = CGRectMake(CGRectGetMinX(self.favoriteButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, cellModel.cellHeight - kVideoDetailHeadwCellTBPadding - kVideoDetailHeadwCellIconHeight, kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     // 离线下载
     self.downLoadButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.downLoadButton.hidden = YES;
     // 分享推荐
-    self.shareButton.frame = CGRectMake(CGRectGetMinX(self.downLoadButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
+    self.shareButton.frame = CGRectMake(CGRectGetMinX(self.praiseButton.frame) - kVideoDetailHeadwCellIconMargin - kVideoDetailHeadwCellIconWidth, CGRectGetMinY(self.praiseButton.frame), kVideoDetailHeadwCellIconWidth, kVideoDetailHeadwCellIconHeight);
     
     self.bottomLine.frame = CGRectMake(kVideoDetailHeadwCellTBPadding, cellModel.cellHeight - 0.5, kVideoDetailHeadwCellWidth - kVideoDetailHeadwCellLRPadding*2, 0.5);
 }
