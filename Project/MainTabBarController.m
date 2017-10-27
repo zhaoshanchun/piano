@@ -103,7 +103,7 @@
 }
 
 - (void)checkAppOnline {
-    // TODO...
+    // TODO...   不要的可以先删掉
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com//lookup?id=1231276398"]];
     NSLog(@"%s %@", __func__, url);
     
