@@ -13,6 +13,7 @@
 #import "HomePageViewController.h"
 #import "PublicShareViewController.h"
 #import "PracticeListViewController.h"
+#import "MallPageViewController.h"
 #import "ProfileViewController.h"
 
 @interface MainTabBarController ()
@@ -53,6 +54,12 @@
                                  @{kClassKey  : @"PracticeListViewController",
                                    kTextKey   : localizeString(@"exerise_title"),
                                    kTitleKey  : localizeString(@"exerise_title"),
+                                   kImgKey    : @"Book_open",
+                                   kSelImgKey : @"Book_open"},
+                                 
+                                 @{kClassKey  : @"MallPageViewController",
+                                   kTextKey   : localizeString(@"商城"),
+                                   kTitleKey  : localizeString(@"商城"),
                                    kImgKey    : @"Book_open",
                                    kSelImgKey : @"Book_open"},
                                  
