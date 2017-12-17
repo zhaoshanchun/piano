@@ -86,7 +86,7 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     
-    // 阿里百川
+    // 阿里百川 (http://baichuan.taobao.com/docs/doc.htm?spm=a3c0d.7629140.0.0.i4szrK&treeId=129&articleId=105648&docType=1)
     // 百川平台基础SDK初始化，加载并初始化各个业务能力插件
     [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
         
@@ -99,11 +99,11 @@
     
     // 配置全局的淘客参数  //如果没有阿里妈妈的淘客账号,setTaokeParams函数需要调用
     AlibcTradeTaokeParams *taokeParams = [[AlibcTradeTaokeParams alloc] init];
-    taokeParams.pid = @"mm_XXXXX"; //mm_XXXXX为你自己申请的阿里妈妈淘客pid，一定得填写，不然无法初始化
+    // taokeParams.pid = @"mm_XXXXX"; //mm_XXXXX为你自己申请的阿里妈妈淘客pid
     [[AlibcTradeSDK sharedInstance] setTaokeParams:taokeParams];
     
-    //设置全局的app标识，在电商模块里等同于isv_code
-    //没有申请过isv_code的接入方,默认不需要调用该函数
+    // 设置全局的app标识，在电商模块里等同于isv_code
+    // 没有申请过isv_code的接入方,默认不需要调用该函数
     //    [[AlibcTradeSDK sharedInstance] setISVCode:@"your_isv_code"];
     
     // 设置全局配置，是否强制使用h5
